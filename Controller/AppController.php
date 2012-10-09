@@ -32,4 +32,37 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    
+    /**
+     * Lee: User authorization code
+     * Sets the path to where the user goes after logging in/out, and 
+     * sets an authorization failed message.
+     */
+    public $components = array(
+        'Session',
+        'Auth'=>array(
+            'loginRedirect'=>array('controller'=>'users', 'action'=>'index'),
+            'logoutRedirect'=>array('controller'=>'users', 'action'=>'index'),
+            'authError'=>"You can't access that page",
+            'authorize'=>array('Controller')
+        )
+    );
+    
+    /**
+     * Lee: this function checks to see if a user is authorized
+     * 
+     * @param type $user The user to be authorized
+     */
+    public function isAuthorized($user) {
+        return true;
+    }
+    
+    /**
+     * Lee: non logged in users can access view and index pages 
+     */
+    public function beforeFilter() {
+        $this->Auth->allow('index', 'view');
+        $this->set('logged_in', $this->Auth->loggedIn());
+        $this->set('current_user', $this->Auth->user());
+    }
 }

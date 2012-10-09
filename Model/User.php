@@ -24,7 +24,7 @@ class User extends AppModel {
 		'username' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+				'message' => 'Please enter a username',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -32,7 +32,7 @@ class User extends AppModel {
 			),
 			'alphanumeric' => array(
 				'rule' => array('alphanumeric'),
-				//'message' => 'Your custom message here',
+				'message' => 'Your username should be a combination of letters/numbers',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -42,7 +42,7 @@ class User extends AppModel {
 		'password' => array(
 			'alphanumeric' => array(
 				'rule' => array('alphanumeric'),
-				//'message' => 'Your custom message here',
+				'message' => 'Your password should be a combination of letters/numbers',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -50,7 +50,29 @@ class User extends AppModel {
 			),
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+				'message' => 'Please enter your password',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+                        'matchPasswords' => array(
+                                'rule' => 'matchPasswords',
+                                'message' => 'Your passwords do not match'
+                        )
+		),
+                'password_confirmation' => array(
+			'alphanumeric' => array(
+				'rule' => array('alphanumeric'),
+				'message' => 'Your password confirmation should be a combination of letters/numbers',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Please confirm your password',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -60,7 +82,7 @@ class User extends AppModel {
 		'email' => array(
 			'email' => array(
 				'rule' => array('email'),
-				//'message' => 'Your custom message here',
+				'message' => 'Please enter your email in example@example.com format',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -68,6 +90,30 @@ class User extends AppModel {
 			),
 		),
 	);
+        
+        /**
+         * Lee: Custom match passwords validation method
+         * 
+         * @param type $data
+         * @return boolean 
+         */
+        public function matchPasswords($data) {
+            if ($data['password'] == $this->data['User']['password_confirmation']) {
+                return true;
+            }
+            $this->invalidate('password_confirmation', 'Your passwords do not match');
+            return false;
+        }
+        
+        /**
+         * Lee: callback function for encrypting passwords 
+         */
+        public function beforeSave() {
+            if (isset($this->data['User']['password'])) {
+                $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+            }
+            return true;
+        }
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 

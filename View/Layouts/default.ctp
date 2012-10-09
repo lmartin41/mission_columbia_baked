@@ -40,6 +40,23 @@
 			<h1><?php echo $this->Html->link(__('CakePHP: the rapid development php framework'), 'http://cakephp.org'); ?></h1>
 		</div>
 		<div id="content">
+                    
+                    <?php
+                        /****************************************** 
+                         *  Lee: this snippet below fixes the "login"/"logout"
+                         *  message in the top right hand corner of every page
+                         ******************************************/
+                    ?>
+                    <div style="text-align: right;">
+                        <?php if($logged_in): ?>
+                            Welcome <?php echo $current_user['username']; ?>.  
+                            <?php echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout')); ?>
+                        <?php else: ?>
+                            <?php echo $this->Html->link('Login', array('controller'=>'users', 'action'=>'login')); ?>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <?php /***********************************/ ?>
 
 			<?php echo $this->Session->flash(); ?>
 

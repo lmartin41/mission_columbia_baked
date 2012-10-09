@@ -6,6 +6,39 @@ App::uses('AppController', 'Controller');
  * @property User $User
  */
 class UsersController extends AppController {
+    
+    public $name = 'Users';
+    
+    /**
+     * FIXME: delete later - Lee
+     */
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('add');
+    }
+    
+    /**
+     * Lee: Standard login method 
+     * Redirects to users page right now (see AppController.php)
+     */
+    public function login() {
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                $this->redirect($this->Auth->redirect());
+            }
+            
+            else {
+                $this->Session->setFlash('Your username/password combination was incorrect');
+            }
+        }
+    }
+    
+    /**
+     * Standard cakephp logout method 
+     */
+    public function logout() {
+        $this->redirect($this->Auth->logout());
+    }
 
 /**
  * index method

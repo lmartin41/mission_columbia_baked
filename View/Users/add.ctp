@@ -5,6 +5,7 @@
 	<?php
 		echo $this->Form->input('username');
 		echo $this->Form->input('password');
+                echo $this->Form->input('password_confirmation', array('type'=>'password'));
 		echo $this->Form->input('isAdmin');
 		echo $this->Form->input('isSuperAdmin');
 		echo $this->Form->input('organization_id');
