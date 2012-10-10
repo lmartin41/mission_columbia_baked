@@ -13,10 +13,10 @@
 		echo $this->Form->input('child_support');
 		echo $this->Form->input('ssi_or_disability');
 		echo $this->Form->input('unemployment');
-		echo $this->Form->input('when_next_check');
+		echo $this->Form->input('when_next_check', array('type' => 'date'));
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->end(__('Add Client Relationships')); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

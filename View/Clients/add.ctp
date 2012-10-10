@@ -1,12 +1,14 @@
 <div class="clients form">
 <?php echo $this->Form->create('Client'); ?>
 	<fieldset>
-		<legend><?php echo __('Add Client'); ?></legend>
+		<legend><?php echo __('Add Client: Personal Information'); ?></legend>
 	<?php
 		echo $this->Form->input('first_name');
 		echo $this->Form->input('last_name');
-		echo $this->Form->input('DOB');
-		echo $this->Form->input('sex');
+		echo $this->Form->input('DOB', array('type' => 'date'));
+                echo "(If you don't know, please enter age)";
+                echo $this->Form->input('Age', array('style' => 'width:50px'));
+		echo $this->Form->input('sex', array('style' => 'width:50px'));
 		echo $this->Form->input('SSN');
 		echo $this->Form->input('address_one');
 		echo $this->Form->input('address_two');
@@ -17,10 +19,10 @@
 		echo $this->Form->input('apartment_number');
 		echo $this->Form->input('how_did_you_hear');
 		echo $this->Form->input('how_long_do_you_need');
-		echo $this->Form->input('isDeleted');
+	//	echo $this->Form->input('isDeleted');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->end(__('Add Client Income Sources')); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

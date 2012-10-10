@@ -70,14 +70,14 @@ class Client extends AppModel {
 			),
 		),
 		'DOB' => array(
-			'datetime' => array(
-				'rule' => array('datetime'),
+		//	'datetime' => array(
+			//	'rule' => array('datetime'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+		//	),
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -87,6 +87,11 @@ class Client extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+                'Age' => array(
+                        'fixAge' => array(
+                                'rule' => 'fixAge'   
+                        )
+                ),
 		'sex' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -98,14 +103,14 @@ class Client extends AppModel {
 			),
 		),
 		'SSN' => array(
-			'ssn' => array(
-				'rule' => array('ssn'),
+			//'ssn' => array(
+				//'rule' => array('ssn'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+		//	),
 		),
 		'city' => array(
 			'alphanumeric' => array(
@@ -138,24 +143,24 @@ class Client extends AppModel {
 			),
 		),
 		'phone' => array(
-			'phone' => array(
-				'rule' => array('phone'),
+		//	'phone' => array(
+			//	'rule' => array('phone'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+		//	),
 		),
 		'apartment_number' => array(
-			'alphanumeric' => array(
-				'rule' => array('alphanumeric'),
+		//	'alphanumeric' => array(
+			//	'rule' => array('alphanumeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+		//	),
 		),
 		'isDeleted' => array(
 			'boolean' => array(
@@ -168,6 +173,19 @@ class Client extends AppModel {
 			),
 		),
 	);
+        
+        /**
+         * Lee: This function checks to see if the age field has been set, 
+         * in which case it overrides the dob fields and calculates and 
+         * sets the dob for the client as january 1st of the calculated year 
+         */
+        public function fixAge($data) {
+            if ($data['Age'] != NULL) {
+                $year = date('Y') - $data['Age'];
+                $this->data['Client']['DOB'] = $year."-1-1 00:00:00";
+            }
+            return true;
+        }
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 

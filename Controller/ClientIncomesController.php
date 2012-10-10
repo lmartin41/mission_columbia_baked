@@ -37,12 +37,12 @@ class ClientIncomesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($id = null) {
 		if ($this->request->is('post')) {
 			$this->ClientIncome->create();
 			if ($this->ClientIncome->save($this->request->data)) {
 				$this->Session->setFlash(__('The client income has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('controller' => 'client_relations', 'action' => 'add'));
 			} else {
 				$this->Session->setFlash(__('The client income could not be saved. Please, try again.'));
 			}

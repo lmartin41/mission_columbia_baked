@@ -1,11 +1,11 @@
 <div class="clients view">
-<h2><?php  echo __('Client'); ?></h2>
+
+    
+<?php /***************** details ******************************************/ ?>
+    
+    
+<h2><?php echo h($client['Client']['first_name'])." 's Details"; ?></h2>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($client['Client']['id']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('First Name'); ?></dt>
 		<dd>
 			<?php echo h($client['Client']['first_name']); ?>
@@ -14,6 +14,11 @@
 		<dt><?php echo __('Last Name'); ?></dt>
 		<dd>
 			<?php echo h($client['Client']['last_name']); ?>
+			&nbsp;
+		</dd>
+                 <dt><?php echo __('Id'); ?></dt>
+		<dd>
+			<?php echo h($client['Client']['id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('DOB'); ?></dt>
@@ -76,6 +81,8 @@
 			<?php echo h($client['Client']['how_long_do_you_need']); ?>
 			&nbsp;
 		</dd>
+                
+                <?php if ($current_user['isSuperAdmin']): ?>
 		<dt><?php echo __('IsDeleted'); ?></dt>
 		<dd>
 			<?php echo h($client['Client']['isDeleted']); ?>
@@ -91,180 +98,236 @@
 			<?php echo h($client['Client']['modified']); ?>
 			&nbsp;
 		</dd>
+                <?php endif; ?>
 	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Client'), array('action' => 'edit', $client['Client']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete # %s?', $client['Client']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Clients'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Client'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Client Incomes'), array('controller' => 'client_incomes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Client Income'), array('controller' => 'client_incomes', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Client Relations'), array('controller' => 'client_relations', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Client Relation'), array('controller' => 'client_relations', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Client Specifics'), array('controller' => 'client_specifics', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Client Specific'), array('controller' => 'client_specifics', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Resource Uses'), array('controller' => 'resource_uses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Resource Us'), array('controller' => 'resource_uses', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Client Incomes'); ?></h3>
-	<?php if (!empty($client['ClientIncome'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Client Id'); ?></th>
-		<th><?php echo __('Regular Job'); ?></th>
-		<th><?php echo __('Food Stamps'); ?></th>
-		<th><?php echo __('Veterans Pension'); ?></th>
-		<th><?php echo __('Part Time Job'); ?></th>
-		<th><?php echo __('Social Security'); ?></th>
-		<th><?php echo __('Annuity Check'); ?></th>
-		<th><?php echo __('Child Support'); ?></th>
-		<th><?php echo __('Ssi Or Disability'); ?></th>
-		<th><?php echo __('Unemployment'); ?></th>
-		<th><?php echo __('When Next Check'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($client['ClientIncome'] as $clientIncome): ?>
-		<tr>
-			<td><?php echo $clientIncome['id']; ?></td>
-			<td><?php echo $clientIncome['client_id']; ?></td>
-			<td><?php echo $clientIncome['regular_job']; ?></td>
-			<td><?php echo $clientIncome['food_stamps']; ?></td>
-			<td><?php echo $clientIncome['veterans_pension']; ?></td>
-			<td><?php echo $clientIncome['part_time_job']; ?></td>
-			<td><?php echo $clientIncome['social_security']; ?></td>
-			<td><?php echo $clientIncome['annuity_check']; ?></td>
-			<td><?php echo $clientIncome['child_support']; ?></td>
-			<td><?php echo $clientIncome['ssi_or_disability']; ?></td>
-			<td><?php echo $clientIncome['unemployment']; ?></td>
-			<td><?php echo $clientIncome['when_next_check']; ?></td>
-			<td><?php echo $clientIncome['created']; ?></td>
-			<td><?php echo $clientIncome['modified']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'client_incomes', 'action' => 'view', $clientIncome['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'client_incomes', 'action' => 'edit', $clientIncome['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'client_incomes', 'action' => 'delete', $clientIncome['id']), null, __('Are you sure you want to delete # %s?', $clientIncome['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
+<br />
+<?php echo $this->Html->link(__('Edit Details'), array('action' => 'edit')); ?> 
+<br />
+<br />
+<br />
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Client Income'), array('controller' => 'client_incomes', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Client Relations'); ?></h3>
+
+<?php /***************** Income ******************************************/ ?>
+
+
+<?php           
+                /** FIXME: This is a hack and needs to be refactored later - Lee **/
+                $regular = $food = $veterans = $part_time = $social = $annuity = $child = $ssi = $unemployment = $when = $created = $modified = "";
+		foreach ($client['ClientIncome'] as $clientIncome) {
+                     if ($clientIncome['client_id'] == $client['Client']['id']) {
+			$regular = $clientIncome['regular_job'];
+                        $food = $clientIncome['food_stamps'];
+                        $veterans = $clientIncome['veterans_pension'];
+                        $part_time = $clientIncome['part_time_job'];
+                        $social = $clientIncome['social_security'];
+                        $annuity = $clientIncome['annuity_check']; 
+                        $child = $clientIncome['child_support'];
+                        $ssi = $clientIncome['ssi_or_disability'];
+                        $unemployment = $clientIncome['unemployment'];
+                        $when = $clientIncome['when_next_check'];
+                        $created = $clientIncome['created'];
+                        $modified = $clientIncome['modified']; 
+                     }
+                }
+                
+                $pregnant = $disabled = $handicapped = $stove = $refrigerator = $cell = $cable = $internet = $car = $sp_created = $sp_modified = "";
+                foreach ($client['ClientSpecific'] as $specifics) {
+                     if ($specifics['client_id'] == $client['Client']['id']) {
+			$pregnant = $specifics['pregnant'];
+                        $disabled = $specifics['disabled'];
+                        $handicapped = $specifics['handicapped'];
+                        $stove = $specifics['stove'];
+                        $refrigerator = $specifics['refrigerator'];
+                        $cell = $specifics['cell']; 
+                        $cable = $specifics['cable'];
+                        $internet = $specifics['internet'];
+                        $car = $specifics['car_truck_model'];
+                        $sp_created = $specifics['created'];
+                        $sp_modified = $specifics['modified']; 
+                     }
+                }
+?>
+
+
+<h2><?php echo h($client['Client']['first_name'])." 's Source of Income"; ?></h2>
+
+        <dl>
+		<dt><?php echo __('Regular Job'); ?></dt>
+		<dd>
+                        &nbsp;
+			<?php echo $regular; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Food Stamps'); ?></dt>
+		<dd>
+                        &nbsp;
+			<?php echo $food; ?>
+			&nbsp;
+		</dd>
+                <dt><?php echo __('Veterans Pension'); ?></dt>
+		<dd>
+                        &nbsp;
+			<?php echo $veterans; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Part Time Job'); ?></dt>
+		<dd>
+                        &nbsp;
+			<?php echo $part_time; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Social Security'); ?></dt>
+		<dd>
+                        &nbsp;
+			<?php echo $social; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Annuity Check'); ?></dt>
+		<dd>
+                        &nbsp;
+			<?php echo $annuity; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Child Support'); ?></dt>
+		<dd>
+                        &nbsp;
+			<?php echo $child; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('SSI Or Disability'); ?></dt>
+		<dd>
+                        &nbsp;
+			<?php echo $ssi; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Unemployment'); ?></dt>
+		<dd>
+                        &nbsp;
+			<?php echo $unemployment; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('When Next Check'); ?></dt>
+		<dd>
+                        &nbsp;
+			<?php echo $when; ?>
+			&nbsp;
+		</dd>
+	</dl>
+
+<br />
+<?php echo $this->Html->link(__('Edit Income'), array('controller' => 'client_incomes', 'action' => 'edit')); ?>
+<br />
+<br />
+<br />
+
+
+<?php /***************** Relatives ******************************************/ ?>
+
+
+<h2><?php echo h($client['Client']['first_name'])." 's Relatives"; ?></h2>
 	<?php if (!empty($client['ClientRelation'])): ?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Client Id'); ?></th>
 		<th><?php echo __('First Name'); ?></th>
 		<th><?php echo __('Last Name'); ?></th>
 		<th><?php echo __('Relationship'); ?></th>
 		<th><?php echo __('DOB'); ?></th>
 		<th><?php echo __('Sex'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
 		$i = 0;
-		foreach ($client['ClientRelation'] as $clientRelation): ?>
+		foreach ($client['ClientRelation'] as $clientRelation): 
+                if ($clientRelation['client_id'] == $client['Client']['id']): ?>
 		<tr>
 			<td><?php echo $clientRelation['id']; ?></td>
-			<td><?php echo $clientRelation['client_id']; ?></td>
 			<td><?php echo $clientRelation['first_name']; ?></td>
 			<td><?php echo $clientRelation['last_name']; ?></td>
 			<td><?php echo $clientRelation['relationship']; ?></td>
 			<td><?php echo $clientRelation['DOB']; ?></td>
 			<td><?php echo $clientRelation['sex']; ?></td>
-			<td><?php echo $clientRelation['created']; ?></td>
-			<td><?php echo $clientRelation['modified']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'client_relations', 'action' => 'view', $clientRelation['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'client_relations', 'action' => 'edit', $clientRelation['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'client_relations', 'action' => 'delete', $clientRelation['id']), null, __('Are you sure you want to delete # %s?', $clientRelation['id'])); ?>
-			</td>
 		</tr>
+        <?php endif; ?>
 	<?php endforeach; ?>
 	</table>
+<?php else: echo "none"; ?>
 <?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Client Relation'), array('controller' => 'client_relations', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Client Specifics'); ?></h3>
-	<?php if (!empty($client['ClientSpecific'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Client Id'); ?></th>
-		<th><?php echo __('Pregnant'); ?></th>
-		<th><?php echo __('Disabled'); ?></th>
-		<th><?php echo __('Handicapped'); ?></th>
-		<th><?php echo __('Stove'); ?></th>
-		<th><?php echo __('Refrigerator'); ?></th>
-		<th><?php echo __('Cell'); ?></th>
-		<th><?php echo __('Cable'); ?></th>
-		<th><?php echo __('Internet'); ?></th>
-		<th><?php echo __('Car Truck Model'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($client['ClientSpecific'] as $clientSpecific): ?>
-		<tr>
-			<td><?php echo $clientSpecific['id']; ?></td>
-			<td><?php echo $clientSpecific['client_id']; ?></td>
-			<td><?php echo $clientSpecific['pregnant']; ?></td>
-			<td><?php echo $clientSpecific['disabled']; ?></td>
-			<td><?php echo $clientSpecific['handicapped']; ?></td>
-			<td><?php echo $clientSpecific['stove']; ?></td>
-			<td><?php echo $clientSpecific['refrigerator']; ?></td>
-			<td><?php echo $clientSpecific['cell']; ?></td>
-			<td><?php echo $clientSpecific['cable']; ?></td>
-			<td><?php echo $clientSpecific['internet']; ?></td>
-			<td><?php echo $clientSpecific['car_truck_model']; ?></td>
-			<td><?php echo $clientSpecific['created']; ?></td>
-			<td><?php echo $clientSpecific['modified']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'client_specifics', 'action' => 'view', $clientSpecific['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'client_specifics', 'action' => 'edit', $clientSpecific['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'client_specifics', 'action' => 'delete', $clientSpecific['id']), null, __('Are you sure you want to delete # %s?', $clientSpecific['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Client Specific'), array('controller' => 'client_specifics', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Resource Uses'); ?></h3>
+<br />
+<br />
+<?php echo $this->Html->link(__('Edit Relatives'), array('controller' => 'client_relations', 'action' => 'edit')); ?>
+<br />
+<br />
+<br />
+
+
+<?php /***************** Specifics ******************************************/ ?>
+
+
+<h2><?php echo h($client['Client']['first_name'])." 's Specifics"; ?></h2>
+
+        <dl>
+		<dt><?php echo __('Pregnant'); ?></dt>
+		<dd>
+			<?php echo $pregnant; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Disabled'); ?></dt>
+		<dd>
+			<?php echo $disabled; ?>
+			&nbsp;
+		</dd>
+                <dt><?php echo __('Handicapped'); ?></dt>
+		<dd>
+			<?php echo $handicapped; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Stove'); ?></dt>
+		<dd>
+			<?php echo $stove; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Refrigerator'); ?></dt>
+		<dd>
+			<?php echo $refrigerator; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Cell'); ?></dt>
+		<dd>
+			<?php echo $cell; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Cable'); ?></dt>
+		<dd>
+			<?php echo $cable; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Internet'); ?></dt>
+		<dd>
+			<?php echo $internet; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Model of Car'); ?></dt>
+		<dd>
+			<?php echo $car; ?>
+			&nbsp;
+		</dd>
+	</dl>
+
+<br />
+<br />
+<?php echo $this->Html->link(__('Edit Client Specifics'), array('controller' => 'client_specifics', 'action' => 'edit')); ?> 
+<br />
+<br />
+<br />
+
+
+<?php /***************** Resources ******************************************/ ?>
+
+
+<h2><?php echo h($client['Client']['first_name'])." 's Resource Use"; ?></h2>
+
 	<?php if (!empty($client['ResourceUs'])): ?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
@@ -273,34 +336,38 @@
 		<th><?php echo __('Resource Id'); ?></th>
 		<th><?php echo __('Date'); ?></th>
 		<th><?php echo __('Comments'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
 		$i = 0;
-		foreach ($client['ResourceUs'] as $resourceUs): ?>
+		foreach ($client['ResourceUs'] as $resourceUs): 
+                if ($resourceUs['client_id'] == $client['Client']['id']): ?>
 		<tr>
 			<td><?php echo $resourceUs['id']; ?></td>
 			<td><?php echo $resourceUs['client_id']; ?></td>
 			<td><?php echo $resourceUs['resource_id']; ?></td>
 			<td><?php echo $resourceUs['date']; ?></td>
 			<td><?php echo $resourceUs['comments']; ?></td>
-			<td><?php echo $resourceUs['created']; ?></td>
-			<td><?php echo $resourceUs['modified']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'resource_uses', 'action' => 'edit', $resourceUs['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'resource_uses', 'action' => 'delete', $resourceUs['id']), null, __('Are you sure you want to delete # %s?', $resourceUs['id'])); ?>
-			</td>
 		</tr>
+        <?php endif; ?>
 	<?php endforeach; ?>
 	</table>
+<?php else: echo "none"; ?>
 <?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Resource Us'), array('controller' => 'resource_uses', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
+<br /><br />
+<?php echo $this->Html->link(__('Edit Resource Uses'), array('controller' => 'resource_uses', 'action' => 'edit')); ?>
+
+
+
 </div>
+<div class="actions">
+	<h3><?php echo __('Actions'); ?></h3>
+	<ul>
+                <li><?php echo $this->Html->link(__('Clients Listing'), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete # %s?', $client['Client']['id'])); ?> </li>
+                <li><?php echo $this->Html->link(__('Print this Client Summary'), array('action' => 'add')); ?> </li>	
+		<li><?php echo $this->Html->link(__('Create a new Client'), array('action' => 'add')); ?> </li>		
+	</ul>
+</div>
+

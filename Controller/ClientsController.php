@@ -6,8 +6,22 @@ App::uses('AppController', 'Controller');
  * @property Client $Client
  */
 class ClientsController extends AppController {
-
-/**
+    
+    /**
+     * Lee: Authorization method for what pages a user can or cannot access 
+     * associated with clients based on their role (regular, admin, super) 
+     */
+    public function isAuthorized($user) {
+        //superadmins get access to everything
+        if ($user['isSuperAdmin']) return true;
+        
+        //currently working on this.  trying to decide what admins can and 
+        //cannot access
+        
+        return true;
+    }
+    
+    /**
  * index method
  *
  * @return void
@@ -31,6 +45,20 @@ class ClientsController extends AppController {
 		}
 		$this->set('client', $this->Client->read(null, $id));
 	}
+        
+        /**
+         * Lee: This method searches for a client 
+         */
+        public function search() { 
+            if ($this->request->is('post')) {
+                $this->redirect(array('action' => 'searchResults'));
+            }
+        }
+        
+        /**
+         * Lee: This method displays the results of the above search 
+         */
+        public function searchResults() { }
 
 /**
  * add method
@@ -41,8 +69,8 @@ class ClientsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Client->create();
 			if ($this->Client->save($this->request->data)) {
-				$this->Session->setFlash(__('The client has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('The client details have been saved'));
+				$this->redirect(array('controller' => 'client_incomes', 'action' => 'add'));
 			} else {
 				$this->Session->setFlash(__('The client could not be saved. Please, try again.'));
 			}

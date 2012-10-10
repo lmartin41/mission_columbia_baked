@@ -21,104 +21,104 @@ class ClientIncome extends AppModel {
  */
 	public $validate = array(
 		'regular_job' => array(
-			'decimal' => array(
-				'rule' => array('decimal'),
+		//	'decimal' => array(
+			//	'rule' => array('decimal'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+		//	),
 		),
 		'food_stamps' => array(
-			'decimal' => array(
-				'rule' => array('decimal'),
+		//	'decimal' => array(
+			//	'rule' => array('decimal'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+		//	),
 		),
 		'veterans_pension' => array(
-			'decimal' => array(
-				'rule' => array('decimal'),
+			//'decimal' => array(
+				//'rule' => array('decimal'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+		//	),
 		),
 		'part_time_job' => array(
-			'decimal' => array(
-				'rule' => array('decimal'),
+			//'decimal' => array(
+				//'rule' => array('decimal'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+			//),
 		),
 		'social_security' => array(
-			'decimal' => array(
-				'rule' => array('decimal'),
+			//'decimal' => array(
+				//'rule' => array('decimal'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+			//),
 		),
 		'annuity_check' => array(
-			'decimal' => array(
-				'rule' => array('decimal'),
+			//'decimal' => array(
+				//'rule' => array('decimal'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+			//),
 		),
 		'child_support' => array(
-			'decimal' => array(
-				'rule' => array('decimal'),
+			//'decimal' => array(
+				//'rule' => array('decimal'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+			//),
 		),
 		'ssi_or_disability' => array(
-			'decimal' => array(
-				'rule' => array('decimal'),
+			//'decimal' => array(
+				//'rule' => array('decimal'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+			//),
 		),
 		'unemployment' => array(
-			'decimal' => array(
-				'rule' => array('decimal'),
+			//'decimal' => array(
+				//'rule' => array('decimal'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+			//),
 		),
 		'when_next_check' => array(
-			'decimal' => array(
-				'rule' => array('decimal'),
+			//'decimal' => array(
+			//	'rule' => array('decimal'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+			//),
 		),
 	);
 
