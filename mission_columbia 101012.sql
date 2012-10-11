@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 08, 2012 at 04:38 PM
+-- Generation Time: Oct 11, 2012 at 02:37 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -93,36 +93,41 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `apartment_number` int(6) DEFAULT NULL,
   `how_did_you_hear` text,
   `how_long_do_you_need` text,
+  `regular_job` decimal(10,0) DEFAULT NULL,
+  `food_stamps` decimal(10,0) DEFAULT NULL,
+  `veterans_pension` decimal(10,0) DEFAULT NULL,
+  `part_time_job` decimal(10,0) DEFAULT NULL,
+  `social_security` decimal(10,0) DEFAULT NULL,
+  `annuity_check` decimal(10,0) DEFAULT NULL,
+  `child_support` decimal(10,0) DEFAULT NULL,
+  `ssi_or_disability` decimal(10,0) DEFAULT NULL,
+  `unemployment` decimal(10,0) DEFAULT NULL,
+  `when_next_check` date DEFAULT NULL,
+  `pregnant` tinyint(1) DEFAULT NULL,
+  `disabled` tinyint(1) DEFAULT NULL,
+  `handicapped` tinyint(1) DEFAULT NULL,
+  `stove` tinyint(1) DEFAULT NULL,
+  `refrigerator` tinyint(1) DEFAULT NULL,
+  `cell` tinyint(1) DEFAULT NULL,
+  `cable` tinyint(1) DEFAULT NULL,
+  `internet` tinyint(1) DEFAULT NULL,
+  `model` varchar(30) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=112 ;
 
 --
--- Table structure for table `client_incomes`
+-- Dumping data for table `clients`
 --
 
-CREATE TABLE IF NOT EXISTS `client_incomes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `client_id` int(11) NOT NULL,
-  `regular_job` decimal(11,0) DEFAULT NULL,
-  `food_stamps` decimal(11,0) DEFAULT NULL,
-  `veterans_pension` decimal(11,0) DEFAULT NULL,
-  `part_time_job` decimal(11,0) DEFAULT NULL,
-  `social_security` decimal(11,0) DEFAULT NULL,
-  `annuity_check` decimal(11,0) DEFAULT NULL,
-  `child_support` decimal(11,0) DEFAULT NULL,
-  `ssi_or_disability` decimal(11,0) DEFAULT NULL,
-  `unemployment` decimal(11,0) DEFAULT NULL,
-  `when_next_check` datetime DEFAULT NULL,
-  `created` datetime NOT NULL,
-  `modified` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `client_id` (`client_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+INSERT INTO `clients` (`id`, `first_name`, `last_name`, `DOB`, `sex`, `SSN`, `address_one`, `address_two`, `city`, `state`, `zip`, `phone`, `apartment_number`, `how_did_you_hear`, `how_long_do_you_need`, `regular_job`, `food_stamps`, `veterans_pension`, `part_time_job`, `social_security`, `annuity_check`, `child_support`, `ssi_or_disability`, `unemployment`, `when_next_check`, `pregnant`, `disabled`, `handicapped`, `stove`, `refrigerator`, `cell`, `cable`, `internet`, `model`, `isDeleted`, `created`, `modified`) VALUES
+(106, 'asdf', 'asdfa', '2012-10-10 00:00:00', 'm', NULL, '', '', '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-10-10', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-10 23:49:14', '2012-10-11 01:10:36'),
+(107, 'aheha', 'asaha', '2012-10-11 00:00:00', 'adsf', NULL, '', '', '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-10-11', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-11 00:09:50', '2012-10-11 00:09:50'),
+(108, 'adga', 'adsha', '2012-10-11 00:00:00', 'asdf', NULL, '', '', '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-10-11', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-11 00:11:40', '2012-10-11 00:11:40'),
+(110, 'test', 'test', '2012-10-11 00:00:00', 'a', NULL, '', '', '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-10-11', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-11 00:33:06', '2012-10-11 01:09:18'),
+(111, 'hasRelative', 'asdf', '2012-10-11 00:00:00', 'adsf', NULL, '', '', '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-10-11', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-11 01:11:18', '2012-10-11 01:12:46');
 
 -- --------------------------------------------------------
 
@@ -136,37 +141,23 @@ CREATE TABLE IF NOT EXISTS `client_relations` (
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(30) NOT NULL,
   `relationship` varchar(20) NOT NULL COMMENT '(as in daughter, mother, son, sister, etc.)',
-  `DOB` datetime NOT NULL,
+  `DOB` date NOT NULL,
   `sex` varchar(6) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
--- Table structure for table `client_specifics`
+-- Dumping data for table `client_relations`
 --
 
-CREATE TABLE IF NOT EXISTS `client_specifics` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `client_id` int(11) NOT NULL,
-  `pregnant` tinyint(1) DEFAULT NULL,
-  `disabled` tinyint(1) DEFAULT NULL,
-  `handicapped` tinyint(1) DEFAULT NULL,
-  `stove` tinyint(1) DEFAULT NULL,
-  `refrigerator` tinyint(1) DEFAULT NULL,
-  `cell` int(20) DEFAULT NULL,
-  `cable` tinyint(1) DEFAULT NULL,
-  `internet` tinyint(1) DEFAULT NULL,
-  `car_truck_model` varchar(20) DEFAULT NULL,
-  `created` datetime NOT NULL,
-  `modified` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `client_id` (`client_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+INSERT INTO `client_relations` (`id`, `client_id`, `first_name`, `last_name`, `relationship`, `DOB`, `sex`, `created`, `modified`) VALUES
+(17, 110, 'adshah', 'adhadha', 'adfadf', '2012-10-11', 'f', '2012-10-11 00:33:17', '2012-10-11 00:33:17'),
+(18, 110, 'adah', 'adhah', 'adf', '2012-10-11', 'f', '2012-10-11 00:33:23', '2012-10-11 00:33:23'),
+(19, 111, 'adgg', 'adga', 'asdfa', '2012-10-11', 'adsf', '2012-10-11 01:11:24', '2012-10-11 01:37:00'),
+(20, 111, 'agda', 'adgad', 'adsfa', '2012-10-11', 'f', '2012-10-11 01:34:27', '2012-10-11 01:34:27');
 
 -- --------------------------------------------------------
 
@@ -247,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `resource_uses` (
   KEY `client_id` (`client_id`),
   KEY `resource_id` (`resource_id`),
   KEY `date` (`date`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -258,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `resource_uses` (
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique Identifier',
   `username` varchar(50) NOT NULL,
-  `password` char(40) NOT NULL,
+  `password` varchar(40) NOT NULL,
   `isAdmin` tinyint(1) NOT NULL,
   `isSuperAdmin` tinyint(1) NOT NULL,
   `organization_id` int(11) NOT NULL,
@@ -269,36 +260,27 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `agency_id` (`organization_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1237 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1243 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `isAdmin`, `isSuperAdmin`, `organization_id`, `email`, `isDeleted`, `created`, `modified`) VALUES
-(1234, 'samwise', '31c47d09c29bec8ae9c960b797c44cae294a8b4e', 0, 0, 0, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1238, 'samwise', '3d9803dc694c20a7e5b5cb40971efbb7caa2a484', 0, 0, 0, 'adsf@asd.com', 0, '2012-10-09 16:27:25', '2012-10-09 16:27:25'),
+(1239, 'asdf', '2ef3549c14c8a30048fada9a7e680c18e36d1067', 0, 0, 0, 'asdf@asdf.com', 0, '2012-10-09 16:56:01', '2012-10-09 16:56:01'),
+(1241, 'asdfadsf', '503e6f06e06c730eb11e9d77519f1820be64a52b', 0, 0, 0, 'as@as.com', 0, '2012-10-09 16:57:38', '2012-10-09 16:57:38'),
+(1242, 'superAdmin', '81875d7a3a96bd9f69b2a358c0a3414259446b3a', 0, 1, 0, 'super@super.com', 0, '2012-10-09 20:27:18', '2012-10-09 20:27:18');
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `client_incomes`
---
-ALTER TABLE `client_incomes`
-  ADD CONSTRAINT `client_incomes_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`);
-
---
 -- Constraints for table `client_relations`
 --
 ALTER TABLE `client_relations`
-  ADD CONSTRAINT `client_relations_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`);
-
---
--- Constraints for table `client_specifics`
---
-ALTER TABLE `client_specifics`
-  ADD CONSTRAINT `client_specifics_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`);
+  ADD CONSTRAINT `client_relations_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `feedbacks`
