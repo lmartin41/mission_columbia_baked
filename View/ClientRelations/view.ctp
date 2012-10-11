@@ -41,9 +41,9 @@
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('Client Listing'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
-                <li><?php echo $this->Html->link(__('Relatives Listing'), array('action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('Edit this Relative'), array('action' => 'edit', $clientRelation['ClientRelation']['id'])); ?> </li>
+        <li><?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
+        <li><?php echo $this->Html->link(__('Relatives Listing'), array('action' => 'index', $clientRelation['ClientRelation']['client_id'])); ?> </li>
+        <li><?php echo $this->Html->link(__('Edit this Relative'), array('action' => 'edit', $clientRelation['ClientRelation']['id'], $clientRelation['ClientRelation']['client_id'])); ?> </li>
         <li><?php echo $this->Form->postLink(__('Delete This Relative'), array('action' => 'delete', $clientRelation['ClientRelation']['id']), null, __('Are you sure you want to delete # %s?', $clientRelation['ClientRelation']['id'])); ?> </li>
         <li><?php echo $this->Html->link(__('Create a new Relative'), array('action' => 'add')); ?> </li>
     </ul>

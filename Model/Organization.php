@@ -158,14 +158,14 @@ class Organization extends AppModel {
 			),
 		),
 		'phone' => array(
-			'phone' => array(
-				'rule' => array('phone'),
+		//	'phone' => array(
+			//	'rule' => array('phone'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+		//	),
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -176,24 +176,24 @@ class Organization extends AppModel {
 			),
 		),
 		'phone_cell' => array(
-			'phone' => array(
-				'rule' => array('phone'),
+		//	'phone' => array(
+			//	'rule' => array('phone'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+		//	),
 		),
 		'phone_office' => array(
-			'phone' => array(
-				'rule' => array('phone'),
+			//'phone' => array(
+			//	'rule' => array('phone'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+		//	),
 		),
 	);
 

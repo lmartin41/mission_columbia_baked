@@ -2,43 +2,17 @@
 	<h2><?php echo __('Organizations'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('org_name'); ?></th>
-			<th><?php echo $this->Paginator->sort('org_type'); ?></th>
-			<th><?php echo $this->Paginator->sort('address_one'); ?></th>
-			<th><?php echo $this->Paginator->sort('address_two'); ?></th>
-			<th><?php echo $this->Paginator->sort('city'); ?></th>
-			<th><?php echo $this->Paginator->sort('state'); ?></th>
-			<th><?php echo $this->Paginator->sort('zip'); ?></th>
+			<th><?php echo $this->Paginator->sort('org_type'); ?>
 			<th><?php echo $this->Paginator->sort('contact'); ?></th>
-			<th><?php echo $this->Paginator->sort('website'); ?></th>
-			<th><?php echo $this->Paginator->sort('phone'); ?></th>
-			<th><?php echo $this->Paginator->sort('phone_cell'); ?></th>
-			<th><?php echo $this->Paginator->sort('phone_office'); ?></th>
-			<th><?php echo $this->Paginator->sort('isDeleted'); ?></th>
-			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
 	foreach ($organizations as $organization): ?>
 	<tr>
-		<td><?php echo h($organization['Organization']['id']); ?>&nbsp;</td>
 		<td><?php echo h($organization['Organization']['org_name']); ?>&nbsp;</td>
 		<td><?php echo h($organization['Organization']['org_type']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['address_one']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['address_two']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['city']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['state']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['zip']); ?>&nbsp;</td>
 		<td><?php echo h($organization['Organization']['contact']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['website']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['phone']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['phone_cell']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['phone_office']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['isDeleted']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['created']); ?>&nbsp;</td>
-		<td><?php echo h($organization['Organization']['modified']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $organization['Organization']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $organization['Organization']['id'])); ?>

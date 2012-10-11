@@ -17,7 +17,7 @@
                 <td class="actions">
                     <?php echo $this->Html->link(__('View details'), array('action' => 'view', $client['Client']['id'])); ?>
                     <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add')); ?>
-                    <?php echo $this->Html->link(__('View Client Checklist'), array('controller' => 'resource_uses', 'action' => 'add')); ?>
+                    <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'resource_uses', 'action' => 'add')); ?>
                     <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $client['Client']['id'])); ?>
                     <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete # %s?', $client['Client']['id'])); ?>
                 </td>
@@ -46,11 +46,5 @@
         <li><?php echo $this->Html->link(__('Search for a Client'), array('action' => 'search')); ?> </li>
     </ul>
     <br />
-    <h3><?php echo __('Reports'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('List Client Incomes'), array('controller' => 'client_incomes', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('List Client Relations'), array('controller' => 'client_relations', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('List Client Specifics'), array('controller' => 'client_specifics', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('List Resource Uses'), array('controller' => 'resource_uses', 'action' => 'index')); ?> </li>
-    </ul>
+   
 </div>

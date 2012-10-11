@@ -37,7 +37,6 @@
         echo $this->Form->input('cable');
         echo $this->Form->input('internet');
         echo $this->Form->input('model');
-        echo $this->Form->input('isDeleted');
         ?>
     </fieldset>
     <div>
@@ -54,8 +53,9 @@
     <ul>
 
         <li><?php echo $this->Html->link(__('List Clients'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Edit Photo'), array('action' => 'index')); ?></li>
         <li><?php echo $this->Form->postLink(__('Delete Client'), array('action' => 'delete', $this->Form->value('Client.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Client.id'))); ?></li>
-        <li><?php echo $this->Html->link(__('Edit a Relative of This Client'), array('controller' => 'client_relations', 'action' => 'index')); ?> </li>
+        <li><?php echo $this->Html->link(__('Edit a Relative of This Client'), array('controller' => 'client_relations', 'action' => 'index', $this->Form->value('Client.id'))); ?> </li>
         <li><?php echo $this->Html->link(__('Edit Resource Usage'), array('controller' => 'resource_uses', 'action' => 'edit')); ?> </li>
     </ul>
 </div>

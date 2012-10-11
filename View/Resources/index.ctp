@@ -6,9 +6,6 @@
 			<th><?php echo $this->Paginator->sort('resource_name'); ?></th>
 			<th><?php echo $this->Paginator->sort('organization_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('resource_status'); ?></th>
-			<th><?php echo $this->Paginator->sort('isDeleted'); ?></th>
-			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
@@ -19,13 +16,9 @@
 		<td>
 			<?php echo $this->Html->link($resource['Organization']['org_name'], array('controller' => 'organizations', 'action' => 'view', $resource['Organization']['id'])); ?>
 		</td>
-		<td><?php echo h($resource['Resource']['resource_status']); ?>&nbsp;</td>
-		<td><?php echo h($resource['Resource']['isDeleted']); ?>&nbsp;</td>
-		<td><?php echo h($resource['Resource']['created']); ?>&nbsp;</td>
-		<td><?php echo h($resource['Resource']['modified']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $resource['Resource']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $resource['Resource']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $resource['Resource']['id'], $resource['Resource']['organization_id'])); ?>
 			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $resource['Resource']['id']), null, __('Are you sure you want to delete # %s?', $resource['Resource']['id'])); ?>
 		</td>
 	</tr>
@@ -49,10 +42,8 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Resource'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Organizations'), array('controller' => 'organizations', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Organization'), array('controller' => 'organizations', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Resource Uses'), array('controller' => 'resource_uses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Resource Us'), array('controller' => 'resource_uses', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Create a New Resource'), array('action' => 'add', $resource['Resource']['organization_id'])); ?></li>
+		<li><?php echo $this->Html->link(__('List All Organizations'), array('controller' => 'organizations', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Create a New Organization'), array('controller' => 'organizations', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

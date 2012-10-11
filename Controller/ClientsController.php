@@ -74,9 +74,8 @@ class ClientsController extends AppController {
             $this->Client->create();
             if ($this->Client->save($this->request->data)) {
                 $this->Session->setFlash(__('The client details have been saved'));
-                $this->Session->write('clientID', $this->Client->id);
                 if (isset($this->request->data['addMore'])) {
-                    $this->redirect(array('controller' => 'client_relations', 'action' => 'add'));
+                    $this->redirect(array('controller' => 'client_relations', 'action' => 'add', $this->Client->id));
                 } else if (isset($this->request->data['finished'])) {
                     $this->redirect(array('action' => 'index'));
                 }
@@ -104,10 +103,9 @@ class ClientsController extends AppController {
                 $this->redirect(array('action' => 'index'));
             }
             if ($this->Client->save($this->request->data)) {
-                $this->Session->setFlash(__('The client details have been edited'));
-                $this->Session->write('clientID', $this->Client->id);
+                $this->Session->setFlash(__('The client has been edited'));
                 if (isset($this->request->data['editMore'])) {
-                    $this->redirect(array('controller' => 'client_relations', 'action' => 'index'));
+                    $this->redirect(array('controller' => 'client_relations', 'action' => 'index', $id));
                 } else if (isset($this->request->data['finished'])) {
                     $this->redirect(array('action' => 'index'));
                 }
@@ -142,5 +140,4 @@ class ClientsController extends AppController {
         $this->Session->setFlash(__('Client was not deleted'));
         $this->redirect(array('action' => 'index'));
     }
-
 }

@@ -8,15 +8,16 @@ App::uses('AppController', 'Controller');
  * @property ClientRelation $ClientRelation
  */
 class ClientRelationsController extends AppController {
-
+    
     /**
      * index method
      *
      * @return void
      */
-    public function index() {
+    public function index($clientID = null) {
         $this->ClientRelation->recursive = 0;
         $this->set('clientRelations', $this->paginate());
+        $this->set('clientID', $clientID);
     }
 
     /**
@@ -31,6 +32,7 @@ class ClientRelationsController extends AppController {
         if (!$this->ClientRelation->exists()) {
             throw new NotFoundException(__('Invalid client relation'));
         }
+        
         $this->set('clientRelation', $this->ClientRelation->read(null, $id));
     }
 
@@ -39,9 +41,7 @@ class ClientRelationsController extends AppController {
      *
      * @return void
      */
-    public function add() {
-        $clientID = $this->Session->read('clientID');
-
+    public function add($clientID = null) {
         if ($this->request->is('post')) {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('controller' => 'clients', 'action' => 'index'));
@@ -51,9 +51,9 @@ class ClientRelationsController extends AppController {
             if ($this->ClientRelation->save($this->request->data)) {
                 $this->Session->setFlash(__('The client relation has been saved'));
                 if (isset($this->request->data['Add_another_relative'])) {
-                    $this->redirect(array('controller' => 'client_relations', 'action' => 'add'));
+                    $this->redirect(array('action' => 'add', $clientID));
                 } else if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+                    $this->redirect(array('action' => 'index', $clientID));
                 }
             } else {
                 $this->Session->setFlash(__('The client relation could not be saved. Please, try again.'));
@@ -70,19 +70,21 @@ class ClientRelationsController extends AppController {
      * @param string $id
      * @return void
      */
-    public function edit($id = null) {
+    public function edit($id = null, $clientID = null) {
         $this->ClientRelation->id = $id;
+        
+        $this->set('clientID', $clientID);
         if (!$this->ClientRelation->exists()) {
             throw new NotFoundException(__('Invalid client relation'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('action' => 'index', $clientID));
             }
             if ($this->ClientRelation->save($this->request->data)) {
                 $this->Session->setFlash(__('The client relation has been saved'));
                 if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('action' => 'index'));
+                    $this->redirect(array('action' => 'index', $clientID));
                 }
             } else {
                 $this->Session->setFlash(__('The client relation could not be saved. Please, try again.'));
@@ -103,6 +105,7 @@ class ClientRelationsController extends AppController {
      * @return void
      */
     public function delete($id = null) {
+        $clientID = $this->Session->read('clientID');
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
@@ -112,10 +115,10 @@ class ClientRelationsController extends AppController {
         }
         if ($this->ClientRelation->delete()) {
             $this->Session->setFlash(__('Client relation deleted'));
-            $this->redirect(array('action' => 'index'));
+            $this->redirect(array('action' => 'index', $clientID));
         }
         $this->Session->setFlash(__('Client relation was not deleted'));
-        $this->redirect(array('action' => 'index'));
+        $this->redirect(array('action' => 'index', $clientID));
     }
 
 }

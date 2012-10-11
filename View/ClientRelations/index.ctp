@@ -10,20 +10,19 @@
         <th class="actions"><?php echo __('Actions'); ?></th>
     </tr>
     <?php foreach ($clientRelations as $clientRelation): ?>
-        <?php $clientID = $this->Session->read('clientID'); ?>
         <?php if ($clientRelation['ClientRelation']['client_id'] == $clientID): ?>
             <tr>
                 <td><?php echo h($clientRelation['ClientRelation']['id']); ?>&nbsp;</td>
                 <td>
-                    <?php echo $this->Html->link($clientRelation['Client']['id'], array('controller' => 'clients', 'action' => 'view', $clientRelation['Client']['id'])); ?>
+                    <?php echo $this->Html->link($clientRelation['Client']['first_name'], array('controller' => 'clients', 'action' => 'view', $clientRelation['Client']['id'])); ?>
                 </td>
                 <td><?php echo h($clientRelation['ClientRelation']['first_name']); ?>&nbsp;</td>
                 <td><?php echo h($clientRelation['ClientRelation']['last_name']); ?>&nbsp;</td>
                 <td><?php echo h($clientRelation['ClientRelation']['relationship']); ?>&nbsp;</td>
                 <td class="actions">
-                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $clientRelation['ClientRelation']['id'])); ?>
+                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $clientRelation['ClientRelation']['id'], $clientRelation['ClientRelation']['client_id'])); ?>
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $clientRelation['ClientRelation']['id'])); ?>
-                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $clientRelation['ClientRelation']['id']), null, __('Are you sure you want to delete # %s?', $clientRelation['ClientRelation']['id'])); ?>
+                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $clientRelation['ClientRelation']['id']),  null, __('Are you sure you want to delete # %s?', $clientRelation['ClientRelation']['id'])); ?>
                 </td>
             </tr>
         <?php endif; ?>
@@ -39,7 +38,7 @@
     ?>
 </div>
 <br /><br />
-<?php echo $this->Html->link(__('Add a new Relative'), array('action' => 'add')); ?>
+<?php echo $this->Html->link(__('Add a new Relative'), array('action' => 'add', $clientID)); ?>
 <br /><br />
 <?php echo $this->Html->link(__('Go back to Client Listing'), array('controller' => 'clients', 'action' => 'index')); ?>
 </ul>

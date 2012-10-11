@@ -55,6 +55,7 @@
 			        <input type="radio" id="radio1" name="radio" /><label for="radio1">Users</label>
 			        <input type="radio" id="radio2" name="radio" /><label for="radio2">Clients</label>
 			        <input type="radio" id="radio3" name="radio" /><label for="radio3">Resources</label>
+                                <input type="radio" id="radio35" name="radio" /><label for="radio35">Organizations</label>
 			        <input type="radio" id="radio4" name="radio" /><label for="radio4">Reports</label>
 			        <input type="radio" id="radio5" name="radio" /><label for="radio5">Feedbacks</label>
 			        <input type="radio" id="radio6" name="radio" /><label for="radio6">Admin</label>
@@ -97,11 +98,11 @@
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => __('CakePHP: the rapid development php framework'), 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				);
+			<?php //echo $this->Html->link(
+					//$this->Html->image('cake.power.gif', array('alt' => __('CakePHP: the rapid development php framework'), 'border' => '0')),
+				//	'http://www.cakephp.org/',
+					//array('target' => '_blank', 'escape' => false)
+				//);
 			?>
 		</div>
 	</div>

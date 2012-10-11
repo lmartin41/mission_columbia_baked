@@ -1,5 +1,7 @@
 <div class="clients view">
-    <h2><?php echo __('Client'); ?></h2>
+    <h2><?php echo __($client['Client']['first_name']."'s Details"); ?></h2>
+    <br />
+    <?php echo $this->Html->image('person.png', array('alt' => 'Sample Photo')); ?>
     <dl>
         <dt><?php echo __('Id'); ?></dt>
         <dd>
@@ -205,28 +207,11 @@
             <?php echo h($client['Client']['model']); ?>
             &nbsp;
         </dd>
-        <dt><?php echo __('IsDeleted'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['isDeleted']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Created'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['created']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Modified'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['modified']); ?>
-            &nbsp;
-        </dd>
+        
     </dl>
 
     <br /><br />
-    <?php echo $this->Html->link(__('Edit Details'), array('action' => 'edit')); ?>
+    <?php echo $this->Html->link(__('Edit Details'), array('action' => 'edit', $client['Client']['id'])); ?>
     <br /><br /><br />
     <?php /*     * *************** Relatives ***************************************** */ ?>
 
@@ -264,7 +249,7 @@
 
     <br />
     <br />
-    <?php echo $this->Html->link(__('Edit Relatives'), array('controller' => 'client_relations', 'action' => 'edit')); ?>
+    <?php echo $this->Html->link(__('Edit Relatives'), array('controller' => 'client_relations', 'action' => 'index', $client['Client']['id'])); ?>
 </div>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
