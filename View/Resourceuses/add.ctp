@@ -1,7 +1,7 @@
 <div class="resourceuses form">
 <?php echo $this->Form->create('Resourceus'); ?>
 	<fieldset>
-		<legend><?php echo __('Add Resourceus'); ?></legend>
+		<legend><?php echo __('Add Resource Use'); ?></legend>
 	<?php
 		echo $this->Form->input('client_id');
 		echo $this->Form->input('resource_id');

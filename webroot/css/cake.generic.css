@@ -23,7 +23,7 @@
 
 /** General Style Info **/
 body {
-	background: #003d4c;
+	background: #AAAAAA;
 	color: #fff;
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
 	font-size:90%;
@@ -79,17 +79,18 @@ p {
 
 #header{
 	padding: 10px 20px;
+        
 }
 #header h1 {
-	line-height:20px;
-	background: #003d4c url('../img/cake.icon.png') no-repeat left;
+	line-height:150px;
+	background: #AAAAAA url('../img/mission_logo.png') no-repeat left; 
 	color: #fff;
 	padding: 0px 30px;
 	height:15%;
 }
 #header h1 a {
-	color: #fff;
-	background: #003d4c;
+	color: #330000;
+	background: #AAAAAA;
 	font-weight: normal;
 	text-decoration: none;
 }

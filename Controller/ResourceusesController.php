@@ -41,7 +41,7 @@ class ResourceusesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Resourceus->create();
 			if ($this->Resourceus->save($this->request->data)) {
-				$this->Session->setFlash(__('The resourceus has been saved'));
+				$this->Session->setFlash(__('The resource Use has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The resourceus could not be saved. Please, try again.'));

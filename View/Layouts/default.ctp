@@ -47,7 +47,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1 style="text-align: right;"><?php echo $this->Html->link(__('Mission Columbia: Data Entry & Resource Tracking'), 'http://cakephp.org'); ?></h1>
+			<h1 style="text-align: right;"><?php echo $this->Html->link(__("Mission Columbia: Data Entry & Resource Tracking Service"), 'http://www.missioncolumbia.org'); ?></h1>
 	
 
 			<ul id="top_links" class="do_not_show">
@@ -89,11 +89,11 @@
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
-			<?php //echo $this->Html->link(
-					//$this->Html->image('cake.power.gif', array('alt' => __('CakePHP: the rapid development php framework'), 'border' => '0')),
-				//	'http://www.cakephp.org/',
-					//array('target' => '_blank', 'escape' => false)
-				//);
+			<?php echo $this->Html->link(
+					$this->Html->image('cake.power.gif', array('alt' => __('CakePHP: the rapid development php framework'), 'border' => '0')),
+					'http://www.cakephp.org/',
+					array('target' => '_blank', 'escape' => false)
+				);
 			?>
 		</div>
 	</div>
