@@ -14,7 +14,6 @@ class UsersController extends AppController {
      */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add');
     }
     
     /**
@@ -46,8 +45,10 @@ class UsersController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->User->recursive = 0;
-		$this->set('users', $this->paginate());
+		$conditions = array('cur_user' => $this->Session->read("Auth.User"));
+		$this->paginate = array('active', 'conditions' => $conditions);
+        $users = $this->paginate();
+        $this->set(compact('users'));
 	}
 
 /**
@@ -97,7 +98,31 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->User->save($this->request->data)) {
+			if( $this->request->data['User']['password'] == '' && $this->request->data['User']['password_confirmation'] == '' )
+			{
+				$this->User->set('username', $this->request->data['User']['username']);
+				$this->User->set('email', $this->request->data['User']['email']);
+				if( isset($this->request->data['User']['organization_id']) )
+					$this->User->set('organization_id', $this->request->data['User']['organization_id']);
+				if( isset($this->request->data['User']['isSuperAdmin']) )
+					$this->User->set('isSuperAdmin', $this->request->data['User']['isSuperAdmin']);
+				if( isset($this->request->data['User']['isAdmin']) )
+					$this->User->set('isAdmin', $this->request->data['User']['isAdmin']);
+				if( isset($this->request->data['User']['isDeleted']) )
+					$this->User->set('isDeleted', $this->request->data['User']['isDeleted']);
+				
+				if($this->User->validates(array('fieldList' => array('email'))))
+				{
+					$this->User->save(NULL, array('validate' => false));
+					$this->Session->setFlash(__('The user has been saved'));
+					$this->redirect(array('action' => 'index'));
+				}
+				else
+				{
+					$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				}
+			}
+			elseif ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -105,9 +130,11 @@ class UsersController extends AppController {
 			}
 		} else {
 			$this->request->data = $this->User->read(null, $id);
+			$this->request->data['User']['password'] = '';
 		}
 		$organizations = $this->User->Organization->find('list');
 		$this->set(compact('organizations'));
+		$this->set('org_disabled', $this->User->organizationDisabled($this->Session->read("Auth.User")));
 	}
 
 /**

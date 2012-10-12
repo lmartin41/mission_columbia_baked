@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){  
 	    jQuery(function() {
-	        jQuery( "#radio" ).buttonset();
+	        jQuery( "#top_links" ).buttonset();
 
 	    });
 
@@ -14,19 +14,19 @@ jQuery(document).ready(function(){
 	    jQuery("#radio3").click(function () {
 			window.location.href = "http://localhost/mission_columbia_baked/resources/";
 	    });
-            jQuery("#radio35").click(function () {
+            jQuery("#radio4").click(function () {
 			window.location.href = "http://localhost/mission_columbia_baked/organizations/";
 	    });
-	    jQuery("#radio4").click(function () {
+	    jQuery("#radio5").click(function () {
 			//window.location.href = "http://localhost/mission_columbia_baked/reports/";
 	    });
-	    jQuery("#radio5").click(function () {
+	    jQuery("#radio6").click(function () {
 			window.location.href = "http://localhost/mission_columbia_baked/feedbacks/";
 	    });
-	    jQuery("#radio6").click(function () {
+	    jQuery("#radio7").click(function () {
 			//window.location.href = "http://localhost/mission_columbia_baked/admin/";
 	    });
-	    jQuery("#radio7").click(function () {
+	    jQuery("#radio8").click(function () {
 			//window.location.href = "http://localhost/mission_columbia_baked/help/";
 			//jQuery('#radio').toggle();
 	    });

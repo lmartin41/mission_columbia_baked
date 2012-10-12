@@ -50,18 +50,16 @@
 			<h1 style="text-align: right;"><?php echo $this->Html->link(__('Mission Columbia: Data Entry & Resource Tracking'), 'http://cakephp.org'); ?></h1>
 	
 
-			<div id="outer">
-				<div id="radio">
-			        <input type="radio" id="radio1" name="radio" /><label for="radio1">Users</label>
-			        <input type="radio" id="radio2" name="radio" /><label for="radio2">Clients</label>
-			        <input type="radio" id="radio3" name="radio" /><label for="radio3">Resources</label>
-                                <input type="radio" id="radio35" name="radio" /><label for="radio35">Organizations</label>
-			        <input type="radio" id="radio4" name="radio" /><label for="radio4">Reports</label>
-			        <input type="radio" id="radio5" name="radio" /><label for="radio5">Feedbacks</label>
-			        <input type="radio" id="radio6" name="radio" /><label for="radio6">Admin</label>
-			        <input type="radio" id="radio7" name="radio" /><label for="radio7">Help</label>
-			    </div>
-			</div>
+			<ul id="top_links" class="do_not_show">
+				<li><input type="radio" id="radio1" name="radio" /><label for="radio1">Users</label></li>
+			    <li><input type="radio" id="radio2" name="radio" /><label for="radio2">Clients</label></li>
+			    <li><input type="radio" id="radio3" name="radio" /><label for="radio3">Resources</label></li>
+                <li><input type="radio" id="radio4" name="radio" /><label for="radio4">Organizations</label></li>
+			    <li><input type="radio" id="radio5" name="radio" /><label for="radio5">Reports</label></li>
+			    <li><input type="radio" id="radio6" name="radio" /><label for="radio6">Feedbacks</label></li>
+			    <li><input type="radio" id="radio7" name="radio" /><label for="radio7">Admin</label></li>
+			    <li><input type="radio" id="radio8" name="radio" /><label for="radio8">Help</label></li>
+			</ul>
 
 		</div>
 		<div id="content">
@@ -77,16 +75,10 @@
                             Welcome <?php echo $current_user['username']; ?>.  
                             <script>
                             	jQuery(document).ready(function(){  
-                            		//jQuery('#radio').toggle();
+                            		jQuery('#top_links').removeClass('do_not_show');
                             	});
                             </script>
                             <?php echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout')); ?>
-                        <?php else: ?>
-                            <script>
-                            	jQuery(document).ready(function(){  
-                            		//jQuery('#radio').toggle();
-                            	});
-                            </script>
                         <?php endif; ?>
                     </div>
                     

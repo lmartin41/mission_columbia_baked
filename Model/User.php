@@ -14,7 +14,7 @@ class User extends AppModel {
  * @var string
  */
 	public $displayField = 'username';
-
+	public $findMethods = array('active' => true);
 /**
  * Validation rules
  *
@@ -38,6 +38,11 @@ class User extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			'isUnique' => array(
+				'rule' => array('isUnique'),
+				'message' => 'This username has already been taken',
+				'on' => 'create'
+			)
 		),
 		'password' => array(
 			'alphanumeric' => array(
@@ -56,12 +61,13 @@ class User extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
-                        'matchPasswords' => array(
-                                'rule' => 'matchPasswords',
-                                'message' => 'Your passwords do not match'
-                        )
+            'matchPasswords' => array(
+            	'rule' => 'matchPasswords',
+                'message' => 'Your passwords do not match',
+                //'on' => 'create'
+            )
 		),
-                'password_confirmation' => array(
+        'password_confirmation' => array(
 			'alphanumeric' => array(
 				'rule' => array('alphanumeric'),
 				'message' => 'Your password confirmation should be a combination of letters/numbers',
@@ -115,6 +121,28 @@ class User extends AppModel {
             return true;
         }
 
+        public function organizationDisabled($user)
+        {
+        	if( !$user['isSuperAdmin'] )
+        		return 'disabled';
+        	else
+        		return NULL;
+        }
+        protected function _findActive($state, $query, $results = array())
+        {
+        	if( $state == 'before' )
+        	{
+        		$cur_user = $query['conditions']['cur_user'];
+        		unset($query['conditions']['cur_user']);
+        		$query['conditions']['User.isDeleted'] = 0;
+        		if( !$cur_user['isSuperAdmin'] )
+        			$query['conditions']['Organization.id'] = $cur_user['organization_id'];
+        		
+        		return $query;
+        	}
+        	
+        	return $results;
+        }
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**

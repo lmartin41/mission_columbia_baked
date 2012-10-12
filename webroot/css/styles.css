@@ -1,10 +1,19 @@
-#radio{
+ul#top_links{
+	list-style-type: none;
+}
+#top_links > li{
 	position:relative;
 	top: 13%;
 	left:-19px;
-	display:none;
-	display:block;
 	float:left;
+	margin: 0;
+	padding: 0;
+	border-style: solid solid none solid;
+	border-color: #003D4C;
+}
+
+.do_not_show {
+	display: none;
 }
 
 #header{

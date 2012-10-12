@@ -61,7 +61,6 @@ class AppController extends Controller {
      * Lee: non logged in users can access view and index pages 
      */
     public function beforeFilter() {
-        $this->Auth->allow('index', 'view');
         $this->set('logged_in', $this->Auth->loggedIn());
         $this->set('current_user', $this->Auth->user());
     }

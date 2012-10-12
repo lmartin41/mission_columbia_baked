@@ -1,16 +1,19 @@
 <div class="users form">
+<?php echo $this->Html->script('edit_user'); ?>
 <?php echo $this->Form->create('User'); ?>
 	<fieldset>
 		<legend><?php echo __('Edit User'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('username');
+		echo $this->Form->input('username', array('disabled'));
 		echo $this->Form->input('password');
-		echo $this->Form->input('isAdmin');
-		echo $this->Form->input('isSuperAdmin');
-		echo $this->Form->input('organization_id');
+		echo $this->Form->input('password_confirmation', array('type'=>'password'));
+		foreach($optionalInputs as $input)
+		{
+			echo $this->Form->input($input);
+		}
+		echo $this->Form->input('organization_id', array($org_disabled));
 		echo $this->Form->input('email');
-		echo $this->Form->input('isDeleted');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
