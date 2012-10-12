@@ -4,10 +4,10 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('username'); ?></th>
-			<th><?php echo $this->Paginator->sort('isAdmin'); ?></th>
-			<th><?php echo $this->Paginator->sort('isSuperAdmin'); ?></th>
 			<th><?php echo $this->Paginator->sort('organization_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('email'); ?></th>
+			<th><?php echo $this->Paginator->sort('isAdmin'); ?></th>
+			<th><?php echo $this->Paginator->sort('isSuperAdmin'); ?></th>
 			<th><?php echo $this->Paginator->sort('isDeleted'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
@@ -18,12 +18,12 @@
 	<tr>
 		<td><?php echo h($user['User']['id']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['isAdmin']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['isSuperAdmin']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($user['Organization']['org_name'], array('controller' => 'organizations', 'action' => 'view', $user['Organization']['id'])); ?>
 		</td>
 		<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
+		<td><?php echo h($user['User']['isAdmin']); ?>&nbsp;</td>
+		<td><?php echo h($user['User']['isSuperAdmin']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['isDeleted']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['created']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['modified']); ?>&nbsp;</td>
@@ -53,6 +53,11 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
+		<?php if($hideDeleted): ?>
+			<li><?php echo $this->Html->link(__('Hide Deleted Users'), array('action' => 'index')); ?></li>
+		<?php else: ?>
+			<li><?php echo $this->Html->link(__('Show Deleted Users'), array('action' => 'index', '?' => array('showAll' => true))); ?></li>
+		<?php endif;?>
 		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?></li>
 		<li><?php echo $this->Html->link(__('List Organizations'), array('controller' => 'organizations', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Organization'), array('controller' => 'organizations', 'action' => 'add')); ?> </li>

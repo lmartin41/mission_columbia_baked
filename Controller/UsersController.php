@@ -45,10 +45,21 @@ class UsersController extends AppController {
  * @return void
  */
 	public function index() {
+		$this->check_privileges($this->Session->read('Auth.User'));
 		$conditions = array('cur_user' => $this->Session->read("Auth.User"));
-		$this->paginate = array('active', 'conditions' => $conditions);
+		if( isset($this->params['url']['showAll']) )
+		{
+			$this->paginate = array('showDeletedToo', 'conditions' => $conditions);
+			$this->set('hideDeleted', true);
+		}
+		else
+		{
+			$this->paginate = array('active', 'conditions' => $conditions);
+			$this->set('hideDeleted', false);
+		}
         $users = $this->paginate();
         $this->set(compact('users'));
+        
 	}
 
 /**
@@ -59,6 +70,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+		$this->check_privileges($this->Session->read('Auth.User'));
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
@@ -72,6 +84,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function add() {
+		$this->check_privileges($this->Session->read('Auth.User'));
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
@@ -93,6 +106,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+		$this->check_privileges($this->Session->read('Auth.User'));
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
@@ -134,7 +148,9 @@ class UsersController extends AppController {
 		}
 		$organizations = $this->User->Organization->find('list');
 		$this->set(compact('organizations'));
-		$this->set('org_disabled', $this->User->organizationDisabled($this->Session->read("Auth.User")));
+		$cur_user = $this->Session->read('Auth.User');
+		$this->set('optionalInputs', $this->User->getOptionalInputs($cur_user));
+		$this->set('org_disabled', $this->User->organizationDisabled($cur_user));
 	}
 
 /**
@@ -146,6 +162,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function delete($id = null) {
+		$this->check_privileges($this->Session->read('Auth.User'));
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
@@ -159,5 +176,14 @@ class UsersController extends AppController {
 		}
 		$this->Session->setFlash(__('User was not deleted'));
 		$this->redirect(array('action' => 'index'));
+	}
+	
+	private function check_privileges($user)
+	{
+		if(!$user['isAdmin'] && !$user['isSuperAdmin'])
+		{
+			$this->Session->setFlash(__('You do not have sufficient privileges to access that page.'));
+			$this->redirect(array('controller' => 'clients', 'action' => 'search'));
+		}
 	}
 }

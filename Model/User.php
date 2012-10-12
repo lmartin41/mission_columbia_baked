@@ -14,7 +14,7 @@ class User extends AppModel {
  * @var string
  */
 	public $displayField = 'username';
-	public $findMethods = array('active' => true);
+	public $findMethods = array('active' => true, 'showDeletedToo' => true);
 /**
  * Validation rules
  *
@@ -121,6 +121,29 @@ class User extends AppModel {
             return true;
         }
 
+        public function getOptionalInputs($user, $isAdd = false)
+        {
+        	$retArray = array();
+        	if( $user['isSuperAdmin'] && !$this->data['User']['isSuperAdmin'] )
+        	{
+        		$retArray[] = 'isSuperAdmin';
+        		$retArray[] = 'isAdmin';
+        	}
+        	elseif( $user['isAdmin'] && !$this->data['User']['isSuperAdmin'] && !$this->data['User']['isAdmin'] )
+        	{
+        		$retArray[] = 'isAdmin';
+        	}
+        	
+        	if(!$isAdd)
+        	{
+        		if( ($user['isSuperAdmin'] || $user['isAdmin']) && $this->data['User']['isDeleted'] )
+        		{
+        			$retArray[] = 'isDeleted';
+        		}
+        	}
+        	return $retArray;
+        }
+        
         public function organizationDisabled($user)
         {
         	if( !$user['isSuperAdmin'] )
@@ -128,6 +151,7 @@ class User extends AppModel {
         	else
         		return NULL;
         }
+        
         protected function _findActive($state, $query, $results = array())
         {
         	if( $state == 'before' )
@@ -143,6 +167,22 @@ class User extends AppModel {
         	
         	return $results;
         }
+        
+        protected function _findShowDeletedToo($state, $query, $results = array())
+        {
+        	if( $state == 'before' )
+        	{
+        		$cur_user = $query['conditions']['cur_user'];
+        		unset($query['conditions']['cur_user']);
+        		if( !$cur_user['isSuperAdmin'] )
+        			$query['conditions']['Organization.id'] = $cur_user['organization_id'];
+        		
+        		return $query;
+        	}
+        	
+        	return $results;
+        }
+        
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
