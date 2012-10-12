@@ -183,7 +183,7 @@ class UsersController extends AppController {
 		if(!$user['isAdmin'] && !$user['isSuperAdmin'])
 		{
 			$this->Session->setFlash(__('You do not have sufficient privileges to access that page.'));
-			$this->redirect(array('controller' => 'clients', 'action' => 'search'));
+			$this->redirect(array('controller' => 'clients', 'action' => 'index'));
 		}
 	}
 }

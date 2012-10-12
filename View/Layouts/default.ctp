@@ -47,9 +47,6 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1 style="text-align: right;"><?php echo $this->Html->link(__("Mission Columbia: Data Entry & Resource Tracking Service"), 'http://www.missioncolumbia.org'); ?></h1>
-	
-
 			<ul id="top_links" class="do_not_show">
 				<?php if( $isAtleastAdmin ): ?>
 					<li><input type="radio" id="radio1" name="radio" /><label for="radio1">Users</label></li>
@@ -58,7 +55,6 @@
 			    <li><input type="radio" id="radio3" name="radio" /><label for="radio3">Resources</label></li>
                 <li><input type="radio" id="radio4" name="radio" /><label for="radio4">Organizations</label></li>
 			    <li><input type="radio" id="radio5" name="radio" /><label for="radio5">Reports</label></li>
-			    <li><input type="radio" id="radio6" name="radio" /><label for="radio6">Feedbacks</label></li>
 			    <?php if( $isAtleastAdmin ): ?>
 			    	<li><input type="radio" id="radio7" name="radio" /><label for="radio7">Admin</label></li>
 			    <?php endif; ?>
@@ -93,6 +89,7 @@
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
+		<p>We would appreciate your <?php echo $this->Html->link('Feedback', array('controller'=>'feedbacks', 'action'=>'index')) ?></p>
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>

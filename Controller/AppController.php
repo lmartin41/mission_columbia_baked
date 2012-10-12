@@ -41,8 +41,8 @@ class AppController extends Controller {
     public $components = array(
         'Session',
         'Auth'=>array(
-            'loginRedirect'=>array('controller'=>'clients', 'action'=>'search'),
-            'logoutRedirect'=>array('controller'=>'clients', 'action'=>'search'),
+            'loginRedirect'=>array('controller'=>'clients', 'action'=>'index'),
+            'logoutRedirect'=>array('controller'=>'clients', 'action'=>'index'),
             'authError'=>"You can't access that page",
             'authorize'=>array('Controller')
         )
@@ -63,6 +63,7 @@ class AppController extends Controller {
     public function beforeFilter() {
         $this->set('logged_in', $this->Auth->loggedIn());
         $this->set('current_user', $this->Auth->user());
-        $this->set('isAtleastAdmin', $this->Auth->user()['isAdmin'] || $this->Auth->user()['isSuperAdmin']);
+        $authUser = $this->Auth->user();
+        $this->set('isAtleastAdmin', $authUser['isAdmin'] || $authUser['isSuperAdmin']);
     }
 }
