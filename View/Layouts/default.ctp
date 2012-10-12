@@ -47,6 +47,7 @@
 <body>
 	<div id="container">
 		<div id="header">
+			<h1>&nbsp;</h1>
 			<ul id="top_links" class="do_not_show">
 				<?php if( $isAtleastAdmin ): ?>
 					<li><input type="radio" id="radio1" name="radio" /><label for="radio1">Users</label></li>

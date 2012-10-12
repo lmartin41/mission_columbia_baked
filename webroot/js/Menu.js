@@ -18,7 +18,7 @@ jQuery(document).ready(function(){
 			window.location.href = "http://localhost/mission_columbia_baked/organizations/";
 	    });
 	    jQuery("#radio5").click(function () {
-			//window.location.href = "http://localhost/mission_columbia_baked/reports/";
+			window.location.href = "http://localhost/mission_columbia_baked/reports/";
 	    });
 	    jQuery("#radio6").click(function () {
 			window.location.href = "http://localhost/mission_columbia_baked/feedbacks/";
