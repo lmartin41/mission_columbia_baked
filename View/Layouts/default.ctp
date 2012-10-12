@@ -82,7 +82,6 @@
                             </script>
                             <?php echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout')); ?>
                         <?php else: ?>
-                            <?php echo $this->Html->link('Login', array('controller'=>'users', 'action'=>'login')); ?>
                             <script>
                             	jQuery(document).ready(function(){  
                             		//jQuery('#radio').toggle();
