@@ -1,3 +1,10 @@
+####################
+## Mission Columbia
+####################
+Config/database.php
+Config/core.php
+webroot/index.php
+
 #################
 ## Eclipse
 #################
