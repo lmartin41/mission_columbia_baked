@@ -59,7 +59,9 @@
                 <li><input type="radio" id="radio4" name="radio" /><label for="radio4">Organizations</label></li>
 			    <li><input type="radio" id="radio5" name="radio" /><label for="radio5">Reports</label></li>
 			    <li><input type="radio" id="radio6" name="radio" /><label for="radio6">Feedbacks</label></li>
-			    <li><input type="radio" id="radio7" name="radio" /><label for="radio7">Admin</label></li>
+			    <?php if( $isAtleastAdmin ): ?>
+			    	<li><input type="radio" id="radio7" name="radio" /><label for="radio7">Admin</label></li>
+			    <?php endif; ?>
 			    <li><input type="radio" id="radio8" name="radio" /><label for="radio8">Help</label></li>
 			</ul>
 
