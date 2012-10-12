@@ -1,4 +1,11 @@
-<div class="clients index">
+<div>
+    <h2>Client Search</h2>
+    <?php
+    echo $this->Form->create();
+    echo $this->Form->input("first_name");
+    echo $this->Form->input("last_name");
+    echo $this->Form->end("Search");
+    ?> 
     <h2><?php echo __('Client Listing'); ?></h2>
     <table cellpadding="0" cellspacing="0">
         <tr>
@@ -38,13 +45,7 @@
         echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
         ?>
     </div>
+    <br /><br />
+    <?php echo $this->Html->link(__('Add a client'), array('action' => 'add')); ?>
 </div>
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Add a New Client'), array('action' => 'add')); ?></li>
-        <li><?php echo $this->Html->link(__('Search for a Client'), array('action' => 'search')); ?> </li>
-    </ul>
-    <br />
-   
-</div>
+
