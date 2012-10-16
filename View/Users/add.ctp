@@ -6,8 +6,10 @@
 		echo $this->Form->input('username');
 		echo $this->Form->input('password');
         echo $this->Form->input('password_confirmation', array('type'=>'password'));
-		echo $this->Form->input('isAdmin');
-		echo $this->Form->input('isSuperAdmin');
+        foreach($optionalInputs as $input)
+        {
+        	echo $this->Form->input($input);
+        }
 		echo $this->Form->input('organization_id');
 		echo $this->Form->input('email');
 	?>

@@ -26,7 +26,7 @@ body {
 	background: #AAAAAA;
 	color: #fff;
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
-	font-size:90%;
+	font-size:12px;
 	margin: 0;
 }
 a {
@@ -307,16 +307,25 @@ form div.submit {
 	margin-top: 10px;
 }
 label {
-	display: block;
-	font-size: 110%;
+	display: inline;
+	/*font-size: 110%;*/
 	margin-bottom:3px;
 }
 input, textarea {
 	clear: both;
-	font-size: 140%;
+	/*font-size: 140%;*/
 	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
-	padding: 1%;
-	width:98%;
+	padding: 0.3%;
+	/*width:98%;*/
+}
+input{
+	display: inline;
+	margin-left: 1em;
+}
+
+textarea{
+	display: block;
+	width: 70%;
 }
 select {
 	clear: both;
@@ -352,7 +361,7 @@ input[type=radio] {
 }
 input[type=submit] {
 	display: inline;
-	font-size: 110%;
+	/*font-size: 110%;*/
 	width: auto;
 }
 form .submit input[type=submit] {

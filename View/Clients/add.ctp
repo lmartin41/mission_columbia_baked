@@ -6,7 +6,9 @@
         echo $this->Form->input('first_name');
         echo $this->Form->input('last_name');
         echo $this->Form->input('DOB', array('type' => 'date'));
-        echo $this->Form->input('sex');
+        $options = array ('M' => 'Male', 'F' => 'Female');
+        $attributes=array('legend' => false);
+        echo $this->Form->radio('sex', $options, $attributes);
         echo $this->Form->input('SSN');
         echo $this->Form->input('address_one');
         echo $this->Form->input('address_two');
