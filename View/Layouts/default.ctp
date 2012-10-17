@@ -90,7 +90,9 @@
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
-		<p>We would appreciate your <?php echo $this->Html->link('Feedback', array('controller'=>'feedbacks', 'action'=>'index')) ?></p>
+		<?php if($logged_in): ?>
+			<p>We would appreciate your <?php echo $this->Html->link('Feedback', array('controller'=>'feedbacks', 'action'=>'add')) ?></p>
+		<?php endif; ?>
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
