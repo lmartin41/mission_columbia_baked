@@ -105,6 +105,10 @@ class Client extends AppModel {
         $this->data['Client']['DOB'] = $year."-01-01 00:00:00";
         return true;
     }
+    
+    public static function giveMeCount() {
+        return 7; //$this->find('count');
+    }
 
     /**
      * hasMany associations

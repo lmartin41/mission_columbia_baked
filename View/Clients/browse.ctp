@@ -15,10 +15,10 @@
 
                 <td class="actions">
                     <?php echo $this->Html->link(__('View details'), array('action' => 'view', $client['Client']['id'])); ?>
-                    <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add')); ?>
-                    <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'resource_uses', 'action' => 'add')); ?>
+                    <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
+                    <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?>
                     <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $client['Client']['id'])); ?>
-                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete # %s?', $client['Client']['id'])); ?>
+                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete # %s?', $client['Client']['first_name'])); ?>
                 </td>
             </tr>
         <?php endforeach; ?>

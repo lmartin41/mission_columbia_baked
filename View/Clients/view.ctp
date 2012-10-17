@@ -1,8 +1,11 @@
+<?php echo $this->Html->script("toggle.js", FALSE); ?>
+
 <div class="clients view">
     <h2><?php echo __($client['Client']['first_name'] . "'s Details"); ?></h2>
     <br />
     <?php echo $this->Html->image('person.png', array('alt' => 'Sample Photo')); ?>
     <dl>
+        <h3>Personal Information</h3>
         <dt><?php echo __('Id'); ?></dt>
         <dd>
             &nbsp;&nbsp;
@@ -33,185 +36,188 @@
             <?php echo h($client['Client']['sex']); ?>
             &nbsp;
         </dd>
-        <dt><?php echo __('SSN'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['SSN']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Address One'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['address_one']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Address Two'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['address_two']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('City'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['city']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('State'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['state']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Zip'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['zip']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Phone'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['phone']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Apartment Number'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['apartment_number']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('How Did You Hear'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['how_did_you_hear']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('How Long Do You Need'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['how_long_do_you_need']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Regular Job'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['regular_job']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Food Stamps'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['food_stamps']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Veterans Pension'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['veterans_pension']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Part Time Job'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['part_time_job']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Social Security'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['social_security']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Annuity Check'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['annuity_check']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Child Support'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['child_support']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Ssi Or Disability'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['ssi_or_disability']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Unemployment'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['unemployment']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('When Next Check'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['when_next_check']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Pregnant'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['pregnant']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Disabled'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['disabled']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Handicapped'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['handicapped']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Stove'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['stove']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Refrigerator'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['refrigerator']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Cell'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['cell']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Cable'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['cable']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Internet'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['internet']); ?>
-            &nbsp;
-        </dd>
-        <dt><?php echo __('Model'); ?></dt>
-        <dd>
-            &nbsp;&nbsp;
-            <?php echo h($client['Client']['model']); ?>
-            &nbsp;
-        </dd>
+        <br />
+        <h3>Contact Information</h3>
+        <a onclick="return toggle('4');">Expand</a>
+        <div id ="4" style ="display: none">
+            <dt><?php echo __('Address'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['address_one']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('City'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['city']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('State'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['state']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Zip'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['zip']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Phone'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['phone']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Apartment Number'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['apartment_number']); ?>
+                &nbsp;
+            </dd>
+        </div>
+        <br /><br />
+        <h3>Source of Income</h3>
+        <a onclick="return toggle('5');">Expand</a>
+        <div id ="5" style ="display: none">
+            <dt><?php echo __('Regular Job'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['regular_job']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Food Stamps'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['food_stamps']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Veterans Pension'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['veterans_pension']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Part Time Job'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['part_time_job']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Social Security'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['social_security']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Annuity Check'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['annuity_check']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Child Support'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['child_support']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Ssi Or Disability'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['ssi_or_disability']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Unemployment'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['unemployment']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('When Next Check'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['when_next_check']); ?>
+                &nbsp;
+            </dd>
+        </div>
+        <br /><br />
+        <h3>Other Information</h3>
+        <a onclick="return toggle('6');">Expand</a>
+        <div id ="6" style ="display: none">
+            <dt><?php echo __('Pregnant'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['pregnant']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Disabled'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['disabled']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Handicapped'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['handicapped']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Stove'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['stove']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Refrigerator'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['refrigerator']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Cell'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['cell']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Cable'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['cable']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Internet'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['internet']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('Model'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['model']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('How Did You Hear'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['how_did_you_hear']); ?>
+                &nbsp;
+            </dd>
+            <dt><?php echo __('How Long Do You Need'); ?></dt>
+            <dd>
+                &nbsp;&nbsp;
+                <?php echo h($client['Client']['how_long_do_you_need']); ?>
+                &nbsp;
+            </dd>
+        </div>
 
     </dl>
 
     <br /><br />
-    <?php echo $this->Html->link(__('Edit Details'), array('action' => 'edit', $client['Client']['id'])); ?>
+    <?php echo $this->Html->link(__('Edit Details for ' . $client['Client']['first_name']), array('action' => 'edit', $client['Client']['id'])); ?>
     <br /><br /><br />
     <?php /*     * *************** Relatives ***************************************** */ ?>
 
@@ -249,9 +255,10 @@
                 <?php endif; ?>
             <?php endforeach; ?>
         </table>
-    <?php else: ?>
-        <?php echo $this->Html->link(__('Add a New Relative'), array('controller' => 'client_relations', 'action' => 'add', $client['Client']['id'])); ?>
+
     <?php endif; ?>
+    <br />
+    <?php echo $this->Html->link(__('Add a New Relative'), array('controller' => 'client_relations', 'action' => 'add', $client['Client']['id'])); ?>
 
 
 
@@ -266,7 +273,7 @@
             <tr>
                 <th><?php echo __('Id'); ?></th>
                 <th><?php echo __('Client Id'); ?></th>
-                <th><?php echo __('Resource Id'); ?></th>
+                <th><?php echo __('Resource Name'); ?></th>
                 <th><?php echo __('Date'); ?></th>
                 <th><?php echo __('Comments'); ?></th>
                 <th class="actions"><?php echo __('Actions'); ?></th>
@@ -279,7 +286,7 @@
                     <tr>
                         <td><?php echo $resourceUs['id']; ?></td>
                         <td><?php echo $resourceUs['client_id']; ?></td>
-                        <td><?php echo $resourceUs['resource_id']; ?></td>
+                        <td><?php echo $resourceUs['Resource']['resource_name']; ?></td>
                         <td><?php echo $resourceUs['date']; ?></td>
                         <td><?php echo $resourceUs['comments']; ?></td>
                         <td class="actions">
@@ -295,14 +302,15 @@
     <?php endif; ?>
 
     <br /><br />
-
+    <?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'Resourceuses', 'action' => 'add', $client['Client']['id'])); ?>
 </div>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
+        <li><?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> </li>
         <li><?php echo $this->Html->link(__('Client Listing'), array('action' => 'browse')); ?> </li>
         <li><?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete # %s?', $client['Client']['id'])); ?> </li>
+        <li><?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete # %s?', $client['Client']['first_name'])); ?> </li>
         <li><?php echo $this->Html->link(__('Print this Client Summary'), array('action' => 'add')); ?> </li>	
         <li><?php echo $this->Html->link(__('Create new Client'), array('action' => 'add')); ?> </li>		
     </ul>

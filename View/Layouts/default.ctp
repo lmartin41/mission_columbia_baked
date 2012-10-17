@@ -20,78 +20,84 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-	
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo __('Mission Columbia:'); ?>
-		<?php echo $title_for_layout; ?>
-	</title>
+    <head>
 
-	<?php echo $this->Html->script('jquery-1.8.2.min.js'); ?>
-	<?php echo $this->Html->script('jquery-ui-1.9.0.custom.min.js'); ?>
-	<?php echo $this->Html->script('Menu.js'); ?>
+        <?php echo $this->Html->charset(); ?>
+        <title>
+            <?php echo __('Mission Columbia:'); ?>
+            <?php echo $title_for_layout; ?>
+        </title>
 
-	<?php
-		echo $this->Html->meta('icon');
+        <?php echo $this->Html->script('jquery-1.8.2.min.js'); ?>
+        <?php echo $this->Html->script('jquery-ui-1.9.0.custom.min.js'); ?>
+        <?php echo $this->Html->script('Menu.js'); ?>
 
-		echo $this->Html->css('cake.generic');
+        <?php
+        echo $this->Html->meta('icon');
+        echo $this->Html->css('cake.generic');
+        echo $this->fetch('meta');
+        echo $this->fetch('css');
+        echo $this->Html->css('jquery-ui-1.9.0.custom.min');
+        echo $this->Html->css('styles');
+        echo $this->fetch('script');
+        ?>
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <h1>&nbsp;</h1>
+                <ul id="top_links" class="do_not_show">
+                    <li><input type="radio" id="radio2" name="radio" /><label for="radio2">Clients</label></li>
+                    <li><input type="radio" id="radio3" name="radio" /><label for="radio3">Resources</label></li>
+                    <li><input type="radio" id="radio4" name="radio" /><label for="radio4">Organizations</label></li>
+                    <li><input type="radio" id="radio5" name="radio" /><label for="radio5">Reports</label></li>
+                    <?php if ($isAtleastAdmin): ?>
+                        <li><input type="radio" id="radio7" name="radio" /><label for="radio7">Admin</label></li>
+                    <?php endif; ?>
+                    <li><input type="radio" id="radio8" name="radio" /><label for="radio8">Help</label></li>
+                </ul>
 
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->Html->css('jquery-ui-1.9.0.custom.min');
-		echo $this->Html->css('styles');
-		echo $this->fetch('script');
-	?>
-</head>
-<body>
-	<div id="container">
-		<div id="header">
-			<h1>&nbsp;</h1>
-			<ul id="top_links" class="do_not_show">
-			    <li><input type="radio" id="radio2" name="radio" /><label for="radio2">Clients</label></li>
-			    <li><input type="radio" id="radio3" name="radio" /><label for="radio3">Resources</label></li>
-                <li><input type="radio" id="radio4" name="radio" /><label for="radio4">Organizations</label></li>
-			    <li><input type="radio" id="radio5" name="radio" /><label for="radio5">Reports</label></li>
-			    <?php if( $isAtleastAdmin ): ?>
-			    	<li><input type="radio" id="radio7" name="radio" /><label for="radio7">Admin</label></li>
-			    <?php endif; ?>
-			    <li><input type="radio" id="radio8" name="radio" /><label for="radio8">Help</label></li>
-			</ul>
+            </div>
+            <div id="content">
 
-		</div>
-		<div id="content">
-                    
-                    <?php
-                        /****************************************** 
-                         *  Lee: this snippet below fixes the "login"/"logout"
-                         *  message in the top right hand corner of every page
-                         ******************************************/
-                    ?>
-                    <div style="text-align: right;">
-                        <?php if($logged_in): ?>
-                            Welcome <?php echo $current_user['username']; ?>.  
-                            <script>
-                            	jQuery(document).ready(function(){  
-                            		jQuery('#top_links').removeClass('do_not_show');
-                            	});
-                            </script>
-                            <?php echo $this->Html->link('Logout', array('controller'=>'users', 'action'=>'logout')); ?>
-                        <?php endif; ?>
-                    </div>
-                    
-                    <?php /***********************************/ ?>
+                <?php
+                /*                 * **************************************** 
+                 *  Lee: this snippet below fixes the "login"/"logout"
+                 *  message in the top right hand corner of every page
+                 * **************************************** */
+                ?>
+                <div style="text-align: right;">
+                    <?php if ($logged_in): ?>
+                        Welcome <?php echo $current_user['username']; ?>.  
+                        <script>
+                            jQuery(document).ready(function(){  
+                                jQuery('#top_links').removeClass('do_not_show');
+                            });
+                        </script>
+                        <?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?>
+                    <?php endif; ?>
+                </div>
 
-			<?php echo $this->Session->flash(); ?>
+                <?php /*                 * ******************************** */ ?>
 
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-		<?php if($logged_in): ?>
-			<p>We would appreciate your <?php echo $this->Html->link('Feedback', array('controller'=>'feedbacks', 'action'=>'add')) ?></p>
-		<?php endif; ?>
-		</div>
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
-</body>
+                <?php echo $this->Session->flash(); ?>
+
+                <?php echo $this->fetch('content'); ?>
+            </div>
+            <div id="footer" style="float: right;">
+                <?php if ($logged_in): ?>
+                    <p>We would appreciate your <?php echo $this->Html->link('Feedback', array('controller' => 'feedbacks', 'action' => 'add')) ?></p>
+                <?php endif; ?>
+            </div>
+            
+            <div id="footer" style="text-align: left; float: left; margin-left: 20px">
+                Mission Columbia Contact Information: <br /><br />
+                Mission Columbia <br />
+                2723 Ashland Rd. <br />
+                Columbia, SC 29210 <br /><br />
+                <a href="mailto:test@test.com">Send e-mail to Mission Columbia</a>
+            </div>
+        </div>
+        <?php echo $this->element('sql_dump'); ?>
+    </body>
 </html>

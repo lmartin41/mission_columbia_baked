@@ -21,7 +21,5 @@
         <li><?php echo $this->Form->postLink(__('Delete this Resource'), array('action' => 'delete', $this->Form->value('Resource.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Resource.id'))); ?></li>
         <li><?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?></li>
         <li><?php echo $this->Html->link(__('Upload Resource Photo'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('Organization Listing'), array('controller' => 'organizations', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('Create an Organization'), array('controller' => 'organizations', 'action' => 'add')); ?> </li>
     </ul>
 </div>

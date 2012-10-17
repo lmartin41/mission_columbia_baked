@@ -43,12 +43,12 @@ class ResourcesController extends AppController {
 
         if ($this->request->is('post')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('controller' => 'organizations', 'action' => 'index'));
+                $this->redirect(array('action' => 'index'));
             }
             $this->request->data['Resource']['organization_id'] = $organizationID;
             $this->Resource->create();
             if ($this->Resource->save($this->request->data)) {
-                $this->Session->setFlash(__('The client relation has been saved'));
+                $this->Session->setFlash(__('The Resource has been saved'));
                 if (isset($this->request->data['Add_another_resource'])) {
                     $this->redirect(array('action' => 'add', $organizationID));
                 } else if (isset($this->request->data['finished'])) {

@@ -4,6 +4,7 @@
         <legend><?php echo __('Add Resource'); ?></legend>
         <?php
         echo $this->Form->input('resource_name');
+        echo $this->Form->input('Rsource Description', array('type' => 'textarea'));
         echo $this->Form->input('resource_status');
         ?>
     </fieldset>
