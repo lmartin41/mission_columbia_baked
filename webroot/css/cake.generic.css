@@ -107,9 +107,10 @@ p {
 	overflow: auto;
 }
 #footer {
-	clear: both;
+	/** clear: both; */
 	padding: 6px 10px;
 	text-align: right;
+        color: #330000;
 }
 
 /** containers **/

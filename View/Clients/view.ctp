@@ -217,7 +217,7 @@
     </dl>
 
     <br /><br />
-    <?php echo $this->Html->link(__('Edit Details for '.$client['Client']['first_name']), array('action' => 'edit', $client['Client']['id'])); ?>
+    <?php echo $this->Html->link(__('Edit Details for ' . $client['Client']['first_name']), array('action' => 'edit', $client['Client']['id'])); ?>
     <br /><br /><br />
     <?php /*     * *************** Relatives ***************************************** */ ?>
 
@@ -255,9 +255,10 @@
                 <?php endif; ?>
             <?php endforeach; ?>
         </table>
-    <?php else: ?>
-        <?php echo $this->Html->link(__('Add a New Relative'), array('controller' => 'client_relations', 'action' => 'add', $client['Client']['id'])); ?>
+
     <?php endif; ?>
+    <br />
+    <?php echo $this->Html->link(__('Add a New Relative'), array('controller' => 'client_relations', 'action' => 'add', $client['Client']['id'])); ?>
 
 
 
@@ -300,12 +301,13 @@
     <?php else: echo "none"; ?>
     <?php endif; ?>
 
-    <br />
+    <br /><br />
     <?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'Resourceuses', 'action' => 'add', $client['Client']['id'])); ?>
 </div>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
+        <li><?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> </li>
         <li><?php echo $this->Html->link(__('Client Listing'), array('action' => 'browse')); ?> </li>
         <li><?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?> </li>
         <li><?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete # %s?', $client['Client']['first_name'])); ?> </li>

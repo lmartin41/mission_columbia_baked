@@ -20,11 +20,9 @@
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
+        <li><?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
+        <li><?php echo $this->Html->link(__('Client Listing'), array('controller' => 'clients', 'action' => 'browse')); ?> </li>
+        <li><?php echo $this->Html->link(__('Resource Listing'), array('controller' => 'resources', 'action' => 'index')); ?> </li>
 
-        <li><?php echo $this->Html->link(__('List Resourceuses'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('List Clients'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Client'), array('controller' => 'clients', 'action' => 'add')); ?> </li>
-        <li><?php echo $this->Html->link(__('List Resources'), array('controller' => 'resources', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Resource'), array('controller' => 'resources', 'action' => 'add')); ?> </li>
     </ul>
 </div>

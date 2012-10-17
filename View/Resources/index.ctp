@@ -4,6 +4,7 @@
         <th><?php echo $this->Paginator->sort('id'); ?></th>
         <th><?php echo $this->Paginator->sort('resource_name'); ?></th>
         <th><?php echo $this->Paginator->sort('organization_id'); ?></th>
+        <th><?php echo 'Resource Description'; ?></th>
         <th><?php echo $this->Paginator->sort('resource_status'); ?></th>
         <th class="actions"><?php echo __('Actions'); ?></th>
     </tr>
@@ -13,6 +14,9 @@
             <td><?php echo h($resource['Resource']['resource_name']); ?>&nbsp;</td>
             <td>
                 <?php echo $this->Html->link($resource['Organization']['org_name'], array('controller' => 'organizations', 'action' => 'view', $resource['Organization']['id'])); ?>
+            </td>
+            <td>
+                <?php echo 'Resource Description'; ?>
             </td>
             <td class="actions">
                 <?php echo $this->Html->link(__('View'), array('action' => 'view', $resource['Resource']['id'])); ?>
