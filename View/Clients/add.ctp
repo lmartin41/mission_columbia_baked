@@ -160,6 +160,6 @@
 
         <li><?php echo $this->Html->link(__('Clients Listing'), array('action' => 'browse')); ?></li>
         <li><?php echo $this->Html->link(__('Upload Photo'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('Search for a Client'), array('action' => 'search')); ?> </li>
+        <li><?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> </li>
     </ul>
 </div>

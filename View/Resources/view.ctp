@@ -2,6 +2,7 @@
     <h2><?php echo __('Resources'); ?></h2>
     <br />
     <?php echo $this->Html->image('resource.jpeg', array('alt' => 'Sample Photo')) ?>
+    <br /><br /><br />
     <dl>
         <dt><?php echo __('Resource Name'); ?></dt>
         <dd>
@@ -62,9 +63,5 @@
         <li><?php echo $this->Html->link(__('Edit Resource'), array('action' => 'edit', $resource['Resource']['id'], $resource['Resource']['organization_id'])); ?> </li>
         <li><?php echo $this->Form->postLink(__('Delete Resource'), array('action' => 'delete', $resource['Resource']['id']), null, __('Are you sure you want to delete # %s?', $resource['Resource']['id'])); ?> </li>
         <li><?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('Create a New Resource'), array('action' => 'add', $resource['Resource']['organization_id'])); ?> </li>
-        <li><?php echo $this->Html->link(__('Organizations List'), array('controller' => 'organizations', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('Create a new Organization'), array('controller' => 'organizations', 'action' => 'add')); ?> </li>
-        <li><?php echo $this->Html->link(__('Create a New Resource Use'), array('controller' => 'resource_uses', 'action' => 'add')); ?> </li>
     </ul>
 </div>

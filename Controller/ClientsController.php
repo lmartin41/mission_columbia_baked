@@ -19,14 +19,18 @@ class ClientsController extends AppController {
     public function index() {
          if ($this->request->is('post')) {
             $results = $this->Client->find('all');
-            $correctResults = null;
+            $correctResults = array();
             $lastName = $this->request->data['Client']['last_name'];
             $firstName = $this->request->data['Client']['first_name'];
+            
+            $i = 0;
             foreach ($results as $current) {
                 if ($current['Client']['first_name'] == $firstName && $current['Client']['last_name'] == $lastName) {
-                    $correctResults = $current;
+                    $correctResults[$i] = $current;
+                    $i++;
                 }
             }
+            
             $this->Session->write('results', $correctResults);
             $this->redirect(array('action' => 'searchResults'));
         }
@@ -53,30 +57,10 @@ class ClientsController extends AppController {
     }
 
     /**
-     * Lee: This method searches for a client 
-     */
-    public function search() {
-        if ($this->request->is('post')) {
-            $results = $this->Client->find('all');
-            $correctResults = null;
-            $lastName = $this->request->data['Client']['last_name'];
-            $firstName = $this->request->data['Client']['first_name'];
-            foreach ($results as $current) {
-                if ($current['Client']['first_name'] == $firstName && $current['Client']['last_name'] == $lastName) {
-                    $correctResults = $current;
-                }
-            }
-            $this->Session->write('results', $correctResults);
-            $this->redirect(array('action' => 'searchResults'));
-        }
-    }
-
-    /**
      * Lee: This method displays the results of the above search 
      */
     public function searchResults() {
-       $results = $this->Session->read('results');
-       $this->set('results', $results);
+       $this->set('results', $this->Session->read('results'));
     }
 
     /**
@@ -95,7 +79,7 @@ class ClientsController extends AppController {
                 if (isset($this->request->data['addMore'])) {
                     $this->redirect(array('controller' => 'client_relations', 'action' => 'add', $this->Client->id));
                 } else if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('action' => 'index'));
+                    $this->redirect(array('action' => 'browse'));
                 }
             } else {
                 $this->Session->setFlash(__('The client could not be saved. Please, try again.'));
