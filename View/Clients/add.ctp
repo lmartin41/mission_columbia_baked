@@ -1,45 +1,150 @@
+<?php echo $this->Html->script("toggle.js", FALSE); ?>
+
 <div class="clients form">
     <?php echo $this->Form->create('Client'); ?>
     <fieldset>
         <legend><?php echo __('Add Client'); ?></legend>
-        <?php
-        echo $this->Form->input('first_name');
-        echo $this->Form->input('last_name');
-        echo $this->Form->input('DOB', array('type' => 'date'));
-        $options = array ('M' => 'Male', 'F' => 'Female');
-        $attributes=array('legend' => false);
-        echo $this->Form->radio('sex', $options, $attributes);
-        echo $this->Form->input('SSN');
-        echo $this->Form->input('address_one');
-        echo $this->Form->input('address_two');
-        echo $this->Form->input('city');
-        echo $this->Form->input('state');
-        echo $this->Form->input('zip');
-        echo $this->Form->input('phone');
-        echo $this->Form->input('apartment_number');
-        echo $this->Form->input('how_did_you_hear');
-        echo $this->Form->input('how_long_do_you_need');
-        echo $this->Form->input('regular_job');
-        echo $this->Form->input('food_stamps');
-        echo $this->Form->input('veterans_pension');
-        echo $this->Form->input('part_time_job');
-        echo $this->Form->input('social_security');
-        echo $this->Form->input('annuity_check');
-        echo $this->Form->input('child_support');
-        echo $this->Form->input('ssi_or_disability');
-        echo $this->Form->input('unemployment');
-        echo $this->Form->input('when_next_check');
-        echo $this->Form->input('pregnant');
-        echo $this->Form->input('disabled');
-        echo $this->Form->input('handicapped');
-        echo $this->Form->input('stove');
-        echo $this->Form->input('refrigerator');
-        echo $this->Form->input('cell');
-        echo $this->Form->input('cable');
-        echo $this->Form->input('internet');
-        echo $this->Form->input('model');
-        ?>
+        <br />
+
+        <!-----------  PERSONAL INFORMATION ------------------------->
+        <h2>Personal Information</h2><br />
+
+        <table>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('first_name'); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('last_name'); ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('DOB', array('type' => 'date', 'empty' => true)); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('age'); ?>
+                </td>
+                <td>
+                    <?php
+                    $options = array('M' => 'Male', 'F' => 'Female');
+                    $attributes = array('legend' => false);
+                    echo $this->Form->radio('sex', $options, $attributes);
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <?php echo $this->Form->input('address', array('style' => 'width: 400px')); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('apartment_number'); ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('city'); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('state'); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('zip'); ?>
+                </td>
+
+            </tr>
+        </table>
+        <?php echo $this->Form->input('phone'); ?>
+
+        <!---------------------------- SOURCE OF INCOME ----------------->
+
+        <h2>Source of Income</h2>
+        <a onclick="return toggle('1');">Expand</a>
+        <div id ="1" style ="display: none">
+            <table>
+                <tr>
+                    <td>
+                        <?php echo $this->Form->input('regular_job'); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('food_stamps'); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('veterans_pension'); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $this->Form->input('part_time_job'); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('social_security'); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('annuity_check'); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $this->Form->input('child_support'); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('ssi_or_disability'); ?> 
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('unemployment'); ?>
+                    </td>
+                </tr>
+            </table>
+            <?php echo $this->Form->input('when_next_check', array('type' => 'date', 'empty' => true)); ?>  
+        </div>
+
+
+        <!------------------------------- OTHER ------------------------------>
+        <br /><br />
+        <h2>Other Information</h2>
+        <a onclick="return toggle('2');">Expand</a>
+        <div id="2" style="display: none">
+            <table>
+                <tr>
+                    <td>
+                        <?php echo $this->Form->input('pregnant'); ?> 
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('disabled'); ?>  
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('handicapped'); ?> 
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('stove'); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $this->Form->input('refrigerator'); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('cell'); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('cable'); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('internet'); ?>
+                    </td>
+                </tr>
+            </table>
+            <?php echo $this->Form->input('model'); ?>
+
+            <?php
+            echo $this->Form->input('how_did_you_hear');
+            echo $this->Form->input('how_long_do_you_need');
+            ?>
+            <br />
+        </div>
     </fieldset>
+
     <div>
         <?php echo $this->Form->submit(__('Save and Add Client Relatives'), array('name' => 'addMore', 'div' => false)); ?>
         &nbsp;
@@ -53,8 +158,8 @@
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
 
-       <li><?php echo $this->Html->link(__('Clients Listing'), array('action' => 'index')); ?></li>
-       <li><?php echo $this->Html->link(__('Upload Photo'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Clients Listing'), array('action' => 'browse')); ?></li>
+        <li><?php echo $this->Html->link(__('Upload Photo'), array('action' => 'index')); ?></li>
         <li><?php echo $this->Html->link(__('Search for a Client'), array('action' => 'search')); ?> </li>
     </ul>
 </div>

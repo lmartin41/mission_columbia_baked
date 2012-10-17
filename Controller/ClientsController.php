@@ -8,15 +8,15 @@ App::uses('AppController', 'Controller');
  * @property Client $Client
  */
 class ClientsController extends AppController {
-
+    
+    public $helpers = array('Js');
+    
     /**
      * index method
      *
      * @return void
      */
     public function index() {
-        $this->Client->recursive = 0;
-        $this->set('clients', $this->paginate());
          if ($this->request->is('post')) {
             $results = $this->Client->find('all');
             $correctResults = null;
@@ -30,6 +30,11 @@ class ClientsController extends AppController {
             $this->Session->write('results', $correctResults);
             $this->redirect(array('action' => 'searchResults'));
         }
+    }
+    
+    public function browse() {
+        $this->Client->recursive = 0;
+        $this->set('clients', $this->paginate());
     }
 
     /**
@@ -148,7 +153,7 @@ class ClientsController extends AppController {
         }
         if ($this->Client->delete()) {
             $this->Session->setFlash(__('Client deleted'));
-            $this->redirect(array('action' => 'index'));
+            $this->redirect(array('action' => 'browse'));
         }
         $this->Session->setFlash(__('Client was not deleted'));
         $this->redirect(array('action' => 'index'));

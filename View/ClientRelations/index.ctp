@@ -1,5 +1,5 @@
 
-<h2><?php echo __('Which Relative?'); ?></h2>
+<h2><?php echo __('Relatives Listing'); ?></h2>
 <table cellpadding="0" cellspacing="0">
     <tr>
         <th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -40,6 +40,6 @@
 <br /><br />
 <?php echo $this->Html->link(__('Add a new Relative'), array('action' => 'add', $clientID)); ?>
 <br /><br />
-<?php echo $this->Html->link(__('Go back to Client Listing'), array('controller' => 'clients', 'action' => 'index')); ?>
+<?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?>
 </ul>
 </div>

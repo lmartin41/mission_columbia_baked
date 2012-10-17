@@ -300,7 +300,7 @@
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('Client Listing'), array('action' => 'index')); ?> </li>
+        <li><?php echo $this->Html->link(__('Client Listing'), array('action' => 'browse')); ?> </li>
         <li><?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?> </li>
         <li><?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete # %s?', $client['Client']['id'])); ?> </li>
         <li><?php echo $this->Html->link(__('Print this Client Summary'), array('action' => 'add')); ?> </li>	

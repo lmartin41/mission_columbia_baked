@@ -53,7 +53,7 @@ class ClientRelationsController extends AppController {
                 if (isset($this->request->data['Add_another_relative'])) {
                     $this->redirect(array('action' => 'add', $clientID));
                 } else if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('action' => 'index', $clientID));
+                    $this->redirect(array('controller' => 'clients', 'action' => 'index'));
                 }
             } else {
                 $this->Session->setFlash(__('The client relation could not be saved. Please, try again.'));
