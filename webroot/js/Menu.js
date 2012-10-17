@@ -9,22 +9,22 @@ jQuery(document).ready(function(){
 			window.location.href = "http://localhost/mission_columbia_baked/users/";
 	    });
 	    jQuery("#radio2").click(function () {
-			window.location.href = "http://localhost/mission_columbia_baked/clients/";
+			location.href = $('#clients').attr('href');
 	    });
 	    jQuery("#radio3").click(function () {
-			window.location.href = "http://localhost/mission_columbia_baked/resources/";
+			location.href = $('#resources').attr('href');
 	    });
-            jQuery("#radio4").click(function () {
-			window.location.href = "http://localhost/mission_columbia_baked/organizations/";
+        jQuery("#radio4").click(function () {
+			location.href = $('#organizations').attr('href');
 	    });
 	    jQuery("#radio5").click(function () {
-			window.location.href = "http://localhost/mission_columbia_baked/reports/";
+			location.href = $('#reports').attr('href');
 	    });
 	    jQuery("#radio6").click(function () {
 			window.location.href = "http://localhost/mission_columbia_baked/feedbacks/";
 	    });
 	    jQuery("#radio7").click(function () {
-			window.location.href = "http://localhost/mission_columbia_baked/admin/";
+			location.href = $('#admin').attr('href');
 	    });
 	    jQuery("#radio8").click(function () {
 			//window.location.href = "http://localhost/mission_columbia_baked/help/";
