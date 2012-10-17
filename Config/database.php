@@ -5,8 +5,8 @@ class DATABASE_CONFIG {
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'root',
-		'password' => '',
+		'login' => 'mission_columbia',
+		'password' => 'WFAqpmJJSCNC9Z3Q',
 		'database' => 'mission_columbia',
 	);
 }
