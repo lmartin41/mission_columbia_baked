@@ -124,18 +124,30 @@ class User extends AppModel {
         public function getOptionalInputs($user, $isAdd = false)
         {
         	$retArray = array();
-        	if( $user['isSuperAdmin'] && !$this->data['User']['isSuperAdmin'] )
+        	if($isAdd)
         	{
-        		$retArray[] = 'isSuperAdmin';
-        		$retArray[] = 'isAdmin';
+				if( $user['isSuperAdmin'] )
+				{  
+					$retArray[] = 'isSuperAdmin';
+					$retArray[] = 'isAdmin';
+				}
+				elseif( $user['isAdmin'] )
+				{
+					$retArray[] = 'isAdmin';
+				}
         	}
-        	elseif( $user['isAdmin'] && !$this->data['User']['isSuperAdmin'] && !$this->data['User']['isAdmin'] )
+        	else
         	{
-        		$retArray[] = 'isAdmin';
-        	}
-        	
-        	if(!$isAdd)
-        	{
+        		if( $user['isSuperAdmin'] && !$this->data['User']['isSuperAdmin'] )
+        		{
+        			$retArray[] = 'isSuperAdmin';
+        			$retArray[] = 'isAdmin';
+        		}
+        		elseif( $user['isAdmin'] && !$this->data['User']['isSuperAdmin'] && !$this->data['User']['isAdmin'] )
+        		{
+        			$retArray[] = 'isAdmin';
+        		}
+        		
         		if( ($user['isSuperAdmin'] || $user['isAdmin']) && $this->data['User']['isDeleted'] )
         		{
         			$retArray[] = 'isDeleted';

@@ -10,7 +10,7 @@ class UsersController extends AppController {
     public $name = 'Users';
     
     /**
-     * FIXME: delete later - Lee
+     *
      */
     public function beforeFilter() {
         parent::beforeFilter();
@@ -23,7 +23,16 @@ class UsersController extends AppController {
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirect());
+            	$user = $this->Auth->user();
+            	if( $user['isDeleted'] ) //Prevent deleted users from logging in
+            	{
+            		$this->Auth->logout();
+            		$this->Session->setFlash('Your account is no longer active');
+            	}
+            	else
+            	{
+                	$this->redirect($this->Auth->redirect());
+            	}
             }
             
             else {
@@ -45,8 +54,8 @@ class UsersController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->check_privileges($this->Session->read('Auth.User'));
-		$conditions = array('cur_user' => $this->Session->read("Auth.User"));
+		$this->check_privileges($this->Auth->user(), 'index');
+		$conditions = array('cur_user' => $this->Auth->user());
 		if( isset($this->params['url']['showAll']) )
 		{
 			$this->paginate = array('showDeletedToo', 'conditions' => $conditions);
@@ -70,7 +79,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		$this->check_privileges($this->Session->read('Auth.User'));
+		$this->check_privileges($this->Session->read('Auth.User'), 'view');
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
@@ -84,7 +93,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function add() {
-		$this->check_privileges($this->Session->read('Auth.User'));
+		$this->check_privileges($this->Session->read('Auth.User'), 'add');
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
@@ -96,6 +105,10 @@ class UsersController extends AppController {
 		}
 		$organizations = $this->User->Organization->find('list');
 		$this->set(compact('organizations'));
+		$cur_user = $this->Auth->user();
+		$this->set('optionalInputs', $this->User->getOptionalInputs($cur_user, true));
+		$this->set('org_disabled', $this->User->organizationDisabled($cur_user));
+		$this->set('selected_id', $cur_user['organization_id']);
 	}
 
 /**
@@ -106,11 +119,13 @@ class UsersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-		$this->check_privileges($this->Session->read('Auth.User'));
+		$this->check_privileges($this->Auth->user(), 'edit', $id);
+		
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
+		
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if( $this->request->data['User']['password'] == '' && $this->request->data['User']['password_confirmation'] == '' )
 			{
@@ -127,7 +142,7 @@ class UsersController extends AppController {
 				
 				if($this->User->validates(array('fieldList' => array('email'))))
 				{
-					$this->User->save(NULL, array('validate' => false));
+					$this->User->save(null, array('validate' => false));
 					$this->Session->setFlash(__('The user has been saved'));
 					$this->redirect(array('action' => 'index'));
 				}
@@ -148,7 +163,7 @@ class UsersController extends AppController {
 		}
 		$organizations = $this->User->Organization->find('list');
 		$this->set(compact('organizations'));
-		$cur_user = $this->Session->read('Auth.User');
+		$cur_user = $this->Auth->user();
 		$this->set('optionalInputs', $this->User->getOptionalInputs($cur_user));
 		$this->set('org_disabled', $this->User->organizationDisabled($cur_user));
 	}
@@ -162,7 +177,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function delete($id = null) {
-		$this->check_privileges($this->Session->read('Auth.User'));
+		$this->check_privileges($this->Auth->user(), 'delete', $id);
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
@@ -170,7 +185,9 @@ class UsersController extends AppController {
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
-		if ($this->User->delete()) {
+		
+		$this->User->set('isDeleted', 1);
+		if ($this->User->save(null, array('validate' => false))) {
 			$this->Session->setFlash(__('User deleted'));
 			$this->redirect(array('action' => 'index'));
 		}
@@ -178,12 +195,46 @@ class UsersController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 	
-	private function check_privileges($user)
+	private function check_privileges($user, $action, $id = null)
 	{
+		$model_user = null;
+		if( $id != null )
+		{
+			$model_user = $this->User->read(null, $id);
+		}
+		
+		$valid = true;
 		if(!$user['isAdmin'] && !$user['isSuperAdmin'])
 		{
-			$this->Session->setFlash(__('You do not have sufficient privileges to access that page.'));
-			$this->redirect(array('controller' => 'clients', 'action' => 'index'));
+			$valid = false;
+		}
+		
+		if( $action == 'edit' || $action == 'delete' )
+		{
+			//A user cannot edit or delete a user unless they have higher privileges than that user. 
+			if( $user['isAdmin'] )
+			{
+				if($model_user['User']['isSuperAdmin'])
+				{
+					$valid = false;
+				}
+				elseif( $model_user['User']['isAdmin'] )
+				{
+					if ( $action == 'edit' && $model_user['User']['id'] != $user['id'] ) //A user can edit themself
+						$valid = false;
+					elseif( $action == 'delete' ) //A user cannot delete themself.
+						$valid = false;
+				}
+			}
+		}
+		
+		if( !$valid )
+		{
+			$this->Session->setFlash(__('You do not have sufficient privileges to perform that action.'));
+			if( $user['isAdmin'] || $user['isSuperAdmin'] )
+				$this->redirect(array('controller' => 'users', 'action' => 'index'));
+			else
+				$this->redirect(array('controller' => 'pages', 'action' => 'index'));
 		}
 	}
 }

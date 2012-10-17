@@ -10,7 +10,7 @@
         {
         	echo $this->Form->input($input);
         }
-		echo $this->Form->input('organization_id');
+		echo $this->Form->input('organization_id', array($org_disabled, 'selected' => $selected_id));
 		echo $this->Form->input('email');
 	?>
 	</fieldset>

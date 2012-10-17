@@ -49,9 +49,6 @@
 		<div id="header">
 			<h1>&nbsp;</h1>
 			<ul id="top_links" class="do_not_show">
-				<?php if( $isAtleastAdmin ): ?>
-					<li><input type="radio" id="radio1" name="radio" /><label for="radio1">Users</label></li>
-				<?php endif;?>
 			    <li><input type="radio" id="radio2" name="radio" /><label for="radio2">Clients</label></li>
 			    <li><input type="radio" id="radio3" name="radio" /><label for="radio3">Resources</label></li>
                 <li><input type="radio" id="radio4" name="radio" /><label for="radio4">Organizations</label></li>

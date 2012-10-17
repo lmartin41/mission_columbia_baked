@@ -49,7 +49,8 @@ class FeedbacksController extends AppController {
 		}
 		$users = $this->Feedback->User->find('list');
 		$this->set(compact('users'));
-		$this->set('selected_id', $this->Session->read('Auth.User')['id']);
+		$auth_user = $this->Auth->user();
+		$this->set('selected_id', $auth_user['id']);
 	}
 
 /**

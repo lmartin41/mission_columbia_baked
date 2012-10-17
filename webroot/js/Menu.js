@@ -24,7 +24,7 @@ jQuery(document).ready(function(){
 			window.location.href = "http://localhost/mission_columbia_baked/feedbacks/";
 	    });
 	    jQuery("#radio7").click(function () {
-			//window.location.href = "http://localhost/mission_columbia_baked/admin/";
+			window.location.href = "http://localhost/mission_columbia_baked/admin/";
 	    });
 	    jQuery("#radio8").click(function () {
 			//window.location.href = "http://localhost/mission_columbia_baked/help/";
