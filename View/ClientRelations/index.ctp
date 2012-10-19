@@ -22,7 +22,7 @@
                 <td class="actions">
                     <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $clientRelation['ClientRelation']['id'], $clientRelation['ClientRelation']['client_id'])); ?>
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $clientRelation['ClientRelation']['id'])); ?>
-                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $clientRelation['ClientRelation']['id']),  null, __('Are you sure you want to delete # %s?', $clientRelation['ClientRelation']['id'])); ?>
+                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $clientRelation['ClientRelation']['id'], $clientRelation['ClientRelation']['client_id']),  null, __('Are you sure you want to delete %s?', $clientRelation['ClientRelation']['first_name'])); ?>
                 </td>
             </tr>
         <?php endif; ?>
@@ -41,5 +41,7 @@
 <?php echo $this->Html->link(__('Add a new Relative'), array('action' => 'add', $clientID)); ?>
 <br /><br />
 <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?>
+<br /><br />
+<?php echo $this->Html->link(__('Browse Clients'), array('controller' => 'clients', 'action' => 'browse')); ?>
 </ul>
 </div>

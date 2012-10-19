@@ -4,6 +4,8 @@
         <legend><?php echo __('Edit Resource'); ?></legend>
         <?php
         echo $this->Form->input('resource_name');
+        echo $this->Form->input('description');
+        echo $this->Form->input('inventory');
         echo $this->Form->input('resource_status');
         ?>
     </fieldset>
@@ -18,7 +20,7 @@
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
 
-        <li><?php echo $this->Form->postLink(__('Delete this Resource'), array('action' => 'delete', $this->Form->value('Resource.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Resource.id'))); ?></li>
+        <li><?php echo $this->Form->postLink(__('Delete this Resource'), array('action' => 'delete', $this->Form->value('Resource.id')), null, __('Are you sure you want to delete %s?', $this->Form->value('Resource.resource_name'))); ?></li>
         <li><?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?></li>
         <li><?php echo $this->Html->link(__('Upload Resource Photo'), array('action' => 'index')); ?></li>
     </ul>

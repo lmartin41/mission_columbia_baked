@@ -1,5 +1,5 @@
 <div class="resourceuses view">
-<h2><?php  echo __('Resourceus'); ?></h2>
+<h2><?php  echo __('Resource Usage'); ?></h2>
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
@@ -41,13 +41,10 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Resourceus'), array('action' => 'edit', $resourceus['Resourceus']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Resourceus'), array('action' => 'delete', $resourceus['Resourceus']['id']), null, __('Are you sure you want to delete # %s?', $resourceus['Resourceus']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Resourceuses'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Resourceus'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Clients'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Client'), array('controller' => 'clients', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Resources'), array('controller' => 'resources', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Resource'), array('controller' => 'resources', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit This Resource Use'), array('action' => 'edit', $resourceus['Resourceus']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete this Resource Use'), array('action' => 'delete', $resourceus['Resourceus']['id']), null, __('Are you sure you want to delete # %s?', $resourceus['Resourceus']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Resource Use Listing'), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'browse')); ?> </li>
+		<li><?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

@@ -104,8 +104,7 @@ class ClientRelationsController extends AppController {
      * @param string $id
      * @return void
      */
-    public function delete($id = null) {
-        $clientID = $this->Session->read('clientID');
+    public function delete($id = null, $clientID = null) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }

@@ -6,7 +6,6 @@
         <legend><?php echo __('Add Client'); ?></legend>
         <br />
 
-        <!-----------  PERSONAL INFORMATION ------------------------->
         <h2>Personal Information</h2><br />
 
         <table>
@@ -19,10 +18,9 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td colspan="2">
+                    <b style="color: #ff0000">Note: Enter either age or DOB</b>
                     <?php echo $this->Form->input('DOB', array('type' => 'date', 'empty' => true)); ?>
-                </td>
-                <td>
                     <?php echo $this->Form->input('age'); ?>
                 </td>
                 <td>
@@ -56,7 +54,7 @@
         </table>
         <?php echo $this->Form->input('phone'); ?>
 
-        <!---------------------------- SOURCE OF INCOME ----------------->
+
 
         <h2>Source of Income</h2>
         <a onclick="return toggle('1');">Expand</a>
@@ -99,8 +97,6 @@
             <?php echo $this->Form->input('when_next_check', array('type' => 'date', 'empty' => true)); ?>  
         </div>
 
-
-        <!------------------------------- OTHER ------------------------------>
         <br /><br />
         <h2>Other Information</h2>
         <a onclick="return toggle('2');">Expand</a>
@@ -159,7 +155,7 @@
     <ul>
 
         <li><?php echo $this->Html->link(__('Clients Listing'), array('action' => 'browse')); ?></li>
-        <li><?php echo $this->Html->link(__('Upload Photo'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Upload Photo'), array('controller' => 'users', 'action' => 'upload')); ?></li>
         <li><?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> </li>
     </ul>
 </div>

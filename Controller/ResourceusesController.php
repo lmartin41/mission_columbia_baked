@@ -77,7 +77,7 @@ class ResourceusesController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Resourceus->save($this->request->data)) {
-                $this->Session->setFlash(__('The resourceus has been saved'));
+                $this->Session->setFlash(__('The resource Use has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The resourceus could not be saved. Please, try again.'));
@@ -107,11 +107,27 @@ class ResourceusesController extends AppController {
             throw new NotFoundException(__('Invalid resourceus'));
         }
         if ($this->Resourceus->delete()) {
-            $this->Session->setFlash(__('Resourceus deleted'));
+            $this->Session->setFlash(__('Resource Use deleted'));
             $this->redirect(array('action' => 'index'));
         }
         $this->Session->setFlash(__('Resourceus was not deleted'));
         $this->redirect(array('action' => 'index'));
+    }
+
+    /**
+     * Lee: Report functions 
+     */
+    public function count() {
+        return $this->Resourceus->find('count');
+    }
+
+    public function mostPopular() {
+        $query = $this->Resourceus->query(
+                "Select max(counts) as mostPopular from (
+                    select resource_name as counts from resource_uses 
+                    join resources on resource_id 
+                    group by resource_id) as derived;");
+        return $query[0][0]['mostPopular'];
     }
 
 }

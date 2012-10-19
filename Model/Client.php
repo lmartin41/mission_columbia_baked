@@ -10,6 +10,8 @@ App::uses('AppModel', 'Model');
  */
 class Client extends AppModel {
 
+    var $name = 'Client';
+
     /**
      * Display field
      *
@@ -102,12 +104,8 @@ class Client extends AppModel {
             return true;
         }
         $year = Date('Y') - $this->data['Client']['age'];
-        $this->data['Client']['DOB'] = $year."-01-01 00:00:00";
+        $this->data['Client']['DOB'] = $year . "-01-01 00:00:00";
         return true;
-    }
-    
-    public static function giveMeCount() {
-        return 7; //$this->find('count');
     }
 
     /**

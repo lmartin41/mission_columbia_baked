@@ -3,7 +3,7 @@
 <div class="clients form">
     <?php echo $this->Form->create('Client'); ?>
     <fieldset>
-        <legend><?php echo __('Add Client'); ?></legend>
+        <legend><?php echo __('Edit Client'); ?></legend>
         <br />
 
         <!-----------  PERSONAL INFORMATION ------------------------->
@@ -18,12 +18,11 @@
                     <?php echo $this->Form->input('last_name'); ?>
                 </td>
             </tr>
-            <tr>
-                <td>
+             <tr>
+                <td colspan="2">
+                    <b style="color: #ff0000">Note: Enter either age or DOB</b>
                     <?php echo $this->Form->input('DOB', array('type' => 'date', 'empty' => true)); ?>
-                </td>
-                <td>
-                    <?php echo $this->Form->input('(Or Age)'); ?>
+                    <?php echo $this->Form->input('age'); ?>
                 </td>
                 <td>
                     <?php
@@ -160,7 +159,7 @@
 
         <li><?php echo $this->Html->link(__('List Clients'), array('action' => 'index')); ?></li>
         <li><?php echo $this->Html->link(__('Edit Photo'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Form->postLink(__('Delete Client'), array('action' => 'delete', $this->Form->value('Client.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Client.id'))); ?></li>
+        <li><?php echo $this->Form->postLink(__('Delete Client'), array('action' => 'delete', $this->Form->value('Client.id')), null, __('Are you sure you want to delete %s?', $this->Form->value('Client.first_name'))); ?></li>
         <li><?php echo $this->Html->link(__('Edit a Relative of This Client'), array('controller' => 'client_relations', 'action' => 'index', $this->Form->value('Client.id'))); ?> </li>
         <li><?php echo $this->Html->link(__('Edit Resource Usage'), array('controller' => 'resource_uses', 'action' => 'edit')); ?> </li>
     </ul>

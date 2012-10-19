@@ -107,4 +107,11 @@ class OrganizationsController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
 
+    /**
+     * Lee: Report functions 
+     */
+    public function count() {
+        return $this->Organization->find('count');
+    }
+
 }

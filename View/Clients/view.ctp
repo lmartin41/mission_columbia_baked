@@ -249,7 +249,7 @@
                         <td class="actions">
                             <?php echo $this->Html->link(__('View'), array('controller' => 'client_relations', 'action' => 'view', $clientRelation['id'])); ?>
                             <?php echo $this->Html->link(__('Edit'), array('controller' => 'client_relations', 'action' => 'edit', $clientRelation['id'], $client['Client']['id'])); ?>
-                            <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'client_relations', 'action' => 'delete', $clientRelation['id']), null, __('Are you sure you want to delete # %s?', $clientRelation['id'])); ?>
+                            <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'client_relations', 'action' => 'delete', $clientRelation['id'], $client['Client']['id']), null, __('Are you sure you want to delete %s?', $clientRelation['first_name'])); ?>
                         </td>
                     </tr>
                 <?php endif; ?>
@@ -310,8 +310,8 @@
         <li><?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> </li>
         <li><?php echo $this->Html->link(__('Client Listing'), array('action' => 'browse')); ?> </li>
         <li><?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete # %s?', $client['Client']['first_name'])); ?> </li>
-        <li><?php echo $this->Html->link(__('Print this Client Summary'), array('action' => 'add')); ?> </li>	
+        <li><?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete %s?', $client['Client']['first_name'])); ?> </li>
+        <li><?php echo $this->Html->link(__('Print this Client Summary'), array('action' => 'printClient', $client['Client']['id'])); ?> </li>	
         <li><?php echo $this->Html->link(__('Create new Client'), array('action' => 'add')); ?> </li>		
     </ul>
 </div>

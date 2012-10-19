@@ -8,34 +8,37 @@ App::uses('AppController', 'Controller');
  * @property Client $Client
  */
 class ClientsController extends AppController {
-    
+
     public $helpers = array('Js');
-    
+
     /**
      * index method
      *
      * @return void
      */
     public function index() {
-         if ($this->request->is('post')) {
-            $results = $this->Client->find('all');
-            $correctResults = array();
+        if ($this->request->is('post')) {
             $lastName = $this->request->data['Client']['last_name'];
             $firstName = $this->request->data['Client']['first_name'];
-            
-            $i = 0;
-            foreach ($results as $current) {
-                if ($current['Client']['first_name'] == $firstName && $current['Client']['last_name'] == $lastName) {
-                    $correctResults[$i] = $current;
-                    $i++;
-                }
-            }
-            
+            $correctResults = $this->clientSearch($lastName, $firstName);
             $this->Session->write('results', $correctResults);
             $this->redirect(array('action' => 'searchResults'));
         }
     }
-    
+
+    public function clientSearch($lastName, $firstName) {
+        $results = $this->Client->find('all');
+        $correctResults = array();
+        $i = 0;
+        foreach ($results as $current) {
+            if ($current['Client']['first_name'] == $firstName && $current['Client']['last_name'] == $lastName) {
+                $correctResults[$i] = $current;
+                $i++;
+            }
+        }
+        return $correctResults;
+    }
+
     public function browse() {
         $this->Client->recursive = 0;
         $this->set('clients', $this->paginate());
@@ -60,7 +63,7 @@ class ClientsController extends AppController {
      * Lee: This method displays the results of the above search 
      */
     public function searchResults() {
-       $this->set('results', $this->Session->read('results'));
+        $this->set('results', $this->Session->read('results'));
     }
 
     /**
@@ -142,4 +145,77 @@ class ClientsController extends AppController {
         $this->Session->setFlash(__('Client was not deleted'));
         $this->redirect(array('action' => 'index'));
     }
+
+    /**
+     * Lee: Report functions 
+     */
+    public function count() {
+        return $this->Client->find('count');
+    }
+
+    public function age() {
+        $query = $this->Client->query("Select avg(datediff(curdate(), DOB)) as avgage from clients;");
+        return round($query[0][0]['avgage'] / 365, 2, PHP_ROUND_HALF_DOWN);
+    }
+
+    public function sexCount() {
+        $retVal = array();
+        $query1 = $this->Client->query("Select count(sex) as numMen from clients where sex = 'M';");
+        $query2 = $this->Client->query("Select count(sex) as numWomen from clients where sex = 'W';");
+        $retVal[0] = $query1[0][0]['numMen'];
+        $retVal[1] = $query2[0][0]['numWomen'];
+        return $retVal;
+    }
+
+    public function avgIncome() {
+        $query = $this->Client->query("Select sum(regular_job + food_stamps + veterans_pension + part_time_job + social_security + 
+            annuity_check + child_support + ssi_or_disability + unemployment) as summation from clients;");
+        return $query[0][0]['summation'] / $this->count();
+    }
+
+    public function status() {
+        $retVal = array();
+        //FIXME: obviously this is not optimal
+        $query1 = $this->Client->query("Select count(pregnant) as numPregnant from clients where pregnant = '1'");
+        $query2 = $this->Client->query("Select count(disabled) as numDisabled from clients where disabled = '1'");
+        $query3 = $this->Client->query("Select count(handicapped) as numHandicapped from clients where handicapped = '1'");
+        $query4 = $this->Client->query("Select count(stove) as numStove from clients where stove = '1'");
+        $query5 = $this->Client->query("Select count(refrigerator) as numRefrigerator from clients where refrigerator = '1'");
+        $query6 = $this->Client->query("Select count(cell) as numCell from clients where cell = '1'");
+        $query7 = $this->Client->query("Select count(cable) as numCable from clients where cable = '1'");
+        $query8 = $this->Client->query("Select count(internet) as numInternet from clients where internet = '1';");
+        $retVal[0] = $query1[0][0]['numPregnant'];
+        $retVal[1] = $query2[0][0]['numDisabled'];
+        $retVal[2] = $query3[0][0]['numHandicapped'];
+        $retVal[3] = $query4[0][0]['numStove'];
+        $retVal[4] = $query5[0][0]['numRefrigerator'];
+        $retVal[5] = $query6[0][0]['numCell'];
+        $retVal[6] = $query7[0][0]['numCable'];
+        $retVal[7] = $query8[0][0]['numInternet'];
+        return $retVal;
+    }
+
+    public function clientReportSearch() {
+        $this->set('results', $this->Session->read('clientReportResults'));
+    }
+
+    public function clientReport($clientID = null) {
+        $this->Client->id = $clientID;
+        if (!$this->Client->exists()) {
+            throw new NotFoundException(__('Invalid client'));
+        }
+        $this->set('client', $this->Client->read(null, $id));
+    }
+
+    public function printClient($id = null) {
+        $this->layout = 'print';
+        $this->Client->recursive = -1;
+        $this->Client->id = $id;
+        if (!$this->Client->exists()) {
+            throw new NotFoundException(__('Invalid client'));
+        }
+        $this->set('client', $this->Client->read(null, $id));
+        $this->set('bodyAttr', 'onload="window.print();"');
+    }
+
 }

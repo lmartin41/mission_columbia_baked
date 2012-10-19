@@ -77,22 +77,22 @@ class ClientRelation extends AppModel {
             ),
         ),
         'DOB' => array(
-    //        'date' => array(
-   //             'rule' => array('date'),
+            'fixAge' => array(
+                'rule' => 'fixAge'
             //'message' => 'Your custom message here',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
-  //          ),
-            'notempty' => array(
-                'rule' => array('notempty'),
+            //          ),
+            //'notempty' => array(
+            //    'rule' => array('notempty'),
             //'message' => 'Your custom message here',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
-            ),
+            )
         ),
         'sex' => array(
             'notempty' => array(
@@ -113,6 +113,15 @@ class ClientRelation extends AppModel {
             ),
         ),
     );
+
+    public function fixAge($data) {
+        if ($this->data['Client']['age'] == null) {
+            return true;
+        }
+        $year = Date('Y') - $this->data['Client']['age'];
+        $this->data['Client']['DOB'] = $year . "-01-01 00:00:00";
+        return true;
+    }
 
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 
