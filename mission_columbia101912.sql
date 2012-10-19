@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 17, 2012 at 05:00 PM
+-- Generation Time: Oct 19, 2012 at 06:27 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -84,8 +84,6 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `DOB` datetime NOT NULL,
   `sex` varchar(6) NOT NULL,
   `address_one` varchar(30) DEFAULT NULL,
-  `address_two` varchar(30) DEFAULT NULL,
-  `ssn` varchar(30) DEFAULT NULL,
   `city` varchar(30) DEFAULT NULL,
   `state` varchar(2) DEFAULT NULL,
   `zip` int(11) DEFAULT NULL,
@@ -116,22 +114,17 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=140 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=131 ;
 
 --
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`id`, `first_name`, `last_name`, `DOB`, `sex`, `address_one`, `address_two`, `ssn`, `city`, `state`, `zip`, `phone`, `apartment_number`, `how_did_you_hear`, `how_long_do_you_need`, `regular_job`, `food_stamps`, `veterans_pension`, `part_time_job`, `social_security`, `annuity_check`, `child_support`, `ssi_or_disability`, `unemployment`, `when_next_check`, `pregnant`, `disabled`, `handicapped`, `stove`, `refrigerator`, `cell`, `cable`, `internet`, `model`, `isDeleted`, `created`, `modified`) VALUES
-(110, 'test', 'test', '2012-10-11 00:00:00', 'a', '', '', '', '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-10-11', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-11 00:33:06', '2012-10-11 14:23:19'),
-(111, 'hasRelative', 'asdf', '2012-10-11 00:00:00', 'adsf', '', '', '', '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-10-11', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-11 01:11:18', '2012-10-11 01:12:46'),
-(113, 'tester', 'tester', '2012-10-11 00:00:00', 'f', '', '', '', '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-10-11', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-11 14:29:25', '2012-10-11 14:29:25'),
-(130, 'gggg', 'gggg', '0000-00-00 00:00:00', 'M', NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-17 01:12:10', '2012-10-17 01:12:10'),
-(131, 'mmmm', 'mm', '2001-01-01 00:00:00', 'M', NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-17 01:20:56', '2012-10-17 01:20:56'),
-(132, 'nhnhnhn', 'nhnhnh', '2001-01-01 00:00:00', 'M', NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-17 01:22:05', '2012-10-17 01:22:05'),
-(133, 'bgbgbg', 'bgbgb', '2012-01-01 00:00:00', 'M', NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-17 01:24:34', '2012-10-17 01:24:34'),
-(137, 'asdf', 'asdfa', '2000-01-01 00:00:00', 'M', NULL, NULL, NULL, 'asdfadfs', 'as', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-17 03:11:33', '2012-10-17 03:11:33'),
-(138, 'withaddress', 'asdfsdf', '2001-01-01 00:00:00', 'M', NULL, NULL, NULL, 'asdfadf', 'ad', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-17 03:54:01', '2012-10-17 03:54:01');
+INSERT INTO `clients` (`id`, `first_name`, `last_name`, `DOB`, `sex`, `address_one`, `city`, `state`, `zip`, `phone`, `apartment_number`, `how_did_you_hear`, `how_long_do_you_need`, `regular_job`, `food_stamps`, `veterans_pension`, `part_time_job`, `social_security`, `annuity_check`, `child_support`, `ssi_or_disability`, `unemployment`, `when_next_check`, `pregnant`, `disabled`, `handicapped`, `stove`, `refrigerator`, `cell`, `cable`, `internet`, `model`, `isDeleted`, `created`, `modified`) VALUES
+(110, 'test', 'test', '2001-01-01 00:00:00', 'M', '', '', '', NULL, NULL, NULL, '', '', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2012-10-11', 1, 1, 1, 1, 0, 0, 0, 0, '', 0, '2012-10-11 00:33:06', '2012-10-19 01:49:31'),
+(111, 'hasRelative', 'asdf', '2001-01-01 00:00:00', 'M', '', '', '', NULL, NULL, NULL, '', '', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2012-10-11', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-11 01:11:18', '2012-10-19 01:33:12'),
+(113, 'tester', 'tester', '2001-01-01 00:00:00', 'F', '', '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-10-11', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-11 14:29:25', '2012-10-19 01:33:20'),
+(130, 'gggg', 'gggg', '2001-01-01 00:00:00', 'F', NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '2012-10-17 01:12:10', '2012-10-19 01:33:28');
 
 -- --------------------------------------------------------
 
@@ -214,18 +207,13 @@ CREATE TABLE IF NOT EXISTS `client_relations` (
 --
 
 INSERT INTO `client_relations` (`id`, `client_id`, `first_name`, `last_name`, `relationship`, `DOB`, `sex`, `created`, `modified`) VALUES
-(17, 110, 'adshah', 'adhadha', 'adfadf', '2012-10-11', 'f', '2012-10-11 00:33:17', '2012-10-11 00:33:17'),
-(18, 110, 'adah', 'adhah', 'adf', '2012-10-11', 'f', '2012-10-11 00:33:23', '2012-10-11 00:33:23'),
+(17, 110, 'adshah', 'adhadha', 'adfadf', '2012-10-11', 'f', '2012-10-11 00:33:17', '2012-10-18 22:40:34'),
+(18, 110, 'adah', 'adhah', 'adf', '2012-10-11', 'f', '2012-10-11 00:33:23', '2012-10-18 22:44:53'),
 (19, 111, 'adgg', 'adga', 'asdfa', '2012-10-11', 'adsf', '2012-10-11 01:11:24', '2012-10-11 01:37:00'),
 (20, 111, 'agda', 'adgad', 'adsfa', '2012-10-11', 'f', '2012-10-11 01:34:27', '2012-10-11 01:34:27'),
 (24, 110, 'agadg', 'asdfa', 'asdfadf', '2012-10-11', 'f', '2012-10-11 14:23:29', '2012-10-11 14:23:29'),
 (25, 113, 'testerrelative', 'testerrelative', 'adgadg', '2012-10-11', 'f', '2012-10-11 14:29:53', '2012-10-11 14:29:53'),
-(37, 110, 'adsgadg', 'adgag', 'adsgagd', '2012-10-11', 'f', '2012-10-11 20:32:23', '2012-10-11 20:32:23'),
-(38, 110, 'adsgadg', 'adgag', 'adsgagd', '2012-10-11', 'f', '2012-10-11 20:32:44', '2012-10-11 20:32:44'),
-(39, 110, 'asdgadgcccccc', 'asdga', 'adsgag', '2012-10-11', 'f', '2012-10-11 20:32:51', '2012-10-11 20:33:03'),
 (40, 111, 'asdfadfcccc', 'ccc', 'ccc', '2012-10-11', 'ccc', '2012-10-11 20:40:34', '2012-10-11 20:40:33'),
-(43, 133, 'ababa', 'ababab', 'ababab', '2012-10-17', 'f', '2012-10-17 01:25:18', '2012-10-17 01:25:18'),
-(45, 110, 'gggg', 'gggg', 'gggg', '2012-10-17', 'f', '2012-10-17 15:37:15', '2012-10-17 15:37:15'),
 (46, 111, 'didthiswork', 'asdf', 'adsfas', '2012-10-17', 'f', '2012-10-17 15:37:43', '2012-10-17 15:37:43');
 
 -- --------------------------------------------------------
@@ -291,6 +279,8 @@ CREATE TABLE IF NOT EXISTS `resources` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `resource_name` varchar(30) NOT NULL,
   `organization_id` int(11) NOT NULL,
+  `inventory` varchar(100) NOT NULL,
+  `description` text NOT NULL,
   `resource_status` text NOT NULL,
   `isDeleted` int(11) NOT NULL,
   `created` datetime NOT NULL,
@@ -298,16 +288,18 @@ CREATE TABLE IF NOT EXISTS `resources` (
   PRIMARY KEY (`id`),
   KEY `agency_id` (`organization_id`),
   KEY `agency_id_2` (`organization_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `resources`
 --
 
-INSERT INTO `resources` (`id`, `resource_name`, `organization_id`, `resource_status`, `isDeleted`, `created`, `modified`) VALUES
-(3, 'asdfaf', 4, 'asdfasf', 0, '2012-10-14 15:12:51', '2012-10-14 15:12:51'),
-(5, 'test', 2, 'test', 0, '2012-10-17 16:32:38', '2012-10-17 16:32:38'),
-(6, 'test2', 2, 'test2', 0, '2012-10-17 16:32:42', '2012-10-17 16:32:42');
+INSERT INTO `resources` (`id`, `resource_name`, `organization_id`, `inventory`, `description`, `resource_status`, `isDeleted`, `created`, `modified`) VALUES
+(3, 'asdfaf', 4, '', '', 'asdfasf', 0, '2012-10-14 15:12:51', '2012-10-14 15:12:51'),
+(5, 'test', 2, '', '', 'test', 0, '2012-10-17 16:32:38', '2012-10-17 16:32:38'),
+(6, 'test2', 2, '', '', 'test2', 0, '2012-10-17 16:32:42', '2012-10-17 16:32:42'),
+(7, 'test', 1, 'asdfads', 'adsfasd', 'asdfadsfas', 0, '2012-10-18 22:07:30', '2012-10-18 22:07:30'),
+(8, 'adsfadsf', 1, 'adsfafda', 'asdfasdf', 'asdfadsfadsf', 0, '2012-10-18 22:07:40', '2012-10-18 22:07:40');
 
 -- --------------------------------------------------------
 
@@ -327,16 +319,20 @@ CREATE TABLE IF NOT EXISTS `resource_uses` (
   KEY `client_id` (`client_id`),
   KEY `resource_id` (`resource_id`),
   KEY `date` (`date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `resource_uses`
 --
 
 INSERT INTO `resource_uses` (`id`, `client_id`, `resource_id`, `date`, `comments`, `created`, `modified`) VALUES
-(9, 110, 3, '2012-10-17 00:00:00', 'testing', '2012-10-17 05:26:17', '2012-10-17 05:26:17'),
+(9, 110, 3, '2012-10-17 00:00:00', 'testing', '2012-10-17 05:26:17', '2012-10-18 22:50:40'),
 (11, 110, 3, '2012-10-17 00:00:00', 'very good resuorce use', '2012-10-17 15:35:37', '2012-10-17 15:35:37'),
-(12, 110, 3, '2012-10-17 00:00:00', 'another good resource use', '2012-10-17 15:35:44', '2012-10-17 15:35:44');
+(12, 110, 3, '2012-10-17 00:00:00', 'another good resource use', '2012-10-17 15:35:44', '2012-10-17 15:35:44'),
+(13, 110, 6, '2012-10-18 00:00:00', 'good', '2012-10-18 22:27:56', '2012-10-18 22:27:56'),
+(15, 111, 3, '2026-03-07 00:00:00', 'very good resource use', '2012-10-18 22:53:04', '2012-10-18 22:53:04'),
+(16, 111, 3, '2025-07-03 00:00:00', 'gggg', '2012-10-18 22:53:13', '2012-10-18 22:53:13'),
+(17, 111, 5, '2025-06-07 00:00:00', 'great', '2012-10-18 22:54:17', '2012-10-18 22:54:17');
 
 -- --------------------------------------------------------
 
@@ -365,7 +361,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `isAdmin`, `isSuperAdmin`, `organization_id`, `email`, `isDeleted`, `created`, `modified`) VALUES
-(1238, 'samwise', '3d9803dc694c20a7e5b5cb40971efbb7caa2a484', 0, 0, 0, 'adsf@asd.com', 0, '2012-10-09 16:27:25', '2012-10-09 16:27:25'),
+(1238, 'samwise', '3d9803dc694c20a7e5b5cb40971efbb7caa2a484', 0, 0, 1, 'adsf@asd.com', 0, '2012-10-09 16:27:25', '2012-10-09 16:27:25'),
 (1239, 'asdf', '2ef3549c14c8a30048fada9a7e680c18e36d1067', 0, 0, 0, 'asdf@asdf.com', 0, '2012-10-09 16:56:01', '2012-10-09 16:56:01'),
 (1241, 'asdfadsf', '503e6f06e06c730eb11e9d77519f1820be64a52b', 0, 0, 0, 'as@as.com', 0, '2012-10-09 16:57:38', '2012-10-09 16:57:38'),
 (1242, 'superAdmin', '81875d7a3a96bd9f69b2a358c0a3414259446b3a', 0, 1, 0, 'super@super.com', 0, '2012-10-09 20:27:18', '2012-10-09 20:27:18');
@@ -402,8 +398,8 @@ ALTER TABLE `resources`
 -- Constraints for table `resource_uses`
 --
 ALTER TABLE `resource_uses`
-  ADD CONSTRAINT `resource_uses_ibfk_4` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `resource_uses_ibfk_3` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `resource_uses_ibfk_3` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `resource_uses_ibfk_4` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
