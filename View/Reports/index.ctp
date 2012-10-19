@@ -1,4 +1,6 @@
 <?php echo $this->Html->script("toggle.js", FALSE); ?>
+<?php echo $this->Html->script("datepickr.js", FALSE); ?>
+<?php echo $this->Html->css("datepickr.css", FALSE); ?>
 
 <table>
     <tr>
@@ -10,6 +12,16 @@
             echo $this->Form->create('Client');
             echo $this->Form->input("first_name");
             echo $this->Form->input("last_name");
+            ?>
+            From:<input id="datepickClient" class="date-pick" style="width: 100px;"/>
+            &nbsp;
+            To:<input id="datepickClient2" class="date-pick" style="width: 100px;"/>
+
+            <script type="text/javascript">
+                new datepickr('datepickClient', { dateFormat: 'm-d-Y' });
+                new datepickr('datepickClient2', { dateFormat: 'm-d-Y' });
+            </script>
+            <?php
             echo $this->Form->end("Retrieve Client Report", array('name' => 'client'));
             ?> 
             <br />
@@ -58,7 +70,8 @@
             echo $this->Form->input("org_name");
             echo $this->Form->end("Retrieve Organization Report", array('name' => 'organization'));
             ?> 
-            <br /><br /><br /><br />
+            <br /><br /><br /><br /><br /><br />
+
 
             <h3>Organization Statistics</h3>
             <a onclick="return toggle('2');">Expand</a>
@@ -81,9 +94,21 @@
             <?php
             echo $this->Form->create('Resource');
             echo $this->Form->input("resource_name");
+            ?>
+
+            From:<input id="datepickResource" class="date-pick" style="width: 100px;"/>
+            &nbsp;
+            To:<input id="datepickResource2" class="date-pick" style="width: 100px;"/>
+
+            <script type="text/javascript">
+                new datepickr('datepickResource', { dateFormat: 'm-d-Y' });
+                new datepickr('datepickResource2', { dateFormat: 'm-d-Y' });
+            </script>
+            <br /><br /><br /><br />
+            <?php
             echo $this->Form->end("Retrieve Resource Report", array('name' => 'resource'));
             ?> 
-            <br /><br /><br /><br />
+            <br />
 
             <h3>Resource Statistics</h3>
             <a onclick="return toggle('3');">Expand</a>

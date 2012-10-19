@@ -28,9 +28,13 @@ class ReportsController extends AppController {
 
         if ($this->request->is('post')) {
             if ($this->request->is('post')) {
-                $results = $clientsController->clientSearch($this->data['Client']['last_name'], $this->data['Client']['first_name']);
-                $this->Session->write('clientReportResults', $results);
-                $this->redirect(array('controller' => 'clients', 'action' => 'clientReportSearch'));
+                if (isset($this->request->data['client'])) {
+                    $results = $clientsController->clientSearch($this->data['Client']['last_name'], $this->data['Client']['first_name']);
+                   // $timeFrom = $this->request->data(datePickClient);
+                   // $timeTo = $this->request->data(datePickClient2);
+                    $this->Session->write('clientReportResults', $results);
+                    $this->redirect(array('controller' => 'clients', 'action' => 'clientReportSearch'));
+                }
             }
         }
     }
