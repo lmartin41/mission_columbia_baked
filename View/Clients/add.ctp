@@ -1,7 +1,7 @@
 <?php echo $this->Html->script("toggle.js", FALSE); ?>
 
 <style type="text/css">
-    label { 
+    form label { 
         width: 9em; 
         float: left;
         padding: 0px;

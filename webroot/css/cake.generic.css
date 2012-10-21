@@ -24,8 +24,8 @@
 /** General Style Info **/
 body {
         position: absolute;
-        width: 1550px;
-        margin-left: 100px;
+        width: 1450px;
+        margin-left: 125px;
 	background: #AAAAAA;
 	color: #fff;
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
@@ -124,23 +124,18 @@ div.form,
 div.index,
 div.view {
 	float:right;
-	width:76%;
+	width:82%;
 	border-left:1px solid #666;
 	padding:0px 2%;
 }
 div.actions {
 	float:left;
-	width:15%;
-	padding:10px 1.5%;
+	width:12%;
+	padding:10px 0%;
 }
 div.actions h3 {
 	padding-top:0;
 	color:#777;
-}
-
-div.tips {
-        float: right;
-        width: 10%;
 }
 
 
