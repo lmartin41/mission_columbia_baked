@@ -1,8 +1,25 @@
 <?php echo $this->Html->script("client_view.js", FALSE); ?>
 
+<?php echo $this->Html->script('ajaxupload-min.js'); ?>
+<?php echo $this->Html->css('baseTheme.style'); ?>
+
 <div class="clients view">
     <h2><?php echo __($client['Client']['first_name'] . "'s Details"); ?></h2>
     <br />
+
+    <tr>
+            <td>
+                <div id="demo1" style="width:500px"></div>
+                <script type="text/javascript">
+                $('#demo1').ajaxupload({
+                    url:'upload.php',
+                    remotePath:'uploaded/',
+                });
+                </script>
+            </td>
+
+    </tr>
+
     <?php echo $this->Html->image('person.png', array('alt' => 'Sample Photo')); ?>
     <div id="accordion">
 	        <h2>Personal Information</h2>

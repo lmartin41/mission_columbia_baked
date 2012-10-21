@@ -31,6 +31,7 @@
         <?php echo $this->Html->script('jquery-1.8.2.min.js'); ?>
         <?php echo $this->Html->script('jquery-ui-1.9.0.custom.min.js'); ?>
         <?php echo $this->Html->script('Menu.js'); ?>
+        <?php echo $this->Html->script('ajaxupload-min.js'); ?>
 
         <?php
         echo $this->Html->meta('icon');
@@ -39,8 +40,40 @@
         echo $this->fetch('css');
         echo $this->Html->css('jquery-ui-1.9.0.custom.min');
         echo $this->Html->css('styles');
+        echo $this->Html->css('baseTheme.style');
         echo $this->fetch('script');
         ?>
+
+        <!-- call a js function here to check for context of the URL, then alter the tip content accordingly. -->
+        
+
+        <div id="tips" class="tipsBox" style="width:15%;position:absolute;right:5%;top:5%;background:#B4CFEC;border: 1px solid #000000;padding: 10 10 10 10">
+            <div class="tipsContent">
+                <B>Tips Default</B>
+                <!-- <br><br>
+                <p>If you cannot remember your password, please click on the <B>Request a New Password</B> link and a new, temporary password will be sent to your email address.</p> -->
+                
+            </div>
+        </div>
+
+        <script>
+            checkContext();
+        </script>
+
+        <!-- <tr>
+            <td>
+                <div id="demo1" style="width:500px"></div>
+                <script type="text/javascript">
+                $('#demo1').ajaxupload({
+                    url:'upload.php',
+                    remotePath:'uploaded/',
+                });
+                </script>
+            </td>
+
+        </tr> -->
+
+
     </head>
     <body>
         <div id="container">
