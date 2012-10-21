@@ -2,33 +2,34 @@
 <?php echo $this->Html->script("datepickr.js", FALSE); ?>
 <?php echo $this->Html->css("datepickr.css", FALSE); ?>
 
-<table>
-    <tr>
-        <td>
-            <h2>Clients</h2>
-            <br />
-            <h3>Individual Client Report</h3>
-            <?php
-            echo $this->Form->create('Client');
-            echo $this->Form->input("first_name");
-            echo $this->Form->input("last_name");
-            ?>
-            From:<input id="datepickClient" class="date-pick" style="width: 100px;"/>
-            &nbsp;
-            To:<input id="datepickClient2" class="date-pick" style="width: 100px;"/>
+<div class="Reports form">
+    <table style="width: 1000px">
+        <tr>
+            <td>
+                <h2>Clients</h2>
+                <br />
+                <h3>Individual Client Report</h3>
+                <?php
+                echo $this->Form->create('Client');
+                echo $this->Form->input("first_name");
+                echo $this->Form->input("last_name");
+                ?>
+                From:<input id="datepickClient" class="date-pick" style="width: 100px;"/>
+                &nbsp;
+                To:<input id="datepickClient2" class="date-pick" style="width: 100px;"/>
 
-            <script type="text/javascript">
-                new datepickr('datepickClient', { dateFormat: 'm-d-Y' });
-                new datepickr('datepickClient2', { dateFormat: 'm-d-Y' });
-            </script>
-            <?php
-            echo $this->Form->end("Retrieve Client Report", array('name' => 'client'));
-            ?> 
-            <br />
+                <script type="text/javascript">
+                    new datepickr('datepickClient', { dateFormat: 'm-d-Y' });
+                    new datepickr('datepickClient2', { dateFormat: 'm-d-Y' });
+                </script>
+                <?php
+                echo $this->Form->end("Retrieve Client Report", array('name' => 'client'));
+                ?> 
+                <br />
+            </td>
+            <td>
 
-            <h3>Client Statistics</h3>
-            <a onclick="return toggle('1');">Expand</a>
-            <div id ="1" style ="display: none">
+                <h3>Client Statistics</h3>
                 <br />
                 Number of clients: <?php echo $numClients; ?>
                 <br />
@@ -57,76 +58,18 @@
                 Number of Clients with Internet Access: <?php echo $statusClients[7]; ?>
                 <br /><br />
 
-            </div>
-            <br /><br />
-            <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
-        </td>
-        <td>
-            <h2>Organizations</h2>
-            <br />
-            <h3>Individual Organization Report</h3>
-            <?php
-            echo $this->Form->create('Organization');
-            echo $this->Form->input("org_name");
-            echo $this->Form->end("Retrieve Organization Report", array('name' => 'organization'));
-            ?> 
-            <br /><br /><br /><br /><br /><br />
+                <br /><br />
+
+            </td>
 
 
-            <h3>Organization Statistics</h3>
-            <a onclick="return toggle('2');">Expand</a>
-            <div id ="2" style ="display: none">
-                <br />
-                Number of Organizations: <?php echo $numOrganizations; ?>
-                <br />
-
-            </div>
-            <br /><br />
-            <?php echo $this->Html->link('Organization Listing', array('controller' => 'organizations', 'action' => 'index')); ?>
-            <br />
-
-            <br /><br />
-        </td>
-        <td>
-            <h2>Resources</h2>
-            <br />
-            <h3>Individual Resource Report</h3>
-            <?php
-            echo $this->Form->create('Resource');
-            echo $this->Form->input("resource_name");
-            ?>
-
-            From:<input id="datepickResource" class="date-pick" style="width: 100px;"/>
-            &nbsp;
-            To:<input id="datepickResource2" class="date-pick" style="width: 100px;"/>
-
-            <script type="text/javascript">
-                new datepickr('datepickResource', { dateFormat: 'm-d-Y' });
-                new datepickr('datepickResource2', { dateFormat: 'm-d-Y' });
-            </script>
-            <br /><br /><br /><br />
-            <?php
-            echo $this->Form->end("Retrieve Resource Report", array('name' => 'resource'));
-            ?> 
-            <br />
-
-            <h3>Resource Statistics</h3>
-            <a onclick="return toggle('3');">Expand</a>
-            <div id ="3" style ="display: none">
-                <br />
-                Number of resources: <?php echo $numResources; ?>
-                <br />
-                Total number of resource uses: <?php echo $numResourceUses; ?>
-                <br />
-                Most popular resource: <?php echo $mostPopular; ?>
-                <br />
-
-            </div>
-            <br /><br />
-            <?php echo $this->Html->link('Resource Listing', array('controller' => 'resources', 'action' => 'index')); ?>
-            <br />
-
-            <br /><br />
-        </td>
-    </tr>
-</table>
+        </tr>
+    </table>
+</div>
+<div class="actions">
+    <ul>
+        <li><?php echo $this->Html->link(__('Clients Report'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Resource Report'), array('action' => 'resourceReport')); ?></li>
+        <li><?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?></li>
+    </ul>
+</div>

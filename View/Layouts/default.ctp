@@ -129,9 +129,9 @@ checkContext();
 
                 <?php /*                 * *************************************************** */ ?>
 
-            </div>
+           
 
-            <div id="header">
+    
                 <h1>&nbsp;</h1>
                 <ul id="top_links" class="do_not_show">
                     <li><input type="radio" id="radio2" name="radio" /><label for="radio2">Clients</label></li>
@@ -141,7 +141,6 @@ checkContext();
                     <?php if ($isAtleastAdmin): ?>
                         <li><input type="radio" id="radio7" name="radio" /><label for="radio7">Admin</label></li>
                     <?php endif; ?>
-                    <li><input type="radio" id="radio8" name="radio" /><label for="radio8">Help</label></li>
                 </ul>
 
             </div>
@@ -155,7 +154,8 @@ checkContext();
             </div>
             <div id="footer" style="text-align: center;">
                 <?php if ($logged_in): ?>
-                    We would appreciate your <?php echo $this->Html->link('Feedback', array('controller' => 'feedbacks', 'action' => 'add')) ?> |
+                    We would appreciate your <?php echo $this->Html->link('Feedback', array('controller' => 'feedbacks', 'action' => 'add')); ?> |
+                    <a>Help</a> | 
                     <a onclick="return toggle('22');">Contact Mission Columbia</a>
                     <p id ="22" style ="display: none">
                         <br />Mission Columbia 
@@ -174,7 +174,6 @@ checkContext();
             <?php echo $this->Html->link('Organizations', array('controller' => 'organizations', 'action' => 'index'), array('id' => 'organizations')); ?>
             <?php echo $this->Html->link('Reports', array('controller' => 'reports', 'action' => 'index'), array('id' => 'reports')); ?>
             <?php echo $this->Html->link('Admin', array('controller' => 'admin', 'action' => 'index'), array('id' => 'admin')); ?>
-            <?php echo $this->Html->link('Help', array('controller' => 'help', 'action' => 'index'), array('id' => 'help')); ?>
         </div>
     </body>
 </html>

@@ -14,14 +14,30 @@ class ReportsController extends AppController {
     public function index() {
         $clientsController = new ClientsController();
         $organizationsController = new OrganizationsController();
-        $resourcesController = new ResourcesController();
-        $resourceUsesController = new ResourceusesController();
+
         $this->set('numClients', $clientsController->count());
         $this->set('ageClients', $clientsController->age());
         $this->set('sexClients', $clientsController->sexCount());
         $this->set('statusClients', $clientsController->status());
         $this->set('incomeAvgClients', $clientsController->avgIncome());
-        $this->set('numOrganizations', $organizationsController->count());
+
+
+        if ($this->request->is('post')) {
+            if ($this->request->is('post')) {
+                if (isset($this->request->data['client'])) {
+                    $results = $clientsController->clientSearch($this->data['Client']['last_name'], $this->data['Client']['first_name']);
+                    // $timeFrom = $this->request->data(datePickClient);
+                    // $timeTo = $this->request->data(datePickClient2);
+                    $this->Session->write('clientReportResults', $results);
+                    $this->redirect(array('controller' => 'clients', 'action' => 'clientReportSearch'));
+                }
+            }
+        }
+    }
+
+    public function resourceReport() {
+        $resourcesController = new ResourcesController();
+        $resourceUsesController = new ResourceusesController();
         $this->set('numResources', $resourcesController->count());
         $this->set('numResourceUses', $resourceUsesController->count());
         $this->set('mostPopular', $resourceUsesController->mostPopular());
@@ -30,8 +46,8 @@ class ReportsController extends AppController {
             if ($this->request->is('post')) {
                 if (isset($this->request->data['client'])) {
                     $results = $clientsController->clientSearch($this->data['Client']['last_name'], $this->data['Client']['first_name']);
-                   // $timeFrom = $this->request->data(datePickClient);
-                   // $timeTo = $this->request->data(datePickClient2);
+                    // $timeFrom = $this->request->data(datePickClient);
+                    // $timeTo = $this->request->data(datePickClient2);
                     $this->Session->write('clientReportResults', $results);
                     $this->redirect(array('controller' => 'clients', 'action' => 'clientReportSearch'));
                 }

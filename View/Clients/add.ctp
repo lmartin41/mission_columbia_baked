@@ -11,10 +11,6 @@
         margin-left: 20px;
     }
 
-    table {
-        width: 1075px;
-    }
-
 
     h1 {
         font-size: 18px;
@@ -183,7 +179,6 @@
     </div>
 </div>
 <div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
     <ul>
 
         <li><?php echo $this->Html->link(__('Clients Listing'), array('action' => 'browse')); ?></li>
