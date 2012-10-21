@@ -18,24 +18,17 @@ class ClientsController extends AppController {
      */
     public function index() {
         if ($this->request->is('post')) {
-            $lastName = $this->request->data['Client']['last_name'];
-            $firstName = $this->request->data['Client']['first_name'];
-            $correctResults = $this->clientSearch($lastName, $firstName);
+            $firstName = $this->request->data['Client']['First Name'];
+            $lastName = $this->request->data['Client']['Last Name'];
+            $correctResults = $this->clientSearch($firstName, $lastName);
             $this->Session->write('results', $correctResults);
             $this->redirect(array('action' => 'searchResults'));
         }
     }
 
-    public function clientSearch($lastName, $firstName) {
-        $results = $this->Client->find('all');
-        $correctResults = array();
-        $i = 0;
-        foreach ($results as $current) {
-            if ($current['Client']['first_name'] == $firstName && $current['Client']['last_name'] == $lastName) {
-                $correctResults[$i] = $current;
-                $i++;
-            }
-        }
+    public function clientSearch($firstName, $lastName) {
+        $conditions = array('first_name LIKE ' => $firstName.'%', 'last_name LIKE ' => $lastName.'%');
+        $correctResults = $this->Client->find('all', array('conditions' => $conditions));
         return $correctResults;
     }
 

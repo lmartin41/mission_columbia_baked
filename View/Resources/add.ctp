@@ -12,7 +12,7 @@
     <div>
         <?php echo $this->Form->submit('Add Another Resource', array('name' => 'Add_another_relative', 'div' => false)); ?>
         &nbsp;
-        <?php echo $this->Form->submit('Finished!', array('name' => 'finished', 'div' => false)); ?>
+        <?php echo $this->Form->submit('Done', array('name' => 'finished', 'div' => false)); ?>
         &nbsp;
         <?php echo $this->Form->submit('Cancel', array('name' => 'cancel', 'div' => false)); ?>
         <?php echo $this->Form->end(); ?>
