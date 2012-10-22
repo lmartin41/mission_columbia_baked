@@ -1,6 +1,7 @@
 <h2><?php echo "Client Report for ".$client['Client']['first_name']." from ".$startDate." to ".$endDate; ?></h2>
 <br />
 
+Number of Resources Used: <?php echo $numberResourceUses; ?><br />
 Number of Checklists Completed: <?php echo $numChecklistsCompleted; ?>
 
 <br /><br /><Br />
@@ -13,7 +14,7 @@ Number of Checklists Completed: <?php echo $numChecklistsCompleted; ?>
             <th><?php echo __('Resource Name'); ?></th>
             <th><?php echo __('Date'); ?></th>
             <th><?php echo __('Comments'); ?></th>
-            <th class="actions"><?php echo __('Actions'); ?></th>
+            <th class="actions"><?php echo __(''); ?></th>
         </tr>
         <?php
         $i = 0;
@@ -25,13 +26,10 @@ Number of Checklists Completed: <?php echo $numChecklistsCompleted; ?>
                     <td><?php echo $resourceUs['id']; ?></td>
                     <td><?php echo $resourceUs['client_id']; ?></td>
                     <td><?php echo $resourceUs['Resource']['resource_name']; ?></td>
-                    
                     <td><?php echo $resourceUs['date']; ?></td>
                     <td><?php echo $resourceUs['comments']; ?></td>
                     <td class="actions">
-                        <?php echo $this->Html->link(__('View'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['id'])); ?>
-                        <?php echo $this->Html->link(__('Edit'), array('controller' => 'resource_uses', 'action' => 'edit', $resourceUs['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'resource_uses', 'action' => 'delete', $resourceUs['id']), null, __('Are you sure you want to delete # %s?', $resourceUs['id'])); ?>
+                        <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['id'])); ?>
                     </td>
                 </tr>
             <?php endif; ?>

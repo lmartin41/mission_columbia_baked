@@ -27,7 +27,7 @@ class ClientsController extends AppController {
     }
 
     public function clientSearch($firstName, $lastName) {
-        $conditions = array('first_name LIKE ' => $firstName.'%', 'last_name LIKE ' => $lastName.'%');
+        $conditions = array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $lastName . '%');
         $correctResults = $this->Client->find('all', array('conditions' => $conditions));
         return $correctResults;
     }
@@ -187,19 +187,31 @@ class ClientsController extends AppController {
         $retVal[7] = $query8[0][0]['numInternet'];
         return $retVal;
     }
-    
-      public function numberOfChecklistsCompleted($id = null) {
-          $query = $this->Client->query("
+
+    public function numberOfChecklistsCompleted($id = null) {
+        $query = $this->Client->query("
                   
             Select count(*) as numCompleted
             From client_checklist
             Where client_id = '$id' AND isCompleted='true';
                   
             ");
-          
-      return $query[0][0]['numCompleted'];
-      }
 
+        return $query[0][0]['numCompleted'];
+    }
+
+    public function numberResourceUses($id = null, $startDate, $endDate) {
+        $query = $this->Client->query("
+   
+            Select count(*) as numResourceUses
+            From resource_uses 
+            Where client_id = '$id' AND date between '$startDate' and '$endDate'
+                
+        ");
+        
+        return $query[0][0]['numResourceUses'];
+    }
+    
     public function printClient($id = null) {
         $this->layout = 'print';
         $this->Client->recursive = -1;

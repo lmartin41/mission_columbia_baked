@@ -48,12 +48,13 @@
 <div class="actionsNoButton">
     <?php echo $this->Html->link(__('Individual Reports'), array()); ?><br /><br />
     <ul>
-        <li><?php echo $this->Html->link(__('Client Report'), array('action' => 'index')); ?></li><br />
-        <li><?php echo $this->Html->link(__('Resource Report'), array('action' => 'resourceReport')); ?></li><br />
+        <li><?php echo $this->Html->link(__('Clients'), array('action' => 'index')); ?></li><br />
+        <li><?php echo $this->Html->link(__('Resources'), array('action' => 'resourceReport')); ?></li><br />
     </ul>
     <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br /><br />
     <ul>
-        <li>Counts</li><br />
+        <li>Clients</li><br /><br />
+        <li>Resources</li>
     </ul>
 
     <?php echo $this->Html->link('Resource Listing', array('controller' => 'resources', 'action' => 'index')); ?>

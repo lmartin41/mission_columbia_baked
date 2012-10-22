@@ -70,6 +70,8 @@ class ReportsController extends AppController {
         
         $clientsController = new ClientsController();
         $this->set('numChecklistsCompleted', $clientsController->numberOfChecklistsCompleted($clientID));
+        $this->set('numberResourceUses', $clientsController->numberResourceUses($clientID, 
+                $this->Session->read('startDate'), $this->Session->read('endDate')));
         
         $clientsController->Client->id = $clientID;
         if (!$clientsController->Client->exists()) {
