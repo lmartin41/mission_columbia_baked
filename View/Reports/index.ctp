@@ -67,9 +67,9 @@
     </table>
 </div>
 <div class="actionsNoButton">
-    <ul>
-        <li><?php echo $this->Html->link(__('Clients Report'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('Resource Report'), array('action' => 'resourceReport')); ?></li>
-        <li><?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?></li>
-    </ul>
+    
+        <?php echo $this->Html->link(__('Clients Report'), array('action' => 'index')); ?><br /><br />
+        <?php echo $this->Html->link(__('Resource Report'), array('action' => 'resourceReport')); ?><br /><br />
+        <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
+    
 </div>

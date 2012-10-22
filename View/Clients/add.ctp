@@ -182,6 +182,6 @@
 
         <?php echo $this->Html->link('Clients Listing', array('action' => 'browse')); ?><br /><br />
         <?php echo $this->Html->link('Upload Photo', array('controller' => 'users', 'action' => 'upload')); ?><br /><br />
-        <?php echo $this->Html->link('Search for a Client', array('action' => 'index')); ?><br /><br />
+        <?php echo $this->Html->link('Search for a Client', array('action' => 'index')); ?>
    
 </div>

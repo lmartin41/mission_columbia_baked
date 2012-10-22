@@ -19,10 +19,7 @@
     </div>
 </div>
 <div class="actionsNoButton">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
 
-        <li><?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('Organization Listing'), array('controller' => 'organizations', 'action' => 'index')); ?> </li>
-    </ul>
+        <?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?><br /><br />
+        <?php echo $this->Html->link(__('Organization Listing'), array('controller' => 'organizations', 'action' => 'index')); ?>
 </div>

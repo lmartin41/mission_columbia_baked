@@ -1,14 +1,34 @@
 <?php echo $this->Html->script("toggle.js", FALSE); ?>
 
+<style type="text/css">
+    form label { 
+        width: 9em; 
+        float: left;
+        padding: 0px;
+    }
+
+    select {
+        margin-left: 20px;
+    }
+
+
+    h1 {
+        font-size: 18px;
+    }
+
+</style>
+<div id="tips" class="tipsBox" style="width:15%;position:absolute;right:5%;top:5%;background:#B4CFEC;border: 1px solid #000000;padding: 10 10 10 10">
+            <div class="tipsContent">
+                <B>Tips</B>
+                <br><br>
+                <p>Add Client Tip</p>
+            </div>
+</div>
+
 <div class="clients form">
     <?php echo $this->Form->create('Client'); ?>
-    <fieldset>
-        <legend><?php echo __('Edit Client'); ?></legend>
-        <br />
-
-        <!-----------  PERSONAL INFORMATION ------------------------->
-        <h2>Personal Information</h2><br />
-
+    <a onclick="return toggle('1');"><h1>Personal Information</h1></a>
+    <div id ="1">
         <table>
             <tr>
                 <td>
@@ -18,10 +38,12 @@
                     <?php echo $this->Form->input('last_name'); ?>
                 </td>
             </tr>
-             <tr>
-                <td colspan="2">
-                    <b style="color: #ff0000">Note: Enter either age or DOB</b>
-                    <?php echo $this->Form->input('DOB', array('type' => 'date', 'empty' => true)); ?>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('DOB', array('type' => 'date', 'empty' => true, 'div' => false, 'separator' => false)); ?>
+                    &nbsp; &nbsp;<b>OR</b>
+                </td>
+                <td>
                     <?php echo $this->Form->input('age'); ?>
                 </td>
                 <td>
@@ -33,8 +55,8 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <?php echo $this->Form->input('address', array('style' => 'width: 400px')); ?>
+                <td>
+                    <?php echo $this->Form->input('address'); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('apartment_number'); ?>
@@ -52,97 +74,100 @@
                 </td>
 
             </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('phone'); ?>
+                </td>
+            </tr>
         </table>
-        <?php echo $this->Form->input('phone'); ?>
+    </div>
 
-        <!---------------------------- SOURCE OF INCOME ----------------->
+    <a onclick="return toggle('2');"><h1>Source of Income</h1></a>
+    <div id ="2" style ="display: none">
+        <table>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('regular_job'); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('food_stamps'); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('veterans_pension'); ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('part_time_job'); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('social_security'); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('annuity_check'); ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('child_support'); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('ssi_or_disability'); ?> 
+                </td>
+                <td>
+                    <?php echo $this->Form->input('unemployment'); ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('when_next_check', array('type' => 'date', 'empty' => true, 'separator' => false)); ?>    
+                </td>
+            </tr>
+        </table>
 
-        <h2>Source of Income</h2>
-        <a onclick="return toggle('1');">Expand</a>
-        <div id ="1" style ="display: none">
-            <table>
-                <tr>
-                    <td>
-                        <?php echo $this->Form->input('regular_job'); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('food_stamps'); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('veterans_pension'); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo $this->Form->input('part_time_job'); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('social_security'); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('annuity_check'); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo $this->Form->input('child_support'); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('ssi_or_disability'); ?> 
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('unemployment'); ?>
-                    </td>
-                </tr>
-            </table>
-            <?php echo $this->Form->input('when_next_check', array('type' => 'date', 'empty' => true)); ?>  
-        </div>
+    </div>
 
+    <br />
+    <a onclick="return toggle('3');"><h1>Other Information</h1></a>
+    <div id ="3" style ="display: none">
+        <table>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('pregnant'); ?> 
+                </td>
+                <td>
+                    <?php echo $this->Form->input('disabled'); ?>  
+                </td>
+                <td>
+                    <?php echo $this->Form->input('handicapped'); ?> 
+                </td>
+                <td>
+                    <?php echo $this->Form->input('stove'); ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('refrigerator'); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('cell'); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('cable'); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input('internet'); ?>
+                </td>
+            </tr>
+        </table>
+        <?php echo $this->Form->input('model'); ?>
 
-        <!------------------------------- OTHER ------------------------------>
-        <br /><br />
-        <h2>Other Information</h2>
-        <a onclick="return toggle('2');">Expand</a>
-        <div id="2" style="display: none">
-            <table>
-                <tr>
-                    <td>
-                        <?php echo $this->Form->input('pregnant'); ?> 
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('disabled'); ?>  
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('handicapped'); ?> 
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('stove'); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo $this->Form->input('refrigerator'); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('cell'); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('cable'); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('internet'); ?>
-                    </td>
-                </tr>
-            </table>
-            <?php echo $this->Form->input('model'); ?>
-
-            <?php
-            echo $this->Form->input('how_did_you_hear');
-            echo $this->Form->input('how_long_do_you_need');
-            ?>
-            <br />
-        </div>
-    </fieldset>
+        <?php
+        echo $this->Form->input('how_did_you_hear');
+        echo $this->Form->input('how_long_do_you_need');
+        ?>
+    </div>
+    <br /><br />
 
     <div>
         <?php echo $this->Form->submit(__('Save and Edit Client Relatives'), array('name' => 'addMore', 'div' => false)); ?>
@@ -153,14 +178,10 @@
         <?php echo $this->Form->end(); ?>
     </div>
 </div>
-<div class="actionsNoButton">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
+<div class="actionsNoButton" style="">
 
-        <li><?php echo $this->Html->link(__('List Clients'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('Edit Photo'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Form->postLink(__('Delete Client'), array('action' => 'delete', $this->Form->value('Client.id')), null, __('Are you sure you want to delete %s?', $this->Form->value('Client.first_name'))); ?></li>
-        <li><?php echo $this->Html->link(__('Edit a Relative of This Client'), array('controller' => 'client_relations', 'action' => 'index', $this->Form->value('Client.id'))); ?> </li>
-        <li><?php echo $this->Html->link(__('Edit Resource Usage'), array('controller' => 'resource_uses', 'action' => 'edit')); ?> </li>
-    </ul>
+        <?php echo $this->Html->link('Clients Listing', array('action' => 'browse')); ?><br /><br />
+        <?php echo $this->Html->link('Upload Photo', array('controller' => 'users', 'action' => 'upload')); ?><br /><br />
+        <?php echo $this->Html->link('Search for a Client', array('action' => 'index')); ?>
+   
 </div>

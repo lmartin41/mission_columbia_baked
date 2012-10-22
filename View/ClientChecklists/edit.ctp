@@ -107,13 +107,12 @@
     <?php echo $this->Form->end(__('Submit')); ?>
 </div>
 <div class="actionsNoButton">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
 
-        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('ClientChecklist.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('ClientChecklist.id'))); ?></li>
-        <li><?php echo $this->Html->link(__('List Client Checklists'), array('action' => 'index', 'ClientChecklist.id')); ?></li>
-        <li><?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('Client Listing'), array('controller' => 'clients', 'action' => 'browse')); ?> </li>
+        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', 
+            $this->Form->value('ClientChecklist.id')), null, __('Are you sure you want to delete # %s?', 
+                    $this->Form->value('ClientChecklist.id'))); ?><br /><br />
+        <?php echo $this->Html->link(__('List Client Checklists'), array('action' => 'index', 'ClientChecklist.id')); ?><br /><br />
+        <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?><br /><br />
+        <?php echo $this->Html->link(__('Client Listing'), array('controller' => 'clients', 'action' => 'browse')); ?> 
 
-    </ul>
 </div>

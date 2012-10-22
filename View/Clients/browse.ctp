@@ -6,7 +6,7 @@
             <th><?php echo $this->Paginator->sort('last_name'); ?></th>
             <th><?php echo $this->Paginator->sort('id'); ?></th>
 
-            <th class="actions"><?php echo __('Actions'); ?></th>
+            <th class="actions"></th>
         </tr>
         <?php foreach ($clients as $client): ?>
             <tr>
@@ -15,11 +15,7 @@
                 <td><?php echo h($client['Client']['id']); ?>&nbsp;</td>
 
                 <td class="actions">
-                    <?php echo $this->Html->link(__('View details'), array('action' => 'view', $client['Client']['id'])); ?>
-                    <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
-                    <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?>
-                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $client['Client']['id'])); ?>
-                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete %s?', $client['Client']['first_name'])); ?>
+                    <?php echo $this->Html->link(__('View/Edit'), array('action' => 'view', $client['Client']['id'])); ?>
                 </td>
             </tr>
         <?php endforeach; ?>

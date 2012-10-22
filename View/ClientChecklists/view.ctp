@@ -184,13 +184,12 @@
 	</dl>
 </div>
 <div class="actionsNoButton">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Client Checklist'), array('action' => 'edit', $clientChecklist['ClientChecklist']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Client Checklist'), array('action' => 'delete', $clientChecklist['ClientChecklist']['id']), null, __('Are you sure you want to delete # %s?', $clientChecklist['ClientChecklist']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Client Checklists'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Client Checklist'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Clients'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Client'), array('controller' => 'clients', 'action' => 'add')); ?> </li>
-	</ul>
+
+		<?php echo $this->Html->link(__('Edit Client Checklist'), array('action' => 'edit', $clientChecklist['ClientChecklist']['id'])); ?><br /><br />
+		<?php echo $this->Form->postLink(__('Delete Client Checklist'), array('action' => 'delete', $clientChecklist['ClientChecklist']['id']), null, __('Are you sure you want to delete # %s?', $clientChecklist['ClientChecklist']['id'])); ?><br /><br />
+		<?php echo $this->Html->link(__('List Client Checklists'), array('action' => 'index')); ?><br /><br /> 
+		<?php echo $this->Html->link(__('New Client Checklist'), array('action' => 'add')); ?><br /><br />
+		<?php echo $this->Html->link(__('List Clients'), array('controller' => 'clients', 'action' => 'index')); ?><br /><br />
+		<?php echo $this->Html->link(__('New Client'), array('controller' => 'clients', 'action' => 'add')); ?> 
+	
 </div>

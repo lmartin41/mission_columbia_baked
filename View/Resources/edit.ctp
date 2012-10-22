@@ -17,11 +17,11 @@
     </div>
 </div>
 <div class="actionsNoButton">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
 
-        <li><?php echo $this->Form->postLink(__('Delete this Resource'), array('action' => 'delete', $this->Form->value('Resource.id')), null, __('Are you sure you want to delete %s?', $this->Form->value('Resource.resource_name'))); ?></li>
-        <li><?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('Upload Resource Photo'), array('action' => 'index')); ?></li>
-    </ul>
+        <?php echo $this->Form->postLink(__('Delete this Resource'), array('action' => 
+            'delete', $this->Form->value('Resource.id')), null, __('Are you sure you want to delete %s?', 
+                    $this->Form->value('Resource.resource_name'))); ?><br /><br />
+       <?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?><br /><br />
+        <?php echo $this->Html->link(__('Upload Resource Photo'), array('action' => 'index')); ?>
+    
 </div>

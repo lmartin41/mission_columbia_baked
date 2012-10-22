@@ -1,5 +1,5 @@
 <div class="organizations view">
-    <h2><?php echo __('Organization'); ?></h2>
+    <h2><?php echo __($organization['Organization']['org_name']); ?></h2>
     <br />
     <?php echo $this->Html->image('organization.jpg', array('alt' => 'Sample Photo')); ?>
     <dl>
@@ -71,9 +71,9 @@
     </dl>
 
     <br /><br />
-<?php /****************** Resource **********************************/ ?>
-    
-    <h2><?php echo __('Related Resources'); ?></h2>
+    <?php /*     * **************** Resource ********************************* */ ?>
+
+    <h2><?php echo __($organization['Organization']['org_name']."'s Resources"); ?></h2>
     <?php if (!empty($organization['Resource'])): ?>
         <table cellpadding = "0" cellspacing = "0">
             <tr>
@@ -81,10 +81,7 @@
                 <th><?php echo __('Resource Name'); ?></th>
                 <th><?php echo __('Organization Id'); ?></th>
                 <th><?php echo __('Resource Status'); ?></th>
-                <th><?php echo __('IsDeleted'); ?></th>
-                <th><?php echo __('Created'); ?></th>
-                <th><?php echo __('Modified'); ?></th>
-                <th class="actions"><?php echo __('Actions'); ?></th>
+                <th class="actions"><?php echo __(''); ?></th>
             </tr>
             <?php
             $i = 0;
@@ -95,13 +92,8 @@
                     <td><?php echo $resource['resource_name']; ?></td>
                     <td><?php echo $resource['organization_id']; ?></td>
                     <td><?php echo $resource['resource_status']; ?></td>
-                    <td><?php echo $resource['isDeleted']; ?></td>
-                    <td><?php echo $resource['created']; ?></td>
-                    <td><?php echo $resource['modified']; ?></td>
                     <td class="actions">
-                        <?php echo $this->Html->link(__('View'), array('controller' => 'resources', 'action' => 'view', $resource['id'])); ?>
-                        <?php echo $this->Html->link(__('Edit'), array('controller' => 'resources', 'action' => 'edit', $resource['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'resources', 'action' => 'delete', $resource['id']), null, __('Are you sure you want to delete # %s?', $resource['id'])); ?>
+                        <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'resources', 'action' => 'view', $resource['id'])); ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -117,21 +109,18 @@
 
     <br /><br /><br />
 
-    <h2><?php echo __('Related Users'); ?></h2>
+    <h2><?php echo __($organization['Organization']['org_name']."'s Users"); ?></h2>
     <?php if (!empty($organization['User'])): ?>
         <table cellpadding = "0" cellspacing = "0">
             <tr>
                 <th><?php echo __('Id'); ?></th>
                 <th><?php echo __('Username'); ?></th>
-                <th><?php echo __('Password'); ?></th>
                 <th><?php echo __('IsAdmin'); ?></th>
                 <th><?php echo __('IsSuperAdmin'); ?></th>
                 <th><?php echo __('Organization Id'); ?></th>
                 <th><?php echo __('Email'); ?></th>
-                <th><?php echo __('IsDeleted'); ?></th>
-                <th><?php echo __('Created'); ?></th>
-                <th><?php echo __('Modified'); ?></th>
-                <th class="actions"><?php echo __('Actions'); ?></th>
+
+                <th class="actions"><?php echo __(''); ?></th>
             </tr>
             <?php
             $i = 0;
@@ -140,18 +129,12 @@
                 <tr>
                     <td><?php echo $user['id']; ?></td>
                     <td><?php echo $user['username']; ?></td>
-                    <td><?php echo $user['password']; ?></td>
                     <td><?php echo $user['isAdmin']; ?></td>
                     <td><?php echo $user['isSuperAdmin']; ?></td>
                     <td><?php echo $user['organization_id']; ?></td>
                     <td><?php echo $user['email']; ?></td>
-                    <td><?php echo $user['isDeleted']; ?></td>
-                    <td><?php echo $user['created']; ?></td>
-                    <td><?php echo $user['modified']; ?></td>
                     <td class="actions">
-                        <?php echo $this->Html->link(__('View'), array('controller' => 'users', 'action' => 'view', $user['id'])); ?>
-                        <?php echo $this->Html->link(__('Edit'), array('controller' => 'users', 'action' => 'edit', $user['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'users', 'action' => 'delete', $user['id']), null, __('Are you sure you want to delete # %s?', $user['id'])); ?>
+                        <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'users', 'action' => 'view', $user['id'])); ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -167,16 +150,17 @@
 </div>
 
 
-    <div class="actionsNoButton">
-        <h3><?php echo __('Actions'); ?></h3>
-        <ul>
-            <li><?php echo $this->Html->link(__('Edit Organization'), array('action' => 'edit', $organization['Organization']['id'])); ?> </li>
-            <li><?php echo $this->Form->postLink(__('Delete Organization'), array('action' => 'delete', $organization['Organization']['id']), null, __('Are you sure you want to delete # %s?', $organization['Organization']['id'])); ?> </li>
-            <li><?php echo $this->Html->link(__('List Organizations'), array('action' => 'index')); ?> </li>
-            <li><?php echo $this->Html->link(__('New Organization'), array('action' => 'add')); ?> </li>
-            <li><?php echo $this->Html->link(__('List Resources'), array('controller' => 'resources', 'action' => 'index')); ?> </li>
-            <li><?php echo $this->Html->link(__('New Resource'), array('controller' => 'resources', 'action' => 'add')); ?> </li>
-            <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-            <li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-        </ul>
-    </div>
+<div class="actionsNoButton">
+
+
+    <?php echo $this->Html->link(__('Organization Listing'), array('action' => 'index')); ?><br /><br />
+    <?php echo $this->Html->link(__('Resource Listing'), array('controller' => 'resources', 'action' => 'index')); ?><br /><br />
+    <?php echo $this->Html->link(__('User Listing'), array('controller' => 'users', 'action' => 'index')); ?><br /><br />
+    <?php if ($isAtleastAdmin): ?>
+        <?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> 
+        <?php echo $this->Html->link(__('New Resource'), array('controller' => 'resources', 'action' => 'add')); ?><br /><br />
+        <?php echo $this->Html->link(__('New Organization'), array('action' => 'add')); ?><br /><br />
+        <?php echo $this->Html->link(__('Edit Organization'), array('action' => 'edit', $organization['Organization']['id'])); ?><br /><br />
+        <?php echo $this->Form->postLink(__('Delete Organization'), array('action' => 'delete', $organization['Organization']['id']), null, __('Are you sure you want to delete # %s?', $organization['Organization']['id'])); ?><br /><br />
+    <?php endif; ?>
+</div>

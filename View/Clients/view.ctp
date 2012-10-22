@@ -4,7 +4,7 @@
 <?php echo $this->Html->css('baseTheme.style'); ?>
 
 <div class="clients view">
-    <h2><?php echo __($client['Client']['first_name'] . "'s Details"); ?></h2>
+    <h2><?php echo __($client['Client']['first_name'] . " ".$client['Client']['last_name']); ?></h2>
     <br />
 
     <tr>
@@ -251,7 +251,7 @@
                 <th><?php echo __('Relationship'); ?></th>
                 <th><?php echo __('DOB'); ?></th>
                 <th><?php echo __('Sex'); ?></th>
-                <th class="actions"><?php echo __('Actions'); ?></th>
+                <th class="actions"><?php echo __(''); ?></th>
             </tr>
             <?php
             $i = 0;
@@ -266,9 +266,8 @@
                         <td><?php echo $clientRelation['DOB']; ?></td>
                         <td><?php echo $clientRelation['sex']; ?></td>
                         <td class="actions">
-                            <?php echo $this->Html->link(__('View'), array('controller' => 'client_relations', 'action' => 'view', $clientRelation['id'])); ?>
-                            <?php echo $this->Html->link(__('Edit'), array('controller' => 'client_relations', 'action' => 'edit', $clientRelation['id'], $client['Client']['id'])); ?>
-                            <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'client_relations', 'action' => 'delete', $clientRelation['id'], $client['Client']['id']), null, __('Are you sure you want to delete %s?', $clientRelation['first_name'])); ?>
+                            <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_relations', 'action' => 'view', $clientRelation['id'])); ?>
+
                         </td>
                     </tr>
                 <?php endif; ?>
@@ -295,7 +294,7 @@
                 <th><?php echo __('Resource Name'); ?></th>
                 <th><?php echo __('Date'); ?></th>
                 <th><?php echo __('Comments'); ?></th>
-                <th class="actions"><?php echo __('Actions'); ?></th>
+                <th class="actions"><?php echo __(''); ?></th>
             </tr>
             <?php
             $i = 0;
@@ -309,9 +308,7 @@
                         <td><?php echo $resourceUs['date']; ?></td>
                         <td><?php echo $resourceUs['comments']; ?></td>
                         <td class="actions">
-                            <?php echo $this->Html->link(__('View'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['id'])); ?>
-                            <?php echo $this->Html->link(__('Edit'), array('controller' => 'resource_uses', 'action' => 'edit', $resourceUs['id'])); ?>
-                            <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'resource_uses', 'action' => 'delete', $resourceUs['id']), null, __('Are you sure you want to delete # %s?', $resourceUs['id'])); ?>
+                            <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['id'])); ?>
                         </td>
                     </tr>
                 <?php endif; ?>
@@ -328,6 +325,8 @@
     <?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> <br /><br />
     <?php echo $this->Html->link(__('Client Listing'), array('action' => 'browse')); ?> <br /><br />
     <?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?> <br /><br />
+    <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?><Br /><br />
+    <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?><br /><br />
     <?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete %s?', $client['Client']['first_name'])); ?><br /><br />
     <?php echo $this->Html->link(__('Print this Client Summary'), array('action' => 'printClient', $client['Client']['id'])); ?> 	<br /><br />
     <?php echo $this->Html->link(__('Create new Client'), array('action' => 'add')); ?> 	

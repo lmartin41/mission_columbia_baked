@@ -40,7 +40,7 @@
                 <th><?php echo __('Resource Id'); ?></th>
                 <th><?php echo __('Date'); ?></th>
                 <th><?php echo __('Comments'); ?></th>
-                <th class="actions"><?php echo __('Actions'); ?></th>
+                <th class="actions"><?php echo __(''); ?></th>
             </tr>
             <?php
             $i = 0;
@@ -52,9 +52,7 @@
                     <td><?php echo $resourceUs['date']; ?></td>
                     <td><?php echo $resourceUs['comments']; ?></td>
                     <td class="actions">
-                        <?php echo $this->Html->link(__('View'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['id'])); ?>
-                        <?php echo $this->Html->link(__('Edit'), array('controller' => 'resource_uses', 'action' => 'edit', $resourceUs['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'resource_uses', 'action' => 'delete', $resourceUs['id']), null, __('Are you sure you want to delete # %s?', $resourceUs['id'])); ?>
+                        <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['id'])); ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -68,10 +66,9 @@
 </div>
 
 <div class="actionsNoButton">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Edit Resource'), array('action' => 'edit', $resource['Resource']['id'], $resource['Resource']['organization_id'])); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Delete Resource'), array('action' => 'delete', $resource['Resource']['id']), null, __('Are you sure you want to delete # %s?', $resource['Resource']['resource_name'])); ?> </li>
-        <li><?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?> </li>
-    </ul>
+
+        <?php echo $this->Html->link(__('Edit Resource'), array('action' => 'edit', $resource['Resource']['id'], $resource['Resource']['organization_id'])); ?><br /><br />
+        <?php echo $this->Form->postLink(__('Delete Resource'), array('action' => 'delete', $resource['Resource']['id']), null, __('Are you sure you want to delete # %s?', $resource['Resource']['resource_name'])); ?><br /><br />
+        <?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?>
+    
 </div>

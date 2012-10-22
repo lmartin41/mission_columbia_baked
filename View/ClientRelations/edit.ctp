@@ -23,11 +23,13 @@
     </div>
 </div>
 <div class="actionsNoButton">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Client Listing'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('Relatives Listing'), array('action' => 'index', $clientID)); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Delete This Relative'), array('action' => 'delete', $this->Form->value('ClientRelation.id'), $clientID), null, __('Are you sure you want to delete %s?', $this->Form->value('ClientRelation.first_name'))); ?></li>
 
-    </ul>
+        <?php echo $this->Html->link(__('Client Listing'), array('controller' => 'clients', 'action' => 'index')); ?><br /><br />
+        <?php echo $this->Html->link(__('Relatives Listing'), array('action' => 'index', $clientID)); ?><br /><br />
+        <?php echo $this->Form->postLink(__('Delete This Relative'), 
+                array('action' => 'delete', $this->Form->value('ClientRelation.id'), 
+                    $clientID), null, __('Are you sure you want to delete %s?', 
+                            $this->Form->value('ClientRelation.first_name'))); ?>
+
+    
 </div>

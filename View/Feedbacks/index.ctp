@@ -43,10 +43,9 @@
 	</div>
 </div>
 <div class="actionsNoButton">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Feedback'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-	</ul>
+
+		<?php echo $this->Html->link(__('New Feedback'), array('action' => 'add')); ?><br /><br />
+		<?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?><br /><br />
+		<?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?>
+	
 </div>
