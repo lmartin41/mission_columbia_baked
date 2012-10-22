@@ -187,18 +187,18 @@ class ClientsController extends AppController {
         $retVal[7] = $query8[0][0]['numInternet'];
         return $retVal;
     }
-
-    public function clientReportSearch() {
-        $this->set('results', $this->Session->read('clientReportResults'));
-    }
-
-    public function clientReport($clientID = null) {
-        $this->Client->id = $clientID;
-        if (!$this->Client->exists()) {
-            throw new NotFoundException(__('Invalid client'));
-        }
-        $this->set('client', $this->Client->read(null, $id));
-    }
+    
+      public function numberOfChecklistsCompleted($id = null) {
+          $query = $this->Client->query("
+                  
+            Select count(*) as numCompleted
+            From client_checklist
+            Where client_id = '$id' AND isCompleted='true';
+                  
+            ");
+          
+      return $query[0][0]['numCompleted'];
+      }
 
     public function printClient($id = null) {
         $this->layout = 'print';

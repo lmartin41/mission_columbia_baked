@@ -3,20 +3,19 @@
 <?php echo $this->Html->css("datepickr.css", FALSE); ?>
 
 <div class="Reports form">
-    <table style="width: 1000px">
-        <tr>
-            <td>
-                <h2>Clients</h2>
-                <br />
+
                 <h3>Individual Client Report</h3>
                 <?php
                 echo $this->Form->create('Client');
                 echo $this->Form->input("first_name");
                 echo $this->Form->input("last_name");
                 ?>
-                From:<input id="datepickClient" class="date-pick" style="width: 100px;"/>
+                
+                <?php $oldDate = Date('Y')."-1-1"; ?>
+                <?php $newDate = Date('Y-m-d'); ?>
+                From:<input name="startDate" id="datepickClient" default="test" class="date-pick" style="width: 100px;" value = '<?php echo $oldDate; ?>' />
                 &nbsp;
-                To:<input id="datepickClient2" class="date-pick" style="width: 100px;"/>
+                To:<input name="endDate" id="datepickClient2" class="date-pick" style="width: 100px;" value ="<?php echo $newDate; ?>" />
 
                 <script type="text/javascript">
                     new datepickr('datepickClient', { dateFormat: 'm-d-Y' });
@@ -26,50 +25,19 @@
                 echo $this->Form->end("Retrieve Client Report", array('name' => 'client'));
                 ?> 
                 <br />
-            </td>
-            <td>
-
-                <h3>Client Statistics</h3>
-                <br />
-                Number of clients: <?php echo $numClients; ?>
-                <br />
-                Average Age of Clients: <?php echo $ageClients; ?>
-                <br />
-                Number of Men: <?php echo $sexClients[0]; ?>
-                <br />
-                Number of Women: <?php echo $sexClients[1]; ?>
-                <br />
-                Average income of Clients: $<?php echo $incomeAvgClients; ?>
-                <br />
-                Number of Pregnant Clients: <?php echo $statusClients[0]; ?>
-                <br />
-                Number of Disabled Clients: <?php echo $statusClients[1]; ?>
-                <br />
-                Number of Handicapped Clients: <?php echo $statusClients[2]; ?>
-                <br />
-                Number of Clients with Stoves: <?php echo $statusClients[3]; ?>
-                <br />
-                Number of Clients with Refrigerators: <?php echo $statusClients[4]; ?>
-                <br />
-                Number of Clients with Cell Phones: <?php echo $statusClients[5]; ?>
-                <br />
-                Number of Clients with Cable TV: <?php echo $statusClients[6]; ?>
-                <br />
-                Number of Clients with Internet Access: <?php echo $statusClients[7]; ?>
-                <br /><br />
-
-                <br /><br />
-
-            </td>
-
-
-        </tr>
-    </table>
 </div>
+
 <div class="actionsNoButton">
+    <?php echo $this->Html->link(__('Individual Reports'), array()); ?><br /><br />
+    <ul>
+        <li><?php echo $this->Html->link(__('Client Report'), array('action' => 'index')); ?></li><br />
+        <li><?php echo $this->Html->link(__('Resource Report'), array('action' => 'resourceReport')); ?></li><br />
+    </ul>
+    <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br /><br />
+    <ul>
+        <li>Counts</li><br />
+    </ul>
     
-        <?php echo $this->Html->link(__('Clients Report'), array('action' => 'index')); ?><br /><br />
-        <?php echo $this->Html->link(__('Resource Report'), array('action' => 'resourceReport')); ?><br /><br />
         <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
-    
+
 </div>

@@ -1,62 +1,60 @@
 <?php echo $this->Html->script("client_view.js", FALSE); ?>
-
 <?php echo $this->Html->script('ajaxupload-min.js'); ?>
 <?php echo $this->Html->css('baseTheme.style'); ?>
 
 <div class="clients view">
-    <h2><?php echo __($client['Client']['first_name'] . " ".$client['Client']['last_name']); ?></h2>
-    <br />
+    <table>
+        <tr>
+            <td>
+                <?php echo $this->Html->image('person.png', array('alt' => 'Sample Photo', 'style' => "float: left;")); ?>
+            </td>
+            <td>
+                <h2>Personal Information</h2>
+                <dl>
 
-    <tr>
-        <td>
-            <div id="demo1" style="width:500px"></div>
-            <script type="text/javascript">
-                $('#demo1').ajaxupload({
-                    url:'upload.php',
-                    remotePath:'uploaded/',
-                });
-            </script>
-        </td>
+                    <dt><?php echo __('First Name'); ?></dt>
+                    <dd>
+                        &nbsp;&nbsp;
+                        <?php echo h($client['Client']['first_name']); ?>
+                        &nbsp;
+                    </dd>
+                    <dt><?php echo __('Last Name'); ?></dt>
+                    <dd>
+                        &nbsp;&nbsp;
+                        <?php echo h($client['Client']['last_name']); ?>
+                        &nbsp;
+                    </dd>
+                    <dt><?php echo __('DOB'); ?></dt>
+                    <dd>
+                        &nbsp;&nbsp;
+                        <?php echo h($client['Client']['DOB']); ?>
+                        &nbsp;
+                    </dd>
+                    <dt><?php echo __('Sex'); ?></dt>
+                    <dd>
+                        &nbsp;&nbsp;
+                        <?php echo h($client['Client']['sex']); ?>
+                        &nbsp;
+                    </dd>
+                </dl>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="demo1" style="width:500px"></div>
+                <script type="text/javascript">
+                    $('#demo1').ajaxupload({
+                        url:'upload.php',
+                        remotePath:'uploaded/',
+                    });
+                </script>
+            </td>
 
-    </tr>
+        </tr>
+    </table>
 
-    <?php echo $this->Html->image('person.png', array('alt' => 'Sample Photo')); ?>
     <div id="accordion">
-        <h2>Personal Information</h2>
-        <div class="white-background black-text">
-            <dl>
-                <dt><?php echo __('Id'); ?></dt>
-                <dd>
-                    &nbsp;&nbsp;
-                    <?php echo h($client['Client']['id']); ?>
-                    &nbsp;
-                </dd>
-                <dt><?php echo __('First Name'); ?></dt>
-                <dd>
-                    &nbsp;&nbsp;
-                    <?php echo h($client['Client']['first_name']); ?>
-                    &nbsp;
-                </dd>
-                <dt><?php echo __('Last Name'); ?></dt>
-                <dd>
-                    &nbsp;&nbsp;
-                    <?php echo h($client['Client']['last_name']); ?>
-                    &nbsp;
-                </dd>
-                <dt><?php echo __('DOB'); ?></dt>
-                <dd>
-                    &nbsp;&nbsp;
-                    <?php echo h($client['Client']['DOB']); ?>
-                    &nbsp;
-                </dd>
-                <dt><?php echo __('Sex'); ?></dt>
-                <dd>
-                    &nbsp;&nbsp;
-                    <?php echo h($client['Client']['sex']); ?>
-                    &nbsp;
-                </dd>
-            </dl>
-        </div>
+
         <h2>Contact Information</h2>
         <div class="white-background black-text">
             <dl>
