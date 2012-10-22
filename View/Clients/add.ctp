@@ -18,11 +18,11 @@
 
 </style>
 <div id="tips" class="tipsBox" style="width:15%;position:absolute;right:5%;top:5%;background:#B4CFEC;border: 1px solid #000000;padding: 10 10 10 10">
-            <div class="tipsContent">
-                <B>Tips</B>
-                <br><br>
-                <p>Add Client Tip</p>
-            </div>
+    <div class="tipsContent">
+        <B>Tips</B>
+        <br><br>
+        <p>Add Client Tip</p>
+    </div>
 </div>
 
 <div class="clients form">
@@ -46,6 +46,11 @@
                 <td>
                     <?php echo $this->Form->input('age'); ?>
                 </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->input('address'); ?>
+                </td>
                 <td>
                     <?php
                     $options = array('M' => 'Male', 'F' => 'Female');
@@ -53,19 +58,18 @@
                     echo $this->Form->radio('sex', $options, $attributes);
                     ?>
                 </td>
+
+
             </tr>
             <tr>
-                <td>
-                    <?php echo $this->Form->input('address'); ?>
-                </td>
                 <td>
                     <?php echo $this->Form->input('apartment_number'); ?>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <?php echo $this->Form->input('city'); ?>
                 </td>
+            </tr>
+            <tr>
                 <td>
                     <?php echo $this->Form->input('state'); ?>
                 </td>
@@ -92,14 +96,17 @@
                 <td>
                     <?php echo $this->Form->input('food_stamps'); ?>
                 </td>
-                <td>
-                    <?php echo $this->Form->input('veterans_pension'); ?>
-                </td>
+
             </tr>
             <tr>
                 <td>
+                    <?php echo $this->Form->input('veterans_pension'); ?>
+                </td>
+                <td>
                     <?php echo $this->Form->input('part_time_job'); ?>
                 </td>
+            </tr>
+            <tr>
                 <td>
                     <?php echo $this->Form->input('social_security'); ?>
                 </td>
@@ -113,12 +120,13 @@
                 </td>
                 <td>
                     <?php echo $this->Form->input('ssi_or_disability'); ?> 
+
+            </tr>
+            <tr>
                 </td>
                 <td>
                     <?php echo $this->Form->input('unemployment'); ?>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <?php echo $this->Form->input('when_next_check', array('type' => 'date', 'empty' => true, 'separator' => false)); ?>    
                 </td>
@@ -141,17 +149,21 @@
                 <td>
                     <?php echo $this->Form->input('handicapped'); ?> 
                 </td>
+
+            </tr>
+            <tr>
                 <td>
                     <?php echo $this->Form->input('stove'); ?>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <?php echo $this->Form->input('refrigerator'); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('cell'); ?>
                 </td>
+
+            </tr>
+            <tr>
                 <td>
                     <?php echo $this->Form->input('cable'); ?>
                 </td>
@@ -180,8 +192,8 @@
 </div>
 <div class="actionsNoButton" style="">
 
-        <?php echo $this->Html->link('Clients Listing', array('action' => 'browse')); ?><br /><br />
-        <?php echo $this->Html->link('Upload Photo', array('controller' => 'users', 'action' => 'upload')); ?><br /><br />
-        <?php echo $this->Html->link('Search for a Client', array('action' => 'index')); ?>
-   
+    <?php echo $this->Html->link('Clients Listing', array('action' => 'browse')); ?><br /><br />
+    <?php echo $this->Html->link('Upload Photo', array('controller' => 'users', 'action' => 'upload')); ?><br /><br />
+    <?php echo $this->Html->link('Search for a Client', array('action' => 'index')); ?>
+
 </div>

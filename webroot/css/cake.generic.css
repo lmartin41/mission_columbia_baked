@@ -24,7 +24,7 @@
 /** General Style Info **/
 body {
         display: block;
-        width: 1350px;
+        width: 1100px;
         margin-left: auto;
         margin-right: auto;
 	background: #AAAAAA;
@@ -127,7 +127,9 @@ div.view {
 	float:right;
 	width:85%;
 	border-left:1px solid #666;
-	padding:0px 2%;
+	padding-top:10px;
+        padding-left: 2%;
+        padding-right: 0px;
 }
 div.actions {
 	float:left;
