@@ -67,7 +67,7 @@
     <?php endif; ?>
 </div>
 
-<div class="actions">
+<div class="actionsNoButton">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('Edit Resource'), array('action' => 'edit', $resource['Resource']['id'], $resource['Resource']['organization_id'])); ?> </li>

@@ -42,7 +42,7 @@
         ?>
     </div>
 </div>
-<div class="actions">
+<div class="actionsNoButton">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('Create a new Client Checklist'), array('action' => 'add')); ?> </li>

@@ -1,5 +1,5 @@
 <div class ="clients form">   
-<h2><?php echo __('Client Listing'); ?></h2>
+    <h2><?php echo __('Client Listing'); ?></h2>
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th><?php echo $this->Paginator->sort('first_name'); ?></th>
@@ -38,12 +38,11 @@
         echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
         ?>
     </div>
-<br />
+    <br />
 
 </div>
-<div class="actions">
-    <ul>
-        <li><?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?></li>
-        <li><?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?></li>
-    </ul>
+<div class="actionsNoButton">
+    <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?><br /><br />
+    <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?>
+        
 </div>

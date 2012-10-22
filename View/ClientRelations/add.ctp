@@ -21,10 +21,9 @@
         <?php echo $this->Form->end(); ?>
     </div>
 </div>
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'search')); ?> </li>
-    </ul>
+<div class="actionsNoButton">
+
+        <?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'index')); ?><br /><br />
+        <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'search')); ?> 
+    
 </div>

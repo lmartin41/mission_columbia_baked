@@ -17,7 +17,7 @@
         <?php echo $this->Form->end(); ?>
     </div>
 </div>
-<div class="actions">
+<div class="actionsNoButton">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> </li>

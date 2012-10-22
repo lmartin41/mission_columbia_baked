@@ -44,7 +44,7 @@
         </tr>
     </table>
 </div>
-<div class="actions">
+<div class="actionsNoButton">
     <ul>
         <li><?php echo $this->Html->link(__('Clients Report'), array('action' => 'index')); ?></li>
         <li><?php echo $this->Html->link(__('Resource Report'), array('action' => 'resourceReport')); ?></li>

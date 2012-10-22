@@ -178,11 +178,10 @@
         <?php echo $this->Form->end(); ?>
     </div>
 </div>
-<div class="actions">
-    <ul>
+<div class="actionsNoButton" style="">
 
-        <li><?php echo $this->Html->link(__('Clients Listing'), array('action' => 'browse')); ?></li>
-        <li><?php echo $this->Html->link(__('Upload Photo'), array('controller' => 'users', 'action' => 'upload')); ?></li>
-        <li><?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> </li>
-    </ul>
+        <?php echo $this->Html->link('Clients Listing', array('action' => 'browse')); ?><br /><br />
+        <?php echo $this->Html->link('Upload Photo', array('controller' => 'users', 'action' => 'upload')); ?><br /><br />
+        <?php echo $this->Html->link('Search for a Client', array('action' => 'index')); ?><br /><br />
+   
 </div>

@@ -95,12 +95,10 @@
     </fieldset>
     <?php echo $this->Form->end(__('Submit')); ?>
 </div>
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
+<div class="actionsNoButton">
 
-        <li><?php echo $this->Html->link(__('List Client Checklists'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('List Clients'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Client'), array('controller' => 'clients', 'action' => 'add')); ?> </li>
-    </ul>
+        <?php echo $this->Html->link(__('List Client Checklists'), array('action' => 'index')); ?><br /><br />
+        <?php echo $this->Html->link(__('List Clients'), array('controller' => 'clients', 'action' => 'index')); ?><br /><br />
+        <?php echo $this->Html->link(__('New Client'), array('controller' => 'clients', 'action' => 'add')); ?> 
+    
 </div>

@@ -8,10 +8,10 @@
     ?> 
 
 </div>
-<div class="actions">
-    <ul>
-        <li><?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?></li>
-        <li><?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?></li>
-    </ul>
+<div class="actionsNoButton">
+    
+        <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?><br /><br />
+        <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?>
+    
 </div>
 
