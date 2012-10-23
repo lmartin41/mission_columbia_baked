@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
 	    jQuery("#radio2").click(function () {
 
 			location.href = $('#clients').attr('href');
-			jQuery('div.tipsContent').replaceWith("<B>Tipzzzzz</B>");
+			// jQuery('div.tipsContent').replaceWith("<B>Tipzzzzz</B>");
 
 	    });
 	    jQuery("#radio3").click(function () {
@@ -42,7 +42,9 @@ function checkContext(){
 	// var host = window.location.host;
 	var pathName = window.location.pathname;
 	if(pathName.indexOf('/mission_columbia_baked/users/login') != -1) {
-		jQuery('div.tipsContent').replaceWith("<B>AT THE LOGIN</B>");
+		jQuery('div.tipsContent').replaceWith("<B>AT THE LOGIN</B> BLEH BLAH BLAH BLAH" +  
+			"BLEH BLAH BLAH BLAH BLEH BLAH BLAH BLAH BLEH BLAH BLAH BLAH BLEH BLAH BLAH BLAH " + 
+			"BLEH BLAH BLAH BLAH BLEH BLAH BLAH BLAH ");
 		// alert("in login " + pathName);
 	}
 	else if(pathName.indexOf('/mission_columbia_baked/resources') != -1) {

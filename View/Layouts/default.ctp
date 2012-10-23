@@ -32,7 +32,7 @@
 
         <?php echo $this->Html->script('jquery-1.8.2.min.js'); ?>
         <?php echo $this->Html->script('jquery-ui-1.9.0.custom.min.js'); ?>
-        <?php echo $this->Html->script('Menu.js'); ?>
+        <?php echo $this->Html->script('NavActions.js'); ?>
 
         <?php
         echo $this->Html->meta('icon');
@@ -43,6 +43,8 @@
         echo $this->Html->css('styles');
         echo $this->fetch('script');
         ?>
+
+        
     </head>
 
 
@@ -59,7 +61,7 @@
     <?php //echo $this->Html->script('Menu.js'); ?>
     <?php //echo $this->Html->script('ajaxupload-min.js'); ?>
 
-    <?php /**
+    <?php /*
       echo $this->Html->meta('icon');
       echo $this->Html->css('cake.generic');
       echo $this->fetch('meta');
@@ -103,6 +105,8 @@ checkContext();
     -->
     
     <body>
+         
+
         <div id="container">
 
             <div id="header">
@@ -145,13 +149,35 @@ checkContext();
 
             </div>
 
+            <div id="bodyContainer" style="width:100%;">
+                
 
-            <div id="content">
+                <div id="content" style="width:80%;float:left;">
 
-                <?php echo $this->Session->flash(); ?>
+                    <?php echo $this->Session->flash(); ?>
 
-                <?php echo $this->fetch('content'); ?>
+                    <?php echo $this->fetch('content'); ?>
+                </div>
+
+                <div id="tipArea" style="width:16%; background:#B4CFEC; float:right;">
+                    
+    <!--  OLD STYLES               <div id="tips" class="tipsBox" style="float:right; position:relative; left:1%; bottom:1%; width:15%; background:#B4CFEC;border: 1px solid #000000;"> -->
+                    <div id="tips" class="tipsBox" style="background:#B4CFEC;border: 1px solid #000000;">
+                        <div class="tipsContent">
+                            <B>Tips Default</B>
+                            <p>If you cannot remember your password, please click on the <B>Request a New Password</B> link and a new, 
+                        </div>
+                    </div>
+
+                </div>
+            
             </div>
+
+            <!-- This has to happen AFTER the tipsBox is rendered -->
+            <script>
+                checkContext();
+            </script>
+
             <div id="footer" style="text-align: center;">
                 <?php if ($logged_in): ?>
                     We would appreciate your <?php echo $this->Html->link('Feedback', array('controller' => 'feedbacks', 'action' => 'add')); ?> |
