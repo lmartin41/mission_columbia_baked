@@ -7,7 +7,7 @@ App::uses('ResourcesController', 'Controller');
 App::uses('ResourceusesController', 'Controller');
 
 class ReportsController extends AppController {
-
+    
     public $helpers = array('Js');
     public $name = 'Reports';
 
