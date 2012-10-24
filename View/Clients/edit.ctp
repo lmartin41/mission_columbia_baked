@@ -1,6 +1,6 @@
 <?php echo $this->Html->script("client_add.js", FALSE); ?>
 
-<?php echo $this->Upload->edit('Client', '$clientID'); ?>
+<?php echo $this->Upload->edit('Client', $clientID); ?>
 
 <style type="text/css">
     form label { 

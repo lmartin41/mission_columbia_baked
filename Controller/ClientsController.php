@@ -1,7 +1,5 @@
 <?php
 
-
-
 App::uses('AppController', 'Controller');
 
 
@@ -99,7 +97,9 @@ class ClientsController extends AppController {
      * @return void
      */
     public function edit($id = null) {
+        $this->set('clientID', $id);
         $this->Client->id = $id;
+
         if (!$this->Client->exists()) {
             $this->Session->setFlash('This client does not exist.  Please create him now');
             $this->redirect(array('action' => 'add'));

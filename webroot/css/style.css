@@ -1,3 +1,11 @@
+.clients.form{
+	float:left;
+}
+
+.actionsNoButton{
+	float:left;
+}
+
 .ax-button span
 {
 	display:none;
