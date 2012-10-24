@@ -1,10 +1,24 @@
-.clients.form{
+/*div.form{
 	float:left;
-}
+	width:85%;
+	border-left:1px solid #666;
+	padding-top:10px;
+        padding-left: 2%;
+        padding-right: 0px;
+}*/
 
-.actionsNoButton{
-	float:left;
-}
+/*div.actionsNoButton{
+	
+	border-style:solid;
+	border-width:5px;
+}*/
+
+/*#tipArea{
+	width:10%;
+	background:#B4CFEC;
+	display:inline;
+	float:right;
+}*/
 
 .ax-button span
 {
