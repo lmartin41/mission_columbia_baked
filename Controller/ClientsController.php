@@ -1,6 +1,9 @@
 <?php
 
+
+
 App::uses('AppController', 'Controller');
+
 
 /**
  * Clients Controller
@@ -9,7 +12,10 @@ App::uses('AppController', 'Controller');
  */
 class ClientsController extends AppController {
 
-    public $helpers = array('Js');
+    // public $helpers = array('AjaxMultiUpload.Upload');
+    public $components = array('Session', 'AjaxMultiUpload.Upload');
+
+    public $helpers = array('Js', 'AjaxMultiUpload.Upload' );
 
     /**
      * index method
@@ -20,6 +26,8 @@ class ClientsController extends AppController {
         if ($this->request->is('post')) {
             $firstName = $this->request->data['Client']['First Name'];
             $lastName = $this->request->data['Client']['Last Name'];
+
+            //PUT AJAX HERE!!
             $correctResults = $this->clientSearch($firstName, $lastName);
             $this->Session->write('results', $correctResults);
             $this->redirect(array('action' => 'searchResults'));

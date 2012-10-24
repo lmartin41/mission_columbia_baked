@@ -1,6 +1,9 @@
 <?php echo $this->Html->script("client_view.js", FALSE); ?>
 <?php echo $this->Html->script('ajaxupload-min.js'); ?>
-<?php echo $this->Html->css('baseTheme.style'); ?>
+
+<?php echo $this->Html->css('classicTheme/style'); ?>
+
+<?php echo $this->Upload->view('Client', $client['Client']['id']); ?>
 
 <div class="clients view">
     <table>
@@ -39,7 +42,7 @@
                 </dl>
             </td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td colspan="2">
                 <div id="demo1" style="width:500px"></div>
                 <script type="text/javascript">
@@ -50,7 +53,7 @@
                 </script>
             </td>
 
-        </tr>
+        </tr> -->
     </table>
 
     <div id="accordion">

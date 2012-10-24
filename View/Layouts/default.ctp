@@ -113,7 +113,7 @@ checkContext();
                 <?php echo $this->Html->image('mission_logo.png'); ?>
 
                 <?php
-                /*                 * **************************************** 
+                /*  * **************************************** 
                  *  Lee: this snippet below fixes the "login"/"logout"
                  *  message in the top right hand corner of every page
                  * **************************************** */
@@ -152,14 +152,14 @@ checkContext();
             <div id="bodyContainer" style="width:100%;">
                 
 
-                <div id="content" style="width:80%;float:left;">
+                <div id="content" style="width:85%;float:left;">
 
                     <?php echo $this->Session->flash(); ?>
 
                     <?php echo $this->fetch('content'); ?>
                 </div>
 
-                <div id="tipArea" style="width:16%; background:#B4CFEC; float:right;">
+                <div id="tipArea" style="width:11%; background:#B4CFEC; float:right;">
                     
     <!--  OLD STYLES               <div id="tips" class="tipsBox" style="float:right; position:relative; left:1%; bottom:1%; width:15%; background:#B4CFEC;border: 1px solid #000000;"> -->
                     <div id="tips" class="tipsBox" style="background:#B4CFEC;border: 1px solid #000000;">
@@ -178,7 +178,7 @@ checkContext();
                 checkContext();
             </script>
 
-            <div id="footer" style="text-align: center;">
+            <div id="footer" style="text-align: center; float:left;">
                 <?php if ($logged_in): ?>
                     We would appreciate your <?php echo $this->Html->link('Feedback', array('controller' => 'feedbacks', 'action' => 'add')); ?> |
                     <a>Help</a> | 
