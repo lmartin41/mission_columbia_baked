@@ -159,8 +159,8 @@ checkContext();
     <!--  OLD STYLES               <div id="tips" class="tipsBox" style="float:right; position:relative; left:1%; bottom:1%; width:15%; background:#B4CFEC;border: 1px solid #000000;"> -->
                         <div id="tips" class="tipsBox" style="background:#B4CFEC;border: 1px solid #000000;">
                             <div class="tipsContent">
-                                <B>Tips Default</B>
-                                <p>If you cannot remember your password, please click on the <B>Request a New Password</B> link and a new, 
+                                <p><strong>Tips Default</strong></p>
+                                <p>If you cannot remember your password, please click on the <strong>Request a New Password</strong> link and a new, </p>
                             </div>
                         </div>
 
