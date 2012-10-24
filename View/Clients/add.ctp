@@ -28,17 +28,29 @@
 <div class="clients form">
     <?php echo $this->Form->create('Client'); ?>
     <div id="accordion">
-    	<h2>Personal Information</h2>
-    	<div class="white-background black-text">
-        	<table>
-            	<tr>
-                	<td>
-                    	<?php echo $this->Form->input('first_name'); ?>
-                	</td>
-                	<td>
-                    	<?php echo $this->Form->input('last_name'); ?>
-                	</td>
-            	</tr>
+	    <h2>Personal Information</h2>
+	    <div class="white-background black-text">
+	        <table>
+	            <tr>
+	                <td>
+	                    <?php echo $this->Form->input('first_name'); ?>
+	                </td>
+	                <td>
+	                    <?php echo $this->Form->input('last_name'); ?>
+	                </td>
+	            </tr>
+	            <tr>
+	            	<td colspan="2">
+	                	<fieldset>
+	                		<legend class="sex">Sex<span class="asteriks">*</span></legend>
+		                    <?php
+		                    $options = array('M' => 'Male', 'F' => 'Female');
+		                    $attributes = array('legend' => false);
+		                    echo $this->Form->radio('sex', $options, $attributes);
+		                    ?>
+	                    </fieldset>
+	            	</td>
+	            </tr>
 	            <tr>
 	                <td>
 	                    <?php echo $this->Form->input('DOB', array('type' => 'date', 'empty' => true, 'div' => false, 'separator' => false)); ?>
@@ -53,41 +65,32 @@
 	                    <?php echo $this->Form->input('address'); ?>
 	                </td>
 	                <td>
-	                    <?php
-	                    $options = array('M' => 'Male', 'F' => 'Female');
-	                    $attributes = array('legend' => false);
-	                    echo $this->Form->radio('sex', $options, $attributes);
-	                    ?>
+	                    <?php echo $this->Form->input('apartment_number', array('label' => 'Apt #', 'type' => 'text')); ?>
 	                </td>
-	
-	
 	            </tr>
 	            <tr>
-	                <td>
-	                    <?php echo $this->Form->input('apartment_number', array('type' => 'text')); ?>
-	                </td>
 	                <td>
 	                    <?php echo $this->Form->input('city'); ?>
 	                </td>
-	            </tr>
-	            <tr>
 	                <td>
 	                    <?php echo $this->Form->input('state'); ?>
 	                </td>
-	                <td>
-	                    <?php echo $this->Form->input('zip', array('type' => 'text')); ?>
-	                </td>
-	
 	            </tr>
 	            <tr>
-	                <td>
+	            	<td colspan="2">
+	                    <?php echo $this->Form->input('zip', array('type' => 'text')); ?>
+	                </td>
+	            </tr>
+	            <tr>
+	                <td colspan="2">
 	                    <?php echo $this->Form->input('phone', array('type' => 'text')); ?>
 	                </td>
 	            </tr>
 	        </table>
-    	</div>
-		<h2>Source of Income</h2>
-	    <div class="white-background black-text">
+	    </div>
+
+	    <h2>Source of Income</h2>
+	    <div class="white-background black-text change-width">
 	        <table>
 	            <tr>
 	                <td>
@@ -96,17 +99,16 @@
 	                <td>
 	                    <?php echo $this->Form->input('food_stamps'); ?>
 	                </td>
-	
 	            </tr>
 	            <tr>
-	                <td>
+	            	<td>
 	                    <?php echo $this->Form->input('veterans_pension'); ?>
 	                </td>
 	                <td>
 	                    <?php echo $this->Form->input('part_time_job'); ?>
 	                </td>
 	            </tr>
-	            <tr>
+	      		<tr>
 	                <td>
 	                    <?php echo $this->Form->input('social_security'); ?>
 	                </td>
@@ -119,21 +121,24 @@
 	                    <?php echo $this->Form->input('child_support'); ?>
 	                </td>
 	                <td>
-	                    <?php echo $this->Form->input('ssi_or_disability'); ?> 
+	                    <?php echo $this->Form->input('ssi_or_disability', array('label' => 'SSI or Disability')); ?> 
 	                </td>
 	            </tr>
 	            <tr>
-	                <td>
+	            	<td colspan="2">
 	                    <?php echo $this->Form->input('unemployment'); ?>
 	                </td>
-	                <td>
+	            </tr>
+	            <tr>
+	                <td colspan="2">
 	                    <?php echo $this->Form->input('when_next_check', array('type' => 'date', 'empty' => true, 'separator' => false)); ?>    
 	                </td>
 	            </tr>
 	        </table>
 	
 	    </div>
-    	<h2>Other Information</h2>
+
+	    <h2>Other Information</h2>
 	    <div class="white-background black-text">
 	        <table>
 	            <tr>
@@ -146,21 +151,17 @@
 	                <td>
 	                    <?php echo $this->Form->input('handicapped'); ?> 
 	                </td>
-	
-	            </tr>
-	            <tr>
 	                <td>
 	                    <?php echo $this->Form->input('stove'); ?>
 	                </td>
+	            </tr>
+	            <tr>
 	                <td>
 	                    <?php echo $this->Form->input('refrigerator'); ?>
 	                </td>
 	                <td>
 	                    <?php echo $this->Form->input('cell'); ?>
 	                </td>
-	
-	            </tr>
-	            <tr>
 	                <td>
 	                    <?php echo $this->Form->input('cable'); ?>
 	                </td>
@@ -169,14 +170,14 @@
 	                </td>
 	            </tr>
 	        </table>
-	        <?php echo $this->Form->input('model'); ?>
+	        <?php echo $this->Form->input('model', array('label' => 'Model of Car')); ?>
 	
 	        <?php
-	        echo $this->Form->input('how_did_you_hear');
-	        echo $this->Form->input('how_long_do_you_need');
+	        echo $this->Form->input('how_did_you_hear', array('label' => 'How did you hear about us?'));
+	        echo $this->Form->input('how_long_do_you_need', array('label' => 'How long do you need?'));
 	        ?>
 	    </div>
-	 </div>
+	</div>
     <br /><br />
 
     <div>
