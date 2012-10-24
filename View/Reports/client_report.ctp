@@ -38,4 +38,6 @@ Number of Checklists Completed: <?php echo $numChecklistsCompleted; ?>
 <?php else: echo "none"; ?>
 <?php endif; ?>
 
+<h2>Client Status</h2>
+
 <br /><br />

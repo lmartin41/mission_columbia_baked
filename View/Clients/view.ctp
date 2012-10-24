@@ -6,13 +6,14 @@
 <?php echo $this->Upload->view('Client', $client['Client']['id']); ?>
 
 <div class="clients view">
+    <h2><?php echo $client['Client']['first_name']."'s Profile"; ?></h2>
     <table>
         <tr>
             <td>
                 <?php echo $this->Html->image('person.png', array('alt' => 'Sample Photo', 'style' => "float: left;")); ?>
             </td>
             <td>
-                <h2>Personal Information</h2>
+                <h3>Personal Information</h3>
                 <dl>
 
                     <dt><?php echo __('First Name'); ?></dt>

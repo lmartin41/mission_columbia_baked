@@ -121,7 +121,40 @@ p {
 }
 
 /** containers **/
-div.form,
+
+div.actionsNoButton {
+		float: left;
+        display: inline-block;
+        width: 10%;
+        padding: 10px 0%;
+}
+
+div.form{
+	display: inline-block;
+	width:65%;
+	border-left:1px solid #666;
+	padding-top:10px;
+        padding-left: 2%;
+        padding-right: 0px;
+}
+
+tbody{
+	display: inline-table;
+	width:85%;
+}
+
+table{
+	
+	border-right:0;
+	clear: both;
+	color: #333;
+	margin-bottom: 10px;
+	display: inline-block;
+	width:95%;
+}
+
+
+
 div.index,
 div.view {
 	float:right;
@@ -141,21 +174,17 @@ div.actions h3 {
 	color:#777;
 }
 
-div.actionsNoButton {
-        float: left;
-        width: 10%;
-        padding: 10px 0%;
-}
+
 
 
 /** Tables **/
-table {
+/*table {
 	border-right:0;
 	clear: both;
 	color: #333;
 	margin-bottom: 10px;
 	width: 100%;
-}
+}*/
 th {
 	border:0;
 	border-bottom:2px solid #555;
