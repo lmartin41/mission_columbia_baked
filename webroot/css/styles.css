@@ -24,4 +24,43 @@ ul#top_links{
 {
 	background: white;
 	color: black;
+	font-size: 12px;
+}
+
+.white-background.black-text label
+{
+	width: 6em;
+}
+
+fieldset
+{
+	border: 1px solid black;
+	width: 20%;
+}
+
+legend.sex
+{
+	font-size: 14px;
+	color: black;
+}
+
+fieldset label
+{
+	margin-top: 4.5px;
+	margin-left: 3px;
+}
+
+.asteriks
+{
+	color: red;
+}
+
+.white-background.black-text.change-width label
+{
+	width: 8em;
+}
+
+#ui-accordion-accordion-panel-2 div.textarea label
+{
+	width: 50%;
 }

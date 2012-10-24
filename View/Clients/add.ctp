@@ -64,7 +64,7 @@
 	            </tr>
 	            <tr>
 	                <td>
-	                    <?php echo $this->Form->input('apartment_number'); ?>
+	                    <?php echo $this->Form->input('apartment_number', array('type' => 'text')); ?>
 	                </td>
 	                <td>
 	                    <?php echo $this->Form->input('city'); ?>
