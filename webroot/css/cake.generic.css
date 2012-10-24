@@ -140,7 +140,7 @@ div.form{
 
 tbody{
 	display: inline-table;
-	width:85%;
+	width:89%;
 }
 
 table{
@@ -149,8 +149,8 @@ table{
 	clear: both;
 	color: #333;
 	margin-bottom: 10px;
-	display: inline-block;
-	width:95%;
+	display: inline;
+	width:100%;
 }
 
 

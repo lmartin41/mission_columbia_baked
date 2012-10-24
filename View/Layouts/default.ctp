@@ -154,14 +154,7 @@ checkContext();
 
                 <div id="content" style="width:96%;float:left;">
 
-
-                    
-
-                    <?php echo $this->Session->flash(); ?>
-
-                    <?php echo $this->fetch('content'); ?>
-
-                    <div id="tipArea" style="width:10%; background:#B4CFEC; float:right; display:inline-block;">
+                    <div id="tipArea" style="width:10%; background:#B4CFEC; float:right; display:inline-block; margin-bottom: 90%">
                     <!-- <div id="tipArea"> -->
     <!--  OLD STYLES               <div id="tips" class="tipsBox" style="float:right; position:relative; left:1%; bottom:1%; width:15%; background:#B4CFEC;border: 1px solid #000000;"> -->
                         <div id="tips" class="tipsBox" style="background:#B4CFEC;border: 1px solid #000000;">
@@ -172,6 +165,10 @@ checkContext();
                         </div>
 
                     </div>
+
+                    <?php echo $this->Session->flash(); ?>
+
+                    <?php echo $this->fetch('content'); ?>
 
                 </div>
 
