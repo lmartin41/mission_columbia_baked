@@ -185,7 +185,7 @@ checkContext();
                 <?php if ($logged_in): ?>
                     We would appreciate your <?php echo $this->Html->link('Feedback', array('controller' => 'feedbacks', 'action' => 'add')); ?> |
                     <a>Help</a> | 
-                    <a onclick="return toggle('22');">Contact Mission Columbia</a>
+                    <a onclick="return toggle('22');">Contact</a>
                     <p id ="22" style ="display: none">
                         <br />Mission Columbia 
                         <br />2723 Ashland Rd.
