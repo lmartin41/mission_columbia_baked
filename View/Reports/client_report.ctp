@@ -1,3 +1,5 @@
+<div class="reports form">
+
 <h2><?php echo "Client Report for ".$client['Client']['first_name']." from ".$startDate." to ".$endDate; ?></h2>
 <br />
 
@@ -38,6 +40,26 @@ Number of Checklists Completed: <?php echo $numChecklistsCompleted; ?>
 <?php else: echo "none"; ?>
 <?php endif; ?>
 
+<br /><br />
+
 <h2>Client Status</h2>
 
 <br /><br />
+
+</div>
+
+<div class="actionsNoButton">
+    <?php echo $this->Html->link(__('Individual Reports'), array()); ?><br /><br />
+    <ul>
+        <li><?php echo $this->Html->link(__('Clients'), array('action' => 'index')); ?></li><br />
+        <li><?php echo $this->Html->link(__('Resources'), array('action' => 'resourceIndex')); ?></li><br />
+    </ul>
+    <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br /><br />
+    <ul>
+        <li><?php echo $this->Html->link('Clients'), array('action' => 'aggregateClients'); ?><br />
+        <li><?php echo $this->Html->link('Resources'), array('action' => 'aggregateResources'); ?></li>
+    </ul>
+    <br />
+        <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
+
+</div>

@@ -26,3 +26,11 @@
                 <br />
                 Number of Clients with Internet Access: <?php echo $statusClients[7]; ?>
                 <br /><br />
+                
+                <h3>Resource Statistics</h3>
+                <br />
+                Number of resources: <?php echo $numResources; ?>
+                <br />
+                Total number of resource uses: <?php echo $numResourceUses; ?>
+                <br />
+                Most popular resource: <?php echo $mostPopular; ?>
