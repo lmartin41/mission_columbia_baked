@@ -4,27 +4,27 @@
 
 <div class="Reports form">
 
-                <h3>Individual Client Report</h3>
-                <?php
-                echo $this->Form->create('Client');
-                echo $this->Form->input("first_name");
-                echo $this->Form->input("last_name");
-                ?>
-                
-                <?php $oldDate = Date('Y')."-1-1"; ?>
-                <?php $newDate = Date('Y-m-d'); ?>
-                From:<input name="startDate" id="datepickClient" default="test" class="date-pick" style="width: 100px;" value = '<?php echo $oldDate; ?>' />
-                &nbsp;
-                To:<input name="endDate" id="datepickClient2" class="date-pick" style="width: 100px;" value ="<?php echo $newDate; ?>" />
+    <h3>Individual Client Report</h3>
+    <?php
+    echo $this->Form->create('Client');
+    echo $this->Form->input("first_name");
+    echo $this->Form->input("last_name");
+    ?>
 
-                <script type="text/javascript">
-                    new datepickr('datepickClient', { dateFormat: 'm-d-Y' });
-                    new datepickr('datepickClient2', { dateFormat: 'm-d-Y' });
-                </script>
-                <?php
-                echo $this->Form->end("Retrieve Client Report", array('name' => 'client'));
-                ?> 
-                <br />
+    <?php $oldDate = Date('Y') . "-1-1"; ?>
+    <?php $newDate = Date('Y-m-d'); ?>
+    From:<input name="startDate" id="datepickClient" default="test" class="date-pick" style="width: 100px;" value = '<?php echo $oldDate; ?>' />
+    &nbsp;
+    To:<input name="endDate" id="datepickClient2" class="date-pick" style="width: 100px;" value ="<?php echo $newDate; ?>" />
+
+    <script type="text/javascript">
+        new datepickr('datepickClient', { dateFormat: 'Y-m-d' });
+        new datepickr('datepickClient2', { dateFormat: 'Y-m-d' });
+    </script>
+    <?php
+    echo $this->Form->end("Retrieve Client Report", array('name' => 'client'));
+    ?> 
+    <br />
 </div>
 
 <div class="actionsNoButton">
@@ -35,10 +35,10 @@
     </ul>
     <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br /><br />
     <ul>
-         <li><?php echo $this->Html->link('Clients', array('action' => 'aggregateClientsIndex')); ?></li><br />
+        <li><?php echo $this->Html->link('Clients', array('action' => 'aggregateClientsIndex')); ?></li><br />
         <li><?php echo $this->Html->link('Resources', array('action' => 'aggregateResourcesIndex')); ?></li>
     </ul>
     <br />
-        <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
+    <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
 
 </div>

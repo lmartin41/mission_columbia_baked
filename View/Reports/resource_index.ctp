@@ -12,13 +12,13 @@
 
     <?php $oldDate = Date('Y') . "-1-1"; ?>
     <?php $newDate = Date('Y-m-d'); ?>
-    From:<input name="startDate" id="datepickClient" default="test" class="date-pick" style="width: 100px;" value = '<?php echo $oldDate; ?>' />
+    From:<input name="startDate" id="datepickResource3" default="test" class="date-pick" style="width: 100px;" value = '<?php echo $oldDate; ?>' />
     &nbsp;
-    To:<input name="endDate" id="datepickClient2" class="date-pick" style="width: 100px;" value ="<?php echo $newDate; ?>" />
+    To:<input name="endDate" id="datepickResource4" class="date-pick" style="width: 100px;" value ="<?php echo $newDate; ?>" />
 
     <script type="text/javascript">
-        new datepickr('datepickResource', { dateFormat: 'm-d-Y' });
-        new datepickr('datepickResource2', { dateFormat: 'm-d-Y' });
+        new datepickr('datepickResource3', { dateFormat: 'Y-m-d' });
+        new datepickr('datepickResource4', { dateFormat: 'Y-m-d' });
     </script>
     <br /><br />
     <?php
@@ -35,7 +35,7 @@
     </ul>
     <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br /><br />
     <ul>
-         <li><?php echo $this->Html->link('Clients', array('action' => 'aggregateClientsIndex')); ?></li><br />
+        <li><?php echo $this->Html->link('Clients', array('action' => 'aggregateClientsIndex')); ?></li><br />
         <li><?php echo $this->Html->link('Resources', array('action' => 'aggregateResourcesIndex')); ?></li>
     </ul>
     <br />

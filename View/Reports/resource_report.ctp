@@ -1,3 +1,5 @@
+
+
 <div class="reports form">   
 
 <h2><?php echo "Resource Report for ".$resource['Resource']['resource_name']." from ".$startDate." to ".$endDate; ?></h2>
