@@ -150,7 +150,7 @@ class ClientsController extends AppController {
     /**
      * Lee: Report functions 
      */
-    public function count() {
+    public function count($startDate) {
         return $this->Client->find('count');
     }
 

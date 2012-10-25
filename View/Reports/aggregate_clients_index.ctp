@@ -5,37 +5,45 @@
 <div class="Reports form">
 
     <h3>Aggregate Client Report</h3><br />
-    <?php $oldDate = Date('Y') . "-1-1"; ?>
-    <?php $newDate = Date('Y-m-d'); ?>
-    
-    <form>
-    From:<input name="startDate" id="datepickAggClient" default="test" class="date-pick" style="width: 100px;" value = '<?php echo $oldDate; ?>' />
-    &nbsp;
-    To:<input name="endDate" id="datepickAggClient2" class="date-pick" style="width: 100px;" value ="<?php echo $newDate; ?>" />
-    <br /><br />
+    <?php $oldDate = Date('Y') . "-01-01"; ?>
 
-    <fieldset>
-        <input type="radio" name="weekly" value="weekly">Search Weekly<br>
-        <input type="radio" name="monthly" value="monthly">Search Monthly
-    </fieldset>
+    <form name="aggregateClient" method="post">
 
-    <script type="text/javascript">
-        new datepickr('datepickAggClient', { dateFormat: 'Y-m-d' });
-        new datepickr('datepickAggClient2', { dateFormat: 'Y-m-d' });
-    </script>
-<br /><br />
-    <?php
-    echo $this->Form->end("Retrieve Aggregate Client Report", array('name' => 'client'));
-    ?> 
+        Date:<input name="startDate" id="datepickAggClient" default="test" class="date-pick" style="width: 100px;" value = '<?php echo $oldDate; ?>' />
+        &nbsp;
+        <br /><br /><br />
+
+        <script type="text/javascript">
+            new datepickr('datepickAggClient', { dateFormat: 'Y-m-d' });
+        </script>
+
+        Search Weekly or Monthly:<br />
+        <fieldset>
+            <input type="radio" name="weekMonthChooser" value="weekly" style="vertical-align: middle" />Weekly<br /><br />
+            <input type="radio" name="weekMonthChooser" value="monthly" style="vertical-align: middle" />Monthly<br /><br />
+        </fieldset>
+
+        Search by the following Criteria:<br />
+
+        <fieldset>
+            <input type="radio" name="sexChooser" value="male" style="vertical-align: middle" />Men<br /><br />
+            <input type="radio" name="sexChooser" value="female" style="vertical-align: middle" />Women<br /><br />
+            <input type="radio" name="sexChooser" value="neither" style="vertical-align: middle" />Neither<br /><br />
+        </fieldset>
+
+
+        <input type="submit" value="Retrieve Aggregate Client Report"/>
+    </form>
+
 </div>
 
 <div class="actionsNoButton">
-    <?php echo $this->Html->link(__('Individual Reports'), array()); ?><br /><br />
+    <?php echo $this->Html->link(__('Individual Reports'), array()); ?><br />
     <ul>
         <li><?php echo $this->Html->link(__('Clients'), array('action' => 'index')); ?></li><br />
         <li><?php echo $this->Html->link(__('Resources'), array('action' => 'resourceIndex')); ?></li><br />
     </ul>
-    <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br /><br />
+    <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br />
     <ul>
         <li><?php echo $this->Html->link('Clients', array('action' => 'aggregateClientsIndex')); ?></li><br />
         <li><?php echo $this->Html->link('Resources', array('action' => 'aggregateResourcesIndex')); ?></li>

@@ -120,6 +120,14 @@ class ResourceusesController extends AppController {
     public function count() {
         return $this->Resourceus->find('count');
     }
+    
+    public function countPeriod($startDate, $endDate) {
+        $query = $this->Resourceus->query("
+                Select count(*)
+                From resource_uses
+                Where date between '$startDate' AND '$endDate';
+            ");
+    }
 
     public function mostPopular() {
         $query = $this->Resourceus->query(
