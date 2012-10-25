@@ -1,5 +1,5 @@
 <div class="resourceuses form">
-    <?php echo $this->Form->create('Resourceus'); ?>
+    <?php echo $this->Form->create('ResourceUs'); ?>
     <fieldset>
         <legend><?php echo __('Add Resource Use'); ?></legend>
         <?php

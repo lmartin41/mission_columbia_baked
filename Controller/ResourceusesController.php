@@ -7,15 +7,15 @@ App::uses('AppController', 'Controller');
  *
  * @property Resourceus $Resourceus
  */
-class ResourceusesController extends AppController {
-
+class ResourceUsesController extends AppController {
+	public $uses = "ResourceUs";
     /**
      * index method
      *
      * @return void
      */
     public function index() {
-        $this->Resourceus->recursive = 0;
+        $this->ResourceUs->recursive = 0;
         $this->set('resourceuses', $this->paginate());
     }
 
@@ -58,8 +58,8 @@ class ResourceusesController extends AppController {
                 $this->Session->setFlash(__('The resuorce use could not be saved. Please, try again.'));
             }
         }
-        $clients = $this->Resourceus->Client->find('list');
-        $resources = $this->Resourceus->Resource->find('list');
+        $clients = $this->ResourceUs->Client->find('list');
+        $resources = $this->ResourceUs->Resource->find('list');
         $this->set(compact('clients', 'resources'));
     }
 
@@ -85,8 +85,8 @@ class ResourceusesController extends AppController {
         } else {
             $this->request->data = $this->Resourceus->read(null, $id);
         }
-        $clients = $this->Resourceus->Client->find('list');
-        $resources = $this->Resourceus->Resource->find('list');
+        $clients = $this->ResourceUs->Client->find('list');
+        $resources = $this->ResourceUs->Resource->find('list');
         $this->set(compact('clients', 'resources'));
     }
 
@@ -102,11 +102,11 @@ class ResourceusesController extends AppController {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
-        $this->Resourceus->id = $id;
-        if (!$this->Resourceus->exists()) {
+        $this->ResourceUs->id = $id;
+        if (!$this->ResourceUs->exists()) {
             throw new NotFoundException(__('Invalid resourceus'));
         }
-        if ($this->Resourceus->delete()) {
+        if ($this->ResourceUs->delete()) {
             $this->Session->setFlash(__('Resource Use deleted'));
             $this->redirect(array('action' => 'index'));
         }
@@ -118,11 +118,11 @@ class ResourceusesController extends AppController {
      * Lee: Report functions 
      */
     public function count() {
-        return $this->Resourceus->find('count');
+        return $this->ResourceUs->find('count');
     }
     
     public function countPeriod($startDate, $endDate) {
-        $query = $this->Resourceus->query("
+        $query = $this->ResourceUs->query("
                 Select count(*)
                 From resource_uses
                 Where date between '$startDate' AND '$endDate';
@@ -130,7 +130,7 @@ class ResourceusesController extends AppController {
     }
 
     public function mostPopular() {
-        $query = $this->Resourceus->query(
+        $query = $this->ResourceUs->query(
                 "Select max(counts) as mostPopular from (
                     select resource_name as counts from resource_uses 
                     join resources on resource_id 
@@ -140,7 +140,7 @@ class ResourceusesController extends AppController {
     }
 
     public function countParticular($resourceID = null, $startDate, $endDate) {
-        $query = $this->Resourceus->query("
+        $query = $this->ResourceUs->query("
                 Select count(resource_id) as count
                 From resource_uses
                 Where resource_id = '$resourceID' AND date between '$startDate' and '$endDate';
@@ -149,7 +149,7 @@ class ResourceusesController extends AppController {
     }
     
     public function mostPopularClient($resourceID = null, $startDate, $endDate) {
-        $query = $this->Resourceus->query("
+        $query = $this->ResourceUs->query("
                Select max(counts) as mostPopular from (
                     select first_name as counts from clients
                     join resource_uses on client_id 
