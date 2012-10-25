@@ -1,8 +1,8 @@
 <?php
-class AdminController extends AppController
+class CustomizeController extends AppController
 {
 	public $uses = null;
-	public $name = 'Admin';
+	public $name = 'Customize';
 	
 	public function index()
 	{

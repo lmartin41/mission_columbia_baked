@@ -117,7 +117,7 @@ div.view
 	width: 70%;
 }
 
-div.form.no-border
+div.form.no-border, div.index.no-border
 {
 	border: 0px;
 }
@@ -127,7 +127,7 @@ div.form.no-border
 	margin-top: 10px;
 }
 
-div.feedbacks.index
+div.feedbacks.index, div.customize.index
 {
 	float: left;
 	width: 70%;
