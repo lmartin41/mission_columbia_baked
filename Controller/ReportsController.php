@@ -36,8 +36,54 @@ class ReportsController extends AppController {
             $startDate = $this->request->data['startDate'];
             $endDate = $this->request->data['endDate'];
             $this->Session->write('resourceResults', $correctResults);
+            $this->Session->write('startDate', $startDate);
+            $this->Session->write('endDate', $endDate);
             $this->redirect(array('action' => 'resourceReportSearch'));
         }
+    }
+
+    public function aggregateClientsIndex() {
+        if ($this->request->is('post')) {
+            $startDate = $this->request->data['startDate'];
+            $endDate = $this->request->data['endDate'];
+
+            $this->Session->write('startDate', $startDate);
+            $this->Session->write('endDate', $endDate);
+            $this->redirect(array('action' => 'aggregateClientsReport'));
+        }
+    }
+
+    public function aggregateResourcesIndex() {
+        if ($this->request->is('post')) {
+            $startDate = $this->request->data['startDate'];
+            $endDate = $this->request->data['endDate'];
+
+            $this->Session->write('startDate', $startDate);
+            $this->Session->write('endDate', $endDate);
+            $this->redirect(array('action' => 'aggregateResourcesReport'));
+        }
+    }
+    
+    public function aggregateClientsReport() {
+        
+    }
+    
+    public function aggregateResourcesReport() {
+        
+    }
+
+    public function resourceSearch($resourceName) {
+        $resourcesController = new ResourcesController();
+
+        $conditions = array('resource_name LIKE ' => $resourceName);
+        $correctResults = $resourcesController->Resource->find('all', array('conditions' => $conditions));
+        return $correctResults;
+    }
+
+    public function clientSearch($firstName, $lastName) {
+        $conditions = array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $lastName . '%');
+        $correctResults = $this->Client->find('all', array('conditions' => $conditions));
+        return $correctResults;
     }
 
     public function aggregateClients() {
@@ -84,6 +130,24 @@ class ReportsController extends AppController {
             throw new NotFoundException(__('Invalid client'));
         }
         $this->set('client', $clientsController->Client->read(null, $id));
+    }
+
+    public function resourceReport($resourceID = null) {
+        $this->set('startDate', $this->Session->read('startDate'));
+        $this->set('endDate', $this->Session->read('endDate'));
+        $this->set('startCompare', strtotime($this->Session->read('startDate')));
+        $this->set('endCompare', strtotime($this->Session->read('endDate')));
+
+        $resourcesController = new ResourcesController();
+        $resourceUsesController = new ResourceusesController();
+        $this->set('numberResourceUses', $resourceUsesController->countParticular($resourceID, $this->Session->read('startDate'), $this->Session->read('endDate')));
+        $this->set('mostPopular', $resourceUsesController->mostPopularClient($resourceID, $this->Session->read('startDate'), $this->Session->read('endDate')));
+
+        $resourcesController->Resource->id = $resourceID;
+        if (!$resourcesController->Resource->exists()) {
+            throw new NotFoundException(__('Invalid Resource'));
+        }
+        $this->set('resource', $resourcesController->Resource->read(null, $id));
     }
 
 }

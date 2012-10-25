@@ -8,8 +8,8 @@
         <br /><br />
 
     <?php else: ?>
-            
-            <table cellpadding="0" cellspacing="0">
+
+        <table cellpadding="0" cellspacing="0">
             <tr>
                 <th>Client ID</th>
                 <th>First Name</th>
@@ -38,10 +38,10 @@
     </ul>
     <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br /><br />
     <ul>
-        <li><?php echo $this->Html->link('Clients'), array('action' => 'aggregateClients'); ?><br />
-        <li><?php echo $this->Html->link('Resources'), array('action' => 'aggregateResources'); ?></li>
+        <li><?php echo $this->Html->link('Clients', array('action' => 'aggregateClientsIndex')); ?></li><br />
+        <li><?php echo $this->Html->link('Resources', array('action' => 'aggregateResourcesIndex')); ?></li>
     </ul>
     <br />
-        <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
+    <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
 
 </div>

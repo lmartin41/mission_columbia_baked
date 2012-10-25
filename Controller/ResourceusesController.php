@@ -126,7 +126,28 @@ class ResourceusesController extends AppController {
                 "Select max(counts) as mostPopular from (
                     select resource_name as counts from resource_uses 
                     join resources on resource_id 
-                    group by resource_id) as derived;");
+                    group by resource_id) as derived;
+                 ");
+        return $query[0][0]['mostPopular'];
+    }
+
+    public function countParticular($resourceID = null, $startDate, $endDate) {
+        $query = $this->Resourceus->query("
+                Select count(resource_id) as count
+                From resource_uses
+                Where resource_id = '$resourceID' AND date between '$startDate' and '$endDate';
+            ");
+        return $query[0][0]['count'];
+    }
+    
+    public function mostPopularClient($resourceID = null, $startDate, $endDate) {
+        $query = $this->Resourceus->query("
+               Select max(counts) as mostPopular from (
+                    select first_name as counts from clients
+                    join resource_uses on client_id 
+                    where resource_uses.resource_id = '$resourceID' AND date between '$startDate' and '$endDate'
+                    group by clients.id) as derived;
+               ");
         return $query[0][0]['mostPopular'];
     }
 
