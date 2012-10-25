@@ -64,3 +64,20 @@ fieldset label
 {
 	width: 50%;
 }
+
+form#UserLoginForm
+{
+	float: left;
+	clear: none;
+	width: 50%;
+}
+
+.clear
+{
+	clear: both;
+}
+
+.actionsNoButton a
+{
+	font-size: 12px;
+}

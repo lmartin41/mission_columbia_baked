@@ -1,5 +1,3 @@
-<?php echo $this->Html->script("toggle.js", FALSE); ?>
-
 <?php
 /**
  *
@@ -42,6 +40,7 @@
         echo $this->Html->css('jquery-ui-1.9.0.custom.min');
         echo $this->Html->css('styles');
         echo $this->fetch('script');
+        echo $this->Html->script("toggle.js");
         ?>
 
         
@@ -155,7 +154,7 @@ checkContext();
 
                 <div id="content" style="width:97%;float:left;">
 
-                    <div id="tipArea" style="width:10%; background:#B4CFEC; float:right; display:inline-block; margin-bottom: 90%">
+                    <div id="tipArea" style="width:10%; background:#B4CFEC; float:right; display:inline-block;">
                     <!-- <div id="tipArea"> -->
     <!--  OLD STYLES               <div id="tips" class="tipsBox" style="float:right; position:relative; left:1%; bottom:1%; width:15%; background:#B4CFEC;border: 1px solid #000000;"> -->
                         <div id="tips" class="tipsBox" style="background:#B4CFEC;border: 1px solid #000000;">
@@ -172,6 +171,7 @@ checkContext();
                     <?php echo $this->fetch('content'); ?>
 
                 </div>
+                <div class="clear"></div>
 
                 
             
