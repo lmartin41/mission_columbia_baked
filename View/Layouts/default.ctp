@@ -152,7 +152,7 @@ checkContext();
             <div id="bodyContainer" style="width:100%;">
                 
 
-                <div id="content" style="width:96%;float:left;">
+                <div id="content" style="width:97%;float:left;">
 
                     <div id="tipArea" style="width:10%; background:#B4CFEC; float:right; display:inline-block; margin-bottom: 90%">
                     <!-- <div id="tipArea"> -->
