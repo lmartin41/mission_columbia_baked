@@ -13,9 +13,9 @@
 		echo $this->Form->input('zip');
 		echo $this->Form->input('contact');
 		echo $this->Form->input('website');
-		echo $this->Form->input('phone');
-		echo $this->Form->input('phone_cell');
-		echo $this->Form->input('phone_office');
+		echo $this->Form->input('phone', array('type' => 'text'));
+		echo $this->Form->input('phone_cell', array('type' => 'text'));
+		echo $this->Form->input('phone_office', array('type' => 'text'));
 		echo $this->Form->input('isDeleted');
 	?>
 	</fieldset>

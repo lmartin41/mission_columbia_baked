@@ -40,13 +40,13 @@
             </tr>
             <tr>
                 <td>
-                    <?php echo $this->Form->input('phone'); ?>
+                    <?php echo $this->Form->input('phone', array('type' => 'text')); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->input('phone_cell'); ?>
+                    <?php echo $this->Form->input('phone_cell', array('type' => 'text')); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->input('phone_office'); ?>
+                    <?php echo $this->Form->input('phone_office', array('type' => 'text')); ?>
                 </td>
             </tr>
         </table>
