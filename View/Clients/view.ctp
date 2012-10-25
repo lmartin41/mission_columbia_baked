@@ -3,8 +3,18 @@
 
 <?php echo $this->Html->css('classicTheme/style'); ?>
 
-<?php echo $this->Upload->view('Client', $client['Client']['id']); ?>
+<?php //echo $this->Upload->view('Client', $client['Client']['id']); ?>
 
+<div class="actionsNoButton">
+    <?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> <br /><br />
+    <?php echo $this->Html->link(__('Client Listing'), array('action' => 'browse')); ?> <br /><br />
+    <?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?> <br /><br />
+    <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?><Br /><br />
+    <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?><br /><br />
+    <?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete %s?', $client['Client']['first_name'])); ?><br /><br />
+    <?php echo $this->Html->link(__('Print this Client Summary'), array('action' => 'printClient', $client['Client']['id'])); ?> 	<br /><br />
+    <?php echo $this->Html->link(__('Create new Client'), array('action' => 'add')); ?> 	
+</div>
 <div class="clients view">
     <h2><?php echo $client['Client']['first_name']."'s Profile"; ?></h2>
     <table>
@@ -321,17 +331,5 @@
 
     <br /><br />
     <?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'Resourceuses', 'action' => 'add', $client['Client']['id'])); ?>
-</div>
-<div class="actionsNoButton">
-
-    <?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> <br /><br />
-    <?php echo $this->Html->link(__('Client Listing'), array('action' => 'browse')); ?> <br /><br />
-    <?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?> <br /><br />
-    <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?><Br /><br />
-    <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?><br /><br />
-    <?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete %s?', $client['Client']['first_name'])); ?><br /><br />
-    <?php echo $this->Html->link(__('Print this Client Summary'), array('action' => 'printClient', $client['Client']['id'])); ?> 	<br /><br />
-    <?php echo $this->Html->link(__('Create new Client'), array('action' => 'add')); ?> 	
-
 </div>
 
