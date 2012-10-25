@@ -49,13 +49,13 @@ function checkContext(){
 	// var url = window.location.href;
 	// var host = window.location.host;
 	var pathName = window.location.pathname;
-	if(pathName.indexOf('/mission_columbia_baked/users/login') != -1) {
+	/*if(pathName.indexOf('/mission_columbia_baked/users/login') != -1) {
 		jQuery('div.tipsContent').replaceWith("<B>AT THE LOGIN</B> BLEH BLAH BLAH BLAH" +  
 			"BLEH BLAH BLAH BLAH BLEH BLAH BLAH BLAH BLEH BLAH BLAH BLAH BLEH BLAH BLAH BLAH " + 
 			"BLEH BLAH BLAH BLAH BLEH BLAH BLAH BLAH ");
 		// alert("in login " + pathName);
-	}
-	else if(pathName.indexOf('/mission_columbia_baked/resources') != -1) {
+	}*/
+	/*else*/ if(pathName.indexOf('/mission_columbia_baked/resources') != -1) {
 		jQuery('div.tipsContent').replaceWith("<B>AT resources Page</B>");
 		// alert("in resources " +  pathName);
 	}

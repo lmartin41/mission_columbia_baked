@@ -1,3 +1,12 @@
+<div class="actionsNoButton">
+		<?php echo $this->Html->link(__('List Users'), array('action' => 'index'), array('class' => 'active_link'));?>
+		<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?>
+		<?php if($hideDeleted): ?>
+			<?php echo $this->Html->link(__('Hide Deleted Users'), array('action' => 'index')); ?><br /><br />
+		<?php else: ?>
+			<?php echo $this->Html->link(__('Show Deleted Users'), array('action' => 'index', '?' => array('showAll' => true))); ?><br /><br />
+		<?php endif;?>
+</div>
 <div class="users index">
 	<h2><?php echo __('Users'); ?></h2>
 	<table>
@@ -35,17 +44,4 @@
 		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
 	?>
 	</div>
-</div>
-<div class="actionsNoButton">
-		<?php if($hideDeleted): ?>
-			<?php echo $this->Html->link(__('Hide Deleted Users'), array('action' => 'index')); ?><br /><br />
-		<?php else: ?>
-			<?php echo $this->Html->link(__('Show Deleted Users'), array('action' => 'index', '?' => array('showAll' => true))); ?><br /><br />
-		<?php endif;?>
-		<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?></li>
-		<?php echo $this->Html->link(__('List Organizations'), array('controller' => 'organizations', 'action' => 'index')); ?><br /><br />
-		<?php echo $this->Html->link(__('New Organization'), array('controller' => 'organizations', 'action' => 'add')); ?><br /><br />
-		<?php echo $this->Html->link(__('List Feedbacks'), array('controller' => 'feedbacks', 'action' => 'index')); ?><br /><br />
-		<?php echo $this->Html->link(__('New Feedback'), array('controller' => 'feedbacks', 'action' => 'add')); ?>
-	
 </div>
