@@ -40,4 +40,4 @@
     <br /><br />
     <?php echo $this->Html->link('Search Again', array('action' => 'index')); ?>
 
-</div>x
+</div>
