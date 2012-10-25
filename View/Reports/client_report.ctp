@@ -49,12 +49,12 @@ Number of Checklists Completed: <?php echo $numChecklistsCompleted; ?>
 </div>
 
 <div class="actionsNoButton">
-    <?php echo $this->Html->link(__('Individual Reports'), array()); ?><br /><br />
+    <?php echo $this->Html->link(__('Individual Reports'), array()); ?><br />
     <ul>
         <li><?php echo $this->Html->link(__('Clients'), array('action' => 'index')); ?></li><br />
         <li><?php echo $this->Html->link(__('Resources'), array('action' => 'resourceIndex')); ?></li><br />
     </ul>
-    <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br /><br />
+    <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br />
     <ul>
  <li><?php echo $this->Html->link('Clients', array('action' => 'aggregateClientsIndex')); ?></li><br />
         <li><?php echo $this->Html->link('Resources', array('action' => 'aggregateResourcesIndex')); ?></li>
