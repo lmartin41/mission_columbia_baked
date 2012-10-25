@@ -1,4 +1,4 @@
-<div class="actionsNoButton">
+<div class="actionsNoButton users">
 		<?php echo $this->Html->link(__('List Users'), array('action' => 'index'), array('class' => 'active_link'));?>
 		<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?>
 		<?php if($hideDeleted): ?>

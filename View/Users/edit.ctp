@@ -1,3 +1,10 @@
+<div class="actionsNoButton">
+	<?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?>
+	<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?>
+	<?php echo $this->Html->link(__('View User'), array('action' => 'view', $this->Form->value('User.id'))); ?>
+	<?php echo $this->Html->link(__('Edit User'), array('action' => 'edit', $this->Form->value('User.id')), array('class' => 'active_link')); ?>
+	<?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $this->Form->value('User.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('User.id'))); ?>
+</div>
 <div class="users form">
 <?php echo $this->Html->script('edit_user'); ?>
 <?php echo $this->Form->create('User'); ?>
@@ -17,14 +24,4 @@
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actionsNoButton">
-
-		<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('User.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('User.id'))); ?><br /><br />
-		<?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?><br /><br />
-		<?php echo $this->Html->link(__('List Organizations'), array('controller' => 'organizations', 'action' => 'index')); ?><br /><br />
-		<?php echo $this->Html->link(__('New Organization'), array('controller' => 'organizations', 'action' => 'add')); ?><Br /><br />
-		<?php echo $this->Html->link(__('List Feedbacks'), array('controller' => 'feedbacks', 'action' => 'index')); ?><br /><br />
-		<?php echo $this->Html->link(__('New Feedback'), array('controller' => 'feedbacks', 'action' => 'add')); ?>
-	
 </div>
