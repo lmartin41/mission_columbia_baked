@@ -155,7 +155,7 @@ checkContext();
 
                     <?php echo $this->fetch('content'); ?>
 					<div id="tipArea" style="width:10%; background:#B4CFEC; float:right; display:inline-block;">
-                        <div id="tips" class="tipsBox" style="background:#B4CFEC;border: 1px solid #000000; border-radius: 5px;">
+                        <div id="tips" class="tipsBox" style="background:#B4CFEC; border-radius: 5px;">
                             <div class="tipsContent">
                                 <p><strong>Tips Default</strong></p>
                                 <p>If you cannot remember your password, please talk to your organizations administrator to change it.</p>

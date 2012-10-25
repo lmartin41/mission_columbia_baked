@@ -56,23 +56,26 @@ function checkContext(){
 		// alert("in login " + pathName);
 	}*/
 	/*else*/ if(pathName.indexOf('/mission_columbia_baked/resources') != -1) {
-		jQuery('div.tipsContent').replaceWith("<B>AT resources Page</B>");
+		jQuery('div.tipsContent').replaceWith("<B></B>");
 		// alert("in resources " +  pathName);
 	}
 	else if(pathName.indexOf('/mission_columbia_baked/organizations') != -1) {
-		jQuery('div.tipsContent').replaceWith("<B>AT organizations Page</B>");
+		jQuery('div.tipsContent').replaceWith("<B></B>");
 	}
 	else if(pathName.indexOf('/mission_columbia_baked/reports') != -1) {
-		jQuery('div.tipsContent').replaceWith("<B>AT reports Page</B>");
+		jQuery('div.tipsContent').replaceWith("<B></B>");
 	}
 	else if(pathName.indexOf('/mission_columbia_baked/admin') != -1) {
-		jQuery('div.tipsContent').replaceWith("<B>AT admin Page</B>");
+		jQuery('div.tipsContent').replaceWith("<B></B>");
 	}
 	else if(pathName.indexOf('/mission_columbia_baked/help') != -1) {
-		jQuery('div.tipsContent').replaceWith("<B>AT help Page</B>");
+		jQuery('div.tipsContent').replaceWith("<B></B>");
 	}
 	else if(pathName.indexOf('/mission_columbia_baked/') != -1) {
-		jQuery('div.tipsContent').replaceWith("<B>AT THE CLIENTS PAGE!</B>");
+		jQuery('div.tipsContent').replaceWith("<B></B>");
+	}
+	else if(pathName.indexOf('/mission_columbia_baked/users/login') != -1) {
+		jQuery('div.tipsContent').replaceWith("<B>Contact your organizations for resolving login issues.</B>");
 	}
 	// else if(url.indexOf('http://localhost/mission_columbia_baked/clients/searchResults') != -1) {
 	// 	jQuery('div.tipsContent').replaceWith("<B>AT THE CLIENT SEARCH RESULTS PAGE</B>");
