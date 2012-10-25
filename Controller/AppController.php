@@ -41,8 +41,8 @@ class AppController extends Controller {
     public $components = array(
         'Session',
         'Auth'=>array(
-            'loginRedirect'=>array('controller'=>'clients', 'action'=>'index'),
-            'logoutRedirect'=>array('controller'=>'clients', 'action'=>'index'),
+            'loginRedirect'=>array('controller'=>'welcome', 'action'=>'index'),
+            'logoutRedirect'=>array('controller'=>'welcome', 'action'=>'index'),
             'authError'=>"You can't access that page",
             'authorize'=>array('Controller')
         )

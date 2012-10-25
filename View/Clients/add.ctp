@@ -17,14 +17,6 @@
     }
 
 </style>
-<div id="tips" class="tipsBox" style="width:15%;position:absolute;right:5%;top:5%;background:#B4CFEC;border: 1px solid #000000;padding: 10 10 10 10">
-    <div class="tipsContent">
-        <B>Tips</B>
-        <br><br>
-        <p>Add Client Tip</p>
-    </div>
-</div>
-
 <div class="clients form">
     <?php echo $this->Form->create('Client'); ?>
     <div id="accordion">
