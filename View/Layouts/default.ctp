@@ -153,23 +153,17 @@ checkContext();
                 
 
                 <div id="content" style="width:97%;float:left;">
+                    <?php echo $this->Session->flash(); ?>
 
-                    <div id="tipArea" style="width:10%; background:#B4CFEC; float:right; display:inline-block;">
-                    <!-- <div id="tipArea"> -->
-    <!--  OLD STYLES               <div id="tips" class="tipsBox" style="float:right; position:relative; left:1%; bottom:1%; width:15%; background:#B4CFEC;border: 1px solid #000000;"> -->
+                    <?php echo $this->fetch('content'); ?>
+					<div id="tipArea" style="width:10%; background:#B4CFEC; float:right; display:inline-block;">
                         <div id="tips" class="tipsBox" style="background:#B4CFEC;border: 1px solid #000000;">
                             <div class="tipsContent">
                                 <p><strong>Tips Default</strong></p>
                                 <p>If you cannot remember your password, please click on the <strong>Request a New Password</strong> link and a new, </p>
                             </div>
                         </div>
-
                     </div>
-
-                    <?php echo $this->Session->flash(); ?>
-
-                    <?php echo $this->fetch('content'); ?>
-
                 </div>
                 <div class="clear"></div>
 

@@ -32,7 +32,7 @@ ul#top_links{
 	width: 6em;
 }
 
-fieldset
+#ui-accordion-accordion-panel-0 fieldset
 {
 	border: 1px solid black;
 	width: 20%;
@@ -77,7 +77,36 @@ form#UserLoginForm
 	clear: both;
 }
 
-.actionsNoButton a
+div.actionsNoButton
+{
+	margin-top: 10px;
+}
+
+div.actionsNoButton.users
+{
+	width: 15%;
+}
+
+div.actionsNoButton a
 {
 	font-size: 12px;
+	margin-bottom: 2px;
+	display: block;
+}
+
+.actionsNoButton .active_link
+{
+	color: #800606;
+	cursor: default;
+}
+
+div.users.index
+{
+	float: left;
+	width: 70%;
+}
+
+form
+{
+	width:100%;
 }
