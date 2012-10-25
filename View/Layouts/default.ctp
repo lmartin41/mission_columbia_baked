@@ -158,7 +158,7 @@ checkContext();
                         <div id="tips" class="tipsBox" style="background:#B4CFEC;border: 1px solid #000000; border-radius: 5px;">
                             <div class="tipsContent">
                                 <p><strong>Tips Default</strong></p>
-                                <p>If you cannot remember your password, please click on the <strong>Request a New Password</strong> link and a new, </p>
+                                <p>If you cannot remember your password, please talk to your organizations administrator to change it.</p>
                             </div>
                         </div>
                     </div>
