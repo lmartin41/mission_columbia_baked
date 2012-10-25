@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  *
  * @property Resourceus $Resourceus
  */
-class ResourceusesController extends AppController {
+class ResourceUsesController extends AppController {
 
     /**
      * index method

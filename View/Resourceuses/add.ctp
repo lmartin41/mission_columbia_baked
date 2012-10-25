@@ -21,6 +21,4 @@
         <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?><br /><br />
         <?php echo $this->Html->link(__('Client Listing'), array('controller' => 'clients', 'action' => 'browse')); ?><br /><br />
         <?php echo $this->Html->link(__('Resource Listing'), array('controller' => 'resources', 'action' => 'index')); ?> 
-
-    
 </div>
