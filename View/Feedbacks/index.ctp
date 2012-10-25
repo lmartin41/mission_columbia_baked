@@ -1,3 +1,7 @@
+<div class="actionsNoButton">
+	<?php echo $this->Html->link(__('List Feedback'), array('controller' => 'feedbacks', 'action' => 'index'), array('class' => 'active_link')); ?>
+	<?php echo $this->Html->link(__('New Feedback'), array('action' => 'add')); ?>
+</div>
 <div class="feedbacks index">
 	<h2><?php echo __('Feedbacks'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
@@ -6,7 +10,6 @@
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('feedback'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
@@ -18,11 +21,8 @@
 		</td>
 		<td><?php echo h($feedback['Feedback']['feedback']); ?>&nbsp;</td>
 		<td><?php echo h($feedback['Feedback']['created']); ?>&nbsp;</td>
-		<td><?php echo h($feedback['Feedback']['modified']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $feedback['Feedback']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $feedback['Feedback']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $feedback['Feedback']['id']), null, __('Are you sure you want to delete # %s?', $feedback['Feedback']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -41,11 +41,4 @@
 		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
 	?>
 	</div>
-</div>
-<div class="actionsNoButton">
-
-		<?php echo $this->Html->link(__('New Feedback'), array('action' => 'add')); ?><br /><br />
-		<?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?><br /><br />
-		<?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?>
-	
 </div>

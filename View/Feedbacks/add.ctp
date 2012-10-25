@@ -1,4 +1,15 @@
+<div class="actionsNoButton">
+	<?php if( $isAtleastAdmin ): ?>
+		<?php echo $this->Html->link(__('List Feedbacks'), array('action' => 'index')); ?>
+		<?php echo $this->Html->link(__('New Feedback'), array('action' => 'add'), array('class' => 'active_link')); ?>
+	<?php endif; ?>
+</div>
+
+<?php if( $isAtleastAdmin ): ?>
 <div class="feedbacks form">
+<?php else: ?>
+<div class="feedbacks form no-border">
+<?php endif; ?>
 <?php echo $this->Form->create('Feedback'); ?>
 	<fieldset>
 		<legend><?php echo __('Add Feedback'); ?></legend>
@@ -8,13 +19,4 @@
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actionsNoButton">
-	
-		<?php if( $isAtleastAdmin ): ?>
-			<?php echo $this->Html->link(__('List Feedbacks'), array('action' => 'index')); ?><br /><br />
-			<?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?><br /><br />
-			<?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?>
-		<?php endif; ?>
-	
 </div>
