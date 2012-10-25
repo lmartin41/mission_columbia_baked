@@ -110,3 +110,14 @@ form
 {
 	width:100%;
 }
+
+div.view
+{
+	float: left;
+	width: 70%;
+}
+
+div.form.no-border
+{
+	border: 0px;
+}

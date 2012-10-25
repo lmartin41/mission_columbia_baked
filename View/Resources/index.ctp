@@ -1,6 +1,8 @@
 <?php if ($isAtleastAdmin): ?>
 <div class="resources form">
-    <?php endif; ?>
+<?php else: ?>
+<div class="resources form no-border">
+<?php endif; ?>
 
     <h2><?php echo __('Resource Listing'); ?></h2>
     <table cellpadding="0" cellspacing="0">
@@ -44,10 +46,8 @@
         ?>
     </div>
 
-
-<?php if ($isAtleastAdmin): ?>
 </div>
-
+<?php if ($isAtleastAdmin): ?>
 <div class="actionsNoButton" style="">
     <?php echo $this->Html->link('Create a Resource', array('action' => 'add', $current_user['organization_id'])); ?>
 </div>

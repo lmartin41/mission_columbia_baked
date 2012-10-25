@@ -1,3 +1,7 @@
+<div class="actionsNoButton">
+	<?php echo $this->Html->link(__('List Users'), array('action' => 'index'));?>
+	<?php echo $this->Html->link(__('New User'), array('action' => 'add'), array('class' => 'active_link')); ?>	
+</div>
 <div class="users form">
 <?php echo $this->Form->create('User'); ?>
 	<fieldset>
@@ -15,13 +19,4 @@
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actionsNoButton">
-
-		<?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?><br /><br />
-		<?php echo $this->Html->link(__('List Organizations'), array('controller' => 'organizations', 'action' => 'index')); ?><br /><br />
-		<?php echo $this->Html->link(__('New Organization'), array('controller' => 'organizations', 'action' => 'add')); ?><br /><br /> 
-		<?php echo $this->Html->link(__('List Feedbacks'), array('controller' => 'feedbacks', 'action' => 'index')); ?><br /><br /> 
-		<?php echo $this->Html->link(__('New Feedback'), array('controller' => 'feedbacks', 'action' => 'add')); ?>
-	
 </div>

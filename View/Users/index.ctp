@@ -4,7 +4,7 @@
 		<?php if($hideDeleted): ?>
 			<?php echo $this->Html->link(__('Hide Deleted Users'), array('action' => 'index')); ?><br /><br />
 		<?php else: ?>
-			<?php echo $this->Html->link(__('Show Deleted Users'), array('action' => 'index', '?' => array('showAll' => true))); ?><br /><br />
+			<?php echo $this->Html->link(__('Show Deleted Users'), array('action' => 'index', '?' => array('showAll' => true))); ?>
 		<?php endif;?>
 </div>
 <div class="users index">

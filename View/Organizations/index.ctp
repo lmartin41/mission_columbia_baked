@@ -1,6 +1,8 @@
 <?php if ($isAtleastAdmin): ?>
-    <div class="organizations form">
-    <?php endif; ?>
+<div class="organizations form">
+<?php else: ?>
+<div class="organizations form no-border">
+<?php endif; ?>
 
     <h2><?php echo __('Organization Listing'); ?></h2>
     <table cellpadding="0" cellspacing="0">
@@ -37,9 +39,9 @@
         echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
         ?>
     </div>
-    <?php if ($isAtleastAdmin): ?>
-    </div>
-
+    
+</div>
+<?php if ($isAtleastAdmin): ?>
     <div class="actionsNoButton" style="">
         <?php echo $this->Html->link(__('New Organization'), array('action' => 'add')); ?><br /><br />
         <?php echo $this->Html->link('Create a Resource', array('controller' => 'resources', 'action' => 'add', $organization['Organization']['id'])); ?>
