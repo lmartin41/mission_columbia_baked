@@ -56,11 +56,11 @@ function checkContext(){
 		// alert("in login " + pathName);
 	}*/
 	/*else*/ if(pathName.indexOf('/mission_columbia_baked/resources') != -1) {
-		jQuery('div.tipsContent').replaceWith("<B></B>");
+		jQuery('div.tipsContent').replaceWith("<B>This is a listing of all organizations' resource streams currently in the system.  Click on view/edit for more details</B>");
 		// alert("in resources " +  pathName);
 	}
 	else if(pathName.indexOf('/mission_columbia_baked/organizations') != -1) {
-		jQuery('div.tipsContent').replaceWith("<B></B>");
+		jQuery('div.tipsContent').replaceWith("<B>This is a listing of all organizations currently in the system.  Click on view/edit for more details</B>");
 	}
 	else if(pathName.indexOf('/mission_columbia_baked/reports') != -1) {
 		jQuery('div.tipsContent').replaceWith("<B></B>");
