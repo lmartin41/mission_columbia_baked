@@ -149,15 +149,15 @@ checkContext();
 
             </div>
 
-            <div id="bodyContainer" style="width:100%;">
+            <div id="bodyContainer" style="width:100%; ">
                 
 
-                <div id="content" style="width:97%;float:left;">
+                <div id="content" style="width:97%;float:left; border-radius: 5px;">
 
                     <div id="tipArea" style="width:10%; background:#B4CFEC; float:right; display:inline-block;">
                     <!-- <div id="tipArea"> -->
     <!--  OLD STYLES               <div id="tips" class="tipsBox" style="float:right; position:relative; left:1%; bottom:1%; width:15%; background:#B4CFEC;border: 1px solid #000000;"> -->
-                        <div id="tips" class="tipsBox" style="background:#B4CFEC;border: 1px solid #000000;">
+                        <div id="tips" class="tipsBox" style="background:#B4CFEC;border: 1px solid #000000; border-radius: 5px;">
                             <div class="tipsContent">
                                 <p><strong>Tips Default</strong></p>
                                 <p>If you cannot remember your password, please click on the <strong>Request a New Password</strong> link and a new, </p>
@@ -182,7 +182,7 @@ checkContext();
                 checkContext();
             </script>
 
-            <div id="footer" style="text-align: center; float:left;">
+            <div id="footer" style="text-align: center; margin-left:auto; margin-left:auto;">
                 <?php if ($logged_in): ?>
                     We would appreciate your <?php echo $this->Html->link('Feedback', array('controller' => 'feedbacks', 'action' => 'add')); ?> |
                     <a>Help</a> | 
