@@ -40,6 +40,7 @@ class ResourceUsesController extends AppController {
      * @return void
      */
     public function add($clientID = null) {
+    	
         if ($this->request->is('post')) {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('controller' => 'clients', 'action' => 'index'));
