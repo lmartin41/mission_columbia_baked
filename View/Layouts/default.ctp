@@ -120,7 +120,7 @@ checkContext();
                 <div style="text-align: right; float: right;">
                     <?php if ($logged_in): ?>
                         Currently Logged in as: <?php echo $current_user['username']; ?> | 
-                        <?php echo $this->Html->link('Edit Profile', array('controller' => 'users', 'action' => 'edit')); ?> | 
+                        <?php echo $this->Html->link('Edit Profile', array('controller' => 'users', 'action' => 'edit', $current_user['id'])); ?> | 
                         <script>
                             jQuery(document).ready(function(){  
                                 jQuery('#top_links').removeClass('do_not_show');

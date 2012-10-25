@@ -1,3 +1,4 @@
+<?php if( $isAtleastAdmin ): ?>
 <div class="actionsNoButton">
 	<?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?>
 	<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?>
@@ -6,6 +7,9 @@
 	<?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $this->Form->value('User.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('User.id'))); ?>
 </div>
 <div class="users form">
+<?php else: ?>
+<div class="users form no-border">
+<?php endif; ?>
 <?php echo $this->Html->script('edit_user'); ?>
 <?php echo $this->Form->create('User'); ?>
 	<fieldset>

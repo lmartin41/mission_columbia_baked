@@ -206,7 +206,17 @@ class UsersController extends AppController {
 		$valid = true;
 		if(!$user['isAdmin'] && !$user['isSuperAdmin'])
 		{
-			$valid = false;
+			if( $action == 'edit' )
+			{
+				if($user['id'] == $model_user['User']['id'])
+				{
+					return true;
+				}
+			}
+			else
+			{
+				$valid = false;
+			}
 		}
 		
 		if( $action == 'edit' || $action == 'delete' )
