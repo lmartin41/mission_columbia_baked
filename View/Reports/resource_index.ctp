@@ -35,8 +35,8 @@
     </ul>
     <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br /><br />
     <ul>
-        <li><?php echo $this->Html->link('Clients'), array('action' => 'aggregateClients'); ?><br />
-        <li><?php echo $this->Html->link('Resources'), array('action' => 'aggregateResources'); ?></li>
+         <li><?php echo $this->Html->link('Clients', array('action' => 'aggregateClientsIndex')); ?></li><br />
+        <li><?php echo $this->Html->link('Resources', array('action' => 'aggregateResourcesIndex')); ?></li>
     </ul>
     <br />
     <?php echo $this->Html->link('Resource Listing', array('controller' => 'resources', 'action' => 'index')); ?>
