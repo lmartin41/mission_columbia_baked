@@ -143,7 +143,8 @@ checkContext();
                     <li><input type="radio" id="radio4" name="radio" /><label for="radio4">Organizations</label></li>
                     <li><input type="radio" id="radio5" name="radio" /><label for="radio5">Reports</label></li>
                     <?php if ($isAtleastAdmin): ?>
-                        <li><input type="radio" id="radio7" name="radio" /><label for="radio7">Admin</label></li>
+                        <li><input type="radio" id="radioUsers" name="radioUsers" /><label for="radioUsers">Users</label></li>
+                        <li><input type="radio" id="radioCustomize" name="radioCustomize" /><label for="radioCustomize">Customize</label></li>
                     <?php endif; ?>
                 </ul>
 
@@ -202,7 +203,8 @@ checkContext();
             <?php echo $this->Html->link('Resources', array('controller' => 'resources', 'action' => 'index'), array('id' => 'resources')); ?>
             <?php echo $this->Html->link('Organizations', array('controller' => 'organizations', 'action' => 'index'), array('id' => 'organizations')); ?>
             <?php echo $this->Html->link('Reports', array('controller' => 'reports', 'action' => 'index'), array('id' => 'reports')); ?>
-            <?php echo $this->Html->link('Admin', array('controller' => 'admin', 'action' => 'index'), array('id' => 'admin')); ?>
+            <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('id' => 'users')); ?>
+            <?php echo $this->Html->link('Customize', array('controller' => 'customize', 'action' => 'index'), array('id' => 'customize')); ?>
         </div>
     </body>
 </html>

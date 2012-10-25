@@ -33,6 +33,14 @@ jQuery(document).ready(function(){
 			//window.location.href = "http://localhost/mission_columbia_baked/help/";
 			//jQuery('#radio').toggle();
 	    });
+	    
+	    $("#radioUsers").click(function (){
+	    	location.href = $('#users').attr('href');
+	    });
+	    
+	    $('#radioCustomize').click(function () {
+	    	location.href = $('#customize').attr('href');
+	    });
 	});
 
 function checkContext(){
