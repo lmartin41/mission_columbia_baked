@@ -3,44 +3,44 @@
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
-			<?php echo h($resourceus['Resourceus']['id']); ?>
+			<?php echo h($resourceUs['ResourceUs']['id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Client'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($resourceus['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $resourceus['Client']['id'])); ?>
+			<?php echo $this->Html->link($resourceUs['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $resourceUs['Client']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Resource'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($resourceus['Resource']['resource_name'], array('controller' => 'resources', 'action' => 'view', $resourceus['Resource']['id'])); ?>
+			<?php echo $this->Html->link($resourceUs['Resource']['resource_name'], array('controller' => 'resources', 'action' => 'view', $resourceUs['Resource']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Date'); ?></dt>
 		<dd>
-			<?php echo h($resourceus['Resourceus']['date']); ?>
+			<?php echo h($resourceUs['ResourceUs']['date']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Comments'); ?></dt>
 		<dd>
-			<?php echo h($resourceus['Resourceus']['comments']); ?>
+			<?php echo h($resourceUs['ResourceUs']['comments']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
-			<?php echo h($resourceus['Resourceus']['created']); ?>
+			<?php echo h($resourceUs['ResourceUs']['created']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Modified'); ?></dt>
 		<dd>
-			<?php echo h($resourceus['Resourceus']['modified']); ?>
+			<?php echo h($resourceUs['ResourceUs']['modified']); ?>
 			&nbsp;
 		</dd>
 	</dl>
 </div>
 <div class="actionsNoButton">
-		<?php echo $this->Html->link(__('Edit This Resource Use'), array('action' => 'edit', $resourceus['Resourceus']['id'])); ?><br /><br />
-		<?php echo $this->Form->postLink(__('Delete this Resource Use'), array('action' => 'delete', $resourceus['Resourceus']['id']), null, __('Are you sure you want to delete # %s?', $resourceus['Resourceus']['id'])); ?><br /><br />
+		<?php echo $this->Html->link(__('Edit This Resource Use'), array('action' => 'edit', $resourceUs['ResourceUs']['id'])); ?><br /><br />
+		<?php echo $this->Form->postLink(__('Delete this Resource Use'), array('action' => 'delete', $resourceUs['ResourceUs']['id']), null, __('Are you sure you want to delete # %s?', $resourceus['Resourceus']['id'])); ?><br /><br />
 		<?php echo $this->Html->link(__('Resource Use Listing'), array('action' => 'index')); ?><br /><br />
 		<?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'browse')); ?><br /><Br />
 		<?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?>

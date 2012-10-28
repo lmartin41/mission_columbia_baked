@@ -31,7 +31,7 @@ class ResourceUsesController extends AppController {
         if (!$this->ResourceUs->exists()) {
             throw new NotFoundException(__('Invalid ResourceUs'));
         }
-        $this->set('ResourceUs', $this->ResourceUs->read(null, $id));
+        $this->set('resourceUs', $this->ResourceUs->read(null, $id));
     }
 
     /**

@@ -164,7 +164,7 @@
                 <dt><?php echo __('Pregnant'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
-                    <?php echo h($client['Client']['pregnant']); ?>
+                    <?php echo ($client['Client']['pregnant'] == 1) ? 'true' : 'false'; ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Disabled'); ?></dt>
@@ -228,8 +228,6 @@
                     &nbsp;
                 </dd>
             </dl>
-
-            <?php echo $this->Html->link(__('Edit Details for ' . $client['Client']['first_name']), array('action' => 'edit', $client['Client']['id'])); ?>
         </div>
 
         <?php /*         * *************** Relatives ***************************************** */ ?>
@@ -274,10 +272,10 @@
             <?php echo $this->Html->link(__('Add a New Relative'), array('controller' => 'client_relations', 'action' => 'add', $client['Client']['id'])); ?>
         </div>
 
-            <?php /*             * *************************** resource uses ************* */ ?>
+        <?php /*         * *************************** resource uses ************* */ ?>
 
-            <h2><?php echo h($client['Client']['first_name']) . " 's Resource Usage"; ?></h2>
-            <div class="white-background black-text">
+        <h2><?php echo h($client['Client']['first_name']) . " 's Resource Usage"; ?></h2>
+        <div class="white-background black-text">
             <?php if (!empty($client['ResourceUs'])): ?>
                 <table cellpadding = "0" cellspacing = "0">
                     <tr>
@@ -300,7 +298,7 @@
                                 <td><?php echo $resourceUs['date']; ?></td>
                                 <td><?php echo $resourceUs['comments']; ?></td>
                                 <td class="actions">
-                                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'Resourceuses', 'action' => 'view', $resourceUs['id'])); ?>
+                                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'Resourceuses', 'action' => 'view', $resourceUs['ResourceUs']['id'])); ?>
                                 </td>
                             </tr>
                         <?php endif; ?>
@@ -311,7 +309,7 @@
 
             <br /><br />
             <?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
-            </div>
         </div>
     </div>
+</div>
 
