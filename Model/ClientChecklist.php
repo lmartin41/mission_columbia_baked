@@ -4,15 +4,9 @@ App::uses('AppModel', 'Model');
  * ClientChecklist Model
  *
  * @property Client $Client
+ * @property ClientChecklistTask $ClientChecklistTask
  */
 class ClientChecklist extends AppModel {
-
-/**
- * Use table
- *
- * @var mixed False or table name
- */
-	public $useTable = 'client_checklist';
 
 /**
  * Display field
@@ -38,4 +32,26 @@ class ClientChecklist extends AppModel {
 			'order' => ''
 		)
 	);
+
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
+		'ClientChecklistTask' => array(
+			'className' => 'ClientChecklistTask',
+			'foreignKey' => 'client_checklist_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+
 }
