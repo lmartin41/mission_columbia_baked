@@ -6,7 +6,7 @@
         echo $this->Form->input('first_name');
         echo $this->Form->input('last_name');
         echo $this->Form->input('relationship');
-        echo $this->Form->input('DOB', array('type' => 'date'));
+        echo $this->Form->input('DOB', array('type' => 'date', 'minYear'=>date('Y')-120, 'maxYear'=>date('Y')-1));
         echo "(If you don't know, please enter age)";
         echo $this->Form->input('Age', array('style' => 'width:50px'));
         echo $this->Form->input('sex', array('style' => 'width:50px'));

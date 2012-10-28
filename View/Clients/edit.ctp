@@ -48,8 +48,11 @@
 	            </tr>
 	            <tr>
 	                <td>
-	                    <?php echo $this->Form->input('DOB', array('type' => 'date', 'empty' => true, 'div' => false, 'separator' => false)); ?>
-	                    &nbsp; &nbsp;<b>OR</b>
+
+	                	<?php echo $this->Form->input('DOB', array('type' => 'date', 'minYear'=>date('Y')-120, 'maxYear'=>date('Y')-1, 'empty' => true, 'div' => false, 'separator' => false)); ?>
+
+	                	&nbsp; &nbsp;<b>OR</b>
+
 	                </td>
 	                <td>
 	                    <?php echo $this->Form->input('age'); ?>

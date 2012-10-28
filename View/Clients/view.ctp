@@ -1,9 +1,7 @@
 <?php echo $this->Html->script("client_view.js", FALSE); ?>
-<?php echo $this->Html->script('ajaxupload-min.js'); ?>
 
-<?php echo $this->Html->css('classicTheme/style'); ?>
 
-<?php //echo $this->Upload->view('Client', $client['Client']['id']); ?>
+<?php echo $this->Upload->view('Client', $client['Client']['id']); ?>
 
 <div class="actionsNoButton">
     <?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> <br /><br />
@@ -53,18 +51,6 @@
                 </dl>
             </td>
         </tr>
-        <!-- <tr>
-            <td colspan="2">
-                <div id="demo1" style="width:500px"></div>
-                <script type="text/javascript">
-                    $('#demo1').ajaxupload({
-                        url:'upload.php',
-                        remotePath:'uploaded/',
-                    });
-                </script>
-            </td>
-
-        </tr> -->
     </table>
 
     <div id="accordion">
