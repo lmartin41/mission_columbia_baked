@@ -27,11 +27,11 @@ class ResourceUsesController extends AppController {
      * @return void
      */
     public function view($id = null) {
-        $this->Resourceus->id = $id;
-        if (!$this->Resourceus->exists()) {
-            throw new NotFoundException(__('Invalid resourceus'));
+        $this->ResourceUs->id = $id;
+        if (!$this->ResourceUs->exists()) {
+            throw new NotFoundException(__('Invalid ResourceUs'));
         }
-        $this->set('resourceus', $this->Resourceus->read(null, $id));
+        $this->set('ResourceUs', $this->ResourceUs->read(null, $id));
     }
 
     /**
@@ -45,10 +45,10 @@ class ResourceUsesController extends AppController {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('controller' => 'clients', 'action' => 'index'));
             }
-            $this->request->data['Resourceus']['client_id'] = $clientID;
-            $this->Resourceus->create();
-            $this->Resourceus->client_id = $clientID;
-            if ($this->Resourceus->save($this->request->data)) {
+            $this->request->data['ResourceUs']['client_id'] = $clientID;
+            $this->ResourceUs->create();
+            $this->ResourceUs->client_id = $clientID;
+            if ($this->ResourceUs->save($this->request->data)) {
                 $this->Session->setFlash(__('The Resource Use has been saved'));
                 if (isset($this->request->data['Add_another_resource'])) {
                     $this->redirect(array('action' => 'add', $clientID));
@@ -72,19 +72,19 @@ class ResourceUsesController extends AppController {
      * @return void
      */
     public function edit($id = null) {
-        $this->Resourceus->id = $id;
-        if (!$this->Resourceus->exists()) {
-            throw new NotFoundException(__('Invalid resourceus'));
+        $this->ResourceUs->id = $id;
+        if (!$this->ResourceUs->exists()) {
+            throw new NotFoundException(__('Invalid ResourceUs'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->Resourceus->save($this->request->data)) {
+            if ($this->ResourceUs->save($this->request->data)) {
                 $this->Session->setFlash(__('The resource Use has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The resourceus could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The ResourceUs could not be saved. Please, try again.'));
             }
         } else {
-            $this->request->data = $this->Resourceus->read(null, $id);
+            $this->request->data = $this->ResourceUs->read(null, $id);
         }
         $clients = $this->ResourceUs->Client->find('list');
         $resources = $this->ResourceUs->Resource->find('list');

@@ -10,10 +10,9 @@ App::uses('AppController', 'Controller');
  */
 class ClientsController extends AppController {
 
-    // public $helpers = array('AjaxMultiUpload.Upload');
-    public $components = array('Session', 'AjaxMultiUpload.Upload');
+    public $components = array('Session');
 
-    public $helpers = array('Js', 'AjaxMultiUpload.Upload' );
+    public $helpers = array('Js');
 
     /**
      * index method

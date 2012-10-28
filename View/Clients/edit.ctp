@@ -1,7 +1,5 @@
 <?php echo $this->Html->script("client_add.js", FALSE); ?>
 
-<?php echo $this->Upload->edit('Client', $clientID); ?>
-
 <style type="text/css">
     form label { 
         width: 9em; 
@@ -189,8 +187,8 @@
 </div>
 <div class="actionsNoButton" style="">
 
-        <?php echo $this->Html->link('Clients Listing', array('action' => 'browse')); ?><br /><br />
-        <?php echo $this->Html->link('Upload Photo', array('controller' => 'users', 'action' => 'upload')); ?><br /><br />
+        <?php echo $this->Html->link('Clients Listing', array('action' => 'browse')); ?><br />
+        <?php echo $this->Html->link('Upload Photo', array('controller' => 'users', 'action' => 'upload')); ?><br />
         <?php echo $this->Html->link('Search for a Client', array('action' => 'index')); ?>
    
 </div>

@@ -40,7 +40,6 @@ class ResourcesController extends AppController {
      * @return void
      */
     public function add($organizationID = null) {
-        $this->Session->setFlash($organizationID);
         if ($this->request->is('post')) {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('action' => 'index'));

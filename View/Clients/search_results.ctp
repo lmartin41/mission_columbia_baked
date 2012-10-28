@@ -37,7 +37,7 @@
 <div class="actionsNoButton">
 
     <?php echo $this->Html->link('Client Listing', array('action' => 'browse')); ?>
-    <br /><br />
+    <br />
     <?php echo $this->Html->link('Search Again', array('action' => 'index')); ?>
 
 </div>

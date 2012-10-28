@@ -1,20 +1,17 @@
 <?php echo $this->Html->script("client_view.js", FALSE); ?>
 
-
-<?php echo $this->Upload->view('Client', $client['Client']['id']); ?>
-
 <div class="actionsNoButton">
-    <?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> <br /><br />
-    <?php echo $this->Html->link(__('Client Listing'), array('action' => 'browse')); ?> <br /><br />
-    <?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?> <br /><br />
-    <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?><Br /><br />
-    <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?><br /><br />
-    <?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete %s?', $client['Client']['first_name'])); ?><br /><br />
-    <?php echo $this->Html->link(__('Print this Client Summary'), array('action' => 'printClient', $client['Client']['id'])); ?> 	<br /><br />
+    <?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> <br />
+    <?php echo $this->Html->link(__('Client Listing'), array('action' => 'browse')); ?> <br />
+    <?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?> <br />
+    <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?><Br />
+    <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?><br />
+    <?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete %s?', $client['Client']['first_name'])); ?><br />
+    <?php echo $this->Html->link(__('Print this Client Summary'), array('action' => 'printClient', $client['Client']['id'])); ?> 	<br />
     <?php echo $this->Html->link(__('Create new Client'), array('action' => 'add')); ?> 	
 </div>
 <div class="clients view">
-    <h2><?php echo $client['Client']['first_name']."'s Profile"; ?></h2>
+    <h2><?php echo $client['Client']['first_name'] . "'s Profile"; ?></h2>
     <table>
         <tr>
             <td>
@@ -231,91 +228,90 @@
                     &nbsp;
                 </dd>
             </dl>
+
+            <?php echo $this->Html->link(__('Edit Details for ' . $client['Client']['first_name']), array('action' => 'edit', $client['Client']['id'])); ?>
+        </div>
+
+        <?php /*         * *************** Relatives ***************************************** */ ?>
+
+
+        <h2><?php echo h($client['Client']['first_name']) . " 's Relatives"; ?></h2>
+        <div class="white-background black-text">
+            <?php if (!empty($client['ClientRelation'])): ?>
+                <table cellpadding = "0" cellspacing = "0">
+                    <tr>
+                        <th><?php echo __('Id'); ?></th>
+                        <th><?php echo __('First Name'); ?></th>
+                        <th><?php echo __('Last Name'); ?></th>
+                        <th><?php echo __('Relationship'); ?></th>
+                        <th><?php echo __('DOB'); ?></th>
+                        <th><?php echo __('Sex'); ?></th>
+                        <th class="actions"><?php echo __(''); ?></th>
+                    </tr>
+                    <?php
+                    $i = 0;
+                    foreach ($client['ClientRelation'] as $clientRelation):
+                        if ($clientRelation['client_id'] == $client['Client']['id']):
+                            ?>
+                            <tr>
+                                <td><?php echo $clientRelation['id']; ?></td>
+                                <td><?php echo $clientRelation['first_name']; ?></td>
+                                <td><?php echo $clientRelation['last_name']; ?></td>
+                                <td><?php echo $clientRelation['relationship']; ?></td>
+                                <td><?php echo $clientRelation['DOB']; ?></td>
+                                <td><?php echo $clientRelation['sex']; ?></td>
+                                <td class="actions">
+                                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_relations', 'action' => 'view', $clientRelation['id'])); ?>
+
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </table>
+
+            <?php endif; ?>
+            <br />
+            <?php echo $this->Html->link(__('Add a New Relative'), array('controller' => 'client_relations', 'action' => 'add', $client['Client']['id'])); ?>
+        </div>
+
+            <?php /*             * *************************** resource uses ************* */ ?>
+
+            <h2><?php echo h($client['Client']['first_name']) . " 's Resource Usage"; ?></h2>
+            <div class="white-background black-text">
+            <?php if (!empty($client['ResourceUs'])): ?>
+                <table cellpadding = "0" cellspacing = "0">
+                    <tr>
+                        <th><?php echo __('Id'); ?></th>
+                        <th><?php echo __('Client Id'); ?></th>
+                        <th><?php echo __('Resource Name'); ?></th>
+                        <th><?php echo __('Date'); ?></th>
+                        <th><?php echo __('Comments'); ?></th>
+                        <th class="actions"><?php echo __(''); ?></th>
+                    </tr>
+                    <?php
+                    $i = 0;
+                    foreach ($client['ResourceUs'] as $resourceUs):
+                        if ($resourceUs['client_id'] == $client['Client']['id']):
+                            ?>
+                            <tr>
+                                <td><?php echo $resourceUs['id']; ?></td>
+                                <td><?php echo $resourceUs['client_id']; ?></td>
+                                <td><?php echo $resourceUs['Resource']['resource_name']; ?></td>
+                                <td><?php echo $resourceUs['date']; ?></td>
+                                <td><?php echo $resourceUs['comments']; ?></td>
+                                <td class="actions">
+                                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'Resourceuses', 'action' => 'view', $resourceUs['id'])); ?>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </table>
+            <?php else: echo "none"; ?>
+            <?php endif; ?>
+
+            <br /><br />
+            <?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
+            </div>
         </div>
     </div>
-    <br /><br />
-    <?php echo $this->Html->link(__('Edit Details for ' . $client['Client']['first_name']), array('action' => 'edit', $client['Client']['id'])); ?>
-    <br /><br /><br />
-    <?php /*     * *************** Relatives ***************************************** */ ?>
-
-
-    <h2><?php echo h($client['Client']['first_name']) . " 's Relatives"; ?></h2>
-    <?php if (!empty($client['ClientRelation'])): ?>
-        <table cellpadding = "0" cellspacing = "0">
-            <tr>
-                <th><?php echo __('Id'); ?></th>
-                <th><?php echo __('First Name'); ?></th>
-                <th><?php echo __('Last Name'); ?></th>
-                <th><?php echo __('Relationship'); ?></th>
-                <th><?php echo __('DOB'); ?></th>
-                <th><?php echo __('Sex'); ?></th>
-                <th class="actions"><?php echo __(''); ?></th>
-            </tr>
-            <?php
-            $i = 0;
-            foreach ($client['ClientRelation'] as $clientRelation):
-                if ($clientRelation['client_id'] == $client['Client']['id']):
-                    ?>
-                    <tr>
-                        <td><?php echo $clientRelation['id']; ?></td>
-                        <td><?php echo $clientRelation['first_name']; ?></td>
-                        <td><?php echo $clientRelation['last_name']; ?></td>
-                        <td><?php echo $clientRelation['relationship']; ?></td>
-                        <td><?php echo $clientRelation['DOB']; ?></td>
-                        <td><?php echo $clientRelation['sex']; ?></td>
-                        <td class="actions">
-                            <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_relations', 'action' => 'view', $clientRelation['id'])); ?>
-
-                        </td>
-                    </tr>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </table>
-
-    <?php endif; ?>
-    <br />
-    <?php echo $this->Html->link(__('Add a New Relative'), array('controller' => 'client_relations', 'action' => 'add', $client['Client']['id'])); ?>
-
-
-
-    <br /><br /><br />
-
-    <?php /*     * *************************** resource uses ************* */ ?>
-
-    <h2><?php echo h($client['Client']['first_name']) . " 's Resource Usage"; ?></h2>
-
-    <?php if (!empty($client['ResourceUs'])): ?>
-        <table cellpadding = "0" cellspacing = "0">
-            <tr>
-                <th><?php echo __('Id'); ?></th>
-                <th><?php echo __('Client Id'); ?></th>
-                <th><?php echo __('Resource Name'); ?></th>
-                <th><?php echo __('Date'); ?></th>
-                <th><?php echo __('Comments'); ?></th>
-                <th class="actions"><?php echo __(''); ?></th>
-            </tr>
-            <?php
-            $i = 0;
-            foreach ($client['ResourceUs'] as $resourceUs):
-                if ($resourceUs['client_id'] == $client['Client']['id']):
-                    ?>
-                    <tr>
-                        <td><?php echo $resourceUs['id']; ?></td>
-                        <td><?php echo $resourceUs['client_id']; ?></td>
-                        <td><?php echo $resourceUs['Resource']['resource_name']; ?></td>
-                        <td><?php echo $resourceUs['date']; ?></td>
-                        <td><?php echo $resourceUs['comments']; ?></td>
-                        <td class="actions">
-                            <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'Resourceuses', 'action' => 'view', $resourceUs['id'])); ?>
-                        </td>
-                    </tr>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </table>
-    <?php else: echo "none"; ?>
-    <?php endif; ?>
-
-    <br /><br />
-    <?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
-</div>
 
