@@ -27,6 +27,10 @@ ul#top_links{
 	font-size: 12px;
 }
 
+.white-background.black-text a {
+    color: black;
+}
+
 .white-background.black-text label
 {
 	width: 6em;

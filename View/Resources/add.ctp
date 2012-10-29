@@ -20,6 +20,6 @@
 </div>
 <div class="actionsNoButton">
 
-        <?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?><br /><br />
+        <?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?><br />
         <?php echo $this->Html->link(__('Organization Listing'), array('controller' => 'organizations', 'action' => 'index')); ?>
 </div>

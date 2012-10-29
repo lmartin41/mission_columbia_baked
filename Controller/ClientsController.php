@@ -2,7 +2,6 @@
 
 App::uses('AppController', 'Controller');
 
-
 /**
  * Clients Controller
  *
@@ -11,7 +10,6 @@ App::uses('AppController', 'Controller');
 class ClientsController extends AppController {
 
     public $components = array('Session');
-
     public $helpers = array('Js');
 
     /**
@@ -21,8 +19,9 @@ class ClientsController extends AppController {
      */
     public function index() {
         if ($this->request->is('post')) {
-            $firstName = $this->request->data['Client']['First Name'];
-            $lastName = $this->request->data['Client']['Last Name'];
+            $names = explode(" ",$this->request->data['Client']['Name']);
+            $firstName = $names[0];
+            $lastName = $names[1];
 
             //PUT AJAX HERE!!
             $correctResults = $this->clientSearch($firstName, $lastName);
@@ -54,7 +53,12 @@ class ClientsController extends AppController {
         if (!$this->Client->exists()) {
             throw new NotFoundException(__('Invalid client'));
         }
-        $this->set('client', $this->Client->read(null, $id));
+        $client = $this->Client->read(null, $id);
+        $this->set('client', $client);
+        $path = APP . 'webroot' . DS . 'img' . DS . $client['Client']['first_name'].$client['Client']['last_name'].'.jpg';
+        if (!file_exists($path)) $path = "person.png";
+        else $path = $client['Client']['first_name'].$client['Client']['last_name'].'.jpg';
+        $this->set('imagePath', $path);
     }
 
     /**
@@ -199,7 +203,7 @@ class ClientsController extends AppController {
         $query = $this->Client->query("
                   
             Select count(*) as numCompleted
-            From client_checklist
+            From client_checklists
             Where client_id = '$id' AND isCompleted='true';
                   
             ");
@@ -215,10 +219,10 @@ class ClientsController extends AppController {
             Where client_id = '$id' AND date between '$startDate' and '$endDate'
                 
         ");
-        
+
         return $query[0][0]['numResourceUses'];
     }
-    
+
     public function printClient($id = null) {
         $this->layout = 'print';
         $this->Client->recursive = -1;
@@ -230,7 +234,7 @@ class ClientsController extends AppController {
         $this->set('bodyAttr', 'onload="window.print();"');
     }
 
-    public function test($clientID){
+    public function test($clientID) {
         $this->set('clientID', $clientID);
     }
 

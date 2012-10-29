@@ -2,8 +2,7 @@
     <h2>Client Search</h2>
     <?php
     echo $this->Form->create();
-    echo $this->Form->input("First Name");
-    echo $this->Form->input("Last Name");
+    echo $this->Form->input("Name");
     echo $this->Form->end("Search");
     ?> 
 

@@ -4,7 +4,7 @@
         <legend><?php echo __('Add Resource Use'); ?></legend>
         <?php
         echo $this->Form->input('resource_id');
-        echo $this->Form->input('date', array('type' => 'date', 'minYear'=>date('Y')-50, 'maxYear'=>date('Y'), 'empty' => true));
+        echo $this->Form->input('date', array('type' => 'date', 'minYear'=>date('Y')-50, 'maxYear'=>date('Y')));
         echo $this->Form->input('comments');
         ?>
     </fieldset>

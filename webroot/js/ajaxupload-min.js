@@ -477,7 +477,7 @@ var y={
     if($('#ax-box').length==0)$('<div id="ax-box"/>').appendTo('body');
     if($('#ax-box-shadow').length==0)$('<div id="ax-box-shadow"/>').appendTo('body');
     if($('#ax-main-frame').length==0)$('<iframe name="ax-main-frame" id="ax-main-frame" />').hide().appendTo('body');
-    var h=$('<fieldset />').append('<legend class="ax-legend">Upload Photo</legend>').appendTo(d);
+    var h=$('<fieldset />').append('<legend class="ax-legend"></legend>').appendTo(d);
     var j=$('<a class="ax-browse-c ax-button" title="Add Files" />').appendTo(h);
     j.append('<span class="ax-plus-icon ax-icon"></span> <span>Add Files</span>');
     var k=$('<input type="file" class="ax-browse" name="ax-files[]" />').attr('multiple',w).appendTo(j);
