@@ -196,8 +196,7 @@
     </div>
 </div>
 <div class="actionsNoButton" style="">
-
-    <?php echo $this->Html->link('Clients Listing', array('action' => 'browse')); ?><br />
-    <?php echo $this->Html->link('Search for a Client', array('action' => 'index')); ?>
-
+	<?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?>
+	<?php echo $this->Html->link(__('Add a Client'), array('action' => 'add'), array('class' => 'active_link')); ?>
+    <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?>
 </div>

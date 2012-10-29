@@ -38,7 +38,7 @@
 
 </div>
 <div class="actionsNoButton">
-    <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?><br />
-    <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?>
-        
+	<?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?>
+	<?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?>
+    <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse'), array('class' => 'active_link')); ?>
 </div>

@@ -87,7 +87,7 @@ div.actionsNoButton
 	float: left;
 }
 
-div.actionsNoButton.users
+div.actionsNoButton.users, div.actionsNoButton.client
 {
 	width: 15%;
 }

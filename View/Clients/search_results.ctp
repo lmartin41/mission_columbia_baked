@@ -4,9 +4,7 @@
     <?php
     if ($results == null):
         echo 'No results Found';
-        ?>
-        <br /><br />
-        <?php echo $this->Html->link('Add a Client', array('action' => 'add')); ?>
+    ?>
 
     <?php else: ?>
 
@@ -35,9 +33,7 @@
 </div>
 
 <div class="actionsNoButton">
-
-    <?php echo $this->Html->link('Client Listing', array('action' => 'browse')); ?>
-    <br />
-    <?php echo $this->Html->link('Search Again', array('action' => 'index')); ?>
-
+    <?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?>
+	<?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?>
+    <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?>
 </div>

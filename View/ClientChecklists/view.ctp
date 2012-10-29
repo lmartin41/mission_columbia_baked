@@ -1,3 +1,15 @@
+<div class="actionsNoButton">
+	<ul>
+		<li><?php echo $this->Html->link(__('Edit Client Checklist'), array('action' => 'edit', $clientChecklist['ClientChecklist']['id'])); ?> </li><br />
+		<li><?php echo $this->Form->postLink(__('Delete Client Checklist'), array('action' => 'delete', $clientChecklist['ClientChecklist']['id']), null, __('Are you sure you want to delete # %s?', $clientChecklist['ClientChecklist']['id'])); ?> </li><br />
+		<li><?php echo $this->Html->link(__('List Client Checklists'), array('action' => 'index')); ?> </li><br />
+		<li><?php echo $this->Html->link(__('New Client Checklist'), array('action' => 'add')); ?> </li><br />
+		<li><?php echo $this->Html->link(__('List Clients'), array('controller' => 'clients', 'action' => 'index')); ?> </li><br />
+		<li><?php echo $this->Html->link(__('New Client'), array('controller' => 'clients', 'action' => 'add')); ?> </li><br />
+		<li><?php echo $this->Html->link(__('List Client Checklist Tasks'), array('controller' => 'client_checklist_tasks', 'action' => 'index')); ?> </li><br />
+		<li><?php echo $this->Html->link(__('New Client Checklist Task'), array('controller' => 'client_checklist_tasks', 'action' => 'add')); ?> </li>
+	</ul>
+</div>
 <div class="clientChecklists view">
 <h2><?php  echo __('Client Checklist'); ?></h2>
 	<dl>
@@ -32,18 +44,6 @@
 			&nbsp;
 		</dd>
 	</dl>
-</div>
-<div class="actionsNoButton">
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Client Checklist'), array('action' => 'edit', $clientChecklist['ClientChecklist']['id'])); ?> </li><br />
-		<li><?php echo $this->Form->postLink(__('Delete Client Checklist'), array('action' => 'delete', $clientChecklist['ClientChecklist']['id']), null, __('Are you sure you want to delete # %s?', $clientChecklist['ClientChecklist']['id'])); ?> </li><br />
-		<li><?php echo $this->Html->link(__('List Client Checklists'), array('action' => 'index')); ?> </li><br />
-		<li><?php echo $this->Html->link(__('New Client Checklist'), array('action' => 'add')); ?> </li><br />
-		<li><?php echo $this->Html->link(__('List Clients'), array('controller' => 'clients', 'action' => 'index')); ?> </li><br />
-		<li><?php echo $this->Html->link(__('New Client'), array('controller' => 'clients', 'action' => 'add')); ?> </li><br />
-		<li><?php echo $this->Html->link(__('List Client Checklist Tasks'), array('controller' => 'client_checklist_tasks', 'action' => 'index')); ?> </li><br />
-		<li><?php echo $this->Html->link(__('New Client Checklist Task'), array('controller' => 'client_checklist_tasks', 'action' => 'add')); ?> </li>
-	</ul>
 </div>
 <div class="related">
 	<h3><?php echo __('Related Client Checklist Tasks'); ?></h3>
