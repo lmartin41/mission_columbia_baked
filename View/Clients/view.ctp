@@ -302,7 +302,7 @@
                                 <td><?php echo $resourceUs['date']; ?></td>
                                 <td><?php echo $resourceUs['comments']; ?></td>
                                 <td class="actions">
-                                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'Resourceuses', 'action' => 'view', $resourceUs['ResourceUs']['id'])); ?>
+                                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['ResourceUs']['id'])); ?>
                                 </td>
                             </tr>
                         <?php endif; ?>
