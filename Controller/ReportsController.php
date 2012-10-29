@@ -15,8 +15,9 @@ class ReportsController extends AppController {
         $clientsController = new ClientsController();
 
         if ($this->request->is('post')) {
-            $firstName = $this->request->data['Client']['first_name'];
-            $lastName = $this->request->data['Client']['last_name'];
+            $names = explode(" ", $this->request->data['Client']['Name']);
+            $firstName = $names[0];
+            $lastName = $names[1];
             $startDate = $this->request->data['startDate'];
             $endDate = $this->request->data['endDate'];
             $correctResults = $clientsController->clientSearch($firstName, $lastName);
@@ -183,6 +184,7 @@ class ReportsController extends AppController {
             throw new NotFoundException(__('Invalid client'));
         }
         $this->set('client', $clientsController->Client->read(null, $id));
+       
     }
 
     public function resourceReport($resourceID = null) {

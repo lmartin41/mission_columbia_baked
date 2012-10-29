@@ -4,31 +4,25 @@
 
 <div class="Reports form">
 
-    
-
-    <?php $oldDate = Date('Y') . "-1-1"; ?>
+    <?php $oldDate = Date('Y') . "-01-01"; ?>
     <?php $newDate = Date('Y-m-d'); ?>
-
-    <div id="datePickerFields" style="text-align: center; margin-left:auto; margin-left:auto;">
-        From:<input name="startDate" id="datepickClient" default="test" class="date-pick" style="width: 100px;" value = '<?php echo $oldDate; ?>' />
-        &nbsp;
-        To:<input name="endDate" id="datepickClient2" class="date-pick" style="width: 100px;" value ="<?php echo $newDate; ?>" />
-    </div>
-
-    <script type="text/javascript">
-        new datepickr('datepickClient', { dateFormat: 'Y-m-d' });
-        new datepickr('datepickClient2', { dateFormat: 'Y-m-d' });
-    </script>
 
     <h3>Individual Client Report</h3>
 
     <?php
     echo $this->Form->create('Client');
-    echo $this->Form->input("first_name");
-    echo $this->Form->input("last_name");
+    echo $this->Form->input("Name");
     ?>
 
-    
+    <div id="datePickerFields" style="margin-left:auto; margin-left:auto;">
+        From:<input name="startDate" id="datepickClient" default="test" class="date-pick" style="width: 100px;" value = '<?php echo $oldDate; ?>' />
+        &nbsp;
+        To:<input name="endDate" id="datepickClient2" class="date-pick" style="width: 100px;" value ="<?php echo $newDate; ?>" />
+    </div>
+    <script type="text/javascript">
+        new datepickr('datepickClient', { dateFormat: 'Y-m-d' });
+        new datepickr('datepickClient2', { dateFormat: 'Y-m-d' });
+    </script>
     <?php
     echo $this->Form->end("Retrieve Client Report", array('name' => 'client'));
     ?> 

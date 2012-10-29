@@ -1,19 +1,7 @@
 <?php echo $this->Html->script("client_view.js", FALSE); ?>
 
-<?php echo $this->Html->script('ajaxupload-min.js'); ?>
+<?php echo $this->Html->script('ajaxupload-min.js', FALSE); ?>
 <?php echo $this->Html->css('classicTheme/style'); ?>
-
-<tr>
-    <td>
-       <div id="demo1" style="width:500px"></div>
-            <script type="text/javascript">
-            $('#demo1').ajaxupload({
-                url:'C:/wamp/www/mission_columbia_baked/webroot/upload.php',
-                remotePath:'C:/wamp/www/mission_columbia_baked/webroot/uploaded/',
-            });
-        </script>
-    </td>
-</tr>
 
 <div class="actionsNoButton">
     <?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> <br />
@@ -26,14 +14,14 @@
     <?php echo $this->Html->link(__('Create new Client'), array('action' => 'add')); ?> 	
 </div>
 <div class="clients view">
-    <h2><?php echo $client['Client']['first_name'] . "'s Profile"; ?></h2>
+    <h2><?php echo $client['Client']['first_name'] . " " . $client['Client']['last_name'] . "'s Profile"; ?></h2>
     <table>
         <tr>
             <td>
-                <?php echo $this->Html->image('person.png', array('alt' => 'Sample Photo', 'style' => "float: left;")); ?>
+                <?php echo $this->Html->image($imagePath, array('alt' => 'Sample Photo', 'style' => "float: left; width:200px; height:200px")); ?>
             </td>
             <td>
-                <h3>Personal Information</h3>
+                <h3><?php echo $client['Client']['first_name'] . " " . $client['Client']['last_name'] . "'s Personal Information" ?></h3>
                 <dl>
 
                     <dt><?php echo __('First Name'); ?></dt>
@@ -63,6 +51,7 @@
                 </dl>
             </td>
         </tr>
+
     </table>
 
     <div id="accordion">
@@ -179,55 +168,55 @@
                 <dt><?php echo __('Pregnant'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
-                    <?php echo ($client['Client']['pregnant'] == 1) ? 'true' : 'false'; ?>
+                    <?php echo ($client['Client']['pregnant'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Disabled'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
-                    <?php echo h($client['Client']['disabled']); ?>
+                    <?php echo ($client['Client']['disabled'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Handicapped'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
-                    <?php echo h($client['Client']['handicapped']); ?>
+                    <?php echo ($client['Client']['handicapped'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Stove'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
-                    <?php echo h($client['Client']['stove']); ?>
+                    <?php echo ($client['Client']['stove'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Refrigerator'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
-                    <?php echo h($client['Client']['refrigerator']); ?>
+                    <?php echo ($client['Client']['refrigerator'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Cell'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
-                    <?php echo h($client['Client']['cell']); ?>
+                    <?php echo ($client['Client']['cell'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Cable'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
-                    <?php echo h($client['Client']['cable']); ?>
+                    <?php echo ($client['Client']['cable'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Internet'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
-                    <?php echo h($client['Client']['internet']); ?>
+                    <?php echo ($client['Client']['internet'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Model'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
-                    <?php echo h($client['Client']['model']); ?>
+                    <?php echo ($client['Client']['model'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('How Did You Hear'); ?></dt>
@@ -283,7 +272,7 @@
                 </table>
 
             <?php endif; ?>
-            <br />
+            <br /><br />
             <?php echo $this->Html->link(__('Add a New Relative'), array('controller' => 'client_relations', 'action' => 'add', $client['Client']['id'])); ?>
         </div>
 
@@ -324,6 +313,18 @@
 
             <br /><br />
             <?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
+        </div>
+
+        <h2>Upload Photo</h2>
+        <div class="white-background black-text">
+            <div id="demo1" style="width:500px">
+                <script type="text/javascript">
+                    $('#demo1').ajaxupload({
+                        url:'/mission_columbia_baked/webroot/upload.php',
+                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/img'
+                    });
+                </script>
+            </div>
         </div>
     </div>
 </div>

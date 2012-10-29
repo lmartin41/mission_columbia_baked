@@ -65,7 +65,21 @@
 	                    <?php echo $this->Form->input('city'); ?>
 	                </td>
 	                <td>
-	                    <?php echo $this->Form->input('state'); ?>
+	                    <?php
+                            echo $this->Form->input('state', array('type' => 'select', 'empty' => true, 'options' => array(
+                                    'Alabama' => 'Alabama', 'Alaska' => 'Alaska', 'Arizona' => 'Arizona', 'Arkansas' => 'Arkansas', 'California' => 'California',
+                                    'Colorado' => 'Colorado', 'Connecticut' => 'Connecticut', 'Delaware' => 'Delaware', 'Washington DC' => 'Washington DC', 'Florida' => 'Florida',
+                                    'Georgia' => 'Georgia', 'Hawaii' => 'Hawaii', 'Idaho' => 'Idaho', 'Illinois' => 'Illinois', 'Indiana' => 'Indiana',
+                                    'Iowa' => 'Iowa', 'Kansas' => 'Kansas', 'Kentucky' => 'Kentucky', 'Louisiana' => 'Louisiana', 'Maine' => 'Maine',
+                                    'Maryland' => 'Maryland', 'Massachusetts' => 'Massachusetts', 'Michigan' => 'Michigan', 'Minnesota' => 'Minnesota', 'Mississippi' => 'Mississippi',
+                                    'Missouri' => 'Missouri', 'Montana' => 'Montana', 'Nebraska' => 'Nebraska', 'Nevada' => 'Nevada', 'New Hampshire' => 'New Hampshire',
+                                    'New Jersey' => 'New Jersey', 'New Mexico' => 'New Mexico', 'New York' => 'New York', 'North Carolina' => 'North Carolina', 'North Dakota' => 'North Dakota',
+                                    'Ohio' => 'Ohio', 'Oklahoma' => 'Oklahoma', 'Oregon' => 'Oregon', 'Pennsylvania' => 'Pennsylvania', 'Rhode Island' => 'Rhode Island',
+                                    'South Dakota' => 'South Dakota', 'Tennessee' => 'Tennessee', 'Texas' => 'Texas', 'Utah' => 'Utah', 'Vermont' => 'Vermont',
+                                    'Virginia' => 'VA', 'Washington' => 'Washington', 'West Virginia' => 'West Virginia', 'Wisconsin' => 'Wisconsin', 'Wyoming' => 'Wyoming',
+                                    'Puerto Rico' => 'Puerto Rico', 'Other' => 'Other'
+                                    )));
+                            ?>
 	                </td>
 	            </tr>
 	            <tr>
@@ -86,39 +100,39 @@
 	        <table>
 	            <tr>
 	                <td>
-	                    <?php echo $this->Form->input('regular_job'); ?>
+	                    <?php echo $this->Form->input('regular_job', array('value' => '$0.00')); ?>
 	                </td>
 	                <td>
-	                    <?php echo $this->Form->input('food_stamps'); ?>
+	                    <?php echo $this->Form->input('food_stamps', array('value' => '$0.00')); ?>
 	                </td>
 	            </tr>
 	            <tr>
 	            	<td>
-	                    <?php echo $this->Form->input('veterans_pension'); ?>
+	                    <?php echo $this->Form->input('veterans_pension', array('value' => '$0.00')); ?>
 	                </td>
 	                <td>
-	                    <?php echo $this->Form->input('part_time_job'); ?>
+	                    <?php echo $this->Form->input('part_time_job', array('value' => '$0.00')); ?>
 	                </td>
 	            </tr>
 	      		<tr>
 	                <td>
-	                    <?php echo $this->Form->input('social_security'); ?>
+	                    <?php echo $this->Form->input('social_security', array('value' => '$0.00')); ?>
 	                </td>
 	                <td>
-	                    <?php echo $this->Form->input('annuity_check'); ?>
+	                    <?php echo $this->Form->input('annuity_check', array('value' => '$0.00')); ?>
 	                </td>
 	            </tr>
 	            <tr>
 	                <td>
-	                    <?php echo $this->Form->input('child_support'); ?>
+	                    <?php echo $this->Form->input('child_support', array('value' => '$0.00')); ?>
 	                </td>
 	                <td>
-	                    <?php echo $this->Form->input('ssi_or_disability', array('label' => 'SSI or Disability')); ?> 
+	                    <?php echo $this->Form->input('ssi_or_disability', array('value' => '$0.00')); ?> 
 	                </td>
 	            </tr>
 	            <tr>
 	            	<td colspan="2">
-	                    <?php echo $this->Form->input('unemployment'); ?>
+	                    <?php echo $this->Form->input('unemployment', array('value' => '$0.00')); ?>
 	                </td>
 	            </tr>
 	            <tr>
@@ -184,7 +198,6 @@
 <div class="actionsNoButton" style="">
 
     <?php echo $this->Html->link('Clients Listing', array('action' => 'browse')); ?><br />
-    <?php echo $this->Html->link('Upload Photo', array('controller' => 'users', 'action' => 'upload')); ?><br />
     <?php echo $this->Html->link('Search for a Client', array('action' => 'index')); ?>
 
 </div>

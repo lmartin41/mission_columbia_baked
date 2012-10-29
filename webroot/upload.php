@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHP Real Ajax Uploader
  * Copyright @Alban Xhaferllari

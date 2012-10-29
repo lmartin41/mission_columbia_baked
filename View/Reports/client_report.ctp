@@ -13,7 +13,7 @@ Number of Checklists Completed: <?php echo $numChecklistsCompleted; ?>
         <tr>
             <th><?php echo __('Id'); ?></th>
             <th><?php echo __('Client Id'); ?></th>
-            <th><?php echo __('Resource Name'); ?></th>
+            <th><?php echo __('Resource ID'); ?></th>
             <th><?php echo __('Date'); ?></th>
             <th><?php echo __('Comments'); ?></th>
             <th class="actions"><?php echo __(''); ?></th>
@@ -27,7 +27,7 @@ Number of Checklists Completed: <?php echo $numChecklistsCompleted; ?>
                 <tr>
                     <td><?php echo $resourceUs['id']; ?></td>
                     <td><?php echo $resourceUs['client_id']; ?></td>
-                    <td><?php echo $resourceUs['Resource']['resource_name']; ?></td>
+                    <td><?php echo $resourceUs['resource_id'] ?></td>
                     <td><?php echo $resourceUs['date']; ?></td>
                     <td><?php echo $resourceUs['comments']; ?></td>
                     <td class="actions">
