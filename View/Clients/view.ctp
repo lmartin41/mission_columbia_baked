@@ -1,5 +1,20 @@
 <?php echo $this->Html->script("client_view.js", FALSE); ?>
 
+<?php echo $this->Html->script('ajaxupload-min.js'); ?>
+<?php echo $this->Html->css('classicTheme/style'); ?>
+
+<tr>
+    <td>
+       <div id="demo1" style="width:500px"></div>
+            <script type="text/javascript">
+            $('#demo1').ajaxupload({
+                url:'C:/wamp/www/mission_columbia_baked/webroot/upload.php',
+                remotePath:'C:/wamp/www/mission_columbia_baked/webroot/uploaded/',
+            });
+        </script>
+    </td>
+</tr>
+
 <div class="actionsNoButton">
     <?php echo $this->Html->link(__('Search for a Client'), array('action' => 'index')); ?> <br />
     <?php echo $this->Html->link(__('Client Listing'), array('action' => 'browse')); ?> <br />
