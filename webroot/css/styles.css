@@ -80,6 +80,7 @@ form#UserLoginForm
 div.actionsNoButton
 {
 	margin-top: 10px;
+	float: left;
 }
 
 div.actionsNoButton.users
