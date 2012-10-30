@@ -13,6 +13,7 @@
             <tr>
                 <th>Resource ID</th>
                 <th>Resource Name</th>
+                <th>Organization Name</th>
                 <th></th>
 
             </tr>
@@ -20,6 +21,7 @@
                 <tr>
                     <td><?php echo $result['Resource']['id']; ?>&nbsp;</td>
                     <td><?php echo $result['Resource']['resource_name']; ?>&nbsp;</td>
+                    <td><?php echo $results['Organization']['org_name']; ?>&nbsp;</td>
                     <td><?php echo $this->Html->link('View Report', array('action' => 'resourceReport', $result['Resource']['id'])); ?>
                 </tr>
             <?php endforeach; ?>

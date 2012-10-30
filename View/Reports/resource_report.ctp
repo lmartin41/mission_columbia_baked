@@ -8,6 +8,8 @@
 Organization Responsible for this Resource: <?php echo $resource['Organization']['org_name']; ?><Br />
 Number of Times this Resource Has Been Used: <?php echo $numberResourceUses; ?><br />
 Most popular user of this Resource: <?php echo $mostPopular; ?></br /><br />
+Resource Status: <?php echo $resource['Resource']['status']; ?>
+Resource Inventory: <?php echo $resource['Resource']['inventory']; ?>
 
 <h3><?php echo __('Activity History for this Resource'); ?></h3>
     <?php if (!empty($resource['ResourceUs'])): ?>
