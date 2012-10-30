@@ -28,7 +28,7 @@
         <fieldset>
             <input type="radio" name="sexChooser" value="male" style="vertical-align: middle" />Men<br /><br />
             <input type="radio" name="sexChooser" value="female" style="vertical-align: middle" />Women<br /><br />
-            <input type="radio" name="sexChooser" value="neither" style="vertical-align: middle" />Neither<br /><br />
+            <input type="radio" name="sexChooser" value="neither" style="vertical-align: middle" />Both<br /><br />
         </fieldset>
 
 

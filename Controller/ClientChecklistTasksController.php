@@ -26,7 +26,8 @@ class ClientChecklistTasksController extends AppController {
      * @param string $id
      * @return void
      */
-    public function view($id = null) {
+    public function view($id = null, $clientID = null) {
+        $this->set('clientID', $clientID);
         $this->ClientChecklistTask->id = $id;
         if (!$this->ClientChecklistTask->exists()) {
             throw new NotFoundException(__('Invalid client checklist task'));
@@ -39,7 +40,7 @@ class ClientChecklistTasksController extends AppController {
      *
      * @return void
      */
-    public function add($clientChecklistID) {
+    public function add($clientChecklistID = null) {
         $this->set('clientChecklistID', $clientChecklistID);
         $clientChecklist = $this->ClientChecklistTask->ClientChecklist->read(null, $clientChecklistID);
         if ($this->request->is('post')) {
@@ -70,7 +71,8 @@ class ClientChecklistTasksController extends AppController {
      * @param string $id
      * @return void
      */
-    public function edit($id = null) {
+    public function edit($id = null, $clientID = null) {
+        $this->set('clientID', $clientID);
         $this->ClientChecklistTask->id = $id;
         if (!$this->ClientChecklistTask->exists()) {
             throw new NotFoundException(__('Invalid client checklist task'));
@@ -78,7 +80,7 @@ class ClientChecklistTasksController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->ClientChecklistTask->save($this->request->data)) {
                 $this->Session->setFlash(__('The client checklist task has been saved'));
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('controller' => 'ClientChecklists', 'action' => 'index', $clientID));
             } else {
                 $this->Session->setFlash(__('The client checklist task could not be saved. Please, try again.'));
             }
@@ -97,7 +99,7 @@ class ClientChecklistTasksController extends AppController {
      * @param string $id
      * @return void
      */
-    public function delete($id = null) {
+    public function delete($id = null, $clientID) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
@@ -107,10 +109,10 @@ class ClientChecklistTasksController extends AppController {
         }
         if ($this->ClientChecklistTask->delete()) {
             $this->Session->setFlash(__('Client checklist task deleted'));
-            $this->redirect(array('action' => 'index'));
+            $this->redirect(array('controller' => 'ClientChecklists', 'action' => 'index', $clientID));
         }
         $this->Session->setFlash(__('Client checklist task was not deleted'));
-        $this->redirect(array('action' => 'index'));
+        $this->redirect(array('controller' => 'ClientChecklists', 'action' => 'index', $clientID));
     }
 
 }

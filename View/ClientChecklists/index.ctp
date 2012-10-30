@@ -3,10 +3,10 @@
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th><?php echo $this->Paginator->sort('id'); ?></th>
-            <th><?php echo $this->Paginator->sort('client_id'); ?></th>
+            <th><?php echo $this->Paginator->sort('client'); ?></th>
             <th><?php echo $this->Paginator->sort('isCompleted'); ?></th>
-            <th><?php echo $this->Paginator->sort('created'); ?></th>
-            <th><?php echo $this->Paginator->sort('modified'); ?></th>
+            <th><?php echo $this->Paginator->sort('checklist_name'); ?></th>
+            <th><?php echo $this->Paginator->sort('checklist_description'); ?></th>
             <th class="actions"><?php echo __(''); ?></th>
         </tr>
         <?php
@@ -16,11 +16,11 @@
                 <tr>
                     <td><?php echo h($clientChecklist['ClientChecklist']['id']); ?>&nbsp;</td>
                     <td>
-                        <?php echo $this->Html->link($clientChecklist['Client']['id'], array('controller' => 'clients', 'action' => 'view', $clientChecklist['Client']['id'])); ?>
+                        <?php echo $this->Html->link($clientChecklist['Client']['first_name']." ".$clientChecklist['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $clientChecklist['Client']['id'])); ?>
                     </td>
                     <td><?php echo h($clientChecklist['ClientChecklist']['isCompleted']); ?>&nbsp;</td>
-                    <td><?php echo h($clientChecklist['ClientChecklist']['created']); ?>&nbsp;</td>
-                    <td><?php echo h($clientChecklist['ClientChecklist']['modified']); ?>&nbsp;</td>
+                    <td><?php echo h($clientChecklist['ClientChecklist']['checklist_name']); ?>&nbsp;</td>
+                    <td><?php echo h($clientChecklist['ClientChecklist']['checklist_description']); ?>&nbsp;</td>
                     <td class="actions">
                         <?php echo $this->Html->link(__('Add Task'), array('controller' => 'ClientChecklistTasks', 'action' => 'add', $clientChecklist['ClientChecklist']['id'])); ?>
                         <?php echo $this->Html->link(__('View/Edit'), array('action' => 'view', $clientChecklist['ClientChecklist']['id'])); ?>
@@ -47,9 +47,8 @@
 </div>
 <div class="actionsNoButton">
     <ul>
-        <li><?php echo $this->Form->postLink(__('Create Client Checklist'), array('action' => 'add', $client['Client']['id']), null, __('Are you sure you want to create a client checklist for %s?', $client['Client']['first_name'])); ?> </li><br />
+        <li><?php echo $this->Html->link(__('Create Client Checklist'), array('action' => 'add', $client['Client']['id'])); ?></li><br />
         <li><?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> </li><br />
         <li><?php echo $this->Html->link(__('Browse Clients'), array('controller' => 'clients', 'action' => 'browse')); ?> </li><br />
-        <li><?php echo $this->Html->link(__('New Client Checklist Task'), array('controller' => 'client_checklist_tasks', 'action' => 'add')); ?> </li>
     </ul>
 </div>

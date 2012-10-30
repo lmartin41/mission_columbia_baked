@@ -123,7 +123,7 @@ class ResourceUsesController extends AppController {
     }
     
     public function countPeriod($startDate, $endDate) {
-        $query = $this->ResourceUs->query("
+        $query = $this->ResourceUse->query("
                 Select count(*)
                 From resource_uses
                 Where date between '$startDate' AND '$endDate';
@@ -131,7 +131,7 @@ class ResourceUsesController extends AppController {
     }
 
     public function mostPopular() {
-        $query = $this->ResourceUs->query(
+        $query = $this->ResourceUse->query(
                 "Select max(counts) as mostPopular from (
                     select resource_name as counts from resource_uses 
                     join resources on resource_id 

@@ -1,92 +1,91 @@
 <div class="actionsNoButton">
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Client Checklist'), array('action' => 'edit', $clientChecklist['ClientChecklist']['id'])); ?> </li><br />
-		<li><?php echo $this->Form->postLink(__('Delete Client Checklist'), array('action' => 'delete', $clientChecklist['ClientChecklist']['id']), null, __('Are you sure you want to delete # %s?', $clientChecklist['ClientChecklist']['id'])); ?> </li><br />
-		<li><?php echo $this->Html->link(__('List Client Checklists'), array('action' => 'index')); ?> </li><br />
-		<li><?php echo $this->Html->link(__('New Client Checklist'), array('action' => 'add')); ?> </li><br />
-		<li><?php echo $this->Html->link(__('List Clients'), array('controller' => 'clients', 'action' => 'index')); ?> </li><br />
-		<li><?php echo $this->Html->link(__('New Client'), array('controller' => 'clients', 'action' => 'add')); ?> </li><br />
-		<li><?php echo $this->Html->link(__('List Client Checklist Tasks'), array('controller' => 'client_checklist_tasks', 'action' => 'index')); ?> </li><br />
-		<li><?php echo $this->Html->link(__('New Client Checklist Task'), array('controller' => 'client_checklist_tasks', 'action' => 'add')); ?> </li>
-	</ul>
+    <ul>
+        <li><?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $clientChecklist['ClientChecklist']['id'])); ?> </li><br />
+        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $clientChecklist['ClientChecklist']['id'], $clientChecklist['Client']['id']), null, __('Are you sure you want to delete # %s?', $clientChecklist['ClientChecklist']['id'])); ?> </li><br />
+        <li><?php echo $this->Html->link(__('Checklists Listing'), array('action' => 'index', $clientChecklist['Client']['id'])); ?> </li><br />
+        <li><?php echo $this->Html->link(__('New Checklist'), array('action' => 'add', $clientChecklist['ClientChecklist']['id'])); ?> </li><br />
+        <li><?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'browse')); ?> </li><br />
+        <li><?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> </li><br />
+        <li><?php echo $this->Html->link(__('New Client Checklist Task'), array('controller' => 'client_checklist_tasks', 'action' => 'add')); ?> </li>
+    </ul>
 </div>
 <div class="clientChecklists view">
-<h2><?php  echo __('Client Checklist'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($clientChecklist['ClientChecklist']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Client'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($clientChecklist['Client']['id'], array('controller' => 'clients', 'action' => 'view', $clientChecklist['Client']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('IsCompleted'); ?></dt>
-		<dd>
-			<?php echo h($clientChecklist['ClientChecklist']['isCompleted']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('IsDeleted'); ?></dt>
-		<dd>
-			<?php echo h($clientChecklist['ClientChecklist']['isDeleted']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Created'); ?></dt>
-		<dd>
-			<?php echo h($clientChecklist['ClientChecklist']['created']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Modified'); ?></dt>
-		<dd>
-			<?php echo h($clientChecklist['ClientChecklist']['modified']); ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Client Checklist Tasks'); ?></h3>
-	<?php if (!empty($clientChecklist['ClientChecklistTask'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Client Checklist Id'); ?></th>
-		<th><?php echo __('Task Name'); ?></th>
-		<th><?php echo __('Task Description'); ?></th>
-		<th><?php echo __('Comments'); ?></th>
-		<th><?php echo __('IsCompleted'); ?></th>
-		<th><?php echo __('IsDeleted'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($clientChecklist['ClientChecklistTask'] as $clientChecklistTask): ?>
-		<tr>
-			<td><?php echo $clientChecklistTask['id']; ?></td>
-			<td><?php echo $clientChecklistTask['client_checklist_id']; ?></td>
-			<td><?php echo $clientChecklistTask['task_name']; ?></td>
-			<td><?php echo $clientChecklistTask['task_description']; ?></td>
-			<td><?php echo $clientChecklistTask['comments']; ?></td>
-			<td><?php echo $clientChecklistTask['isCompleted']; ?></td>
-			<td><?php echo $clientChecklistTask['isDeleted']; ?></td>
-			<td><?php echo $clientChecklistTask['created']; ?></td>
-			<td><?php echo $clientChecklistTask['modified']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'client_checklist_tasks', 'action' => 'view', $clientChecklistTask['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'client_checklist_tasks', 'action' => 'edit', $clientChecklistTask['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'client_checklist_tasks', 'action' => 'delete', $clientChecklistTask['id']), null, __('Are you sure you want to delete # %s?', $clientChecklistTask['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
+    <h2><?php echo __('Client Checklist'); ?></h2>
+    <dl>
+        <dt><?php echo __('Id'); ?></dt>
+        <dd>
+            <?php echo h($clientChecklist['ClientChecklist']['id']); ?>
+            &nbsp;
+        </dd>
+        <dt><?php echo __('Client'); ?></dt>
+        <dd>
+            <?php echo $this->Html->link($clientChecklist['Client']['id'], array('controller' => 'clients', 'action' => 'view', $clientChecklist['Client']['id'])); ?>
+            &nbsp;
+        </dd>
+        <dt><?php echo __('Checklist Name'); ?></dt>
+        <dd>
+            <?php echo $clientChecklist['ClientChecklist']['checklist_name']; ?>
+            &nbsp;
+        </dd>
+        <dt><?php echo __('Checklist Description'); ?></dt>
+        <dd>
+            <?php echo $clientChecklist['ClientChecklist']['checklist_description']; ?>
+            &nbsp;
+        </dd>
+        <dt><?php echo __('IsCompleted'); ?></dt>
+        <dd>
+            <?php echo h($clientChecklist['ClientChecklist']['isCompleted']); ?>
+            &nbsp;
+        </dd>
+        <dt><?php echo __('IsDeleted'); ?></dt>
+        <dd>
+            <?php echo h($clientChecklist['ClientChecklist']['isDeleted']); ?>
+            &nbsp;
+        </dd>
+        <dt><?php echo __('Created'); ?></dt>
+        <dd>
+            <?php echo h($clientChecklist['ClientChecklist']['created']); ?>
+            &nbsp;
+        </dd>
+        <dt><?php echo __('Modified'); ?></dt>
+        <dd>
+            <?php echo h($clientChecklist['ClientChecklist']['modified']); ?>
+            &nbsp;
+        </dd>
+    </dl>
+<Br /><br />
+    <h3><?php echo __('Client Checklist Tasks'); ?></h3>
+    <?php if (!empty($clientChecklist['ClientChecklistTask'])): ?>
+        <table cellpadding = "0" cellspacing = "0">
+            <tr>
+                <th><?php echo __('Id'); ?></th>
+                <th><?php echo __('Client Checklist Id'); ?></th>
+                <th><?php echo __('Task Name'); ?></th>
+                <th><?php echo __('Task Description'); ?></th>
+                <th><?php echo __('Comments'); ?></th>
+                <th><?php echo __('IsCompleted'); ?></th>
+                <th class="actions"><?php echo __(''); ?></th>
+            </tr>
+            <?php
+            $i = 0;
+            foreach ($clientChecklist['ClientChecklistTask'] as $clientChecklistTask):
+                ?>
+                <tr>
+                    <td><?php echo $clientChecklistTask['id']; ?></td>
+                    <td><?php echo $clientChecklistTask['client_checklist_id']; ?></td>
+                    <td><?php echo $clientChecklistTask['task_name']; ?></td>
+                    <td><?php echo $clientChecklistTask['task_description']; ?></td>
+                    <td><?php echo $clientChecklistTask['comments']; ?></td>
+                    <td><?php echo $clientChecklistTask['isCompleted']; ?></td>
+                    <td class="actions">
+                        <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_checklist_tasks', 'action' => 'view', $clientChecklistTask['id'], $clientChecklist['Client']['id'])); ?>
+                    </td>
+                </tr>
+        <?php endforeach; ?>
+        </table>
 <?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Client Checklist Task'), array('controller' => 'client_checklist_tasks', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
+    <div>
+        None
+    </div>
 </div>

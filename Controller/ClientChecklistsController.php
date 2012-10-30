@@ -41,13 +41,23 @@ class ClientChecklistsController extends AppController {
      * @return void
      */
     public function add($clientID = null) {
-        $this->request->data['ClientChecklist']['client_id'] = $clientID;
-        $this->ClientChecklist->create();
-        if ($this->ClientChecklist->save($this->request->data)) {
-            $this->Session->setFlash(__('The client checklist has been saved'));
-            $this->redirect(array('action' => 'index', $clientID));
-        } else {
-            $this->Session->setFlash(__('The client checklist could not be saved. Please, try again.'));
+        $this->set('clientID', $clientID);
+        if ($this->request->is('post')) {
+            if (isset($this->request->data['cancel'])) {
+                $this->redirect(array('action' => 'index', $clientID));
+            }
+            $this->request->data['ClientChecklist']['client_id'] = $clientID;
+            $this->ClientChecklist->create();
+            if ($this->ClientChecklist->save($this->request->data)) {
+                $this->Session->setFlash(__('The client checklist has been saved'));
+                if (isset($this->request->data['addMore'])) {
+                    $this->redirect(array('controller' => 'ClientChecklistTasksController', 'action' => 'add', $this->ClientChecklist->id));
+                } else if (isset($this->request->data['finished'])) {
+                    $this->redirect(array('action' => 'index', $clientID));
+                }
+            } else {
+                $this->Session->setFlash(__('The client checklist could not be saved. Please, try again.'));
+            }
         }
     }
 
@@ -85,7 +95,7 @@ class ClientChecklistsController extends AppController {
      * @param string $id
      * @return void
      */
-    public function delete($id = null) {
+    public function delete($id = null, $clientID = null) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
@@ -95,10 +105,10 @@ class ClientChecklistsController extends AppController {
         }
         if ($this->ClientChecklist->delete()) {
             $this->Session->setFlash(__('Client checklist deleted'));
-            $this->redirect(array('action' => 'index'));
+            $this->redirect(array('action' => 'index', $clientID));
         }
         $this->Session->setFlash(__('Client checklist was not deleted'));
-        $this->redirect(array('action' => 'index'));
+        $this->redirect(array('action' => 'index', $clientID));
     }
 
 }

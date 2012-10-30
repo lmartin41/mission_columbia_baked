@@ -70,7 +70,17 @@ class ReportsController extends AppController {
             
             if (strlen($endDay) == 1) $endDay = "0".$endDay;
             $endDate = $endYear . "-" . $endMonth . "-" . $endDay;
-
+            
+            $sex = 'both';
+            if ($this->request->data('sexChooser') == 'male') {
+                $sex = 'male';
+            }
+            
+            if ($this->request->data('sexChooser') == 'female') {
+                $sex = 'female';
+            }
+            
+            $this->Session->write('sex', $sex);
             $this->Session->write('startDate', $startDate);
             $this->Session->write('endDate', $endDate);
             $this->redirect(array('action' => 'aggregateClientsReport'));
@@ -115,6 +125,7 @@ class ReportsController extends AppController {
     public function aggregateClientsReport() {
         $startDate = $this->Session->read('startDate');
         $endDate = $this->Session->read('endDate');
+        $sex = $this->Session->read('sex');
         
         $this->set('startDate', $startDate);
         $this->set('endDate', $endDate);
