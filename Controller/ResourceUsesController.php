@@ -74,14 +74,14 @@ class ResourceUsesController extends AppController {
     public function edit($id = null) {
         $this->ResourceUs->id = $id;
         if (!$this->ResourceUs->exists()) {
-            throw new NotFoundException(__('Invalid ResourceUs'));
+            throw new NotFoundException(__('Invalid Resource Use'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->ResourceUs->save($this->request->data)) {
                 $this->Session->setFlash(__('The resource Use has been saved'));
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('controller' => 'clients', 'action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The ResourceUs could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The ResourceUse could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->ResourceUs->read(null, $id);
@@ -109,10 +109,10 @@ class ResourceUsesController extends AppController {
         }
         if ($this->ResourceUs->delete()) {
             $this->Session->setFlash(__('Resource Use deleted'));
-            $this->redirect(array('action' => 'index'));
+            $this->redirect(array('controller' => 'clients', 'action' => 'index'));
         }
         $this->Session->setFlash(__('Resourceus was not deleted'));
-        $this->redirect(array('action' => 'index'));
+        $this->redirect(array('controller' => 'clients', 'action' => 'index'));
     }
 
     /**
@@ -140,8 +140,8 @@ class ResourceUsesController extends AppController {
         return $query[0][0]['mostPopular'];
     }
 
-    public function countParticular($resourceID = null, $startDate, $endDate) {
-        $query = $this->ResourceUs->query("
+    public function countParticular($resourceID, $startDate, $endDate) {
+       $query = $this->ResourceUse->query("
                 Select count(resource_id) as count
                 From resource_uses
                 Where resource_id = '$resourceID' AND date between '$startDate' and '$endDate';
@@ -149,8 +149,8 @@ class ResourceUsesController extends AppController {
         return $query[0][0]['count'];
     }
     
-    public function mostPopularClient($resourceID = null, $startDate, $endDate) {
-        $query = $this->ResourceUs->query("
+    public function mostPopularClient($resourceID, $startDate, $endDate) {
+        $query = $this->ResourceUse->query("
                Select max(counts) as mostPopular from (
                     select first_name as counts from clients
                     join resource_uses on client_id 

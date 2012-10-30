@@ -58,7 +58,7 @@
 	            </tr>
 	            <tr>
 	                <td>
-	                    <?php echo $this->Form->input('address'); ?>
+	                    <?php echo $this->Form->input('address_one', array('label' => 'Address')); ?>
 	                </td>
 	                <td>
 	                    <?php echo $this->Form->input('apartment_number', array('label' => 'Apt #', 'type' => 'text')); ?>
@@ -189,8 +189,6 @@
     <br /><br />
 
     <div>
-        <?php echo $this->Form->submit(__('Save and Edit Client Relatives'), array('name' => 'addMore', 'div' => false)); ?>
-        &nbsp;
         <?php echo $this->Form->submit('Done', array('name' => 'finished', 'div' => false)); ?>
         &nbsp;
         <?php echo $this->Form->submit('Cancel', array('name' => 'cancel', 'div' => false)); ?>

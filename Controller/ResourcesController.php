@@ -115,6 +115,15 @@ class ResourcesController extends AppController {
         $this->Session->setFlash(__('Resource was not deleted'));
         $this->redirect(array('action' => 'index'));
     }
+    
+    public function giveMeName($resourceID) {
+        $query = $this->Resource->query("
+            Select resource_name
+            From resources
+            Where id = '$resourceID'
+        ");
+        return $query[0]['resources']['resource_name'];
+    }
 
     /**
      * Lee: Report functions 

@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('ResourcesController', 'Controller');
 
 /**
  * Clients Controller
@@ -19,7 +20,7 @@ class ClientsController extends AppController {
      */
     public function index() {
         if ($this->request->is('post')) {
-            $names = explode(" ",$this->request->data['Client']['Name']);
+            $names = explode(" ", $this->request->data['Client']['Name']);
             $firstName = $names[0];
             $lastName = $names[1];
 
@@ -53,11 +54,30 @@ class ClientsController extends AppController {
         if (!$this->Client->exists()) {
             throw new NotFoundException(__('Invalid client'));
         }
+        
         $client = $this->Client->read(null, $id);
+        $resourceUses = array();
+        $resourceName = array();
+        $resourceController = new ResourcesController();
+        
+        $i = 0;
+        foreach ($client['ResourceUs'] as $resourceUse) {
+            if ($resourceUse['client_id'] == $client['Client']['id']) {
+               $resourceUses[$i] = $resourceUse;
+               $resourceName[$i] = $resourceController->giveMeName($resourceUse['resource_id']);
+               $i++;
+            }
+        }
+        
+        $this->set('resourceUses', $resourceUses);
+        $this->set('resourceName', $resourceName);
+
         $this->set('client', $client);
-        $path = APP . 'webroot' . DS . 'img' . DS . $client['Client']['first_name'].$client['Client']['last_name'].'.jpg';
-        if (!file_exists($path)) $path = "person.png";
-        else $path = $client['Client']['first_name'].$client['Client']['last_name'].'.jpg';
+        $path = APP . 'webroot' . DS . 'img' . DS . $client['Client']['first_name'] . $client['Client']['last_name'] . '.jpg';
+        if (!file_exists($path))
+            $path = "person.png";
+        else
+            $path = $client['Client']['first_name'] . $client['Client']['last_name'] . '.jpg';
         $this->set('imagePath', $path);
     }
 
@@ -109,14 +129,12 @@ class ClientsController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('action' => 'view', $id));
             }
             if ($this->Client->save($this->request->data)) {
                 $this->Session->setFlash(__('The client has been edited'));
-                if (isset($this->request->data['editMore'])) {
-                    $this->redirect(array('controller' => 'client_relations', 'action' => 'index', $id));
-                } else if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('action' => 'index'));
+                if (isset($this->request->data['finished'])) {
+                    $this->redirect(array('action' => 'view', $id));
                 }
             } else {
                 $this->Session->setFlash(__('The client could not be saved. Please, try again.'));

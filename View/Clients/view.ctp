@@ -4,13 +4,13 @@
 <?php echo $this->Html->css('classicTheme/style'); ?>
 
 <div class="actionsNoButton client">
-    <?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?>
-	<?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?>
-    <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?>
-    <?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?>
-    <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
-    <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?>
-    <?php echo $this->Html->link(__('Print Client Summary'), array('action' => 'printClient', $client['Client']['id'])); ?>
+    <?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?><br />
+    <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?><br />
+    <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?><br />
+    <?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?><br />
+    <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?><br />
+    <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?><br />
+    <?php echo $this->Html->link(__('Print Client Summary'), array('action' => 'printClient', $client['Client']['id'])); ?><br />
     <?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete %s?', $client['Client']['first_name'])); ?>
 </div>
 <div class="clients view">
@@ -291,28 +291,27 @@
                         <th class="actions"><?php echo __(''); ?></th>
                     </tr>
                     <?php
-                    $i = 0;
-                    foreach ($client['ResourceUs'] as $resourceUs):
-                        if ($resourceUs['client_id'] == $client['Client']['id']):
-                            ?>
-                            <tr>
-                                <td><?php echo $resourceUs['id']; ?></td>
-                                <td><?php echo $resourceUs['client_id']; ?></td>
-                                <td><?php echo $resourceUs['Resource']['resource_name']; ?></td>
-                                <td><?php echo $resourceUs['date']; ?></td>
-                                <td><?php echo $resourceUs['comments']; ?></td>
-                                <td class="actions">
-                                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['ResourceUs']['id'])); ?>
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+                    $j = 0;
+                    foreach ($resourceUses as $resourceUs):
+                        ?>
+                        <tr>
+                            <td><?php echo $resourceUs['id']; ?></td>
+                            <td><?php echo $resourceUs['client_id']; ?></td>
+                            <td><?php echo $resourceName[$j]; ?></td>
+                            <td><?php echo $resourceUs['date']; ?></td>
+                            <td><?php echo $resourceUs['comments']; ?></td>
+                            <td class="actions">
+        <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'ResourceUses', 'action' => 'view', $resourceUs['id'])); ?>
+                            </td>
+                        </tr>
+                        <?php $i++; ?>
+                <?php endforeach; ?>
                 </table>
             <?php else: echo "none"; ?>
-            <?php endif; ?>
+<?php endif; ?>
 
             <br /><br />
-            <?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
+<?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
         </div>
 
         <h2>Upload Photo</h2>

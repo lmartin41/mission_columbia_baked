@@ -54,7 +54,7 @@
 	            </tr>
 	            <tr>
 	                <td>
-	                    <?php echo $this->Form->input('address'); ?>
+	                    <?php echo $this->Form->input('address_one', array('label' => 'Address')); ?>
 	                </td>
 	                <td>
 	                    <?php echo $this->Form->input('apartment_number', array('label' => 'Apt #', 'type' => 'text')); ?>
@@ -196,7 +196,7 @@
     </div>
 </div>
 <div class="actionsNoButton" style="">
-	<?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?>
-	<?php echo $this->Html->link(__('Add a Client'), array('action' => 'add'), array('class' => 'active_link')); ?>
+	<?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?><Br />
+	<?php echo $this->Html->link(__('Add a Client'), array('action' => 'add'), array('class' => 'active_link')); ?><br />
     <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?>
 </div>

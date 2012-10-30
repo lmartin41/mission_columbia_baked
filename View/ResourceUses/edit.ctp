@@ -3,7 +3,6 @@
 	<fieldset>
 		<legend><?php echo __('Edit Resource Use'); ?></legend>
 	<?php
-		echo $this->Form->input('id');
 		echo $this->Form->input('client_id');
 		echo $this->Form->input('resource_id');
 		echo $this->Form->input('date', array('type' => 'date', 'empty' => true));

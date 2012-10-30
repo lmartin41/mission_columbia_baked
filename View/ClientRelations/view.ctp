@@ -1,3 +1,13 @@
+<div class="actionsNoButton">
+
+        <?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'index')); ?><br /><br />
+        <?php echo $this->Html->link(__('Relatives Listing'), array('action' => 'index', $clientRelation['ClientRelation']['client_id'])); ?><br /><br />
+        <?php echo $this->Html->link(__('Edit this Relative'), array('action' => 'edit', $clientRelation['ClientRelation']['id'], $clientRelation['ClientRelation']['client_id'])); ?><br /><br />
+        <?php echo $this->Form->postLink(__('Delete This Relative'), array('action' => 'delete', $clientRelation['ClientRelation']['id'], $clientRelation['ClientRelation']['client_id']), null, __('Are you sure you want to delete %s?', $clientRelation['ClientRelation']['first_name'])); ?><br /><br />
+        <?php echo $this->Html->link(__('Create a new Relative'), array('action' => 'add')); ?>
+    
+</div>
+
 <div class="clientRelations view">
     <h2><?php echo __('Client Relation'); ?></h2>
     <dl>
@@ -38,12 +48,4 @@
         </dd>
     </dl>
 </div>
-<div class="actionsNoButton">
 
-        <?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'index')); ?><br /><br />
-        <?php echo $this->Html->link(__('Relatives Listing'), array('action' => 'index', $clientRelation['ClientRelation']['client_id'])); ?><br /><br />
-        <?php echo $this->Html->link(__('Edit this Relative'), array('action' => 'edit', $clientRelation['ClientRelation']['id'], $clientRelation['ClientRelation']['client_id'])); ?><br /><br />
-        <?php echo $this->Form->postLink(__('Delete This Relative'), array('action' => 'delete', $clientRelation['ClientRelation']['id'], $clientRelation['ClientRelation']['client_id']), null, __('Are you sure you want to delete %s?', $clientRelation['ClientRelation']['first_name'])); ?><br /><br />
-        <?php echo $this->Html->link(__('Create a new Relative'), array('action' => 'add')); ?>
-    
-</div>

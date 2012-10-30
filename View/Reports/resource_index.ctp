@@ -10,7 +10,7 @@
     echo $this->Form->input("resource_name");
     ?>
 
-    <?php $oldDate = Date('Y') . "-1-1"; ?>
+    <?php $oldDate = Date('Y') . "-01-01"; ?>
     <?php $newDate = Date('Y-m-d'); ?>
     From:<input name="startDate" id="datepickResource3" default="test" class="date-pick" style="width: 100px;" value = '<?php echo $oldDate; ?>' />
     &nbsp;
