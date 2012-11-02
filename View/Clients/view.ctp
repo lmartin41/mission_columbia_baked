@@ -304,7 +304,7 @@
         <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'ResourceUses', 'action' => 'view', $resourceUs['id'])); ?>
                             </td>
                         </tr>
-                        <?php $i++; ?>
+                        <?php $j++; ?>
                 <?php endforeach; ?>
                 </table>
             <?php else: echo "none"; ?>

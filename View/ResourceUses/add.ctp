@@ -1,9 +1,11 @@
+<?php $this->Html->script('resource_uses_add', FALSE); ?>
 <div class="resourceuses form">
     <?php echo $this->Form->create('ResourceUs'); ?>
     <fieldset>
         <legend><?php echo __('Add Resource Use'); ?></legend>
         <?php
-        echo $this->Form->input('resource_id');
+        echo $this->Form->input('organization_id', array('label' => 'Organization:', 'id' => 'organization', 'empty' => 'Select an organization'));
+        echo $this->Form->input('resource_id', array('type' => 'select', 'label' => 'Resource:', 'disabled' => 'disabled'));
         echo $this->Form->input('date', array('type' => 'date', 'minYear'=>date('Y')-50, 'maxYear'=>date('Y')));
         echo $this->Form->input('comments');
         ?>
