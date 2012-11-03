@@ -62,8 +62,8 @@ class Client extends AppModel {
             ),
         ),
         'DOB' => array(
-            'fixAge' => array(
-                'rule' => 'fixAge',
+          //  'fixAge' => array(
+         //       'rule' => 'fixAge',
             //'message' => 'Your custom message here',
             //'allowEmpty' => false,
             //'required' => false,
@@ -77,7 +77,7 @@ class Client extends AppModel {
             //'required' => false,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
-            ),
+          //  ),
         ),
         'sex' => array(
             'notempty' => array(
@@ -129,6 +129,19 @@ class Client extends AppModel {
         ),
         'ResourceUs' => array(
             'className' => 'ResourceUs',
+            'foreignKey' => 'client_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+        'ClientChecklist' => array(
+            'className' => 'ClientChecklist',
             'foreignKey' => 'client_id',
             'dependent' => false,
             'conditions' => '',

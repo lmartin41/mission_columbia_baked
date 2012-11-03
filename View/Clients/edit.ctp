@@ -1,4 +1,5 @@
 <?php echo $this->Html->script("client_add.js", FALSE); ?>
+<?php echo $this->Html->script("ageDobAuto.js", FALSE); ?>
 
 <style type="text/css">
     form label { 
@@ -10,7 +11,6 @@
     select {
         margin-left: 20px;
     }
-
 
     h1 {
         font-size: 18px;
@@ -47,13 +47,13 @@
 	            <tr>
 	                <td>
 
-	                	<?php echo $this->Form->input('DOB', array('type' => 'date', 'minYear'=>date('Y')-120, 'maxYear'=>date('Y')-1, 'empty' => true, 'div' => false, 'separator' => false)); ?>
+	                	<?php echo $this->Form->input('DOB', array('type' => 'date', 'onChange' => 'updateAge()', 'minYear' => date('Y') - 120, 'maxYear' => date('Y'), 'empty' => true, 'div' => false, 'separator' => false)); ?>
 
 	                	&nbsp; &nbsp;<b>OR</b>
 
 	                </td>
 	                <td>
-	                    <?php echo $this->Form->input('age'); ?>
+	                   <?php echo $this->Form->input('age', array('onChange' => 'updateDOB()')); ?>
 	                </td>
 	            </tr>
 	            <tr>
@@ -78,7 +78,7 @@
                                 'Missouri' => 'Missouri', 'Montana' => 'Montana', 'Nebraska' => 'Nebraska', 'Nevada' => 'Nevada', 'New Hampshire' => 'New Hampshire', 
                                 'New Jersey' => 'New Jersey', 'New Mexico' => 'New Mexico', 'New York' => 'New York', 'North Carolina' => 'North Carolina', 'North Dakota' => 'North Dakota',
                                 'Ohio' => 'Ohio', 'Oklahoma' => 'Oklahoma', 'Oregon' => 'Oregon', 'Pennsylvania' => 'Pennsylvania', 'Rhode Island' => 'Rhode Island',
-                                'South Dakota' => 'South Dakota', 'Tennessee' => 'Tennessee', 'Texas' => 'Texas', 'Utah' => 'Utah', 'Vermont' => 'Vermont',
+                                'South Carolina' => 'South Carolina', 'South Dakota' => 'South Dakota', 'Tennessee' => 'Tennessee', 'Texas' => 'Texas', 'Utah' => 'Utah', 'Vermont' => 'Vermont',
                                 'Virginia' => 'VA', 'Washington' => 'Washington', 'West Virginia' => 'West Virginia', 'Wisconsin' => 'Wisconsin', 'Wyoming' => 'Wyoming',
                                 'Puerto Rico' => 'Puerto Rico', 'Other' => 'Other'
                             ))); ?>
@@ -196,9 +196,7 @@
     </div>
 </div>
 <div class="actionsNoButton" style="">
-
-        <?php echo $this->Html->link('Clients Listing', array('action' => 'browse')); ?><br />
-        <?php echo $this->Html->link('Upload Photo', array('controller' => 'users', 'action' => 'upload')); ?><br />
-        <?php echo $this->Html->link('Search for a Client', array('action' => 'index')); ?>
-   
+	<?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?><Br />
+	<?php echo $this->Html->link(__('Edit Client'), array('action' => 'edit'), array('class' => 'active_link')); ?><br />
+    <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?>
 </div>

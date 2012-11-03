@@ -12,6 +12,11 @@ class ClientsController extends AppController {
 
     public $components = array('Session');
     public $helpers = array('Js');
+    public $paginate = array(
+        'order' => array(
+            'last_name' => 'asc'
+        )
+    );
 
     /**
      * index method
@@ -21,18 +26,35 @@ class ClientsController extends AppController {
     public function index() {
         if ($this->request->is('post')) {
             $names = explode(" ", $this->request->data['Client']['Name']);
-            $firstName = $names[0];
-            $lastName = $names[1];
+
+            $posVal = strpos($names[0], ',');
+            if ($posVal !== false) {
+                $lastName = substr($names[0], 0, $posVal);
+                $firstName = $names[1];
+            } else {
+                $firstName = $names[0];
+                $lastName = $names[1];
+            }
 
             //PUT AJAX HERE!!
             $correctResults = $this->clientSearch($firstName, $lastName);
             $this->Session->write('results', $correctResults);
-            $this->redirect(array('action' => 'searchResults'));
+
+            if (count($correctResults) == 1) {
+                $this->redirect(array('action' => 'view', $correctResults[0]['Client']['id']));
+            } else {
+                $this->redirect(array('action' => 'searchResults'));
+            }
         }
     }
 
     public function clientSearch($firstName, $lastName) {
-        $conditions = array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $lastName . '%');
+        if (empty($lastName)) {
+            $conditions = array('OR' => array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $firstName . '%'));
+        } else {
+            $conditions = array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $lastName . '%');
+        }
+
         $correctResults = $this->Client->find('all', array('conditions' => $conditions));
         return $correctResults;
     }
@@ -54,30 +76,39 @@ class ClientsController extends AppController {
         if (!$this->Client->exists()) {
             throw new NotFoundException(__('Invalid client'));
         }
-        
+
         $client = $this->Client->read(null, $id);
         $resourceUses = array();
         $resourceName = array();
         $resourceController = new ResourcesController();
-        
+
         $i = 0;
         foreach ($client['ResourceUs'] as $resourceUse) {
             if ($resourceUse['client_id'] == $client['Client']['id']) {
-               $resourceUses[$i] = $resourceUse;
-               $resourceName[$i] = $resourceController->giveMeName($resourceUse['resource_id']);
-               $i++;
+                $resourceUses[$i] = $resourceUse;
+                $resourceName[$i] = $resourceController->giveMeName($resourceUse['resource_id']);
+                $i++;
             }
         }
-        
+
         $this->set('resourceUses', $resourceUses);
         $this->set('resourceName', $resourceName);
 
         $this->set('client', $client);
-        $path = APP . 'webroot' . DS . 'img' . DS . $client['Client']['first_name'] . $client['Client']['last_name'] . '.jpg';
-        if (!file_exists($path))
+        $path1 = APP . 'webroot' . DS . 'img' . DS . $id . '.jpg';
+        $path2 = APP . 'webroot' . DS . 'img' . DS . $id. ' .png';
+        $path;
+        
+        if (file_exists($path1)) {
+            $path = $path1;
+        }
+        else if (file_exists($path2)) {
+            $path = $path2;
+        }
+        else {
             $path = "person.png";
-        else
-            $path = $client['Client']['first_name'] . $client['Client']['last_name'] . '.jpg';
+        }
+
         $this->set('imagePath', $path);
     }
 

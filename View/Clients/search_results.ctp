@@ -4,7 +4,7 @@
     <?php
     if ($results == null):
         echo 'No results Found';
-    ?>
+        ?>
 
     <?php else: ?>
 
@@ -33,7 +33,7 @@
 </div>
 
 <div class="actionsNoButton">
-    <?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?>
-	<?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?>
+    <?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?><br />
+    <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?><br />
     <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?>
 </div>

@@ -301,17 +301,47 @@
                             <td><?php echo $resourceUs['date']; ?></td>
                             <td><?php echo $resourceUs['comments']; ?></td>
                             <td class="actions">
-        <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'ResourceUses', 'action' => 'view', $resourceUs['id'])); ?>
+                                <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'ResourceUses', 'action' => 'view', $resourceUs['id'])); ?>
                             </td>
                         </tr>
-                        <?php $i++; ?>
-                <?php endforeach; ?>
+                        <?php $j++; ?>
+                    <?php endforeach; ?>
                 </table>
             <?php else: echo "none"; ?>
-<?php endif; ?>
+            <?php endif; ?>
 
             <br /><br />
-<?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
+            <?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
+        </div>
+
+        <h2><?php echo h($client['Client']['first_name']) . " 's Checklists"; ?></h2>
+        <div class="white-background black-text">
+            <?php if (!empty($client['ClientChecklist'])): ?>
+                <table cellpadding = "0" cellspacing = "0">
+                    <tr>
+                        <th><?php echo __('Id'); ?></th>
+                        <th><?php echo __('Client Id'); ?></th>
+                        <th><?php echo __('Checklist Name'); ?></th>
+                        <th><?php echo __('Checklist Description'); ?></th>
+                        <th class="actions"><?php echo __(''); ?></th>
+                    </tr>
+                    <?php foreach ($client['ClientChecklist'] as $checklist): ?>
+                        <tr>
+                            <td><?php echo $checklist['id']; ?></td>
+                            <td><?php echo $checklist['client_id']; ?></td>
+                            <td><?php echo $checklist['checklist_name']; ?></td>
+                            <td><?php echo $checklist['checklist_description']; ?></td>
+                            <td class="actions">
+                                <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_checklists', 'action' => 'view', $checklist['id'])); ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php else: echo "none"; ?>
+            <?php endif; ?>
+
+            <br /><br />
+            <?php echo $this->Html->link('Add new Checklist for this Client', array('controller' => 'client_checklists', 'action' => 'add', $client['Client']['id'])); ?>
         </div>
 
         <h2>Upload Photo</h2>
@@ -320,7 +350,8 @@
                 <script type="text/javascript">
                     $('#demo1').ajaxupload({
                         url:'/mission_columbia_baked/webroot/upload.php',
-                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/img'
+                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/img',
+                        editFilename: true
                     });
                 </script>
             </div>
