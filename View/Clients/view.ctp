@@ -305,7 +305,7 @@
                             </td>
                         </tr>
                         <?php $j++; ?>
-                    <?php endforeach; ?>
+                <?php endforeach; ?>
                 </table>
             <?php else: echo "none"; ?>
             <?php endif; ?>

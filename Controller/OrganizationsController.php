@@ -14,6 +14,9 @@ class OrganizationsController extends AppController {
      *
      * @return void
      */
+	
+	public $components = array('RequestHandler');
+	
     public function index() {
         $this->Organization->recursive = 0;
         $this->set('organizations', $this->paginate());
@@ -31,7 +34,7 @@ class OrganizationsController extends AppController {
         if (!$this->Organization->exists()) {
             throw new NotFoundException(__('Invalid organization'));
         }
-        $this->set('organization', $this->Organization->read(null, $id));
+        $this->set('organization', $this->Organization->read(null, $id));      
     }
 
     /**
@@ -107,6 +110,16 @@ class OrganizationsController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
 
+    public function resources($id = null)
+    {
+    	$this->Organization->id = $id;
+    	if (!$this->Organization->exists()) {
+    		throw new NotFoundException(__('Invalid organization'));
+    	}
+    	$org = $this->Organization->read(null, $id);
+    	$this->set('organization_resources', $org['Resource']);
+    }
+    
     /**
      * Lee: Report functions 
      */

@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
  * @property Resourceus $Resourceus
  */
 class ResourceUsesController extends AppController {
-	public $uses = "ResourceUs";
+	public $uses = array("ResourceUs", "Organization");
     /**
      * index method
      *
@@ -60,8 +60,8 @@ class ResourceUsesController extends AppController {
             }
         }
         $clients = $this->ResourceUs->Client->find('list');
-        $resources = $this->ResourceUs->Resource->find('list');
-        $this->set(compact('clients', 'resources'));
+        $organizations = $this->Organization->find('list');
+        $this->set(compact('clients', 'organizations'));
     }
 
     /**
