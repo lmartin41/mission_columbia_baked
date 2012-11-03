@@ -93,23 +93,31 @@ class ClientsController extends AppController {
 
         $this->set('resourceUses', $resourceUses);
         $this->set('resourceName', $resourceName);
-
         $this->set('client', $client);
-        $path1 = APP . 'webroot' . DS . 'img' . DS . $id . '.jpg';
-        $path2 = APP . 'webroot' . DS . 'img' . DS . $id. ' .png';
-        $path;
+        
+        $path = $this->giveMePath('Client', $id);
+        $this->set('imagePath', $path);
+    }
+    
+    /**
+     * Lee: This function is for determining the path for image uploading
+     * 
+     * @param type $id
+     * @return string 
+     */
+    public static function giveMePath($name, $id) {
+        $path1 = APP . 'webroot' . DS . 'img' . DS . $name.$id. '.jpg';
+        $path2 = APP . 'webroot' . DS . 'img' . DS . $name.$id. '.png';
+        $path = "person.png";
         
         if (file_exists($path1)) {
-            $path = $path1;
+            $path = $name.$id.'.jpg';
         }
         else if (file_exists($path2)) {
-            $path = $path2;
-        }
-        else {
-            $path = "person.png";
+            $path = $name.$id.'.png';
         }
 
-        $this->set('imagePath', $path);
+        return $path;
     }
 
     /**
@@ -253,10 +261,21 @@ class ClientsController extends AppController {
                   
             Select count(*) as numCompleted
             From client_checklists
-            Where client_id = '$id' AND isCompleted='true';
+            Where client_id = '$id' AND isCompleted = '1';
                   
             ");
 
+        return $query[0][0]['numCompleted'];
+    }
+    
+    public function numberOfChecklistTasksCompleted($id = null) {
+        $query = $this->Client->query("
+            
+            Select count(*) as numCompleted
+            From client_checklist_tasks join client_checklists
+            Where client_checklists.client_id = '$id' AND client_checklist_tasks.isCompleted = '1';
+                
+            ");
         return $query[0][0]['numCompleted'];
     }
 

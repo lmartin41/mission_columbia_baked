@@ -1,13 +1,15 @@
 <?php echo $this->Html->script("toggle.js", FALSE); ?>
 <?php echo $this->Html->script("datepickr.js", FALSE); ?>
 <?php echo $this->Html->css("datepickr.css", FALSE); ?>
+<?php $this->Html->script('resource_uses_add', FALSE); ?>
 
 <div class="Reports form">
 
     <h3>Individual Resource Report</h3>
+    <?php echo $this->Form->create('ResourceUs'); ?>
     <?php
-    echo $this->Form->create('Resource');
-    echo $this->Form->input("resource_name");
+    echo $this->Form->input('organization_id', array('label' => 'Organization:', 'id' => 'organization', 'empty' => 'Select an organization'));
+    echo $this->Form->input('resource_id', array('type' => 'select', 'label' => 'Resource:', 'disabled' => 'disabled'));
     ?>
 
     <?php $oldDate = Date('Y') . "-01-01"; ?>

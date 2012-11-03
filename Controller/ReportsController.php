@@ -8,6 +8,7 @@ App::uses('ResourceusesController', 'Controller');
 
 class ReportsController extends AppController {
 
+    public $uses = array("ResourceUs", "Organization");
     public $helpers = array('Js');
     public $name = 'Reports';
 
@@ -16,15 +17,28 @@ class ReportsController extends AppController {
 
         if ($this->request->is('post')) {
             $names = explode(" ", $this->request->data['Client']['Name']);
-            $firstName = $names[0];
-            $lastName = $names[1];
+
+            $posVal = strpos($names[0], ',');
+            if ($posVal !== false) {
+                $lastName = substr($names[0], 0, $posVal);
+                $firstName = $names[1];
+            } else {
+                $firstName = $names[0];
+                $lastName = $names[1];
+            }
+
             $startDate = $this->request->data['startDate'];
             $endDate = $this->request->data['endDate'];
             $correctResults = $clientsController->clientSearch($firstName, $lastName);
             $this->Session->write('clientResults', $correctResults);
             $this->Session->write('startDate', $startDate);
             $this->Session->write('endDate', $endDate);
-            $this->redirect(array('action' => 'clientReportSearch'));
+
+            if (count($correctResults) == 1) {
+                $this->redirect(array('action' => 'clientReport', $correctResults[0]['Client']['id']));
+            } else {
+                $this->redirect(array('action' => 'clientReportSearch'));
+            }
         }
     }
 
@@ -41,92 +55,100 @@ class ReportsController extends AppController {
             $this->Session->write('endDate', $endDate);
             $this->redirect(array('action' => 'resourceReportSearch'));
         }
+
+        $organizations = $this->Organization->find('list');
+        $this->set(compact('organizations'));
     }
 
     public function aggregateClientsIndex() {
         if ($this->request->is('post')) {
-            $startDate = $this->request->data['startDate'];
-            $startYear = substr($startDate, 0, 4);
-            $startMonth = substr($startDate, 5, -3);
-            $startDay = substr($startDate, 8, 9);
-            $endDay = $startDay;
-            $endYear = $startYear;
-            $endMonth = $startMonth;
 
+            $startDate = $this->request->data['startDate'];
+            $range = 'monthly';
             if ($this->request->data('weekMonthChooser') == 'weekly') {
-                $endDay += 7;
-                if ($endDay > 30) {
-                    $endDay = $endDay % 30;
-                    $endMonth++;
-                    if ($endMonth > 12) {
-                        $endMonth = $endMonth % 12;
-                        $endYear++;
-                    }
-                }
-            } else if ($this->request->data('weekMonthChooser') == 'monthly') {
-                $startDay = 0;
-                $endDay = 30;
+                $range = 'weekly';
             }
-            
-            if (strlen($endDay) == 1) $endDay = "0".$endDay;
-            $endDate = $endYear . "-" . $endMonth . "-" . $endDay;
-            
+            $dates = $this->figureOutStartEnd($startDate, $range);
+            $this->Session->write('startDate', $dates[0]);
+            $this->Session->write('endDate', $dates[1]);
+
             $sex = 'both';
             if ($this->request->data('sexChooser') == 'male') {
                 $sex = 'male';
             }
-            
             if ($this->request->data('sexChooser') == 'female') {
                 $sex = 'female';
             }
-            
             $this->Session->write('sex', $sex);
-            $this->Session->write('startDate', $startDate);
-            $this->Session->write('endDate', $endDate);
+
             $this->redirect(array('action' => 'aggregateClientsReport'));
         }
     }
 
     public function aggregateResourcesIndex() {
-       if ($this->request->is('post')) {
+        if ($this->request->is('post')) {
+
             $startDate = $this->request->data['startDate'];
-            $startYear = substr($startDate, 0, 4);
-            $startMonth = substr($startDate, 5, -3);
-            $startDay = substr($startDate, 8, 9);
-            $endDay = $startDay;
-            $endYear = $startYear;
-            $endMonth = $startMonth;
-
+            $range = 'monthly';
             if ($this->request->data('weekMonthChooser') == 'weekly') {
-                $endDay += 7;
-                if ($endDay > 30) {
-                    $endDay = $endDay % 30;
-                    $endMonth++;
-                    if ($endMonth > 12) {
-                        $endMonth = $endMonth % 12;
-                        $endYear++;
-                    }
-                }
-            } else if ($this->request->data('weekMonthChooser') == 'monthly') {
-                $startDay = 0;
-                $endDay = 30;
+                $range = 'weekly';
             }
-            
-            if (strlen($endDay) == 1) $endDay = "0".$endDay;
-            $endDate = $endYear . "-" . $endMonth . "-" . $endDay;
+            $dates = $this->figureOutStartEnd($startDate, $range);
+            $this->Session->write('startDate', $dates[0]);
+            $this->Session->write('endDate', $dates[1]);
 
-            $this->Session->write('startDate', $startDate);
-            $this->Session->write('endDate', $endDate);
+            $sex = 'both';
+            if ($this->request->data('sexChooser') == 'male') {
+                $sex = 'male';
+            }
+            if ($this->request->data('sexChooser') == 'female') {
+                $sex = 'female';
+            }
+            $this->Session->write('sex', $sex);
+
             $this->redirect(array('action' => 'aggregateResourcesReport'));
         }
     }
-    
+
+    public function figureOutStartEnd($startDate, $range) {
+        $retVal = array();
+        $startYear = substr($startDate, 0, 4);
+        $startMonth = substr($startDate, 5, -3);
+        $startDay = substr($startDate, 8, 9);
+        $endDay = $startDay;
+        $endYear = $startYear;
+        $endMonth = $startMonth;
+
+        if ($range == 'weekly') {
+            $endDay += 7;
+            if ($endDay > 30) {
+                $endDay = $endDay % 30;
+                $endMonth++;
+                if ($endMonth > 12) {
+                    $endMonth = $endMonth % 12;
+                    $endYear++;
+                }
+            }
+        } else if ($range == 'monthly') {
+            $startDay = '0' . '1';
+            $endDay = 30;
+        }
+
+        if (strlen($endDay) == 1) {
+            $endDay = "0" . $endDay;
+        }
+
+        $retVal[0] = $startYear . "-" . $startMonth . "-" . $startDay;
+        $retVal[1] = $endYear . "-" . $endMonth . "-" . $endDay;
+        return $retVal;
+    }
 
     public function aggregateClientsReport() {
         $startDate = $this->Session->read('startDate');
         $endDate = $this->Session->read('endDate');
+
         $sex = $this->Session->read('sex');
-        
+
         $this->set('startDate', $startDate);
         $this->set('endDate', $endDate);
         $this->set('startCompare', strtotime($this->Session->read('startDate')));
@@ -134,7 +156,7 @@ class ReportsController extends AppController {
 
         $clientsController = new ClientsController();
         $resourceUsesController = new ResourceusesController();
-        
+
         $this->set('countPeriod', $resourceUsesController->countPeriod($startDate, $endDate));
 
         $this->set('numClients', $clientsController->count());
@@ -188,14 +210,31 @@ class ReportsController extends AppController {
 
         $clientsController = new ClientsController();
         $this->set('numChecklistsCompleted', $clientsController->numberOfChecklistsCompleted($clientID));
+        $this->set('numChecklistTasksCompleted', $clientsController->numberOfChecklistTasksCompleted($clientID));
         $this->set('numberResourceUses', $clientsController->numberResourceUses($clientID, $this->Session->read('startDate'), $this->Session->read('endDate')));
 
         $clientsController->Client->id = $clientID;
         if (!$clientsController->Client->exists()) {
             throw new NotFoundException(__('Invalid client'));
         }
-        $this->set('client', $clientsController->Client->read(null, $id));
-       
+
+        $client = $clientsController->Client->read(null, $id);
+        $resourceUses = array();
+        $resourceName = array();
+        $resourceController = new ResourcesController();
+
+        $i = 0;
+        foreach ($client['ResourceUs'] as $resourceUse) {
+            if ($resourceUse['client_id'] == $client['Client']['id']) {
+                $resourceUses[$i] = $resourceUse;
+                $resourceName[$i] = $resourceController->giveMeName($resourceUse['resource_id']);
+                $i++;
+            }
+        }
+
+        $this->set('resourceUses', $resourceUses);
+        $this->set('resourceName', $resourceName);
+        $this->set('client', $client);
     }
 
     public function resourceReport($resourceID = null) {

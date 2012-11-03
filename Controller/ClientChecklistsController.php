@@ -68,23 +68,25 @@ class ClientChecklistsController extends AppController {
      * @param string $id
      * @return void
      */
-    public function edit($id = null) {
+    public function edit($id = null, $clientID = null) {
+        $this->set('clientID', $clientID);
         $this->ClientChecklist->id = $id;
         if (!$this->ClientChecklist->exists()) {
             throw new NotFoundException(__('Invalid client checklist'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
+            if (isset($this->request->data['cancel'])) {
+                $this->redirect(array('action' => 'index', $clientID));
+            }
             if ($this->ClientChecklist->save($this->request->data)) {
                 $this->Session->setFlash(__('The client checklist has been saved'));
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('action' => 'index', $clientID));
             } else {
                 $this->Session->setFlash(__('The client checklist could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->ClientChecklist->read(null, $id);
         }
-        $clients = $this->ClientChecklist->Client->find('list');
-        $this->set(compact('clients'));
     }
 
     /**

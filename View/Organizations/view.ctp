@@ -19,7 +19,7 @@
 <div class="organizations view">
     <h2><?php echo __($organization['Organization']['org_name']); ?></h2>
     <br />
-    <?php echo $this->Html->image('organization.jpg', array('alt' => 'Sample Photo', 'height' => '30%', 'width' => '30%')); ?>
+    <?php echo $this->Html->image($imagePath, array('alt' => 'Sample Photo', 'height' => '30%', 'width' => '30%')); ?>
 
     <div id="accordion">
         <h2>Organization Information</h2>
@@ -173,7 +173,8 @@
                 <script type="text/javascript">
                     $('#demo1').ajaxupload({
                         url:'/mission_columbia_baked/webroot/upload.php',
-                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/img'
+                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/img',
+                        editFilename: true
                     });
                 </script>
             </div>
