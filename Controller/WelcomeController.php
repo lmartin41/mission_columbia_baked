@@ -2,8 +2,12 @@
 
 App::uses('AppController', 'Controller');
 
+
+
 class WelcomeController extends AppController {
-    
+     
+    public $helpers = array('GoogleMap');   //Adding the helper
+
     public function index() {
         
     }
