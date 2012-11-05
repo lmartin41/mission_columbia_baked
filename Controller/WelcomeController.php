@@ -11,7 +11,10 @@ class WelcomeController extends AppController {
     public $helpers = array('GoogleMap');   //Adding the helper
 
     public function index() {
-    	$organizationsController = new OrganizationsController();
+        
+        $orgCont = new OrganizationsController();
+    	$result = $orgCont->giveMeAddresses();
+        var_dump($result);
 
     	$address = $this->Session->read('address_one');
 

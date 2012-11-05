@@ -1,4 +1,4 @@
-<?= $this->Html->script('http://maps.google.com/maps/api/js?sensor=true', false); ?>
+<?php echo $this->Html->script('http://maps.google.com/maps/api/js?sensor=true', false); ?>
 <!-- my key is: AIzaSyC22n51FklMDzv3wwoc7kH4nxKO0fo2wTI 
 if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor...-->
 
@@ -39,11 +39,11 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 
 	
 
-	<?= $this->GoogleMap->map($map_options); ?>
+	<?php echo $this->GoogleMap->map($map_options); ?>
 
 	<!--below needs to be adding markers that are queried from the organizations address1, city, and state vals -->
-	<?= $this->GoogleMap->addMarker("map_canvas", 2, "2723 Ashland Road, Columbia SC"); ?>
+	<?php echo $this->GoogleMap->addMarker("map_canvas", 2, "2723 Ashland Road, Columbia SC"); ?>
 
-	<?= $this->GoogleMap->addMarker("map_canvas", 3, array('latitude' => 40.69847, 'longitude' => -73.9514)); ?>
+	<?php echo $this->GoogleMap->addMarker("map_canvas", 3, array('latitude' => 40.69847, 'longitude' => -73.9514)); ?>
 
 </div>
