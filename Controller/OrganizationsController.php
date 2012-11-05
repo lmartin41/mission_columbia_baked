@@ -1,10 +1,11 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('ClientsController', 'Controller');
 
 /**
  * Organizations Controller
- *
+ *  Make a function that 
  * @property Organization $Organization
  */
 class OrganizationsController extends AppController {
@@ -14,9 +15,8 @@ class OrganizationsController extends AppController {
      *
      * @return void
      */
-	
-	public $components = array('RequestHandler');
-	
+    public $components = array('RequestHandler');
+
     public function index() {
         $this->Organization->recursive = 0;
         $this->set('organizations', $this->paginate());
@@ -34,7 +34,10 @@ class OrganizationsController extends AppController {
         if (!$this->Organization->exists()) {
             throw new NotFoundException(__('Invalid organization'));
         }
-        $this->set('organization', $this->Organization->read(null, $id));      
+        $this->set('organization', $this->Organization->read(null, $id));
+
+        $path = ClientsController::giveMePath('Organization', $id);
+        $this->set('imagePath', $path);
     }
 
     /**
@@ -110,21 +113,38 @@ class OrganizationsController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
 
-    public function resources($id = null)
-    {
-    	$this->Organization->id = $id;
-    	if (!$this->Organization->exists()) {
-    		throw new NotFoundException(__('Invalid organization'));
-    	}
-    	$org = $this->Organization->read(null, $id);
-    	$this->set('organization_resources', $org['Resource']);
+    public function resources($id = null) {
+        $this->Organization->id = $id;
+        if (!$this->Organization->exists()) {
+            throw new NotFoundException(__('Invalid organization'));
+        }
+        $org = $this->Organization->read(null, $id);
+        $this->set('organization_resources', $org['Resource']);
     }
-    
+
     /**
      * Lee: Report functions 
      */
     public function count() {
         return $this->Organization->find('count');
+    }
+
+    /**
+     * 2d array
+     * need an array of all addresses separated by address_one, City, and state
+     */
+    public function giveMeAddresses() {
+        $retVal = array();
+        $query = $this->Organization->query("
+            
+            SELECT address_one, city, state
+            From organizations
+            ");
+        
+        for ($i = 0; $i < count($query); $i++) {
+            $retVal[$i] = $query[$i]['organizations']['address_one'].", ".$query[$i]['organizations']['city'].", ".$query[$i]['organizations']['state'];
+        }
+        return $retVal;
     }
 
 }

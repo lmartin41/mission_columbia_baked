@@ -1,6 +1,6 @@
 <div class="actionsNoButton">
     
-        <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $clientChecklist['ClientChecklist']['id'])); ?> <br />
+        <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $clientChecklist['ClientChecklist']['id'], $clientChecklist['Client']['id'])); ?> <br />
         <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $clientChecklist['ClientChecklist']['id'], $clientChecklist['Client']['id']), null, __('Are you sure you want to delete # %s?', $clientChecklist['ClientChecklist']['id'])); ?><br />
         <?php echo $this->Html->link(__('Checklists Listing'), array('action' => 'index', $clientChecklist['Client']['id'])); ?> <br />
         <?php echo $this->Html->link(__('New Checklist'), array('action' => 'add', $clientChecklist['ClientChecklist']['id'])); ?><br />

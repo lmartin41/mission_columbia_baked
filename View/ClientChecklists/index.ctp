@@ -47,8 +47,8 @@
 </div>
 <div class="actionsNoButton">
     <ul>
-        <li><?php echo $this->Html->link(__('Create Client Checklist'), array('action' => 'add', $client['Client']['id'])); ?></li><br />
-        <li><?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> </li><br />
-        <li><?php echo $this->Html->link(__('Browse Clients'), array('controller' => 'clients', 'action' => 'browse')); ?> </li><br />
+        <?php echo $this->Html->link(__('Create Client Checklist'), array('action' => 'add', $client['Client']['id'])); ?><br />
+        <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> <br />
+        <?php echo $this->Html->link(__('Browse Clients'), array('controller' => 'clients', 'action' => 'browse')); ?><br />
     </ul>
 </div>

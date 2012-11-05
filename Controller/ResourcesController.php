@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('ClientsController', 'Controller');
 
 /**
  * Resources Controller
@@ -32,6 +33,9 @@ class ResourcesController extends AppController {
             throw new NotFoundException(__('Invalid resource'));
         }
         $this->set('resource', $this->Resource->read(null, $id));
+        
+        $path = ClientsController::giveMePath('Resource', $id);
+        $this->set('imagePath', $path);
     }
 
     /**

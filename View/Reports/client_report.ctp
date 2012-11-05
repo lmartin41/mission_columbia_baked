@@ -4,7 +4,8 @@
     <br />
 
     Number of Resources Used: <?php echo $numberResourceUses; ?><br />
-    Number of Checklists Completed: <?php echo $numChecklistsCompleted; ?>
+    Number of Checklists Completed: <?php echo $numChecklistsCompleted; ?><br />
+    Number of Checklist Tasks Completed: <?php echo $numChecklistTasksCompleted; ?>
 
     <br /><br /><Br />
     <h3><?php echo h($client['Client']['first_name']) . " 's Resource Usage"; ?></h3>
@@ -13,54 +14,83 @@
             <tr>
                 <th><?php echo __('Id'); ?></th>
                 <th><?php echo __('Client Id'); ?></th>
-                <th><?php echo __('Resource ID'); ?></th>
+                <th><?php echo __('Resource Name'); ?></th>
                 <th><?php echo __('Date'); ?></th>
                 <th><?php echo __('Comments'); ?></th>
                 <th class="actions"><?php echo __(''); ?></th>
             </tr>
             <?php
             $i = 0;
-            foreach ($client['ResourceUs'] as $resourceUs):
-                if ($resourceUs['client_id'] == $client['Client']['id'] &&
-                        strtotime($resourceUs['date']) >= $startCompare &&
+            foreach ($resourceUses as $resourceUs):
+                if (strtotime($resourceUs['date']) >= $startCompare &&
                         strtotime($resourceUs['date']) <= $endCompare):
                     ?>
                     <tr>
                         <td><?php echo $resourceUs['id']; ?></td>
                         <td><?php echo $resourceUs['client_id']; ?></td>
-                        <td><?php echo $resourceUs['resource_id'] ?></td>
+                        <td><?php echo $resourceName[$i]; ?></td>
                         <td><?php echo $resourceUs['date']; ?></td>
                         <td><?php echo $resourceUs['comments']; ?></td>
                         <td class="actions">
-            <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['id'])); ?>
+                            <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['id'])); ?>
                         </td>
                     </tr>
                 <?php endif; ?>
-        <?php endforeach; ?>
+                <?php $i++; ?>
+            <?php endforeach; ?>
         </table>
     <?php else: echo "none"; ?>
-<?php endif; ?>
+    <?php endif; ?>
 
-    <br /><br />
+    <br /><br /><Br />
+
+    <h3><?php echo h($client['Client']['first_name']) . " 's Current Checklists"; ?></h3>
+    <?php if (!empty($client['ClientChecklist'])): ?>
+        <table cellpadding = "0" cellspacing = "0">
+            <tr>
+                <th><?php echo __('Id'); ?></th>
+                <th><?php echo __('Client Id'); ?></th>
+                <th><?php echo __('Checklist Name'); ?></th>
+                <th><?php echo __('Checklist Description'); ?></th>
+                <th class="actions"><?php echo __(''); ?></th>
+            </tr>
+            <?php foreach ($client['ClientChecklist'] as $checklist): ?>
+                <?php if ($checklist['isCompleted'] == 0): ?>
+                    <tr>
+                        <td><?php echo $checklist['id']; ?></td>
+                        <td><?php echo $checklist['client_id']; ?></td>
+                        <td><?php echo $checklist['checklist_name']; ?></td>
+                        <td><?php echo $checklist['checklist_description']; ?></td>
+                        <td class="actions">
+                            <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_checklists', 'action' => 'view', $checklist['id'])); ?>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </table>
+    <?php else: echo "none"; ?>
+    <?php endif; ?>
+
+    <Br /><br /><br />
 
     <h3>Client Status</h3>
     <dl>
         <dt><?php echo __('Pregnant'); ?></dt>
         <dd>
             &nbsp;&nbsp;
-<?php echo ($client['Client']['pregnant'] == 1) ? 'yes' : 'no'; ?>
+            <?php echo ($client['Client']['pregnant'] == 1) ? 'yes' : 'no'; ?>
             &nbsp;
         </dd>
         <dt><?php echo __('Disabled'); ?></dt>
         <dd>
             &nbsp;&nbsp;
-<?php echo ($client['Client']['disabled'] == 1) ? 'yes' : 'no'; ?>
+            <?php echo ($client['Client']['disabled'] == 1) ? 'yes' : 'no'; ?>
             &nbsp;
         </dd>
         <dt><?php echo __('Handicapped'); ?></dt>
         <dd>
             &nbsp;&nbsp;
-<?php echo ($client['Client']['handicapped'] == 1) ? 'yes' : 'no'; ?>
+            <?php echo ($client['Client']['handicapped'] == 1) ? 'yes' : 'no'; ?>
             &nbsp;
         </dd>
     </dl>
@@ -70,17 +100,17 @@
 </div>
 
 <div class="actionsNoButton">
-<?php echo $this->Html->link(__('Individual Reports'), array()); ?><br />
+    <?php echo $this->Html->link(__('Individual Reports'), array()); ?><br />
     <ul>
         <li><?php echo $this->Html->link(__('Clients'), array('action' => 'index')); ?></li><br />
         <li><?php echo $this->Html->link(__('Resources'), array('action' => 'resourceIndex')); ?></li><br />
     </ul>
-<?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br />
+    <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br />
     <ul>
         <li><?php echo $this->Html->link('Clients', array('action' => 'aggregateClientsIndex')); ?></li><br />
         <li><?php echo $this->Html->link('Resources', array('action' => 'aggregateResourcesIndex')); ?></li>
     </ul>
     <br />
-<?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
+    <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
 
 </div>
