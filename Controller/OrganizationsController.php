@@ -5,7 +5,7 @@ App::uses('ClientsController', 'Controller');
 
 /**
  * Organizations Controller
- *
+ *  Make a function that 
  * @property Organization $Organization
  */
 class OrganizationsController extends AppController {
@@ -129,6 +129,14 @@ class OrganizationsController extends AppController {
      */
     public function count() {
         return $this->Organization->find('count');
+    }
+
+    /**
+    * 2d array
+    * need an array of all addresses separated by address_one, City, and state
+    */
+    public function giveMeAddresses(){
+        
     }
 
 }

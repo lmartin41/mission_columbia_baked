@@ -15,7 +15,7 @@ class WelcomeController extends AppController {
 
     	$address = $this->Session->read('address_one');
 
-    	
+
         
     }
 }
@@ -23,5 +23,9 @@ class WelcomeController extends AppController {
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
+
+ could write a view that would return KML (xml, but a certain syntax)
+
+ just say organizationconrtroler::givemeaddresses.
  */
 ?>
