@@ -43,7 +43,6 @@ class ReportsController extends AppController {
     }
 
     public function resourceIndex() {
-        $resourcesController = new ResourcesController();
 
         if ($this->request->is('post')) {
             $resourceName = $this->request->data['Resource']['resource_name'];
@@ -146,18 +145,25 @@ class ReportsController extends AppController {
     public function aggregateClientsReport() {
         $startDate = $this->Session->read('startDate');
         $endDate = $this->Session->read('endDate');
-
         $sex = $this->Session->read('sex');
+
+        if ($sex == 'male')
+            $sex = "sex = 'M'";
+        else if ($sex == 'female')
+            $sex = "sex = 'F'";
+        else
+            $sex = '';
 
         $this->set('startDate', $startDate);
         $this->set('endDate', $endDate);
         $this->set('startCompare', strtotime($this->Session->read('startDate')));
         $this->set('endCompare', strtotime($this->Session->read('endDate')));
+        $this->set('sex', $this->Session->read('sex'));
 
         $clientsController = new ClientsController();
         $resourceUsesController = new ResourceusesController();
 
-        $this->set('countPeriod', $resourceUsesController->countPeriod($startDate, $endDate));
+        $this->set('countPeriod', $resourceUsesController->countPeriod($startDate, $endDate, $sex));
 
         $this->set('numClients', $clientsController->count());
         $this->set('ageClients', $clientsController->age());
