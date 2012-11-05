@@ -346,9 +346,9 @@
 
         <h2>Upload Photo</h2>
         <div class="white-background black-text">
-            <div id="demo1" style="width:500px">
+        	<div id="image_upload" style="width:500px">
                 <script type="text/javascript">
-                    $('#demo1').ajaxupload({
+                    $('#image_upload').ajaxupload({
                         url:'/mission_columbia_baked/webroot/upload.php',
                         remotePath:'C:/wamp/www/mission_columbia_baked/webroot/img',
                         editFilename: true

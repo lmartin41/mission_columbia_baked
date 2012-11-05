@@ -137,3 +137,8 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 	float: left;
 	width: 70%;
 }
+
+#image_upload a
+{
+	text-decoration: none;
+}
