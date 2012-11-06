@@ -1,9 +1,9 @@
 <?php if( $isAtleastAdmin ): ?>
 <div class="actionsNoButton">
-	<?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?>
-	<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?>
-	<?php echo $this->Html->link(__('View User'), array('action' => 'view', $this->Form->value('User.id'))); ?>
-	<?php echo $this->Html->link(__('Edit User'), array('action' => 'edit', $this->Form->value('User.id')), array('class' => 'active_link')); ?>
+	<?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?><br />
+	<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?><br />
+	<?php echo $this->Html->link(__('View User'), array('action' => 'view', $this->Form->value('User.id'))); ?><br />
+	<?php echo $this->Html->link(__('Edit User'), array('action' => 'edit', $this->Form->value('User.id')), array('class' => 'active_link')); ?><br />
 	<?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $this->Form->value('User.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('User.id'))); ?>
 </div>
 <div class="users form">

@@ -1,9 +1,15 @@
 <div class="actionsNoButton">
-	<?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?>
-	<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?>
-	<?php echo $this->Html->link(__('View User'), array('action' => 'view', $user['User']['id']), array('class' => 'active_link')); ?>
-	<?php echo $this->Html->link(__('Edit User'), array('action' => 'edit', $user['User']['id'])); ?>
-	<?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
+	<?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?><br />
+	<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?><br />
+	<?php echo $this->Html->link(__('View User'), array('action' => 'view', $user['User']['id']), array('class' => 'active_link')); ?><br />
+	<?php echo $this->Html->link(__('Edit User'), array('action' => 'edit', $user['User']['id'])); ?><br />
+	<?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?><br />
+        
+        <?php if (empty($doesFormExist)): ?>
+        <?php echo $this->Html->link('Volunteer Information Form', array('controller' => 'VolunteerInformationForms', 'action' => 'add', $user['User']['id'])); ?>
+        <?php else: ?>
+        <?php echo $this->Html->link('Volunteer Information Form', array('controller' => 'VolunteerInformationForms', 'action' => 'view', $doesFormExist['VolunteerInformationForm']['id'], $user['User']['id'])); ?>
+        <?php endif; ?>
 </div>
 <div class="users view">
 <h2><?php  echo __('User'); ?></h2>
@@ -54,6 +60,7 @@
 			&nbsp;
 		</dd>
 	</dl>
+<br />
 	<div class="related">
 		<h3><?php echo __('Related Feedbacks'); ?></h3>
 		<?php if (!empty($user['Feedback'])): ?>

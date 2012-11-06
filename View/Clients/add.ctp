@@ -45,11 +45,11 @@
                 </tr>
                 <tr>
                     <td>
-                        <?php echo $this->Form->input('DOB', array('type' => 'date', 'onChange' => 'updateAge()', 'minYear' => date('Y') - 120, 'maxYear' => date('Y'), 'empty' => true, 'div' => false, 'separator' => false)); ?>
+                        <?php echo $this->Form->input('DOB', array('type' => 'date', 'onChange' => "updateAge('Client')", 'minYear' => date('Y') - 120, 'maxYear' => date('Y'), 'empty' => true, 'div' => false, 'separator' => false)); ?>
                         &nbsp; &nbsp;<b>OR</b>
                     </td>
                     <td>
-                        <?php echo $this->Form->input('age', array('onChange' => 'updateDOB()')); ?>
+                        <?php echo $this->Form->input('age', array('onChange' => "updateDOB('Client')")); ?>
                     </td>
                 </tr>
                 <tr>
