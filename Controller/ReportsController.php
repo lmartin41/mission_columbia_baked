@@ -29,6 +29,12 @@ class ReportsController extends AppController {
 
             $startDate = $this->request->data['startDate'];
             $endDate = $this->request->data['endDate'];
+
+            if ($startDate > $endDate) {
+                $this->Session->setFlash('Invalid date range');
+                $this->redirect(array('action' => 'index'));
+            }
+
             $correctResults = $clientsController->clientSearch($firstName, $lastName);
             $this->Session->write('clientResults', $correctResults);
             $this->Session->write('startDate', $startDate);
@@ -45,10 +51,17 @@ class ReportsController extends AppController {
     public function resourceIndex() {
 
         if ($this->request->is('post')) {
-            $resourceName = $this->request->data['Resource']['resource_name'];
-            $correctResults = $this->resourceSearch($resourceName);
             $startDate = $this->request->data['startDate'];
             $endDate = $this->request->data['endDate'];
+            
+            if ($startDate > $endDate) {
+                $this->Session->setFlash('Invalid date range');
+                $this->redirect(array('action' => 'resourceIndex'));
+            }
+            
+            $resourceName = $this->request->data['Resource']['resource_name'];
+            $correctResults = $this->resourceSearch($resourceName);
+
             $this->Session->write('resourceResults', $correctResults);
             $this->Session->write('startDate', $startDate);
             $this->Session->write('endDate', $endDate);
@@ -68,6 +81,7 @@ class ReportsController extends AppController {
                 $range = 'weekly';
             }
             $dates = $this->figureOutStartEnd($startDate, $range);
+            
             $this->Session->write('startDate', $dates[0]);
             $this->Session->write('endDate', $dates[1]);
 
@@ -93,6 +107,7 @@ class ReportsController extends AppController {
                 $range = 'weekly';
             }
             $dates = $this->figureOutStartEnd($startDate, $range);
+            
             $this->Session->write('startDate', $dates[0]);
             $this->Session->write('endDate', $dates[1]);
 

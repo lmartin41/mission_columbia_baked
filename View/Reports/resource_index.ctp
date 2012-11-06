@@ -3,7 +3,7 @@
 <?php echo $this->Html->css("datepickr.css", FALSE); ?>
 <?php $this->Html->script('resource_uses_add', FALSE); ?>
 
-<div class="Reports form">
+<div class="resourceuses form">
 
     <h3>Individual Resource Report</h3>
     <?php 

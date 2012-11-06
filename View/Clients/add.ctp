@@ -175,6 +175,14 @@
                         <?php echo $this->Form->input('internet'); ?>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <?php echo $this->Form->input("acceptedChrist"); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input("dedicatedChrist"); ?>
+                    </td>
+                </tr>
             </table>
             <?php echo $this->Form->input('model', array('label' => 'Model of Car')); ?>
 

@@ -44,8 +44,40 @@
 
     <br /><br /><Br />
 
-    <h3><?php echo h($client['Client']['first_name']) . " 's Current Checklists"; ?></h3>
-    <?php if (!empty($client['ClientChecklist'])): ?>
+    <h3><?php echo h($client['Client']['first_name']) . " 's Prayer Requests"; ?></h3>
+    <?php if (!empty($client['PrayerRequest'])): ?>
+        <table cellpadding = "0" cellspacing = "0">
+            <tr>
+                <th><?php echo __('Id'); ?></th>
+                <th><?php echo __('Client Id'); ?></th>
+                <th><?php echo __('Date'); ?></th>
+                <th><?php echo __('Request'); ?></th>
+                <th class="actions"><?php echo __(''); ?></th>
+            </tr>
+            <?php
+            foreach ($client['PrayerRequest'] as $prayerRequest):
+                if (strtotime($prayerRequest['date']) >= $startCompare &&
+                        strtotime($prayerRequest['date']) <= $endCompare):
+                    ?>
+                    <tr>
+                        <td><?php echo $prayerRequest['id']; ?></td>
+                        <td><?php echo $prayerRequest['client_id']; ?></td>
+                        <td><?php echo $prayerRequest['date']; ?></td>
+                        <td><?php echo $prayerRequest['request']; ?></td>
+                        <td class="actions">
+            <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'prayer_requests', 'action' => 'view', $checklist['id'])); ?>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+        <?php endforeach; ?>
+        </table>
+    <?php else: echo "none"; ?>
+<?php endif; ?>
+
+    <Br /><br /><br />
+
+    <h3><?php echo h($client['Client']['first_name']) . " 's Checklists"; ?></h3>
+<?php if (!empty($client['ClientChecklist'])): ?>
         <table cellpadding = "0" cellspacing = "0">
             <tr>
                 <th><?php echo __('Id'); ?></th>
@@ -55,21 +87,24 @@
                 <th class="actions"><?php echo __(''); ?></th>
             </tr>
             <?php foreach ($client['ClientChecklist'] as $checklist): ?>
-                <?php if ($checklist['isCompleted'] == 0): ?>
-                    <tr>
-                        <td><?php echo $checklist['id']; ?></td>
-                        <td><?php echo $checklist['client_id']; ?></td>
-                        <td><?php echo $checklist['checklist_name']; ?></td>
-                        <td><?php echo $checklist['checklist_description']; ?></td>
-                        <td class="actions">
-                            <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_checklists', 'action' => 'view', $checklist['id'])); ?>
-                        </td>
-                    </tr>
-                <?php endif; ?>
-            <?php endforeach; ?>
+                <?php
+                if ($checklist['isCompleted'] == 0 &&
+                        strtotime($checklist['created']) <= $endCompare): ?>
+                <tr>
+                <td><?php echo $checklist['id'];
+                ?></td>
+                <td><?php echo $checklist['client_id']; ?></td>
+                <td><?php echo $checklist['checklist_name']; ?></td>
+                <td><?php echo $checklist['checklist_description']; ?></td>
+                <td class="actions">
+                <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_checklists', 'action' => 'view', $checklist['id'])); ?>
+                </td>
+                </tr>
+            <?php endif; ?>
+        <?php endforeach; ?>
         </table>
-    <?php else: echo "none"; ?>
-    <?php endif; ?>
+<?php else: echo "none"; ?>
+<?php endif; ?>
 
     <Br /><br /><br />
 
@@ -78,19 +113,19 @@
         <dt><?php echo __('Pregnant'); ?></dt>
         <dd>
             &nbsp;&nbsp;
-            <?php echo ($client['Client']['pregnant'] == 1) ? 'yes' : 'no'; ?>
+<?php echo ($client['Client']['pregnant'] == 1) ? 'yes' : 'no'; ?>
             &nbsp;
         </dd>
         <dt><?php echo __('Disabled'); ?></dt>
         <dd>
             &nbsp;&nbsp;
-            <?php echo ($client['Client']['disabled'] == 1) ? 'yes' : 'no'; ?>
+<?php echo ($client['Client']['disabled'] == 1) ? 'yes' : 'no'; ?>
             &nbsp;
         </dd>
         <dt><?php echo __('Handicapped'); ?></dt>
         <dd>
             &nbsp;&nbsp;
-            <?php echo ($client['Client']['handicapped'] == 1) ? 'yes' : 'no'; ?>
+<?php echo ($client['Client']['handicapped'] == 1) ? 'yes' : 'no'; ?>
             &nbsp;
         </dd>
     </dl>
@@ -100,17 +135,17 @@
 </div>
 
 <div class="actionsNoButton">
-    <?php echo $this->Html->link(__('Individual Reports'), array()); ?><br />
+<?php echo $this->Html->link(__('Individual Reports'), array()); ?><br />
     <ul>
         <li><?php echo $this->Html->link(__('Clients'), array('action' => 'index')); ?></li><br />
         <li><?php echo $this->Html->link(__('Resources'), array('action' => 'resourceIndex')); ?></li><br />
     </ul>
-    <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br />
+<?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br />
     <ul>
         <li><?php echo $this->Html->link('Clients', array('action' => 'aggregateClientsIndex')); ?></li><br />
         <li><?php echo $this->Html->link('Resources', array('action' => 'aggregateResourcesIndex')); ?></li>
     </ul>
     <br />
-    <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
+<?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
 
 </div>

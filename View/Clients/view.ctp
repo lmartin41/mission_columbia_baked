@@ -10,6 +10,7 @@
     <?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?><br />
     <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?><br />
     <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?><br />
+    <?php echo $this->Html->link(__('Prayer Requests'), array('controller' => 'prayer_requests', 'action' => 'index', $client['Client']['id'])); ?><br />
     <?php echo $this->Html->link(__('Print Client Summary'), array('action' => 'printClient', $client['Client']['id'])); ?><br />
     <?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete %s?', $client['Client']['first_name'])); ?>
 </div>
@@ -213,6 +214,18 @@
                     <?php echo ($client['Client']['internet'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
+                <dt><?php echo __('Accepted Christ?'); ?></dt>
+                <dd>
+                    &nbsp;&nbsp;
+                    <?php echo ($client['Client']['acceptedChrist'] == 1) ? 'yes' : 'no'; ?>
+                    &nbsp;
+                </dd>
+                <dt><?php echo __('Dedicated Life to Christ?'); ?></dt>
+                <dd>
+                    &nbsp;&nbsp;
+                    <?php echo ($client['Client']['dedicatedChrist'] == 1) ? 'yes' : 'no'; ?>
+                    &nbsp;
+                </dd>
                 <dt><?php echo __('Model'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
@@ -342,6 +355,36 @@
 
             <br /><br />
             <?php echo $this->Html->link('Add new Checklist for this Client', array('controller' => 'client_checklists', 'action' => 'add', $client['Client']['id'])); ?>
+        </div>
+        
+        <h2><?php echo h($client['Client']['first_name']) . " 's Prayer Requests"; ?></h2>
+        <div class="white-background black-text">
+            <?php if (!empty($client['PrayerRequest'])): ?>
+                <table cellpadding = "0" cellspacing = "0">
+                    <tr>
+                        <th><?php echo __('Id'); ?></th>
+                        <th><?php echo __('Client Id'); ?></th>
+                        <th><?php echo __('Date'); ?></th>
+                        <th><?php echo __('Request'); ?></th>
+                        <th class="actions"><?php echo __(''); ?></th>
+                    </tr>
+                    <?php foreach ($client['PrayerRequest'] as $prayerRequest): ?>
+                        <tr>
+                            <td><?php echo $prayerRequest['id']; ?></td>
+                            <td><?php echo $prayerRequest['client_id']; ?></td>
+                            <td><?php echo $prayerRequest['request']; ?></td>
+                            <td><?php echo $prayerRequest['date']; ?></td>
+                            <td class="actions">
+                                <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'prayer_requests', 'action' => 'view', $prayerRequest['id'])); ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php else: echo "none"; ?>
+            <?php endif; ?>
+
+            <br /><br />
+            <?php echo $this->Html->link('Add new Prayer Request for this Client', array('controller' => 'prayer_requests', 'action' => 'add', $client['Client']['id'])); ?>
         </div>
 
         <h2>Upload Photo</h2>
