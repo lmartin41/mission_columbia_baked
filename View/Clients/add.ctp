@@ -127,7 +127,7 @@
                         <?php echo $this->Form->input('child_support', array('value' => '$0.00')); ?>
                     </td>
                     <td>
-                        <?php echo $this->Form->input('ssi_or_disability', array('value' => '$0.00')); ?> 
+                        <?php echo $this->Form->input('ssi_or_disability', array('label' => 'SSI Or Disability', 'value' => '$0.00')); ?> 
                     </td>
                 </tr>
                 <tr>

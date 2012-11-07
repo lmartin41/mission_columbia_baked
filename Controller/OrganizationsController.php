@@ -78,11 +78,18 @@ class OrganizationsController extends AppController {
             throw new NotFoundException(__('Invalid organization'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
+            if (isset($this->request->data['cancel'])) {
+                $this->redirect(array('action' => 'index'));
+            }
             if ($this->Organization->save($this->request->data)) {
                 $this->Session->setFlash(__('The organization has been saved'));
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The organization could not be saved. Please, try again.'));
+                if (isset($this->request->data['addMore'])) {
+                    $this->redirect(array('controller' => 'Resources', 'action' => 'index'));
+                } else if (isset($this->request->data['finished'])) {
+                    $this->redirect(array('action' => 'index'));
+                } else {
+                    $this->Session->setFlash(__('The organization could not be saved. Please, try again.'));
+                }
             }
         } else {
             $this->request->data = $this->Organization->read(null, $id);
@@ -137,12 +144,35 @@ class OrganizationsController extends AppController {
         $retVal = array();
         $query = $this->Organization->query("
             
-            SELECT address_one, city, state
+            Select id, org_name, address_one, city, state, zip
             From organizations
+            
             ");
-        
+
         for ($i = 0; $i < count($query); $i++) {
-            $retVal[$i] = $query[$i]['organizations']['address_one'].", ".$query[$i]['organizations']['city'].", ".$query[$i]['organizations']['state'];
+            $orgID = $query[$i]['organizations']['id'];
+            $query2 = $this->Organization->query("
+                
+                Select resource_name, street_address, city, state, zip
+                From resources
+                Where organization_id = '$orgID'
+
+                ;");
+
+            $retVal[$i] = array(
+                'org_name' => $query[$i]['organizations']['org_name'],
+                'org_address' => $query[$i]['organizations']['address_one'] . ", " . $query[$i]['organizations']['city']
+                . ", " . $query[$i]['organizations']['state'] . ", " . $query[$i]['organizations']['zip'],
+                'resources' => array()
+            );
+  
+            for ($j = 0; $j < count($query2); $j++) {
+                $retVal[$i]['resources'][$j] = array(
+                    'resource_name' => $query2[$j]['resources']['resource_name'],
+                    'resource_address' => $query2[$j]['resources']['street_address'] . ", " . $query2[$j]['resources']['city']
+                    . ", " . $query2[$j]['resources']['state'] . ", " . $query2[$j]['resources']['zip']
+                );
+            }
         }
         return $retVal;
     }

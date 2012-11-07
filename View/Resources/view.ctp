@@ -1,5 +1,6 @@
 <?php echo $this->Html->script("client_view.js", FALSE); ?>
 <?php echo $this->Html->script('ajaxupload-min.js', FALSE); ?>
+<?php echo $this->Html->css('classicTheme/style'); ?>
 
 <div class="actionsNoButton">
     <?php echo $this->Html->link(__('Edit Resource'), array('action' => 'edit', $resource['Resource']['id'], $resource['Resource']['organization_id'])); ?><br />
@@ -38,6 +39,26 @@
                 <dt><?php echo __('Inventory'); ?></dt>
                 <dd>
                     <?php echo h($resource['Resource']['inventory']); ?>
+                    &nbsp;
+                </dd>
+                <dt><?php echo __('Street Address'); ?></dt>
+                <dd>
+                    <?php echo h($resource['Resource']['street_address']); ?>
+                    &nbsp;
+                </dd>
+                <dt><?php echo __('City'); ?></dt>
+                <dd>
+                    <?php echo h($resource['Resource']['city']); ?>
+                    &nbsp;
+                </dd>
+                <dt><?php echo __('State'); ?></dt>
+                <dd>
+                    <?php echo h($resource['Resource']['state']); ?>
+                    &nbsp;
+                </dd>
+                <dt><?php echo __('Zip'); ?></dt>
+                <dd>
+                    <?php echo h($resource['Resource']['zip']); ?>
                     &nbsp;
                 </dd>
             </dl>

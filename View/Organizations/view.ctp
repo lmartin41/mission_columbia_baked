@@ -1,5 +1,5 @@
 <?php echo $this->Html->script("client_view.js", FALSE); ?>
-
+<?php echo $this->Html->css('classicTheme/style'); ?>
 <?php echo $this->Html->script('ajaxupload-min.js', FALSE); ?>
 
 <div class="actionsNoButton">

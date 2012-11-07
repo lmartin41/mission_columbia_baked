@@ -14,7 +14,12 @@ class WelcomeController extends AppController {
         
         $orgCont = new OrganizationsController();
     	$result = $orgCont->giveMeAddresses();
-        var_dump($result);
+        
+        echo '<pre>';
+        print_r($result);
+        echo '</pre>';
+        
+        //have fun!! :) -- Lee
 
     	$address = $this->Session->read('address_one');
 

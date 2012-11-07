@@ -43,7 +43,7 @@
 </div>
 <?php if ($isAtleastAdmin): ?>
     <div class="actionsNoButton" style="">
-        <?php echo $this->Html->link(__('New Organization'), array('action' => 'add')); ?><br /><br />
+        <?php echo $this->Html->link(__('New Organization'), array('action' => 'add')); ?><br />
         <?php echo $this->Html->link('Create a Resource', array('controller' => 'resources', 'action' => 'add', $organization['Organization']['id'])); ?>
     </div>
 <?php endif; ?>
