@@ -118,15 +118,11 @@ class ResourceUsesController extends AppController {
     /**
      * Lee: Report functions 
      */
-    public function count() {
-        return $this->ResourceUs->find('count');
-    }
-    
     public function countPeriod($startDate, $endDate, $sex) {
         $query = $this->ResourceUse->query("
                 Select count(DISTINCT resource_uses.id) as period
                 From resource_uses join clients
-                Where clients.$sex AND date between '$startDate' AND '$endDate';
+                Where $sex AND date between '$startDate' AND '$endDate';
             ");
         return $query[0][0]['period'];
     }
