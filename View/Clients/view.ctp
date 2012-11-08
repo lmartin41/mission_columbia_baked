@@ -59,40 +59,40 @@
         <h2>Contact Information</h2>
         <div class="white-background black-text">
             <dl>
-                <dt><?php echo __('Address'); ?></dt>
+                <dt><?php echo __('Address:'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['address_one']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('City'); ?></dt>
+                <dt><?php echo __('Apartment Number:'); ?></dt>
+                <dd>
+                    &nbsp;&nbsp;
+                    <?php echo h($client['Client']['apartment_number']); ?>
+                    &nbsp;
+                </dd>
+                <dt><?php echo __('City:'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['city']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('State'); ?></dt>
+                <dt><?php echo __('State:'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['state']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Zip'); ?></dt>
+                <dt><?php echo __('Zip:'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['zip']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Phone'); ?></dt>
+                <dt><?php echo __('Phone:'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['phone']); ?>
-                    &nbsp;
-                </dd>
-                <dt><?php echo __('Apartment Number'); ?></dt>
-                <dd>
-                    &nbsp;&nbsp;
-                    <?php echo h($client['Client']['apartment_number']); ?>
                     &nbsp;
                 </dd>
             </dl>
