@@ -391,9 +391,16 @@
         <div class="white-background black-text">
         	<div id="image_upload" style="width:500px">
                 <script type="text/javascript">
+                /*
                     $('#image_upload').ajaxupload({
                         url:'/mission_columbia_baked/webroot/upload.php',
                         remotePath:'C:/wamp/www/mission_columbia_baked/webroot/img',
+                        editFilename: true
+                    });
+                */
+                    $('#image_upload').ajaxupload({
+                        url:'/mission_columbia_baked/webroot/upload.php?id="client-<?php echo ($client["Client"]["id"]); ?>',
+                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/uploaded_images',
                         editFilename: true
                     });
                 </script>

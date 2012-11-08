@@ -61,6 +61,7 @@ class ResourcesController extends AppController {
                 $this->Session->setFlash(__('The client relation could not be saved. Please, try again.'));
             }
         }
+        //read from the database; point resource to the database
         $this->set('resource', $this->Resource->read(null, $id));
     }
 
