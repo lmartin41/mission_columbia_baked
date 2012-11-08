@@ -295,8 +295,7 @@
             <?php if (!empty($client['ResourceUs'])): ?>
                 <table cellpadding = "0" cellspacing = "0">
                     <tr>
-                        <th><?php echo __('Id'); ?></th>
-                        <th><?php echo __('Client Id'); ?></th>
+                        <th><?php echo __('Organization'); ?></th>
                         <th><?php echo __('Resource Name'); ?></th>
                         <th><?php echo __('Date'); ?></th>
                         <th><?php echo __('Comments'); ?></th>
@@ -305,10 +304,9 @@
                     <?php
                     $j = 0;
                     foreach ($resourceUses as $resourceUs):
-                        ?>
+                    ?>
                         <tr>
-                            <td><?php echo $resourceUs['id']; ?></td>
-                            <td><?php echo $resourceUs['client_id']; ?></td>
+                            <td><?php echo $organizationName[$j]; ?></td>
                             <td><?php echo $resourceName[$j]; ?></td>
                             <td><?php echo $resourceUs['date']; ?></td>
                             <td><?php echo $resourceUs['comments']; ?></td>
