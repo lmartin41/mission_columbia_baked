@@ -142,3 +142,13 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 {
 	text-decoration: none;
 }
+
+.clientChecklists dl > dt
+{
+	width: 35%
+}
+
+.clientChecklists dl > dd
+{
+	margin-left: 13em;
+}
