@@ -15,17 +15,21 @@ class WelcomeController extends AppController {
         $orgCont = new OrganizationsController();
     	$result = $orgCont->giveMeAddresses();
         
+        $this->set('theResult', $result);
+        /*
         echo '<pre>';
         print_r($result);
         echo '</pre>';
-        
+        */
         //have fun!! :) -- Lee
 
-    	$address = $this->Session->read('address_one');
+    	//$address = $this->Session->read('address_one');
 
 
         
     }
+
+
 }
 
 /*
