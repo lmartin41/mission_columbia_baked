@@ -79,8 +79,9 @@ class ClientRelationsController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('action' => 'index', $clientID));
+                $this->redirect(array('controller' => 'clients', 'action' => 'index'));
             }
+            $this->request->data['ClientRelation']['client_id'] = $clientID;
             if ($this->ClientRelation->save($this->request->data)) {
                 $this->Session->setFlash(__('The client Relative has been saved'));
                 if (isset($this->request->data['finished'])) {
@@ -104,7 +105,7 @@ class ClientRelationsController extends AppController {
      * @param string $id
      * @return void
      */
-    public function delete($id = null, $clientID = null) {
+    public function delete($id = null) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
@@ -114,10 +115,10 @@ class ClientRelationsController extends AppController {
         }
         if ($this->ClientRelation->delete()) {
             $this->Session->setFlash(__('Client Relative deleted'));
-            $this->redirect(array('controller' => 'clients', 'action' => 'index', $clientID));
+            $this->redirect(array('controller' => 'clients', 'action' => 'index'));
         }
         $this->Session->setFlash(__('Client Relative was not deleted'));
-        $this->redirect(array('action' => 'index', $clientID));
+        $this->redirect(array('controller' => 'clients', 'action' => 'index'));
     }
 
 }

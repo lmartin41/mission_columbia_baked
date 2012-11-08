@@ -2,9 +2,11 @@
 <?php echo $this->Html->script("datepickr.js", FALSE); ?>
 <?php echo $this->Html->css("datepickr.css", FALSE); ?>
 
+<?php include("reportsDiv.ctp"); ?>
+
 <div class="Reports form">
 
-    <h3>Aggregate Client Report</h3><br />
+    <h3>Counts</h3><br />
     <?php $oldDate = Date('Y') . "-01-01"; ?>
 
     <form name="aggregateClient" method="post">
@@ -37,18 +39,3 @@
 
 </div>
 
-<div class="actionsNoButton">
-    <?php echo $this->Html->link(__('Individual Reports'), array()); ?><br />
-    <ul>
-        <li><?php echo $this->Html->link(__('Clients'), array('action' => 'index')); ?></li><br />
-        <li><?php echo $this->Html->link(__('Resources'), array('action' => 'resourceIndex')); ?></li><br />
-    </ul>
-    <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br />
-    <ul>
-        <li><?php echo $this->Html->link('Clients', array('action' => 'aggregateClientsIndex')); ?></li><br />
-        <li><?php echo $this->Html->link('Resources', array('action' => 'aggregateResourcesIndex')); ?></li>
-    </ul>
-    <br />
-    <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
-
-</div>

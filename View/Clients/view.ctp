@@ -372,8 +372,8 @@
                         <tr>
                             <td><?php echo $prayerRequest['id']; ?></td>
                             <td><?php echo $prayerRequest['client_id']; ?></td>
-                            <td><?php echo $prayerRequest['request']; ?></td>
                             <td><?php echo $prayerRequest['date']; ?></td>
+                            <td><?php echo $prayerRequest['request']; ?></td>
                             <td class="actions">
                                 <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'prayer_requests', 'action' => 'view', $prayerRequest['id'])); ?>
                             </td>

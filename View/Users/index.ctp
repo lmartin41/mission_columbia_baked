@@ -1,8 +1,8 @@
 <div class="actionsNoButton users">
-		<?php echo $this->Html->link(__('List Users'), array('action' => 'index'), array('class' => 'active_link'));?>
-		<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?>
+		<?php echo $this->Html->link(__('List Users'), array('action' => 'index'), array('class' => 'active_link'));?><br />
+		<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?><br />
 		<?php if($hideDeleted): ?>
-			<?php echo $this->Html->link(__('Hide Deleted Users'), array('action' => 'index')); ?><br /><br />
+			<?php echo $this->Html->link(__('Hide Deleted Users'), array('action' => 'index')); ?>
 		<?php else: ?>
 			<?php echo $this->Html->link(__('Show Deleted Users'), array('action' => 'index', '?' => array('showAll' => true))); ?>
 		<?php endif;?>
@@ -14,7 +14,7 @@
 			<th><?php echo $this->Paginator->sort('username'); ?></th>
 			<th><?php echo $this->Paginator->sort('organization_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('email'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
+			<th class="actions"><?php echo __(''); ?></th>
 	</tr>
 	<?php
 	foreach ($users as $user): ?>
@@ -25,7 +25,7 @@
 		</td>
 		<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
+			<?php echo $this->Html->link(__('View/Edit'), array('action' => 'view', $user['User']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

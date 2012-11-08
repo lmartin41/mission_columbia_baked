@@ -214,8 +214,8 @@ class ClientsController extends AppController {
         return $this->Client->find('count');
     }
 
-    public function age() {
-        $query = $this->Client->query("Select avg(datediff(curdate(), DOB)) as avgage from clients;");
+    public function age($sex) {
+        $query = $this->Client->query("Select avg(datediff(curdate(), DOB)) as avgage from clients Where $sex;");
         return round($query[0][0]['avgage'] / 365, 2, PHP_ROUND_HALF_DOWN);
     }
 
@@ -228,23 +228,28 @@ class ClientsController extends AppController {
         return $retVal;
     }
 
-    public function avgIncome() {
-        $query = $this->Client->query("Select sum(regular_job + food_stamps + veterans_pension + part_time_job + social_security + 
-            annuity_check + child_support + ssi_or_disability + unemployment) as summation from clients;");
+    public function avgIncome($sex) {
+        $query = $this->Client->query("
+                
+            Select sum(regular_job + food_stamps + veterans_pension + part_time_job + social_security + 
+            annuity_check + child_support + ssi_or_disability + unemployment) as summation from clients
+            Where $sex
+                
+            ;");
         return $query[0][0]['summation'] / $this->count();
     }
 
-    public function status() {
+    public function status($sex) {
         $retVal = array();
         //FIXME: obviously this is not optimal
-        $query1 = $this->Client->query("Select count(pregnant) as numPregnant from clients where pregnant = '1'");
-        $query2 = $this->Client->query("Select count(disabled) as numDisabled from clients where disabled = '1'");
-        $query3 = $this->Client->query("Select count(handicapped) as numHandicapped from clients where handicapped = '1'");
-        $query4 = $this->Client->query("Select count(stove) as numStove from clients where stove = '1'");
-        $query5 = $this->Client->query("Select count(refrigerator) as numRefrigerator from clients where refrigerator = '1'");
-        $query6 = $this->Client->query("Select count(cell) as numCell from clients where cell = '1'");
-        $query7 = $this->Client->query("Select count(cable) as numCable from clients where cable = '1'");
-        $query8 = $this->Client->query("Select count(internet) as numInternet from clients where internet = '1';");
+        $query1 = $this->Client->query("Select count(pregnant) as numPregnant from clients where $sex AND pregnant = '1'");
+        $query2 = $this->Client->query("Select count(disabled) as numDisabled from clients where $sex AND disabled = '1'");
+        $query3 = $this->Client->query("Select count(handicapped) as numHandicapped from clients where $sex AND handicapped = '1'");
+        $query4 = $this->Client->query("Select count(stove) as numStove from clients where $sex AND stove = '1'");
+        $query5 = $this->Client->query("Select count(refrigerator) as numRefrigerator from clients where $sex AND refrigerator = '1'");
+        $query6 = $this->Client->query("Select count(cell) as numCell from clients where $sex AND cell = '1'");
+        $query7 = $this->Client->query("Select count(cable) as numCable from clients where $sex AND cable = '1'");
+        $query8 = $this->Client->query("Select count(internet) as numInternet from clients where $sex AND internet = '1';");
         $retVal[0] = $query1[0][0]['numPregnant'];
         $retVal[1] = $query2[0][0]['numDisabled'];
         $retVal[2] = $query3[0][0]['numHandicapped'];
