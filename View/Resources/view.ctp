@@ -10,7 +10,7 @@
 
 <div class="resources view">
 
-    <h2><?php echo __('Resources'); ?></h2><br />
+    <h2><?php echo __($resource['Resource']['resource_name']); ?></h2><br />
     <?php echo $this->Html->image($imagePath, array('alt' => 'Sample Photo', 'width' => '30%', 'height' => '30%')) ?>
     <div id="accordion">
         <h2>Resource Information</h2>

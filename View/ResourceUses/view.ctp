@@ -1,8 +1,7 @@
 <div class="actionsNoButton">
-	<?php echo $this->Html->link(__('Edit This Resource Use'), array('action' => 'edit', $resourceUs['ResourceUs']['id'])); ?><br /><br />
-	<?php echo $this->Form->postLink(__('Delete this Resource Use'), array('action' => 'delete', $resourceUs['ResourceUs']['id']), null, __('Are you sure you want to delete # %s?', $resourceUs['ResourceUs']['id'])); ?><br /><br />
-	<?php echo $this->Html->link(__('Resource Use Listing'), array('action' => 'index')); ?><br /><br />
-	<?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'browse')); ?><br /><Br />
+	<?php echo $this->Html->link(__('Edit This Resource Use'), array('action' => 'edit', $resourceUs['ResourceUs']['id'])); ?><br />
+	<?php echo $this->Form->postLink(__('Delete this Resource Use'), array('action' => 'delete', $resourceUs['ResourceUs']['id']), null, __('Are you sure you want to delete # %s?', $resourceUs['ResourceUs']['id'])); ?><br />
+	<?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'browse')); ?><br />
 	<?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?>
 </div>
 <div class="resourceuses view">

@@ -62,22 +62,22 @@ class Client extends AppModel {
             ),
         ),
         'DOB' => array(
-          //  'fixAge' => array(
-         //       'rule' => 'fixAge',
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
-            //),
-            // 'notempty' => array(
-            //    'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
-          //  ),
+        //  'fixAge' => array(
+        //       'rule' => 'fixAge',
+        //'message' => 'Your custom message here',
+        //'allowEmpty' => false,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+        //),
+        // 'notempty' => array(
+        //    'rule' => array('notempty'),
+        //'message' => 'Your custom message here',
+        //'allowEmpty' => false,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+        //  ),
         ),
         'sex' => array(
             'notempty' => array(
@@ -91,6 +91,16 @@ class Client extends AppModel {
             'alphanumeric' => array(
                 'rule' => array('alphanumeric'),
             //'message' => 'Your custom message here',
+            //'allowEmpty' => false,
+            //'required' => false,
+            //'last' => false, // Stop validation after this rule
+            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+        ),
+        'phone' => array(
+            'notempty' => array(
+                'rule' => array('phone'),
+                'message' => 'Please enter in a phone number',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule

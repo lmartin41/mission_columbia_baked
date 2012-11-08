@@ -4,20 +4,17 @@
 
 <div class="actionsNoButton">
 
-
     <?php echo $this->Html->link(__('Organization Listing'), array('action' => 'index')); ?><br />
-    <?php echo $this->Html->link(__('Resource Listing'), array('controller' => 'resources', 'action' => 'index')); ?><br />
-    <?php echo $this->Html->link(__('User Listing'), array('controller' => 'users', 'action' => 'index')); ?><br />
     <?php if ($isAtleastAdmin): ?>
-        <?php echo $this->Html->link(__('New Resource'), array('controller' => 'resources', 'action' => 'add')); ?><br />
         <?php echo $this->Html->link(__('New Organization'), array('action' => 'add')); ?><br />
         <?php echo $this->Html->link(__('Edit Organization'), array('action' => 'edit', $organization['Organization']['id'])); ?><br />
         <?php echo $this->Form->postLink(__('Delete Organization'), array('action' => 'delete', $organization['Organization']['id']), null, __('Are you sure you want to delete # %s?', $organization['Organization']['id'])); ?><br />
     <?php endif; ?>
+        
 </div>
 
 <div class="organizations view">
-    <h2><?php echo __($organization['Organization']['org_name']); ?></h2>
+    <h2><?php echo __($organization['Resource']['resource_name']); ?></h2>
     <br />
     <?php echo $this->Html->image($imagePath, array('alt' => 'Sample Photo', 'height' => '30%', 'width' => '30%')); ?>
 
@@ -153,7 +150,7 @@
                             <td><?php echo $user['username']; ?></td>
                             <td><?php echo $user['email']; ?></td>
                             <td class="actions">
-                                <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'users', 'action' => 'view', $user['id'])); ?>
+                                <?php if($isAtleastAdmin) echo $this->Html->link(__('View/Edit'), array('controller' => 'users', 'action' => 'view', $user['id'])); ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

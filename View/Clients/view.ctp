@@ -1,5 +1,4 @@
 <?php echo $this->Html->script("client_view.js", FALSE); ?>
-
 <?php echo $this->Html->script('ajaxupload-min.js', FALSE); ?>
 <?php echo $this->Html->css('classicTheme/style'); ?>
 
@@ -226,10 +225,10 @@
                     <?php echo ($client['Client']['dedicatedChrist'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Model'); ?></dt>
+                <dt><?php echo __('Model of Car'); ?></dt>
                 <dd>
                     &nbsp;&nbsp;
-                    <?php echo ($client['Client']['model'] == 1) ? 'yes' : 'no'; ?>
+                    <?php echo $client['Client']['model']; ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('How Did You Hear'); ?></dt>
@@ -393,7 +392,7 @@
                 <script type="text/javascript">
                     $('#image_upload').ajaxupload({
                         url:'/mission_columbia_baked/webroot/upload.php',
-                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/img',
+                        remotePath: 'C:/wamp/www/mission_columbia_baked/webroot/img',
                         editFilename: true
                     });
                 </script>

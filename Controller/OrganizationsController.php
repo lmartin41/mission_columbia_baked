@@ -83,9 +83,7 @@ class OrganizationsController extends AppController {
             }
             if ($this->Organization->save($this->request->data)) {
                 $this->Session->setFlash(__('The organization has been saved'));
-                if (isset($this->request->data['addMore'])) {
-                    $this->redirect(array('controller' => 'Resources', 'action' => 'index'));
-                } else if (isset($this->request->data['finished'])) {
+                if (isset($this->request->data['finished'])) {
                     $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Session->setFlash(__('The organization could not be saved. Please, try again.'));

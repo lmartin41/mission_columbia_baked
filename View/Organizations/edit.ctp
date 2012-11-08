@@ -66,8 +66,6 @@
         </table>
     </fieldset>
     <div>
-        <?php echo $this->Form->submit(__('Save and Edit a Resource for this Organization'), array('name' => 'addMore', 'div' => false)); ?>
-        &nbsp;
         <?php echo $this->Form->submit('Done', array('name' => 'finished', 'div' => false)); ?>
         &nbsp;
         <?php echo $this->Form->submit('Cancel', array('name' => 'cancel', 'div' => false)); ?>
@@ -77,9 +75,5 @@
 <div class="actionsNoButton">
 
         <?php echo $this->Html->link(__('Organization Listing'), array('action' => 'index')); ?><br />
-        <?php echo $this->Html->link(__('Resource Listing'), array('controller' => 'resources', 'action' => 'index')); ?><br />
-        <?php echo $this->Html->link(__('Create a Resource for this Organization'), array('controller' => 'resources', 'action' => 'add')); ?> <br />
-        <?php echo $this->Html->link(__('List Users for this Organization'), array('controller' => 'users', 'action' => 'index')); ?> <br />
-        <?php echo $this->Html->link(__('Create a new User'), array('controller' => 'users', 'action' => 'add')); ?>
     
 </div>
