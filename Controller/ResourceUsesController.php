@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
  * @property Resourceus $Resourceus
  */
 class ResourceUsesController extends AppController {
-	public $uses = array("ResourceUs", "Organization");
+	public $uses = array("ResourceUs", "Organization", "Resource");
     /**
      * index method
      *
@@ -88,7 +88,12 @@ class ResourceUsesController extends AppController {
         }
         $clients = $this->ResourceUs->Client->find('list');
         $organizations = $this->Organization->find('list');
-        $this->set(compact('clients', 'organizations'));
+        $selected_organization = $this->request->data['Resource']['organization_id'];
+        $resources = $this->Resource->find('list', array( 'conditions' => array('Resource.organization_id' => $selected_organization)));
+        $selected_resource = $this->request->data['Resource']['id'];
+        $this->set(compact('clients', 'organizations', 'resources'));
+        $this->set('selected_organization', $selected_organization);
+        $this->set('selected_resource', $selected_resource);
     }
 
     /**
