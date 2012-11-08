@@ -87,8 +87,8 @@ class ResourceUsesController extends AppController {
             $this->request->data = $this->ResourceUs->read(null, $id);
         }
         $clients = $this->ResourceUs->Client->find('list');
-        $resources = $this->ResourceUs->Resource->find('list');
-        $this->set(compact('clients', 'resources'));
+        $organizations = $this->Organization->find('list');
+        $this->set(compact('clients', 'organizations'));
     }
 
     /**

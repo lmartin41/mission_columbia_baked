@@ -10,6 +10,7 @@
 
 <div class="resources view">
 
+
     <h2><?php echo __($resource['Resource']['resource_name']); ?></h2><br />
     <?php echo $this->Html->image($imagePath, array('alt' => 'Sample Photo', 'width' => '30%', 'height' => '30%')) ?>
     <div id="accordion">
@@ -18,6 +19,7 @@
             <dl>
                 <dt><?php echo __('Resource Name'); ?></dt>
                 <dd>
+                    
                     <?php echo h($resource['Resource']['resource_name']); ?>
                     &nbsp;
                 </dd>
@@ -102,11 +104,13 @@
         <div class="white-background black-text">
             <div id="demo1" style="width:500px">
                 <script type="text/javascript">
+
                     $('#demo1').ajaxupload({
-                        url:'/mission_columbia_baked/webroot/upload.php',
-                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/img',
+                        url:'/mission_columbia_baked/webroot/upload.php?id="resource-<?php echo h($resource["Resource"]["id"]); ?>',
+                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/uploaded_images',
                         editFilename: true
                     });
+                    
                 </script>
             </div>
         </div>

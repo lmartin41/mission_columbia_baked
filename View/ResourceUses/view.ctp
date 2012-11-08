@@ -42,5 +42,6 @@
 			<?php echo h($resourceUs['ResourceUs']['modified']); ?>
 			&nbsp;
 		</dd>
+		<br /><br /><br /><br /><br />
 	</dl>
 </div>
