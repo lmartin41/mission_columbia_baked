@@ -8,8 +8,11 @@ $(document).ready( function(){
             }
         }
 		
+        //parse url
+        var base_url = "http://" + location.host + location.pathname.substr(0, location.pathname.indexOf('/', 2));
+
         $.ajax({
-            url: '../../organizations/resources/' + $('#organization').val() + '.json' ,
+            url: base_url + '/organizations/resources/' + $('#organization').val() + '.json' ,
             dataType: 'json',
             success: updateResourceComboBox
         });
