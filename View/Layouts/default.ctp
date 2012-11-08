@@ -176,8 +176,7 @@ checkContext();
 
             <div id="footer" style="text-align: center; margin-left:auto; margin-left:auto;">
                 <?php if ($logged_in): ?>
-                    We would appreciate your <?php echo $this->Html->link('Feedback', array('controller' => 'feedbacks', 'action' => 'add')); ?> |
-                    <a>Help</a> | 
+                    We would appreciate your <?php echo $this->Html->link('Feedback', array('controller' => 'feedbacks', 'action' => 'add')); ?> | 
                     <a onclick="return toggle('22');">Contact</a>
                     <p id ="22" style ="display: none">
                         <br />Mission Columbia 

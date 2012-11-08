@@ -7,7 +7,7 @@
 		echo $this->Form->input('client_id');
 		echo $this->Form->input('organization_id', array('label' => 'Organization:', 'id' => 'organization', 'empty' => 'Select an organization'));
         echo $this->Form->input('resource_id', array('type' => 'select', 'label' => 'Resource:', 'disabled' => 'disabled'));
-		echo $this->Form->input('date', array('type' => 'date', 'empty' => true));
+		echo $this->Form->input('date', array('type' => 'date', 'minYear' => date('Y') - 120, 'maxYear' => date('Y'), 'empty' => true));
 		echo $this->Form->input('comments');
 	?>
 	</fieldset>
