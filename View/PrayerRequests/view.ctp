@@ -13,14 +13,9 @@
 <div class="prayerRequests view">
 <h2><?php  echo __('Prayer Request'); ?></h2>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($prayerRequest['PrayerRequest']['id']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Client'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($prayerRequest['Client']['id'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?>
+			<?php echo $this->Html->link($prayerRequest['Client']['first_name'] . ' ' . $prayerRequest['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Date'); ?></dt>
