@@ -67,6 +67,19 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 
 	?>
 	
+	<!--incomplete stubbed ajax thingie -->
+	<!--
+	<script>
+		//testMarkers();
+		$(document).ready(function(){  
+		    $("p").click(function () {
+		      alert("clicked");
+
+		    });
+		});
+    
+	</script>
+	-->
 
 	<!--below needs to be adding markers that are queried from the organizations address1, city, and state vals 
 	<?php echo $this->GoogleMap->addMarker("map_canvas", 2, "2723 Ashland Road, Columbia SC"); ?>
