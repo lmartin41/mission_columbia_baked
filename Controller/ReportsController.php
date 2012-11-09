@@ -26,7 +26,10 @@ class ReportsController extends AppController {
                 $firstName = $names[1];
             } else {
                 $firstName = $names[0];
-                $lastName = $names[1];
+                if( count($names) > 1 )
+                	$lastName = $names[1];
+                else
+                	$lastName = null;
             }
 
             $startDate = $this->request->data['startDate'];

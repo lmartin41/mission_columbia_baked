@@ -10,7 +10,7 @@ App::uses('ResourcesController', 'Controller');
  */
 class ClientsController extends AppController {
 	public $uses = array('Client', 'Resource');
-    public $components = array('Session');
+    public $components = array('Session', 'RequestHandler');
     public $helpers = array('Js');
     public $paginate = array(
         'order' => array(
@@ -33,19 +33,34 @@ class ClientsController extends AppController {
                 $firstName = $names[1];
             } else {
                 $firstName = $names[0];
-                $lastName = $names[1];
+                if( count($names) > 1 )
+                	$lastName = $names[1];
+                else
+                	$lastName = null;
             }
 
-            //PUT AJAX HERE!!
-            $correctResults = $this->clientSearch($firstName, $lastName);
-            $this->Session->write('results', $correctResults);
-
-            if (count($correctResults) == 1) {
-                $this->redirect(array('action' => 'view', $correctResults[0]['Client']['id']));
-            } else {
-                $this->redirect(array('action' => 'searchResults'));
+            $this->paginate = $this->clientSearch($firstName, $lastName);
+            if( $this->RequestHandler->isAjax() )
+            {
+            	$this->layout = 'ajax';
+            	$this->disableCache();
+            	Configure::write('debug', 0);
+            }
+            else
+            {
+            	$correctResults = $this->paginate();
+            	if (count($correctResults) == 1) {
+                	$this->redirect(array('action' => 'view', $correctResults[0]['Client']['id']));
+           		}
             }
         }
+        else
+        {
+        	$this->paginate = $this->clientSearch('', '');
+        }
+       
+        $clients = $this->paginate();
+        $this->set(compact('clients'));
     }
 
     public function clientSearch($firstName, $lastName) {
@@ -55,8 +70,7 @@ class ClientsController extends AppController {
             $conditions = array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $lastName . '%');
         }
 
-        $correctResults = $this->Client->find('all', array('conditions' => $conditions));
-        return $correctResults;
+        return array('all', 'conditions' => $conditions, 'order' => array('Client.last_name' => 'ASC'));
     }
 
     public function browse() {
