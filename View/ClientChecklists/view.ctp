@@ -12,14 +12,9 @@
 <div class="clientChecklists view">
     <h2><?php echo __('Client Checklist'); ?></h2>
     <dl>
-        <dt><?php echo __('Id'); ?></dt>
-        <dd>
-            <?php echo h($clientChecklist['ClientChecklist']['id']); ?>
-            &nbsp;
-        </dd>
         <dt><?php echo __('Client'); ?></dt>
         <dd>
-            <?php echo $this->Html->link($clientChecklist['Client']['id'], array('controller' => 'clients', 'action' => 'view', $clientChecklist['Client']['id'])); ?>
+            <?php echo $this->Html->link($clientChecklist['Client']['first_name'] . ' ' . $clientChecklist['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $clientChecklist['Client']['id'])); ?>
             &nbsp;
         </dd>
         <dt><?php echo __('Checklist Name'); ?></dt>

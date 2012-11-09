@@ -142,3 +142,28 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 {
 	text-decoration: none;
 }
+
+.clientChecklists dl > dt
+{
+	width: 35%
+}
+
+.clientChecklists dl > dd
+{
+	margin-left: 13em;
+}
+
+#clientsResults thead, #clientsResults tbody
+{
+	display: table-row-group;
+}
+
+#clientsResults
+{
+	display: table;
+}
+
+.dataTables_wrapper .ui-toolbar
+{
+	background: #0B3E6F;
+}

@@ -9,7 +9,7 @@ App::uses('ResourcesController', 'Controller');
  * @property Client $Client
  */
 class ClientsController extends AppController {
-
+	public $uses = array('Client', 'Resource');
     public $components = array('Session');
     public $helpers = array('Js');
     public $paginate = array(
@@ -24,30 +24,11 @@ class ClientsController extends AppController {
      * @return void
      */
     public function index() {
-        if ($this->request->is('post')) {
-            $names = explode(" ", $this->request->data['Client']['Name']);
-
-            $posVal = strpos($names[0], ',');
-            if ($posVal !== false) {
-                $lastName = substr($names[0], 0, $posVal);
-                $firstName = $names[1];
-            } else {
-                $firstName = $names[0];
-                $lastName = $names[1];
-            }
-
-            //PUT AJAX HERE!!
-            $correctResults = $this->clientSearch($firstName, $lastName);
-            $this->Session->write('results', $correctResults);
-
-            if (count($correctResults) == 1) {
-                $this->redirect(array('action' => 'view', $correctResults[0]['Client']['id']));
-            } else {
-                $this->redirect(array('action' => 'searchResults'));
-            }
-        }
+    	$this->Client->recursive = 0;
+    	$this->set('clients', $this->paginate());
     }
-
+    
+    //No longer needed - Brett Koenig
     public function clientSearch($firstName, $lastName) {
         if (empty($lastName)) {
             $conditions = array('OR' => array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $firstName . '%'));
@@ -55,10 +36,10 @@ class ClientsController extends AppController {
             $conditions = array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $lastName . '%');
         }
 
-        $correctResults = $this->Client->find('all', array('conditions' => $conditions));
-        return $correctResults;
+        return $this->Client->find('all', array('conditions' => $conditions));
     }
 
+    //No longer needed - Brett Koenig
     public function browse() {
         $this->Client->recursive = 0;
         $this->set('clients', $this->paginate());
@@ -80,19 +61,23 @@ class ClientsController extends AppController {
         $client = $this->Client->read(null, $id);
         $resourceUses = array();
         $resourceName = array();
-        $resourceController = new ResourcesController();
+        $organizationName = array();
 
         $i = 0;
         foreach ($client['ResourceUs'] as $resourceUse) {
             if ($resourceUse['client_id'] == $client['Client']['id']) {
                 $resourceUses[$i] = $resourceUse;
-                $resourceName[$i] = $resourceController->giveMeName($resourceUse['resource_id']);
+                $num = $resourceUse['resource_id'];
+                $resource = $this->Resource->find('first', array('conditions' => array('Resource.id' => $num)));
+                $resourceName[$i] = $resource['Resource']['resource_name'];
+                $organizationName[$i] = $resource['Organization']['org_name'];
                 $i++;
             }
         }
 
         $this->set('resourceUses', $resourceUses);
         $this->set('resourceName', $resourceName);
+        $this->set('organizationName', $organizationName);
         $this->set('client', $client);
         
         $path = $this->giveMePath('Client', $id);
