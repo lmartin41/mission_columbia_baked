@@ -10,7 +10,7 @@ App::uses('ResourcesController', 'Controller');
  */
 class ClientsController extends AppController {
 	public $uses = array('Client', 'Resource');
-    public $components = array('Session', 'RequestHandler');
+    public $components = array('Session');
     public $helpers = array('Js');
     public $paginate = array(
         'order' => array(
@@ -24,45 +24,11 @@ class ClientsController extends AppController {
      * @return void
      */
     public function index() {
-        if ($this->request->is('post')) {
-            $names = explode(" ", $this->request->data['Client']['Name']);
-
-            $posVal = strpos($names[0], ',');
-            if ($posVal !== false) {
-                $lastName = substr($names[0], 0, $posVal);
-                $firstName = $names[1];
-            } else {
-                $firstName = $names[0];
-                if( count($names) > 1 )
-                	$lastName = $names[1];
-                else
-                	$lastName = null;
-            }
-
-            $this->paginate = $this->clientSearch($firstName, $lastName);
-            if( $this->RequestHandler->isAjax() )
-            {
-            	$this->layout = 'ajax';
-            	$this->disableCache();
-            	Configure::write('debug', 0);
-            }
-            else
-            {
-            	$correctResults = $this->paginate();
-            	if (count($correctResults) == 1) {
-                	$this->redirect(array('action' => 'view', $correctResults[0]['Client']['id']));
-           		}
-            }
-        }
-        else
-        {
-        	$this->paginate = $this->clientSearch('', '');
-        }
-       
-        $clients = $this->paginate();
-        $this->set(compact('clients'));
+    	$this->Client->recursive = 0;
+    	$this->set('clients', $this->paginate());
     }
-
+    
+    //No longer needed - Brett Koenig
     public function clientSearch($firstName, $lastName) {
         if (empty($lastName)) {
             $conditions = array('OR' => array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $firstName . '%'));
@@ -70,9 +36,10 @@ class ClientsController extends AppController {
             $conditions = array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $lastName . '%');
         }
 
-        return array('all', 'conditions' => $conditions, 'order' => array('Client.last_name' => 'ASC'));
+        return $this->Client->find('all', array('conditions' => $conditions));
     }
 
+    //No longer needed - Brett Koenig
     public function browse() {
         $this->Client->recursive = 0;
         $this->set('clients', $this->paginate());

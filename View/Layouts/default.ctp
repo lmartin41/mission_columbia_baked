@@ -40,7 +40,7 @@
         echo $this->Html->css('jquery-ui-1.9.0.custom.min');
         echo $this->Html->css('styles');
         echo $this->fetch('script');
-        echo $this->Html->script("toggle.js");
+        //echo $this->Html->script("toggle.js");
         ?>
 
         
