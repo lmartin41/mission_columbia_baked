@@ -156,6 +156,7 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 #clientsResults thead, #clientsResults tbody
 {
 	display: table-row-group;
+	cursor: pointer;
 }
 
 #clientsResults
@@ -163,8 +164,30 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 	display: table;
 }
 
+#clientsResults tr td
+{
+	border-bottom: 1px none;
+}
+
+#clientsResults_filter
+{
+	width: 40%;
+}
 .dataTables_wrapper .ui-toolbar
 {
 	background: #333 url(images/ui-bg_dots-small_20_333333_2x2.png) 50% 50% repeat;
 	border: 1px solid #73787E;	
+}
+
+.highlight-dataTables
+{
+	border: 1px solid black;
+}
+
+.highlight-dataTables:last-of-type
+{
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+	border-bottom: 1px none;
 }

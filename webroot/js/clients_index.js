@@ -2,27 +2,27 @@ $(document).ready(function(){
 	oTable = $("#clientsResults").dataTable({
 		"bJQueryUI": true,
 		"sPaginationType": "full_numbers",
-		"bAutoWidth": true,
+		"bProcessing": true,
+		"bServerSide": true,
+		"sAjaxSource": global.base_url + "/clients/dataTables.json",
 		"aoColumns": [
 		              	{"bSortable": true, "bSearchable": true},
 		              	{"bSortable": true, "bSearchable": true, },
 		              	{"bSortable": false, "bSearchable": false}
 		             ],
 		"aaSorting": [[1, 'asc']]
+	}).fnSetFilteringDelay(1000);
+	
+	$('#clientsResults').on('click', 'tbody tr', function(event){
+		var id = $(this).attr('id');
+		location.href = global.base_url + "/clients/view/" + id.substr(id.indexOf('_') + 1);
 	});
 	
-	//fixes weird issue with datatables not drawing search correctly
-	$('#clientsResults_filter').css('text-align', 'left');
+	$('#clientsResults').on('mouseenter', 'tbody tr', function(event){
+		$(this).addClass('highlight-dataTables');
+	});
 	
-	make_rows_into_links();
-	
-	function make_rows_into_links()
-	{
-		$('#clientsResults tbody tr').on('click', function(event){
-			var id = $(this).attr('id');
-			location.href = global.base_url + "/clients/view/" + id.substr(id.indexOf('_') + 1);
-		});
-		
-		$('#clientsResults tbody tr').css('cursor', 'pointer');
-	}
+	$('#clientsResults').on('mouseleave', 'tbody tr', function(event){
+		$(this).removeClass('highlight-dataTables');
+	});
 });
