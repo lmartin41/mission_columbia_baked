@@ -8,15 +8,15 @@
            	<tr>
                	<th>First Name</th>
                	<th>Last Name</th>
-               	<th>Action</th>
+               	<th>DOB</th>
            	</tr>
         </thead>
         <tbody>
         	<?php foreach ($clients as $result): ?>
-                <tr>
+                <tr id="client_<?php echo h($result['Client']['id']); ?>">
                     <td><?php echo h($result['Client']['first_name']); ?></td>
                     <td><?php echo h($result['Client']['last_name']); ?></td>
-                    <td><?php echo $this->Html->link('View Profile', array('action' => 'view', $result['Client']['id'])); ?></td>
+                    <td><?php echo date('m/d/Y', strtotime(h($result['Client']['DOB']))); ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

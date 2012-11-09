@@ -7,12 +7,9 @@ $(document).ready( function(){
                 $('#organization > option:first-child').remove();
             }
         }
-		
-        //parse url
-        var base_url = "http://" + location.host + location.pathname.substr(0, location.pathname.indexOf('/', 2));
 
         $.ajax({
-            url: base_url + '/organizations/resources/' + $('#organization').val() + '.json' ,
+            url: global.base_url + '/organizations/resources/' + $('#organization').val() + '.json' ,
             dataType: 'json',
             success: updateResourceComboBox
         });

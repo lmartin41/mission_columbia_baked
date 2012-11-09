@@ -165,5 +165,6 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 
 .dataTables_wrapper .ui-toolbar
 {
-	background: #0B3E6F;
+	background: #333 url(images/ui-bg_dots-small_20_333333_2x2.png) 50% 50% repeat;
+	border: 1px solid #73787E;	
 }

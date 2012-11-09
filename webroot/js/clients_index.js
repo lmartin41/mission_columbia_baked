@@ -13,4 +13,16 @@ $(document).ready(function(){
 	
 	//fixes weird issue with datatables not drawing search correctly
 	$('#clientsResults_filter').css('text-align', 'left');
+	
+	make_rows_into_links();
+	
+	function make_rows_into_links()
+	{
+		$('#clientsResults tbody tr').on('click', function(event){
+			var id = $(this).attr('id');
+			location.href = global.base_url + "/clients/view/" + id.substr(id.indexOf('_') + 1);
+		});
+		
+		$('#clientsResults tbody tr').css('cursor', 'pointer');
+	}
 });
