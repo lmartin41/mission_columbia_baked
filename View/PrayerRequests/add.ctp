@@ -3,7 +3,6 @@
     <fieldset>
         <legend><?php echo __('Add Prayer Request'); ?></legend>
         <?php
-        echo $this->Form->input('date');
         echo $this->Form->input('request');
         echo $this->Form->input('comments');
         ?>

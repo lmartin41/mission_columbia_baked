@@ -4,7 +4,6 @@
         <tr>
             <th><?php echo $this->Paginator->sort('id'); ?></th>
             <th><?php echo $this->Paginator->sort('client_id'); ?></th>
-            <th><?php echo $this->Paginator->sort('date'); ?></th>
             <th><?php echo $this->Paginator->sort('request'); ?></th>
             <th><?php echo $this->Paginator->sort('comments'); ?></th>
             <th class="actions"><?php echo __(''); ?></th>
@@ -18,7 +17,6 @@
                     <td>
                         <?php echo $this->Html->link($prayerRequest['Client']['id'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?>
                     </td>
-                    <td><?php echo h($prayerRequest['PrayerRequest']['date']); ?>&nbsp;</td>
                     <td><?php echo h($prayerRequest['PrayerRequest']['request']); ?>&nbsp;</td>
                     <td><?php echo h($prayerRequest['PrayerRequest']['comments']); ?>&nbsp;</td>
                     <td class="actions">

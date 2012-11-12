@@ -25,103 +25,46 @@ class ClientRelation extends AppModel {
         'first_name' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'message' => 'Please enter a first name',
             ),
             'alphanumeric' => array(
                 'rule' => array('alphanumeric'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'message' => 'The first name should be alphanumeric',
             ),
         ),
         'last_name' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'message' => 'Plese enter a last name',
             ),
             'alphanumeric' => array(
                 'rule' => array('alphanumeric'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'message' => 'The last name should be alphanumeric',
             ),
         ),
         'relationship' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'message' => 'Please specify how this person is related to the client',
             ),
             'alphanumeric' => array(
                 'rule' => array('alphanumeric'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'message' => 'This field should be alphanumeric',
             ),
         ),
         'DOB' => array(
-            'fixAge' => array(
-                'rule' => 'fixAge'
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
-            //          ),
-            //'notempty' => array(
-            //    'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
-            )
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message' => 'Plese enter a date of birth or age',
+            ),
         ),
         'sex' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
-            ),
-            'alphanumeric' => array(
-                'rule' => array('alphanumeric'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'message' => 'Please select either Male or Female',
             ),
         ),
     );
-
-    public function fixAge($data) {
-        if ($this->data['Client']['age'] == null) {
-            return true;
-        }
-        $year = Date('Y') - $this->data['Client']['age'];
-        $this->data['Client']['DOB'] = $year . "-01-01 00:00:00";
-        return true;
-    }
 
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 

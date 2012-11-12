@@ -49,14 +49,14 @@ class ClientRelationsController extends AppController {
             $this->request->data['ClientRelation']['client_id'] = $clientID;
             $this->ClientRelation->create();
             if ($this->ClientRelation->save($this->request->data)) {
-                $this->Session->setFlash(__('The client Relative has been saved'));
+                $this->Session->setFlash(__('The client relative has been saved'));
                 if (isset($this->request->data['Add_another_relative'])) {
                     $this->redirect(array('action' => 'add', $clientID));
                 } else if (isset($this->request->data['finished'])) {
                     $this->redirect(array('controller' => 'clients', 'action' => 'index'));
                 }
             } else {
-                $this->Session->setFlash(__('The client Relative could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The client relative could not be saved. Please, try again.'));
             }
         }
         $clients = $this->ClientRelation->Client->find('list');
@@ -83,12 +83,12 @@ class ClientRelationsController extends AppController {
             }
             $this->request->data['ClientRelation']['client_id'] = $clientID;
             if ($this->ClientRelation->save($this->request->data)) {
-                $this->Session->setFlash(__('The client Relative has been saved'));
+                $this->Session->setFlash(__('The client relative has been saved'));
                 if (isset($this->request->data['finished'])) {
                     $this->redirect(array('controller' => 'clients', 'action' => 'index'));
                 }
             } else {
-                $this->Session->setFlash(__('The client Relative could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The client relative could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->ClientRelation->read(null, $id);
@@ -111,13 +111,13 @@ class ClientRelationsController extends AppController {
         }
         $this->ClientRelation->id = $id;
         if (!$this->ClientRelation->exists()) {
-            throw new NotFoundException(__('Invalid client Relative'));
+            throw new NotFoundException(__('Invalid client relative'));
         }
         if ($this->ClientRelation->delete()) {
-            $this->Session->setFlash(__('Client Relative deleted'));
+            $this->Session->setFlash(__('Client relative deleted'));
             $this->redirect(array('controller' => 'clients', 'action' => 'index'));
         }
-        $this->Session->setFlash(__('Client Relative was not deleted'));
+        $this->Session->setFlash(__('Client relative was not deleted'));
         $this->redirect(array('controller' => 'clients', 'action' => 'index'));
     }
 
