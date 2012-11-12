@@ -2,10 +2,8 @@
     <h2><?php echo __('Prayer Requests for ' . $client['Client']['first_name']); ?></h2>
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th><?php echo $this->Paginator->sort('id'); ?></th>
             <th><?php echo $this->Paginator->sort('client_id'); ?></th>
             <th><?php echo $this->Paginator->sort('request'); ?></th>
-            <th><?php echo $this->Paginator->sort('comments'); ?></th>
             <th class="actions"><?php echo __(''); ?></th>
         </tr>
         <?php
@@ -13,12 +11,10 @@
             if ($client['Client']['id'] == $prayerRequest['PrayerRequest']['client_id']):
                 ?>
                 <tr>
-                    <td><?php echo h($prayerRequest['PrayerRequest']['id']); ?>&nbsp;</td>
                     <td>
-                        <?php echo $this->Html->link($prayerRequest['Client']['id'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?>
+                        <?php echo $this->Html->link($prayerRequest['Client']['first_name'] . ' ' . $prayerRequest['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?>
                     </td>
                     <td><?php echo h($prayerRequest['PrayerRequest']['request']); ?>&nbsp;</td>
-                    <td><?php echo h($prayerRequest['PrayerRequest']['comments']); ?>&nbsp;</td>
                     <td class="actions">
                         <?php echo $this->Html->link(__('View/Edit'), array('action' => 'view', $prayerRequest['PrayerRequest']['id'], $client['Client']['id'])); ?>
                     </td>

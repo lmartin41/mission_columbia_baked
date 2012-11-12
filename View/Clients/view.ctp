@@ -5,7 +5,6 @@
 <div class="actionsNoButton client">
     <?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?><br />
     <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?><br />
-    <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?><br />
     <?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?><br />
     <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?><br />
     <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?><br />
