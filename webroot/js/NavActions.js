@@ -6,12 +6,11 @@ jQuery(document).ready(function(){
 
 	    //clicking radio buttons functionality
 		jQuery("#radio1").click(function () {
-			window.location.href = "http://localhost/mission_columbia_baked/users/";
+			window.location.href = global.base_url + "/users/";
 	    });
 	    jQuery("#radio2").click(function () {
 
-			location.href = $('#clients').attr('href');
-			// jQuery('div.tipsContent').replaceWith("<B>Tipzzzzz</B>");
+			location.href = global.base_url + "/clients";
 
 	    });
 	    jQuery("#radio3").click(function () {
@@ -46,7 +45,7 @@ jQuery(document).ready(function(){
 function checkContext(){
 	// alert("InCheckContext");
 
-	// var url = window.location.href;
+	var url = window.location.href;
 	// var host = window.location.host;
 	var pathName = window.location.pathname;
 	/*if(pathName.indexOf('/mission_columbia_baked/users/login') != -1) {
@@ -55,7 +54,7 @@ function checkContext(){
 			"BLEH BLAH BLAH BLAH BLEH BLAH BLAH BLAH ");
 		// alert("in login " + pathName);
 	}*/
-	/*else*/ if(pathName.indexOf('/mission_columbia_baked/resources') != -1) {
+	/*else*/ if(pathName.indexOf(global.base_url + '/resources') != -1) {
 		jQuery('div.tipsContent').replaceWith("<B>This is a listing of all organizations' resource streams currently in the system.  Click on view/edit for more details</B>");
 		// alert("in resources " +  pathName);
 	}
@@ -77,10 +76,10 @@ function checkContext(){
 	else if(pathName.indexOf('/mission_columbia_baked/users/login') != -1) {
 		jQuery('div.tipsContent').replaceWith("<B>Contact your organizations for resolving login issues.</B>");
 	}
-	// else if(url.indexOf('http://localhost/mission_columbia_baked/clients/searchResults') != -1) {
-	// 	jQuery('div.tipsContent').replaceWith("<B>AT THE CLIENT SEARCH RESULTS PAGE</B>");
+	else if( url == (global.base_url + '/clients')) {
+		jQuery('div.tipsContent').replaceWith("<strong>Tips for clients index</strong>");
 
 	// 	alert("cleint search");
-	// }
+	}
 
 }

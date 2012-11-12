@@ -155,7 +155,7 @@ checkContext();
                     <?php echo $this->Session->flash(); ?>
 
                     <?php echo $this->fetch('content'); ?>
-					<div id="tipArea" style="width:10%; background:#B4CFEC; float:right; display:inline-block;">
+					<div id="tipArea">
                         <div id="tips" class="tipsBox" style="background:#B4CFEC; border-radius: 5px;">
                             <div class="tipsContent">
                                 <p><strong>Tips Default</strong></p>
@@ -191,7 +191,6 @@ checkContext();
         </div>
         <?php echo $this->element('sql_dump'); ?>
         <div class="do_not_show">
-            <?php echo $this->Html->link('Clients', array('controller' => 'clients', 'action' => 'index'), array('id' => 'clients')); ?>
             <?php echo $this->Html->link('Resources', array('controller' => 'resources', 'action' => 'index'), array('id' => 'resources')); ?>
             <?php echo $this->Html->link('Organizations', array('controller' => 'organizations', 'action' => 'index'), array('id' => 'organizations')); ?>
             <?php echo $this->Html->link('Reports', array('controller' => 'reports', 'action' => 'index'), array('id' => 'reports')); ?>
