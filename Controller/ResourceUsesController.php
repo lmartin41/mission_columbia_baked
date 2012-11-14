@@ -29,7 +29,7 @@ class ResourceUsesController extends AppController {
     public function view($id = null) {
         $this->ResourceUs->id = $id;
         if (!$this->ResourceUs->exists()) {
-            throw new NotFoundException(__('Invalid ResourceUs'));
+            throw new NotFoundException(__('Invalid resource use'));
         }
         $this->set('resourceUs', $this->ResourceUs->read(null, $id));
     }
@@ -49,14 +49,14 @@ class ResourceUsesController extends AppController {
             $this->ResourceUs->create();
             $this->ResourceUs->client_id = $clientID;
             if ($this->ResourceUs->save($this->request->data)) {
-                $this->Session->setFlash(__('The Resource Use has been saved'));
+                $this->Session->setFlash(__('The resource use has been saved'));
                 if (isset($this->request->data['Add_another_resource'])) {
                     $this->redirect(array('action' => 'add', $clientID));
                 } else if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+                    $this->redirect(array('controller' => 'clients', 'action' => 'view', $clientID));
                 }
             } else {
-                $this->Session->setFlash(__('The resuorce use could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The resource use could not be saved. Please, try again.'));
             }
         }
         $clients = $this->ResourceUs->Client->find('list');
@@ -74,14 +74,14 @@ class ResourceUsesController extends AppController {
     public function edit($id = null) {
         $this->ResourceUs->id = $id;
         if (!$this->ResourceUs->exists()) {
-            throw new NotFoundException(__('Invalid Resource Use'));
+            throw new NotFoundException(__('Invalid resource use'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->ResourceUs->save($this->request->data)) {
-                $this->Session->setFlash(__('The resource Use has been saved'));
+                $this->Session->setFlash(__('The resource use has been saved'));
                 $this->redirect(array('controller' => 'clients', 'action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The ResourceUse could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The resource use could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->ResourceUs->read(null, $id);
@@ -113,10 +113,10 @@ class ResourceUsesController extends AppController {
             throw new NotFoundException(__('Invalid resourceus'));
         }
         if ($this->ResourceUs->delete()) {
-            $this->Session->setFlash(__('Resource Use deleted'));
+            $this->Session->setFlash(__('Resource use deleted'));
             $this->redirect(array('controller' => 'clients', 'action' => 'index'));
         }
-        $this->Session->setFlash(__('Resourceus was not deleted'));
+        $this->Session->setFlash(__('Resource use was not deleted'));
         $this->redirect(array('controller' => 'clients', 'action' => 'index'));
     }
 

@@ -3,32 +3,25 @@
 App::uses('OrganizationsController', 'Controller');
 App::uses('AppController', 'Controller');
 
-
-
 class WelcomeController extends AppController {
 
-    
     public $helpers = array('GoogleMap');   //Adding the helper
-	public $components = array('RequestHandler');
+    public $components = array('RequestHandler');
+
     public function index() {
-        
+
         $orgCont = new OrganizationsController();
-    	$result = $orgCont->giveMeAddresses();
-        
+        $result = $orgCont->giveMeAddresses();
+
         $this->set('theResult', $result);
         /*
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';
-        */
+          echo '<pre>';
+          print_r($result);
+          echo '</pre>';
+         */
         //have fun!! :) -- Lee
-
-    	//$address = $this->Session->read('address_one');
-
-
-        
+        //$address = $this->Session->read('address_one');
     }
-
 
 }
 
@@ -36,8 +29,8 @@ class WelcomeController extends AppController {
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
 
- could write a view that would return KML (xml, but a certain syntax)
+  could write a view that would return KML (xml, but a certain syntax)
 
- just say organizationconrtroler::givemeaddresses.
+  just say organizationconrtroler::givemeaddresses.
  */
 ?>

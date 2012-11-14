@@ -1,6 +1,6 @@
 <div class="actionsNoButton">
 	<?php if( $isAtleastAdmin ): ?>
-		<?php echo $this->Html->link(__('List Feedbacks'), array('action' => 'index')); ?>
+		<?php echo $this->Html->link(__('List Feedbacks'), array('action' => 'index')); ?><br />
 		<?php echo $this->Html->link(__('New Feedback'), array('action' => 'add'), array('class' => 'active_link')); ?>
 	<?php endif; ?>
 </div>

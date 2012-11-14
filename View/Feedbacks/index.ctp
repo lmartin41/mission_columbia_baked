@@ -1,5 +1,5 @@
 <div class="actionsNoButton">
-	<?php echo $this->Html->link(__('List Feedback'), array('controller' => 'feedbacks', 'action' => 'index'), array('class' => 'active_link')); ?>
+	<?php echo $this->Html->link(__('List Feedback'), array('controller' => 'feedbacks', 'action' => 'index'), array('class' => 'active_link')); ?><br />
 	<?php echo $this->Html->link(__('New Feedback'), array('action' => 'add')); ?>
 </div>
 <div class="feedbacks index">
@@ -10,7 +10,7 @@
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('feedback'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
+			<th class="actions"><?php echo __(''); ?></th>
 	</tr>
 	<?php
 	foreach ($feedbacks as $feedback): ?>

@@ -9,7 +9,6 @@ App::uses('AppModel', 'Model');
  * @property ResourceUs $ResourceUs
  */
 class Client extends AppModel {
-
     var $name = 'Client';
 
     /**
@@ -28,94 +27,56 @@ class Client extends AppModel {
         'first_name' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'message' => "Please enter a first name",
             ),
-            'alphanumeric' => array(
+            'alphaNumeric' => array(
                 'rule' => array('alphanumeric'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'message' => 'The first name should be alphanumeric',
             ),
         ),
         'last_name' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'message' => 'Please enter a last name',
             ),
             'alphanumeric' => array(
                 'rule' => array('alphanumeric'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'message' => 'The last name should be alphanumeric',
             ),
         ),
         'DOB' => array(
-        //  'fixAge' => array(
-        //       'rule' => 'fixAge',
-        //'message' => 'Your custom message here',
-        //'allowEmpty' => false,
-        //'required' => false,
-        //'last' => false, // Stop validation after this rule
-        //'on' => 'create', // Limit validation to 'create' or 'update' operations
-        //),
-        // 'notempty' => array(
-        //    'rule' => array('notempty'),
-        //'message' => 'Your custom message here',
-        //'allowEmpty' => false,
-        //'required' => false,
-        //'last' => false, // Stop validation after this rule
-        //'on' => 'create', // Limit validation to 'create' or 'update' operations
-        //  ),
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message' => 'Please enter a Date of Birth or Age',
+            ),
         ),
         'sex' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
                 'message' => 'Please select male or female',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
-            ),
-            'alphanumeric' => array(
-                'rule' => array('alphanumeric'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
         ),
         'phone' => array(
             'notempty' => array(
                 'rule' => array('phone'),
                 'message' => 'Please enter in a phone number',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'allowEmpty' => true
             ),
         ),
+        'when_next_check' => array(
+            'validDate' => array(
+                'rule' => 'futureDate',
+                'message' => 'Theoretically, this date should be in the future',
+                'allowEmpty' => true
+            )
+        )
     );
-
-    public function fixAge($data) {
-        if ($this->data['Client']['age'] == null) {
-            return true;
+    
+    public function futureDate($data) {
+        if (strtotime($data['when_next_check']) < strtotime(date('Y-m-d'))) {
+            $this->invalidate();
         }
-        $year = Date('Y') - $this->data['Client']['age'];
-        $this->data['Client']['DOB'] = $year . "-01-01 00:00:00";
-        return true;
+        else return true;
     }
 
     /**

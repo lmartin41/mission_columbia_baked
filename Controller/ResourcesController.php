@@ -51,14 +51,14 @@ class ResourcesController extends AppController {
             $this->request->data['Resource']['organization_id'] = $organizationID;
             $this->Resource->create();
             if ($this->Resource->save($this->request->data)) {
-                $this->Session->setFlash(__('The Resource has been saved'));
+                $this->Session->setFlash(__('The resource has been saved'));
                 if (isset($this->request->data['Add_another_resource'])) {
                     $this->redirect(array('action' => 'add', $organizationID));
                 } else if (isset($this->request->data['finished'])) {
                     $this->redirect(array('action' => 'index'));
                 }
             } else {
-                $this->Session->setFlash(__('The client relation could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The resource could not be saved. Please, try again.'));
             }
         }
         //read from the database; point resource to the database

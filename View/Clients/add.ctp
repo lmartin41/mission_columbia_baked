@@ -137,7 +137,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <?php echo $this->Form->input('when_next_check', array('type' => 'date', 'empty' => true, 'separator' => false)); ?>    
+                        <?php echo $this->Form->input('when_next_check', array('type' => 'date', 'empty' => true, 'separator' => false, 'minYear' => date('Y'), 'maxYear' => date('Y') + 5)); ?>    
                     </td>
                 </tr>
             </table>
@@ -206,5 +206,4 @@
 <div class="actionsNoButton" style="">
     <?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?><Br />
     <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add'), array('class' => 'active_link')); ?><br />
-    <?php echo $this->Html->link(__('Browse Clients'), array('action' => 'browse')); ?>
 </div>

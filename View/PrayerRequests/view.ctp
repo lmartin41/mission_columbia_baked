@@ -1,12 +1,11 @@
 <div class="actionsNoButton">
     
-        <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $prayerRequest['PrayerRequest']['id'], $prayerRequest['Client']['id'])); ?> <br />
-        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $prayerRequest['PrayerRequest']['id'], $prayerRequest['Client']['id']), null, __('Are you sure you want to delete # %s?', $prayerRequest['PrayerRequest']['id'])); ?><br />
-        <?php echo $this->Html->link(__('Checklists Listing'), array('action' => 'index', $prayerRequest['Client']['id'])); ?> <br />
-        <?php echo $this->Html->link(__('New Checklist'), array('action' => 'add', $prayerRequest['PrayerRequest']['id'])); ?><br />
+        <?php echo $this->Html->link(__('Edit Request'), array('action' => 'edit', $prayerRequest['PrayerRequest']['id'], $prayerRequest['Client']['id'])); ?> <br />
+        <?php echo $this->Form->postLink(__('Delete Request'), array('action' => 'delete', $prayerRequest['PrayerRequest']['id'], $prayerRequest['Client']['id']), null, __('Are you sure you want to delete # %s?', $prayerRequest['PrayerRequest']['id'])); ?><br />
+        <?php echo $this->Html->link(__('Requests Listing'), array('action' => 'index', $prayerRequest['Client']['id'])); ?> <br />
+        <?php echo $this->Html->link(__('New Request'), array('action' => 'add', $prayerRequest['PrayerRequest']['id'])); ?><br />
         <?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'browse')); ?> <br />
         <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?><br />
-        <?php echo $this->Html->link(__('New Client Checklist Task'), array('controller' => 'client_checklist_tasks', 'action' => 'add')); ?>
     
 </div>
 
@@ -15,12 +14,7 @@
 	<dl>
 		<dt><?php echo __('Client'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($prayerRequest['Client']['first_name'] . ' ' . $prayerRequest['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Date'); ?></dt>
-		<dd>
-			<?php echo h($prayerRequest['PrayerRequest']['date']); ?>
+			<?php echo $this->Html->link($prayerRequest['Client']['first_name']." ".$prayerRequest['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Request'); ?></dt>

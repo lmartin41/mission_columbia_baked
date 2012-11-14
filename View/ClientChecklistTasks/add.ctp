@@ -18,9 +18,9 @@
     </div>
 </div>
 <div class="actionsNoButton">
-    <ul>
-        <li><?php echo $this->Html->link(__('Browse Client Checklists'), array('controller' => 'client_checklists', 'action' => 'index', $clientChecklistID)); ?> </li><br />
-        <li><?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'client', 'action' => 'index')); ?> </li><br />
-        <li><?php echo $this->Html->link(__('Browse Clients'), array('controller' => 'clients', 'action' => 'browse')); ?> </li>
-    </ul>
+    
+        <?php echo $this->Html->link(__('Browse Client Checklists'), array('controller' => 'client_checklists', 'action' => 'index', $clientChecklistID)); ?><br />
+        <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'client', 'action' => 'index')); ?><br />
+        <?php echo $this->Html->link(__('Browse Clients'), array('controller' => 'clients', 'action' => 'browse')); ?>
+    
 </div>
