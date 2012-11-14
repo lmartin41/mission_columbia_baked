@@ -6,16 +6,12 @@ App::uses('AppController', 'Controller');
 class WelcomeController extends AppController {
 
     public $helpers = array('GoogleMap');   //Adding the helper
-<<<<<<< HEAD
+
 	public $components = array('RequestHandler');
 	public function beforeFilter()
 	{
 		parent::beforeFilter();
 	}
-=======
-    public $components = array('RequestHandler');
-
->>>>>>> 47ef8eca1cb10202a209e47ab91c0ca7a633c25f
     public function index() {
 
         $orgCont = new OrganizationsController();
