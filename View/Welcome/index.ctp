@@ -1,4 +1,4 @@
-<?php echo $this->Html->script('http://maps.google.com/maps/api/js?sensor=true', false); ?>
+<?php echo $this->Html->script('https://maps-api-ssl.google.com/maps/api/js?sensor=true', false); ?>
 <?php echo $this->Html->script('jquery.ui.map.min.js'); ?>
 
 <!--the below js file aids the filter functionality -->
