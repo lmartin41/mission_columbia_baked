@@ -12,6 +12,7 @@ class WelcomeController extends AppController {
 	{
 		parent::beforeFilter();
 	}
+	
     public function index() {
 
         $orgCont = new OrganizationsController();

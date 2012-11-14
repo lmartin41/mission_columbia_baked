@@ -5,6 +5,7 @@
 <?php echo $this->Html->script('demo.js'); ?>
 
 <!--The below script allows the ability to find the current location -->
+<?php echo $this->Html->script('https://www.google.com/jsapi'); ?>
 
 <!-- my key is: AIzaSyC22n51FklMDzv3wwoc7kH4nxKO0fo2wTI 
 if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor...-->
@@ -21,7 +22,7 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 
 	<!--<body onload="initialize()" onunload="GUnload()"> -->
 	<body>
-    	<div id="map_canvas" style="width: 800px; height: 300px"></div>
+    	<div id="map_canvas" style="width: 600px; height: 300px"></div>
     	<div id="radios" class="item gradient rounded shadow" style="margin:5px;padding:5px 5px 5px 10px; background:white;"></div>
   	</body>
 
@@ -29,7 +30,66 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 	<!--<?= $this->GoogleMap->map(); ?>-->
 
 	<script>
+
 	
+
+	/*
+	var map;
+	var pos;
+	var gLat;
+	var gLong;
+
+      function initialize() {
+        var mapOptions = {
+          zoom: 6,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map_canvas'),
+            mapOptions);
+
+        // Try HTML5 geolocation
+        if(navigator.geolocation) {
+        	gLat = position.coords.latitude;
+        	alert(gLat);
+          navigator.geolocation.getCurrentPosition(function(position) {
+            pos = new google.maps.LatLng(position.coords.latitude,
+                                             position.coords.longitude);
+
+            var infowindow = new google.maps.InfoWindow({
+              map: map,
+              position: pos,
+              content: 'Location found using HTML5.'
+            });
+
+            map.setCenter(pos);
+          }, function() {
+            handleNoGeolocation(true);
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleNoGeolocation(false);
+        }
+      }
+      initialize();
+      alert(gLat);
+      */
+    //position hardcoded to south carolina for now
+	$('#map_canvas').gmap({'center': '34.0033, -81.0592' }).bind('init', function () {	});
+	
+	//$('#map_canvas').gmap({'center': position.coords.latitude + ", " + position.coords.longitude, -81.0592' }).bind('init', function () {	});
+/*
+	$('#map_canvas').gmap({'center': '59.3426606750, 18.0736160278' }).bind('init', function () {
+	$('#map_canvas').gmap('addMarker', { 'foo': 'bar,baz,boz', 'position': '59.3426606750, 18.0736160278' });
+	$('#map_canvas').gmap('find', 'markers', { 'property': 'foo', 'value': ['bar','boz'] }, function(marker, found) {
+		marker.setVisible(found);
+	});
+});
+
+	$('#map_canvas').gmap('addMarker', { 'id': 'some_id', 'position': '58.3426606750, 18.0736160278' });
+$('#map_canvas').gmap('inViewport', $('#map_canvas').gmap('get', 'marker > some_id'));
+
+
+	/***
 		$('#map_canvas').gmap().bind('init', function(ev, map) {
 			$('#map_canvas').gmap('addMarker', {'position': '57.7973333,12.0502107', 'bounds': true}).click(function() {
 				$('#map_canvas').gmap('openInfoWindow', {'content': 'Hello World!'}, this);
@@ -46,6 +106,7 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 
 		$('#map_canvas').gmap({'some_option':'some_value'}); // Add the contructor
 		// addMarker returns a jQuery wrapped google.maps.Marker object 
+		//var $marker = $('#map_canvas').gmap('addMarker', {'position': google.loader.ClientLocation.address.city, 'bounds': true});
 		var $marker = $('#map_canvas').gmap('addMarker', {'position': '57.7973333,12.0502107', 'bounds': true});
 		$marker.click(function() {
 			$('#map_canvas').gmap('openInfoWindow', {'content': 'Hello World!'}, this);
@@ -56,6 +117,8 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 			$('#map_canvas').gmap('openInfoWindow', {'content': 'Hello World!'}, this);
 		});
 	
+	***/
+
 
 	/*
 	$('#map_canvas').gmap().bind('init', function() { 
@@ -118,8 +181,12 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 	        }
 	});
 	*/
+
+
+
 	</script>
 
+	<!-- <?php var_dump($theResult); ?> -->
 
 	<script type="text/javascript">
 			$(function() { 
@@ -139,6 +206,60 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 							$('#radios').append(('<label style="margin-right:5px;display:block;"><input type="checkbox" style="margin-right:3px" value="{0}"/>{1}</label>').format(tag, tag));
 						});
 						
+						//BELOW IS WHERE THE LOCATIONS NEED TO BE INPUT
+
+						var jsonResults = '<?php echo json_encode($theResult); ?>';
+
+						//alert(jsonResults);
+						//console.log(jsonResults);
+						//alert(jsonResults.org_name == "Transitions");
+						//alert(jsonResults.)
+						//console.log(jsonResults[3]);
+
+						//var obj = jQuery.parseJSON('{"name":"John"}');
+						//alert( obj.name === "John" );
+
+						var jsonObj = $.parseJSON(jsonResults);
+
+						//console.log(jsonObj);
+
+
+						/*
+						console.log(jsonObj[0].org_name);
+						console.log(jsonObj[0].org_address);
+
+						console.log(jsonObj[0].resources[0].resource_name);
+						console.log(jsonObj[0].resources[0].resource_address);
+						*/
+
+						$.each(jsonObj, function() { 
+						   console.log(this.org_name);
+						   console.log(this.org_address);
+						   $.each(this.resources, function(){
+						   		console.log(this.resource_name);
+						   		console.log(this.resource_address);
+						   });
+						}); 
+
+
+
+						// $.each(jsonObj, function(i,item){
+						//   console.log(item.id);
+						// });
+
+						//console.log 
+
+						var $marker = $('#map_canvas').gmap('addMarker', {'position': '57.7973333,12.0502107', 'bounds': true});
+						$marker.click(function() {
+							$('#map_canvas').gmap('openInfoWindow', {'content': 'Hello World!'}, this);
+						});
+
+						var $marker = $('#map_canvas').gmap('addMarker', {'position': '34.0033, -81.0592', 'bounds': true});
+						$marker.click(function() {
+							$('#map_canvas').gmap('openInfoWindow', {'content': 'Hello World!'}, this);
+						});
+						
+						/*
 						for ( i = 0; i < 100; i++ ) {
 							var temp = [];
 							for ( j = 0; j < Math.random()*5; j++ ) {
@@ -149,6 +270,10 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 								$('#map_canvas').gmap('openInfoWindow', { 'content': $(this)[0].tags + '<br/>' +visibleInViewport }, this);
 							});
 						}
+						*/
+
+
+						
 						
 						$('input:checkbox').click(function() {
 							$('#map_canvas').gmap('closeInfoWindow');
@@ -174,7 +299,7 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 					});
 				}).load();
 			});
-
+	//google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
 	<?php
