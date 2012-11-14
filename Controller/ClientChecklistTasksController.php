@@ -57,7 +57,7 @@ class ClientChecklistTasksController extends AppController {
                     $this->redirect(array('controller' => 'ClientChecklists', 'action' => 'index', $clientChecklist['ClientChecklist']['client_id']));
                 }
             } else {
-                $this->Session->setFlash(__('The client relation could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The client checklist task could not be saved. Please, try again.'));
             }
         }
         $clientChecklists = $this->ClientChecklistTask->ClientChecklist->find('list');

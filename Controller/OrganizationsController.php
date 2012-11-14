@@ -60,7 +60,7 @@ class OrganizationsController extends AppController {
                     $this->redirect(array('action' => 'index'));
                 }
             } else {
-                $this->Session->setFlash(__('The client could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The organization could not be saved. Please, try again.'));
             }
         }
     }

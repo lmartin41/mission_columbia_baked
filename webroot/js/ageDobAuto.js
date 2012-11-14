@@ -7,9 +7,12 @@ function updateAge(clientOrRelative) {
     var today = new Date();
     var year = today.getFullYear();
         
-    if (parseInt(document.getElementById(corStr.concat("DOBMonth")).selectedIndex, 10) <= parseInt(today.getMonth(), 10) + 1) {
-        if (parseInt(document.getElementById(corStr.concat("DOBDay")).value, 10) <= parseInt(today.getDate(), 10)) {
-            inc++;
+    if (parseInt(document.getElementById(corStr.concat("DOBMonth")).selectedIndex, 10) > parseInt(today.getMonth(), 10) + 1) {
+        inc--;
+    }
+    else if (parseInt(document.getElementById(corStr.concat("DOBMonth")).selectedIndex, 10) == parseInt(today.getMonth(), 10) + 1) {
+      if (parseInt(document.getElementById(corStr.concat("DOBDay")).value, 10) >= parseInt(today.getDate(), 10)) {
+            inc--;
         }
     }
         

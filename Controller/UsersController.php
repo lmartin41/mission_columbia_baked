@@ -92,6 +92,10 @@ class UsersController extends AppController {
     public function add() {
         $this->check_privileges($this->Session->read('Auth.User'), 'add');
         if ($this->request->is('post')) {
+            if (isset($this->request->data['cancel'])) {
+                $this->redirect(array('action' => 'index'));
+                return;
+            }
             $this->User->create();
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('The user has been saved'));
@@ -124,6 +128,10 @@ class UsersController extends AppController {
         }
 
         if ($this->request->is('post') || $this->request->is('put')) {
+            if (isset($this->request->data['cancel'])) {
+                $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+                return;
+            }
             if ($this->request->data['User']['password'] == '' && $this->request->data['User']['password_confirmation'] == '') {
                 $this->User->set('username', $this->request->data['User']['username']);
                 $this->User->set('email', $this->request->data['User']['email']);
