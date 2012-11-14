@@ -45,7 +45,8 @@ class AppController extends Controller {
             'logoutRedirect'=>array('controller'=>'welcome', 'action'=>'index'),
             'authError'=>"You can't access that page",
             'authorize'=>array('Controller')
-        )
+        ),
+    	'Security'
     );
     
     /**
@@ -61,9 +62,15 @@ class AppController extends Controller {
      * Lee: non logged in users can access view and index pages 
      */
     public function beforeFilter() {
+    	$this->Security->blackHoleCallback = 'forceSSL';
         $this->set('logged_in', $this->Auth->loggedIn());
         $this->set('current_user', $this->Auth->user());
         $authUser = $this->Auth->user();
         $this->set('isAtleastAdmin', $authUser['isAdmin'] || $authUser['isSuperAdmin']);
+    }
+    
+    public function forceSSL()
+    {
+    	$this->redirect('https://' . $_SERVER['SERVER_NAME'] . $this->here);
     }
 }

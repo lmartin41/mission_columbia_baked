@@ -10,12 +10,14 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
 
     public $name = 'Users';
+    public $components = array('Security');
 
     /**
      *
      */
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->Security->requireSecure(array('login'));
     }
 
     /**

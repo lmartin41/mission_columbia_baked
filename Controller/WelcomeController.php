@@ -10,6 +10,10 @@ class WelcomeController extends AppController {
     
     public $helpers = array('GoogleMap');   //Adding the helper
 	public $components = array('RequestHandler');
+	public function beforeFilter()
+	{
+		parent::beforeFilter();
+	}
     public function index() {
         
         $orgCont = new OrganizationsController();

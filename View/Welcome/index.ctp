@@ -1,4 +1,4 @@
-<?php echo $this->Html->script('http://maps.google.com/maps/api/js?sensor=true', false); ?>
+<?php echo $this->Html->script('https://maps-api-ssl.google.com/maps/api/js?sensor=true', false); ?>
 <!-- my key is: AIzaSyC22n51FklMDzv3wwoc7kH4nxKO0fo2wTI 
 if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor...-->
 
