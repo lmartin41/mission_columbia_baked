@@ -7,10 +7,11 @@ class WelcomeController extends AppController {
 
     public $helpers = array('GoogleMap');   //Adding the helper
 
-	public $components = array('RequestHandler');
+	public $components = array('RequestHandler', 'Auth');
 	public function beforeFilter()
 	{
 		parent::beforeFilter();
+		$this->Auth->allow(array('instructions'));
 	}
 	
     public function index() {
@@ -26,6 +27,11 @@ class WelcomeController extends AppController {
          */
         //have fun!! :) -- Lee
         //$address = $this->Session->read('address_one');
+    }
+    
+    public function instructions()
+    {
+    	
     }
 
 }

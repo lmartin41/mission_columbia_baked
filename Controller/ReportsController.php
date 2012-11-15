@@ -13,7 +13,19 @@ class ReportsController extends AppController {
     public $uses = array("ResourceUse", "Organization", "PrayerRequest", "ClientChecklist");
     public $helpers = array('Js');
     public $name = 'Reports';
+    public $components = array('Security');
+    
+    public function beforeFilter()
+    {
+    	parent::beforeFilter();
+    	$this->Security->blackHoleCallback = 'blah';
+    }
 
+    public function blah()
+    {
+    	
+    }
+    
     public function index() {
         $clientsController = new ClientsController();
 
