@@ -77,6 +77,7 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
       */
     //position hardcoded to south carolina for now
 	$('#map_canvas').gmap({'center': '34.0033, -81.0592' }).bind('init', function () {	});
+	$('#map_canvas').gmap('option', 'zoom', 11);
 	
 	//$('#map_canvas').gmap({'center': position.coords.latitude + ", " + position.coords.longitude, -81.0592' }).bind('init', function () {	});
 /*
@@ -201,7 +202,39 @@ $('#map_canvas').gmap('inViewport', $('#map_canvas').gmap('get', 'marker > some_
 						var lngSpan = northEast.lng() - southWest.lng();
 						var latSpan = northEast.lat() - southWest.lat();
 						var images = ['http://google-maps-icons.googlecode.com/files/friends.png', 'http://google-maps-icons.googlecode.com/files/home.png', 'http://google-maps-icons.googlecode.com/files/girlfriend.png', 'http://google-maps-icons.googlecode.com/files/dates.png', 'http://google-maps-icons.googlecode.com/files/realestate.png', 'http://google-maps-icons.googlecode.com/files/apartment.png', 'http://google-maps-icons.googlecode.com/files/family.png'];
-						var tags = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+						var jsonResults = '<?php echo json_encode($theResult); ?>';
+						var jsonObj = $.parseJSON(jsonResults);
+
+
+						var tags = [];
+
+						$.each(jsonObj, function() { 
+							//	console.log(this.org_name);
+						 	//	console.log(this.org_address);
+						   	var tempAll = this.resources;
+						   	var allSet = [];
+						   	$.each(tempAll, function(){
+						   		var tempName = this.resource_name;
+						   		// console.log(this.resource_name);
+						   		// console.log(this.resource_address);
+						   		var hasDup = 0;
+						   		for(var k = 0; k<tempAll.length; k++){
+						   			//if(tempName===tempAll[k].resource_name){
+						   			if(tempName===tags[k]){
+							   			//alert(tempAll[k].resource_name);
+							   			//if (String(tempName) == tempAll[k].resourceName){
+						   				hasDup = 1;
+						   			}
+						   		}
+						   		if(hasDup == 0){
+						   			tags.push(tempName);
+						   		}
+						   		
+						   	});
+						}); 
+
+						//var tags = ['A', 'B', 'C', 'D', 'E', 'F'];
 						//$('#tags').append('<option value="all">All</option>');
 						$.each(tags, function(i, tag) {
 							//$('#tags').append(('<option value="{0}">{1}</option>').format(tag, tag));
@@ -210,7 +243,9 @@ $('#map_canvas').gmap('inViewport', $('#map_canvas').gmap('get', 'marker > some_
 						
 						//BELOW IS WHERE THE LOCATIONS NEED TO BE INPUT
 
-						var jsonResults = '<?php echo json_encode($theResult); ?>';
+						
+
+
 
 						//alert(jsonResults);
 						//console.log(jsonResults);
@@ -221,7 +256,7 @@ $('#map_canvas').gmap('inViewport', $('#map_canvas').gmap('get', 'marker > some_
 						//var obj = jQuery.parseJSON('{"name":"John"}');
 						//alert( obj.name === "John" );
 
-						var jsonObj = $.parseJSON(jsonResults);
+						
 
 						//console.log(jsonObj);
 
@@ -324,13 +359,15 @@ $('#map_canvas').gmap('inViewport', $('#map_canvas').gmap('get', 'marker > some_
 
 							var currResources = this.resources;
 
+
+
 							//alert(currResources.resource_name);
 
 							geocoder.geocode( { 'address': address}, function(results, status) {
 						      if (status == google.maps.GeocoderStatus.OK) {
 						        //map.setCenter(results[0].geometry.location);
 
-								$('#map_canvas').gmap('addMarker', { 'icon': images[0], 'tags':-1, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+								$('#map_canvas').gmap('addMarker', { 'icon': images[0], 'tags':[], 'bound':true, 'position': results[0].geometry.location} ).click(function() {
 
 									$('#map_canvas').gmap('openInfoWindow', { 'content': $(this)[0].tags + '<br/>' + orgName }, this);
 								});
@@ -351,14 +388,20 @@ $('#map_canvas').gmap('inViewport', $('#map_canvas').gmap('get', 'marker > some_
 
 						   		geocoder = new google.maps.Geocoder();
 								
+						   		var tagNum = [];
 
-								alert(resName);
+								for(var q = 0; q<tags.length; q++){
+									//alert(" res is " + resName + " tag is " + tags[q]);
+									if(resName===tags[q]){
+										tagNum.push(resName);
+								   	}
+								}
 
 								geocoder.geocode( { 'address': resAddress}, function(results, status) {
 							      if (status == google.maps.GeocoderStatus.OK) {
 							        //map.setCenter(results[0].geometry.location);
 
-									$('#map_canvas').gmap('addMarker', { 'icon': images[2], 'tags':0, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+									$('#map_canvas').gmap('addMarker', { 'icon': images[2], 'tags':tagNum, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
 
 										$('#map_canvas').gmap('openInfoWindow', { 'content': $(this)[0].tags + '<br/>' + resName }, this);
 									});
