@@ -7,11 +7,12 @@ App::uses('ResourcesController', 'Controller');
 App::uses('ResourceUsesController', 'Controller');
 App::uses('PrayerRequests', 'Controller');
 App::uses('ClientChecklists', 'Controller');
+App::uses('GoogleChart', 'GoogleChart.Lib');
 
 class ReportsController extends AppController {
 
     public $uses = array("ResourceUse", "Organization", "PrayerRequest", "ClientChecklist");
-    public $helpers = array('Js');
+    public $helpers = array('Js', 'GoogleChart.GoogleChart');
     public $name = 'Reports';
     public $components = array('Security');
     
@@ -38,10 +39,10 @@ class ReportsController extends AppController {
                 $firstName = $names[1];
             } else {
                 $firstName = $names[0];
-                if( count($names) > 1 )
-                	$lastName = $names[1];
+                if (count($names) > 1)
+                    $lastName = $names[1];
                 else
-                	$lastName = null;
+                    $lastName = null;
             }
 
             $startDate = $this->request->data['startDate'];
@@ -185,7 +186,7 @@ class ReportsController extends AppController {
             $sex = "clients.sex = 'F'";
         else
             $sex = "(clients.sex = 'M' OR clients.sex = 'F')";;
-        
+
         $this->set('startDate', $startDate);
         $this->set('endDate', $endDate);
         $this->set('startCompare', strtotime($this->Session->read('startDate')));
@@ -215,7 +216,6 @@ class ReportsController extends AppController {
         $this->set('resourceUses', $this->ResourceUse->find('all'));
         $this->set('prayerRequests', $this->PrayerRequest->find('all'));
         $this->set('clientChecklists', $this->ClientChecklist->find('all'));
-
     }
 
     public function resourceSearch($resourceName) {
@@ -241,38 +241,60 @@ class ReportsController extends AppController {
     }
 
     public function clientReport($clientID = null) {
-        $this->set('startDate', $this->Session->read('startDate'));
-        $this->set('endDate', $this->Session->read('endDate'));
-        $this->set('startCompare', strtotime($this->Session->read('startDate')));
-        $this->set('endCompare', strtotime($this->Session->read('endDate')));
+        $startDate = $this->Session->read('startDate');
+        $endDate = $this->Session->read('endDate');
+        $this->set('startDate', $startDate);
+        $this->set('endDate', $endDate);
+        $this->set('startCompare', strtotime($startDate));
+        $this->set('endCompare', strtotime($endDate));
 
-        $clientsController = new ClientsController();
-        $this->set('numChecklistsCompleted', $clientsController->numberOfChecklistsCompleted($clientID));
-        $this->set('numChecklistTasksCompleted', $clientsController->numberOfChecklistTasksCompleted($clientID));
-        $this->set('numberResourceUses', $clientsController->numberResourceUses($clientID, $this->Session->read('startDate'), $this->Session->read('endDate')));
+        $chart = new GoogleChart();
+        $chart->type("LineChart");
+        $chart->options(array('title' => 'Resource Usage'));
+        $chart->columns(array(
+            'test' => array(
+                'type' => 'string',
+                'label' => 'Date'
+            ),
+            'test2' => array(
+                'type' => 'number',
+                'label' => 'number'
+            )
+        ));
+        
+        $chart->addRow(array('test' => '1/1/2012', 'test2' => 12));
+        $this->set(compact('chart'));
 
-        $clientsController->Client->id = $clientID;
-        if (!$clientsController->Client->exists()) {
-            throw new NotFoundException(__('Invalid client'));
-        }
+        /*
+          $clientsController = new ClientsController();
+          $this->set('numChecklistsCompleted', $clientsController->numberOfChecklistsCompleted($clientID));
+          $this->set('numChecklistTasksCompleted', $clientsController->numberOfChecklistTasksCompleted($clientID));
+          $this->set('numberResourceUses', $clientsController->numberResourceUses($clientID, $this->Session->read('startDate'), $this->Session->read('endDate')));
 
-        $client = $clientsController->Client->read(null, $id);
-        $resourceUses = array();
-        $resourceName = array();
-        $resourceController = new ResourcesController();
+          $clientsController->Client->id = $clientID;
+          if (!$clientsController->Client->exists()) {
+          throw new NotFoundException(__('Invalid client'));
+          }
 
-        $i = 0;
-        foreach ($client['ResourceUs'] as $resourceUse) {
-            if ($resourceUse['client_id'] == $client['Client']['id']) {
-                $resourceUses[$i] = $resourceUse;
-                $resourceName[$i] = $resourceController->giveMeName($resourceUse['resource_id']);
-                $i++;
-            }
-        }
+          $client = $clientsController->Client->read(null, $id);
+          $resourceUses = array();
+          $resourceName = array();
+          $resourceController = new ResourcesController();
 
-        $this->set('resourceUses', $resourceUses);
-        $this->set('resourceName', $resourceName);
-        $this->set('client', $client);
+          $i = 0;
+          foreach ($client['ResourceUs'] as $resourceUse) {
+          if ($resourceUse['client_id'] == $client['Client']['id']) {
+          $resourceUses[$i] = $resourceUse;
+          $resourceName[$i] = $resourceController->giveMeName($resourceUse['resource_id']);
+          $i++;
+          }
+          }
+
+          $this->set('resourceUses', $resourceUses);
+          $this->set('resourceName', $resourceName);
+          $this->set('client', $client);
+
+         */
     }
 
     public function resourceReport($resourceID = null) {

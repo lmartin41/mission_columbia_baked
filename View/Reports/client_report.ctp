@@ -1,6 +1,9 @@
 <?php include("reportsDiv.ctp"); ?>
 
-<div class="reports form">
+<div id="chart_div"><?php $this->GoogleChart->createJsChart($chart);?></div>
+
+
+<!-- <div class="reports form">
 
     <h2><?php echo "Client Report for " . $client['Client']['first_name'] . " from " . $startDate . " to " . $endDate; ?></h2>
     <br />
@@ -135,3 +138,5 @@
     <br /><br />
 
 </div>
+                
+                -->
