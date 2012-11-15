@@ -14,7 +14,7 @@ class ReportsController extends AppController {
     public $uses = array("ResourceUse", "Organization", "PrayerRequest", "ClientChecklist");
     public $helpers = array('Js', 'GoogleChart.GoogleChart');
     public $name = 'Reports';
-
+    
     public function index() {
         $clientsController = new ClientsController();
 
@@ -64,8 +64,9 @@ class ReportsController extends AppController {
                 $this->Session->setFlash('Invalid date range');
                 $this->redirect(array('action' => 'resourceIndex'));
             }
-
-            $resourceName = $this->request->data['Resource']['resource_name'];
+            
+            var_dump($this->request->data);
+            $resourceName = $this->request->data['ResourceUse']['Resource:'];
             $correctResults = $this->resourceSearch($resourceName);
 
             $this->Session->write('resourceResults', $correctResults);
@@ -231,58 +232,41 @@ class ReportsController extends AppController {
     public function clientReport($clientID = null) {
         $startDate = $this->Session->read('startDate');
         $endDate = $this->Session->read('endDate');
+        $startCompare = strtotime($startDate);
+        $endCompare = strtotime($endDate);
         $this->set('startDate', $startDate);
         $this->set('endDate', $endDate);
-        $this->set('startCompare', strtotime($startDate));
-        $this->set('endCompare', strtotime($endDate));
+        $this->set('startCompare', $startCompare);
+        $this->set('endCompare', $endCompare);
+
+        $dates = $this->ResourceUse->query("
+           Select count(date) as counts, date 
+           from resource_uses 
+           where client_id = '$clientID' AND date between '$startDate' AND '$endDate'
+           group by date;
+            ");
 
         $chart = new GoogleChart();
         $chart->type("LineChart");
-        $chart->options(array('title' => 'Resource Usage'));
+        $chart->options(array('title' => 'Number of Resources Used', 'width' => '500'));
         $chart->columns(array(
-            'test' => array(
+            'date' => array(
                 'type' => 'string',
-                'label' => 'Date'
+                'label' => 'date'
             ),
-            'test2' => array(
+            'counts' => array(
                 'type' => 'number',
-                'label' => 'number'
+                'label' => 'Resource Usage'
             )
         ));
-        
-        $chart->addRow(array('test' => '1/1/2012', 'test2' => 12));
+
+        foreach ($dates as $date) {
+            $chart->addRow(array('date' => $date['resource_uses']['date'], 'counts' => intVal($date[0]['counts']), 10));
+        }
+
         $this->set(compact('chart'));
-
-        /*
-          $clientsController = new ClientsController();
-          $this->set('numChecklistsCompleted', $clientsController->numberOfChecklistsCompleted($clientID));
-          $this->set('numChecklistTasksCompleted', $clientsController->numberOfChecklistTasksCompleted($clientID));
-          $this->set('numberResourceUses', $clientsController->numberResourceUses($clientID, $this->Session->read('startDate'), $this->Session->read('endDate')));
-
-          $clientsController->Client->id = $clientID;
-          if (!$clientsController->Client->exists()) {
-          throw new NotFoundException(__('Invalid client'));
-          }
-
-          $client = $clientsController->Client->read(null, $id);
-          $resourceUses = array();
-          $resourceName = array();
-          $resourceController = new ResourcesController();
-
-          $i = 0;
-          foreach ($client['ResourceUs'] as $resourceUse) {
-          if ($resourceUse['client_id'] == $client['Client']['id']) {
-          $resourceUses[$i] = $resourceUse;
-          $resourceName[$i] = $resourceController->giveMeName($resourceUse['resource_id']);
-          $i++;
-          }
-          }
-
-          $this->set('resourceUses', $resourceUses);
-          $this->set('resourceName', $resourceName);
-          $this->set('client', $client);
-
-         */
+        $clientsController = new ClientsController();
+        $this->set('numberResourceUses', $clientsController->numberResourceUses($clientID, $this->Session->read('startDate'), $this->Session->read('endDate')));     
     }
 
     public function resourceReport($resourceID = null) {
