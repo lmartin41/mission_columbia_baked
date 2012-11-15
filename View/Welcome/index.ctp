@@ -8,8 +8,6 @@
 <!--the below js file aids the filter functionality -->
 <?php echo $this->Html->script('demo.js'); ?>
 
-<!--The below script allows the ability to find the current location -->
-<?php echo $this->Html->script('https://www.google.com/jsapi'); ?>
 
 <!-- my key is: AIzaSyC22n51FklMDzv3wwoc7kH4nxKO0fo2wTI 
 if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor...-->
@@ -239,10 +237,18 @@ $('#map_canvas').gmap('inViewport', $('#map_canvas').gmap('get', 'marker > some_
 						$.each(jsonObj, function() { 
 						   console.log(this.org_name);
 						   console.log(this.org_address);
-						   $.each(this.resources, function(){
+
+						   console.log("   ");
+						   var tempAll = this.resources;
+
+						   //console.log(tempAll[0]);
+
+						   $.each(tempAll, function(){
 						   		console.log(this.resource_name);
 						   		console.log(this.resource_address);
 						   });
+						   console.log("   ");
+						   console.log("   ");
 						}); 
 
 						/*********************
@@ -308,29 +314,64 @@ $('#map_canvas').gmap('inViewport', $('#map_canvas').gmap('get', 'marker > some_
 						***/
 
 						$.each(jsonObj, function() { 
+
 						   	// console.log(this.org_name);
 						   	// console.log(this.org_address);
 
 							var geocoder = new google.maps.Geocoder();
+							var orgName = this.org_name;
 							var address = this.org_address;
 
+							var currResources = this.resources;
+
+							//alert(currResources.resource_name);
 
 							geocoder.geocode( { 'address': address}, function(results, status) {
 						      if (status == google.maps.GeocoderStatus.OK) {
 						        //map.setCenter(results[0].geometry.location);
-						        var marker = new google.maps.Marker({
-						            map: map,
-						            position: results[0].geometry.location
-						        });
-						      } else {
-						        alert("Geocode was not successful for the following reason: " + status);
-						      }
-						    });
 
-						   $.each(this.resources, function(){
+								$('#map_canvas').gmap('addMarker', { 'icon': images[0], 'tags':-1, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+
+									$('#map_canvas').gmap('openInfoWindow', { 'content': $(this)[0].tags + '<br/>' + orgName }, this);
+								});
+								
+						      } 
+						      else {
+						        alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for an organization");
+						      }
+						      
+						    });
+							
+							
+						   $.each(currResources, function(){
 						   		// console.log(this.resource_name);
 						   		// console.log(this.resource_address);
+						   		var resName = this.resource_name;
+								var resAddress = this.resource_address;
+
+						   		geocoder = new google.maps.Geocoder();
+								
+
+								alert(resName);
+
+								geocoder.geocode( { 'address': resAddress}, function(results, status) {
+							      if (status == google.maps.GeocoderStatus.OK) {
+							        //map.setCenter(results[0].geometry.location);
+
+									$('#map_canvas').gmap('addMarker', { 'icon': images[2], 'tags':0, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+
+										$('#map_canvas').gmap('openInfoWindow', { 'content': $(this)[0].tags + '<br/>' + resName }, this);
+									});
+									
+							      } 
+							      else {
+							        alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for a resource");
+							      }
+							      
+							    });
+
 						   });
+						   
 						}); 
 
 
