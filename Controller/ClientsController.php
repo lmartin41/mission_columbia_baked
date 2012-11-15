@@ -9,7 +9,7 @@ App::uses('ResourcesController', 'Controller');
  * @property Client $Client
  */
 class ClientsController extends AppController {
-	public $uses = array('Client', 'Resource');
+    public $uses = array('Client', 'Resource');
     public $components = array('Session', 'RequestHandler');
     public $helpers = array('Js');
     public $paginate = array(
