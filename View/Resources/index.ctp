@@ -1,8 +1,157 @@
+<?php echo $this->Html->script('https://maps-api-ssl.google.com/maps/api/js?key=AIzaSyC22n51FklMDzv3wwoc7kH4nxKO0fo2wTI&sensor=true', false); ?>
+
+<?php echo $this->Html->script('jquery.ui.map.min.js'); ?>
+
+<!--the below js file aids the filter functionality -->
+<?php echo $this->Html->script('demo.js'); ?>
+
 <?php if ($isAtleastAdmin): ?>
 <div class="resources form">
 <?php else: ?>
 <div class="resources form no-border">
 <?php endif; ?>
+
+    <div>
+        <body>
+            <div id="map_canvas" style="width: 700px; height: 400px"></div>
+            <div id="radios" class="item gradient rounded shadow" style="margin:5px;padding:5px 5px 5px 10px; background:white;"></div>
+        </body>
+        <script>
+
+        //position hardcoded to south carolina for now
+        $('#map_canvas').gmap({'center': '34.0033, -81.0592' }).bind('init', function () {  });
+        $('#map_canvas').gmap('option', 'zoom', 11);
+
+        </script>
+
+        <script type="text/javascript">
+                $(function() { 
+                    demo.add(function() {           
+                        $('#map_canvas').gmap({'disableDefaultUI':true}).bind('init', function(evt, map) { 
+
+                            $('#map_canvas').gmap('addControl', 'radios', google.maps.ControlPosition.TOP_LEFT);
+                            var southWest = map.getBounds().getSouthWest();
+                            var northEast = map.getBounds().getNorthEast();
+                            var lngSpan = northEast.lng() - southWest.lng();
+                            var latSpan = northEast.lat() - southWest.lat();
+                            var images = ['http://google-maps-icons.googlecode.com/files/friends.png', 'http://google-maps-icons.googlecode.com/files/home.png', 'http://google-maps-icons.googlecode.com/files/girlfriend.png', 'http://google-maps-icons.googlecode.com/files/dates.png', 'http://google-maps-icons.googlecode.com/files/realestate.png', 'http://google-maps-icons.googlecode.com/files/apartment.png', 'http://google-maps-icons.googlecode.com/files/family.png'];
+
+                            var jsonResults = '<?php echo json_encode($theResult); ?>';
+                            var jsonObj = $.parseJSON(jsonResults);
+
+
+                            var tags = [];
+
+                            $.each(jsonObj, function() { 
+
+                                var tempAll = this.resources;
+                                var allSet = [];
+                                $.each(tempAll, function(){
+                                    var tempName = this.resource_name;
+
+                                    var hasDup = 0;
+                                    for(var k = 0; k<tempAll.length; k++){
+
+                                        if(tempName===tags[k]){
+                                            hasDup = 1;
+                                        }
+                                    }
+                                    if(hasDup == 0){
+                                        tags.push(tempName);
+                                    }
+                                    
+                                });
+                            }); 
+
+                            $.each(tags, function(i, tag) {
+                                $('#radios').append(('<label style="margin-right:5px;display:block;"><input type="checkbox" style="margin-right:3px" value="{0}"/>{1}</label>').format(tag, tag));
+                            });
+                            
+                            $.each(jsonObj, function() { 
+
+                                var geocoder = new google.maps.Geocoder();
+                                var orgName = this.org_name;
+                                var address = this.org_address;
+
+                                var currResources = this.resources;
+
+                                geocoder.geocode( { 'address': address}, function(results, status) {
+                                  if (status == google.maps.GeocoderStatus.OK) {
+                                    $('#map_canvas').gmap('addMarker', { 'icon': images[0], 'tags':[], 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+
+                                        $('#map_canvas').gmap('openInfoWindow', { 'content': 'Organization: ' + orgName + '<br/> Address: ' + address }, this);
+                                    });
+                                    
+                                  } 
+                                  else {
+                                    alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for an organization");
+                                  }
+                                  
+                                });
+                                
+                                
+                               $.each(currResources, function(){
+
+                                    var resName = this.resource_name;
+                                    var resAddress = this.resource_address;
+
+                                    geocoder = new google.maps.Geocoder();
+                                    
+                                    var tagNum = [];
+
+                                    for(var q = 0; q<tags.length; q++){
+
+                                        if(resName===tags[q]){
+                                            tagNum.push(resName);
+                                        }
+                                    }
+
+                                    geocoder.geocode( { 'address': resAddress}, function(results, status) {
+                                      if (status == google.maps.GeocoderStatus.OK) {
+                                        //map.setCenter(results[0].geometry.location);
+
+                                        $('#map_canvas').gmap('addMarker', { 'icon': images[2], 'tags':tagNum, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+
+                                            $('#map_canvas').gmap('openInfoWindow', { 'content': 'Resource: ' + resName + '<br/> Address: ' + resAddress }, this);
+                                        });
+                                        
+                                      } 
+                                      else {
+                                        alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for a resource");
+                                      }
+                                      
+                                    });
+
+                               });
+                               
+                            }); 
+
+                            $('input:checkbox').click(function() {
+                                $('#map_canvas').gmap('closeInfoWindow');
+                                $('#map_canvas').gmap('set', 'bounds', null);
+                                var filters = [];
+                                $('input:checkbox:checked').each(function(i, checkbox) {
+                                    filters.push($(checkbox).val());
+                                });
+                                if ( filters.length > 0 ) {
+                                    $('#map_canvas').gmap('find', 'markers', { 'property': 'tags', 'value': filters, 'operator': 'OR' }, function(marker, found) {
+                                        if (found) {
+                                            $('#map_canvas').gmap('addBounds', marker.position);
+                                        }
+                                        marker.setVisible(found); 
+                                    });
+                                } else {
+                                    $.each($('#map_canvas').gmap('get', 'markers'), function(i, marker) {
+                                        $('#map_canvas').gmap('addBounds', marker.position);
+                                        marker.setVisible(true); 
+                                    });
+                                }
+                            });
+                        });
+                    }).load();
+                });
+        </script>
+    </div>
 
     <h2><?php echo __('Resource Listing'); ?></h2>
     <table cellpadding="0" cellspacing="0">
@@ -51,6 +200,9 @@
 <div class="actionsNoButton" style="">
     <?php echo $this->Html->link('Create a Resource', array('action' => 'add', $current_user['organization_id'])); ?>
 </div>
+
+
+
 <?php endif; ?>
 
 
