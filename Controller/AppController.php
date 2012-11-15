@@ -71,6 +71,7 @@ class AppController extends Controller {
     
     public function forceSSL()
     {
-    	$this->redirect('https://' . $_SERVER['SERVER_NAME'] . $this->here);
+    	if( !isset($_SERVER['REDIRECT_HTTPS']) )
+    		$this->redirect('https://' . $_SERVER['SERVER_NAME'] . $this->here);
     }
 }
