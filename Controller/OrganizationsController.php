@@ -175,4 +175,11 @@ class OrganizationsController extends AppController {
         return $retVal;
     }
 
+    public function giveMeUniqueResources(){
+        return $this->Organization->Resource->query("
+            Select distinct resource_name
+            From resources
+            ");
+    }
+
 }

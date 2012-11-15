@@ -20,6 +20,13 @@ class WelcomeController extends AppController {
         $result = $orgCont->giveMeAddresses();
 
         $this->set('theResult', $result);
+
+        $uResources = $orgCont->giveMeUniqueResources();
+
+        var_dump($uResources);
+
+        $this->set('theUResources', $uResources);
+
         /*
           echo '<pre>';
           print_r($result);
