@@ -1,5 +1,5 @@
 <?php
-
+App::uses('OrganizationsController', 'Controller');
 App::uses('AppController', 'Controller');
 App::uses('ClientsController', 'Controller');
 
@@ -16,6 +16,12 @@ class ResourcesController extends AppController {
      * @return void
      */
     public function index() {
+
+        $orgCont = new OrganizationsController();
+        $result = $orgCont->giveMeAddresses();
+
+        $this->set('theResult', $result);
+
         $this->Resource->recursive = 0;
         $this->set('resources', $this->paginate());
     }

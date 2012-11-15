@@ -1,20 +1,15 @@
 <?php include("reportsDiv.ctp"); ?>
+<div class="reports form">
 
-<div class="reports form">   
+    <div id="chart_div"><?php $this->GoogleChart->createJsChart($chart); ?></div>
 
-<h2><?php echo "Resource Report for ".$resource['Resource']['resource_name']." from ".$startDate." to ".$endDate; ?></h2>
-<br />
+    Number of Times this Resource has Been Used During this Period: <?php echo $numberResourceUses; ?><br /><br />
 
-Organization Responsible for this Resource: <?php echo $resource['Organization']['org_name']; ?><Br />
-Number of Times this Resource Has Been Used: <?php echo $numberResourceUses; ?><br />
-Most popular user of this Resource: <?php echo $mostPopular; ?></br /><br />
-Resource Status: <?php echo $resource['Resource']['status']; ?>
-Resource Inventory: <?php echo $resource['Resource']['inventory']; ?>
-
-<h3><?php echo __('Activity History for this Resource'); ?></h3>
+    <h3><?php echo __('Resource Usage Listing'); ?></h3>
     <?php if (!empty($resource['ResourceUs'])): ?>
         <table cellpadding = "0" cellspacing = "0">
             <tr>
+                <th><?php echo __('Client Id'); ?></th>
                 <th><?php echo __('Resource Id'); ?></th>
                 <th><?php echo __('Date'); ?></th>
                 <th><?php echo __('Comments'); ?></th>
@@ -23,10 +18,9 @@ Resource Inventory: <?php echo $resource['Resource']['inventory']; ?>
             <?php
             $i = 0;
             foreach ($resource['ResourceUs'] as $resourceUs):
-                if ($resourceUs['resource_id'] == $resource['Resource']['id'] && 
-                    strtotime($resourceUs['date']) >= $startCompare &&
-                            strtotime($resourceUs['date']) <= $endCompare): ?>
+                ?>
                 <tr>
+                    <td><?php echo $resourceUs['client_id']; ?></td>
                     <td><?php echo $resourceUs['resource_id']; ?></td>
                     <td><?php echo $resourceUs['date']; ?></td>
                     <td><?php echo $resourceUs['comments']; ?></td>
@@ -34,7 +28,6 @@ Resource Inventory: <?php echo $resource['Resource']['inventory']; ?>
                         <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'resource_uses', 'action' => 'view', $resourceUs['id'])); ?>
                     </td>
                 </tr>
-<?php endif; ?>
             <?php endforeach; ?>
         </table>
 
@@ -43,5 +36,4 @@ Resource Inventory: <?php echo $resource['Resource']['inventory']; ?>
             None
         </div>
     <?php endif; ?>
-
 </div>

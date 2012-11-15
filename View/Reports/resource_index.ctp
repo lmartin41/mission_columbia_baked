@@ -8,7 +8,7 @@
 <div class="resourceuses form">
 
     <h3>Individual Resource Report</h3>
-    <?php 
+    <?php
     echo $this->Form->create('ResourceUs');
     echo $this->Form->input('organization_id', array('label' => 'Organization:', 'id' => 'organization', 'empty' => 'Select an organization'));
     echo $this->Form->input('resource_id', array('type' => 'select', 'label' => 'Resource:', 'disabled' => 'disabled'));
