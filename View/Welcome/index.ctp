@@ -1,4 +1,8 @@
+<!--
 <?php echo $this->Html->script('https://maps-api-ssl.google.com/maps/api/js?sensor=true', false); ?>
+-->
+<?php echo $this->Html->script('https://maps-api-ssl.google.com/maps/api/js?key=AIzaSyC22n51FklMDzv3wwoc7kH4nxKO0fo2wTI&sensor=true', false); ?>
+
 <?php echo $this->Html->script('jquery.ui.map.min.js'); ?>
 
 <!--the below js file aids the filter functionality -->
@@ -22,7 +26,7 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 
 	<!--<body onload="initialize()" onunload="GUnload()"> -->
 	<body>
-    	<div id="map_canvas" style="width: 600px; height: 300px"></div>
+    	<div id="map_canvas" style="width: 800px; height: 400px"></div>
     	<div id="radios" class="item gradient rounded shadow" style="margin:5px;padding:5px 5px 5px 10px; background:white;"></div>
   	</body>
 
@@ -241,14 +245,30 @@ $('#map_canvas').gmap('inViewport', $('#map_canvas').gmap('get', 'marker > some_
 						   });
 						}); 
 
+						/*********************
+						var geocoder = new google.maps.Geocoder();
+						var address = '1600 Pennsylvania Avenue NW Washington, DC 20500';
 
 
+						geocoder.geocode( { 'address': address}, function(results, status) {
+					      if (status == google.maps.GeocoderStatus.OK) {
+					        //map.setCenter(results[0].geometry.location);
+					        var marker = new google.maps.Marker({
+					            map: map,
+					            position: results[0].geometry.location
+					        });
+					      } else {
+					        alert("Geocode was not successful for the following reason: " + status);
+					      }
+					    });
+						*****************/
+						
 						// $.each(jsonObj, function(i,item){
 						//   console.log(item.id);
 						// });
 
 						//console.log 
-
+						/*
 						var $marker = $('#map_canvas').gmap('addMarker', {'position': '57.7973333,12.0502107', 'bounds': true});
 						$marker.click(function() {
 							$('#map_canvas').gmap('openInfoWindow', {'content': 'Hello World!'}, this);
@@ -258,6 +278,7 @@ $('#map_canvas').gmap('inViewport', $('#map_canvas').gmap('get', 'marker > some_
 						$marker.click(function() {
 							$('#map_canvas').gmap('openInfoWindow', {'content': 'Hello World!'}, this);
 						});
+						*/
 						
 						/*
 						for ( i = 0; i < 100; i++ ) {
@@ -271,6 +292,47 @@ $('#map_canvas').gmap('inViewport', $('#map_canvas').gmap('get', 'marker > some_
 							});
 						}
 						*/
+
+						/***
+						for ( i = 0; i < 5; i++ ) {
+							var temp = [];
+							//the below forloop is setting the tags that correlate to each location
+							for ( j = 0; j < Math.random()*5; j++ ) {
+								temp.push(tags[Math.floor(Math.random()*10)]);
+							}
+							$('#map_canvas').gmap('addMarker', { 'icon': images[0], 'tags':temp, 'bound':true, 'position': '34.0033, -81.0592'} ).click(function() {
+								var visibleInViewport = ( $('#map_canvas').gmap('inViewport', $(this)[0]) ) ? 'I\'m visible in the viewport.' : 'I\'m sad and hidden.';
+								$('#map_canvas').gmap('openInfoWindow', { 'content': $(this)[0].tags + '<br/>' +visibleInViewport }, this);
+							});
+						}
+						***/
+
+						$.each(jsonObj, function() { 
+						   	// console.log(this.org_name);
+						   	// console.log(this.org_address);
+
+							var geocoder = new google.maps.Geocoder();
+							var address = this.org_address;
+
+
+							geocoder.geocode( { 'address': address}, function(results, status) {
+						      if (status == google.maps.GeocoderStatus.OK) {
+						        //map.setCenter(results[0].geometry.location);
+						        var marker = new google.maps.Marker({
+						            map: map,
+						            position: results[0].geometry.location
+						        });
+						      } else {
+						        alert("Geocode was not successful for the following reason: " + status);
+						      }
+						    });
+
+						   $.each(this.resources, function(){
+						   		// console.log(this.resource_name);
+						   		// console.log(this.resource_address);
+						   });
+						}); 
+
 
 
 						
