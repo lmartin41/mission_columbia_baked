@@ -38,7 +38,8 @@ class WelcomeController extends AppController {
     
     public function instructions()
     {
-    	
+    	if( isset($_SERVER['REDIRECT_HTTPS']) )
+    		$this->redirect(array('action' => 'index'));
     }
 
 }
