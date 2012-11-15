@@ -1,48 +1,14 @@
 <?php $this->Html->script('jquery.cookie', FALSE); ?>
-<script>
-	$(document).ready(function()
-	{
-		if( cookieExists() )
-		{
-			//reset cookie
-			$.cookie('followedInstructions', true, {'expires': 365});
-
-			//redirect
-			document.location = global.base_url + "/users/login";
-		} 
-		else
-		{
-			$('#loading').addClass('do_not_show');
-			$('#instructions').removeClass('do_not_show');
-			$("#browser").accordion({heightStyle: "content"});
-			$("#os").accordion({heightStyle: "content"});
-		}
-	});
-
-	function createCookieAndLogIn()
-	{
-		$.cookie('followedInstructions', true, {'expires': 365});
-		document.location = global.base_url + "/users/login";
-	}
-
-	function cookieExists()
-	{		
-		if( $.cookie('followedInstructions') == 'true' )
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-</script>
+<?php $this->Html->script('welcome_instructions', FALSE); ?>
 <div id="loading">Loading...<br/><?php echo $this->Html->image('ajax-loader.gif');?></div>
 <div id="instructions" class="do_not_show">
 	<p>
 		Hello,
 		<br/>
 		You have been directed to this page because we believe this is the first time you have been to this website.
-		If you have already read and followed these instructions (or plan on ignoring them), then click
+		If you would like to ignore these instructions for now then please 
+		<?php echo $this->Html->link('sign in', array('controller' => 'users', 'action' => 'login')); ?>.
+		If you have already read and followed these instructions, then click
 		<a href="javascript:createCookieAndLogIn()" >do not show this page anymore</a> and you will be redirected to log in. 
 	</p>
 	<p>If you are greeted with an error message that looks like one of the following:</p>
@@ -70,28 +36,35 @@
 		click the option to &quot;proceed anyways&quot;.  It should be noted that this option leaves you vulnerable
 		security threats in the future.
 	</p>
+	<hr/>
+	<div>
+		<h3>Quick Navigation</h3>
+		<ul>
+			<li><a href="javascript:clickWindow('wXP');">Windows XP, Vista</a></li>
+			<li><a href="javascript:clickWindow('w7');"> Windows 7</a></li>
+			<li><a href="javascript:clickWindow('w8');">Windows 8</a></li>
+			<li><a href="javascript:clickWindow('wA');">Apple</a></li>
+		</ul>
+	</div>
+	<br/>
+	<hr/>
+	<br/>
 	<div id="os">
-		<h2>Windows</h2>
+		<h2 id="wXP">Windows XP, Vista</h2>
 		<div class="black-text white-background">
 			<p>
 				Click <a href="http://ca.gatech.edu/certificates/gt-server-root.der" target="_blank">here</a> 
-				to download the certificate.
+				to download the certificate. Then double-click on the downloaded file to run it.
 				<br/>
 				<br/>
 				Then click &quot;open&quot;
 				<br/>
-				<?php echo $this->Html->image('windows-savefile.gif', array('alt' => 'Save image')); ?>
+				<?php echo $this->Html->image('windows-savefile.png', array('alt' => 'Save image')); ?>
 				<br/>
 				<br/>
 				Then click &quot;install&quot;
 				<br/>
 				<?php echo $this->Html->image('windows-certinfo.gif', array('alt' => 'Certificate image')); ?>
-				<br/>
-				<br/>
-				<strong>OPTIONAL:</strong> Depending on the version of windows you might have the following screen. Make sure to click
-				&quot;current user&quot;
-				<br/>
-				<?php echo $this->Html->image('windows-select-user.png', array('alt' => 'Chrome Error')); ?>
 				<br/>
 				<br/>
 				Then
@@ -118,7 +91,94 @@
 				when you try to log in.
 			</p>
 		</div>
-		<h2>Apple</h2>
+		<h2 id="w7">Windows 7</h2>
+		<div class="black-text white-background">
+			<p>
+				Click <a href="http://ca.gatech.edu/certificates/gt-server-root.der" target="_blank">here</a> 
+				to download the certificate. Then double-click on the downloaded file to run it.
+				<br/>
+				<br/>
+				Then click &quot;open&quot;
+				<br/>
+				<?php echo $this->Html->image('windows-savefile.png', array('alt' => 'Save image')); ?>
+				<br/>
+				<br/>
+				Then click &quot;install&quot;
+				<br/>
+				<?php echo $this->Html->image('windows-certinfo.gif', array('alt' => 'Certificate image')); ?>
+				<br/>
+				<br/>
+				Then
+				<br/>
+				<?php echo $this->Html->image('windows-select-trusted-root.jpg', array('alt' => 'Select Trusted Root')); ?>
+				<br/>
+				<br/>
+				Then
+				<br/>
+				<?php echo $this->Html->image('windows-importcomplete.jpg', array('alt' => 'Import complete')); ?>
+				<br/>
+				<br/>
+				Then
+				<br/>
+				<?php echo $this->Html->image('windows-verify-thumbprint.jpg', array('alt' => 'Verify Thumbprint')); ?>
+				<br/>
+				<br/>
+				Then
+				<br/>
+				<?php echo $this->Html->image('windows-importsuccess.jpg', array('alt' => 'Import success')); ?>
+				<br/>
+				<br/>
+				<strong>Close your browser</strong> and re-open it.  Then come back here and the error should be gone
+				when you try to log in.
+			</p>
+		</div>
+		<h2 id="w8">Windows 8</h2>
+		<div class="black-text white-background">
+			<p>
+				Click <a href="http://ca.gatech.edu/certificates/gt-server-root.der" target="_blank">here</a> 
+				to download the certificate. Then double-click on the downloaded file to run it.
+				<br/>
+				<br/>
+				Then click &quot;open&quot;
+				<br/>
+				<?php echo $this->Html->image('windows-savefile.png', array('alt' => 'Save image')); ?>
+				<br/>
+				<br/>
+				Then click &quot;install&quot;
+				<br/>
+				<?php echo $this->Html->image('windows-certinfo.gif', array('alt' => 'Certificate image')); ?>
+				<br/>
+				<br/>
+				Then make sure to click &quot;current user&quot;
+				<br/>
+				<?php echo $this->Html->image('windows-select-user.png', array('alt' => 'Chrome Error')); ?>
+				<br/>
+				<br/>
+				Then
+				<br/>
+				<?php echo $this->Html->image('windows-select-trusted-root.jpg', array('alt' => 'Select Trusted Root')); ?>
+				<br/>
+				<br/>
+				Then
+				<br/>
+				<?php echo $this->Html->image('windows-importcomplete.jpg', array('alt' => 'Import complete')); ?>
+				<br/>
+				<br/>
+				Then
+				<br/>
+				<?php echo $this->Html->image('windows-verify-thumbprint.jpg', array('alt' => 'Verify Thumbprint')); ?>
+				<br/>
+				<br/>
+				Then
+				<br/>
+				<?php echo $this->Html->image('windows-importsuccess.jpg', array('alt' => 'Import success')); ?>
+				<br/>
+				<br/>
+				<strong>Close your browser</strong> and re-open it.  Then come back here and the error should be gone
+				when you try to log in.
+			</p>
+		</div>
+		<h2 id="wA">Apple</h2>
 		<div class="black-text white-background">
 			<p>
 				Click <a href="http://ca.gatech.edu/certificates/gt-server-root.crt" target="_blank">here</a> 
