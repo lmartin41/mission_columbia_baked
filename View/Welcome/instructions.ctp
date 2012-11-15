@@ -22,7 +22,7 @@
 	</div>
 	<br/>
 	<p>
-		it is a known issue.  The reason for the error is that Georgia Tech creates it's own certificates and they
+		It is a known issue.  The reason for the error is that Georgia Tech creates it's own certificates and they
 		are not included as a &quot;Trusted Authority&quot; by default.  For more information 
 		<a href="http://ca.gatech.edu/information.php" target="_blank">click here</a>.
 		There are two ways to fix the problem.
@@ -34,7 +34,7 @@
 	<p>
 		If you are in a hurry or don&apos;t feel comfortable following those instructions, you can always just
 		click the option to &quot;proceed anyways&quot;.  It should be noted that this option leaves you vulnerable
-		security threats in the future.
+		to security threats in the future.
 	</p>
 	<hr/>
 	<div>
@@ -43,7 +43,7 @@
 			<li><a href="javascript:clickWindow('wXP');">Windows XP, Vista</a></li>
 			<li><a href="javascript:clickWindow('w7');"> Windows 7</a></li>
 			<li><a href="javascript:clickWindow('w8');">Windows 8</a></li>
-			<li><a href="javascript:clickWindow('wA');">Apple</a></li>
+			<li><a href="javascript:clickWindow('wA');">Mac OSX</a></li>
 		</ul>
 	</div>
 	<br/>
@@ -178,7 +178,7 @@
 				when you try to log in.
 			</p>
 		</div>
-		<h2 id="wA">Apple</h2>
+		<h2 id="wA">Mac OSX</h2>
 		<div class="black-text white-background">
 			<p>
 				Click <a href="http://ca.gatech.edu/certificates/gt-server-root.crt" target="_blank">here</a> 
