@@ -110,10 +110,18 @@ checkContext();
         <div id="container">
 
             <div id="header">
-                <?php echo $this->Html->image('mission_logo.png', array(
+                <?php 
+                	if ($logged_in)
+                	{	
+                		echo $this->Html->image('mission_logo.png', array(
                 			'alt' => 'logo',
                 			'url' => array('controller' => 'welcome', 'action' => 'index')
-                		)); 
+                		));
+                	}
+                	else
+                	{
+                		echo $this->Html->image('mission_logo.png', array('alt' => 'logo'));
+                	}
                 ?>
 
                 <?php
