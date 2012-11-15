@@ -41,7 +41,7 @@
         echo $this->Html->css('jquery-ui-1.9.0.custom.min');
         echo $this->Html->css('styles');
         echo $this->fetch('script');
-        //echo $this->Html->script("toggle.js");
+        echo $this->Html->script("toggle.js");
         ?>
 
         
@@ -110,7 +110,11 @@ checkContext();
         <div id="container">
 
             <div id="header">
-                <?php echo $this->Html->image('mission_logo.png'); ?>
+                <?php echo $this->Html->image('mission_logo.png', array(
+                			'alt' => 'logo',
+                			'url' => array('controller' => 'welcome', 'action' => 'index')
+                		)); 
+                ?>
 
                 <?php
                 /*  * **************************************** 
@@ -178,7 +182,8 @@ checkContext();
             <div id="footer" style="text-align: center; margin-left:auto; margin-left:auto;">
                 <?php if ($logged_in): ?>
                     We would appreciate your <?php echo $this->Html->link('Feedback', array('controller' => 'feedbacks', 'action' => 'add')); ?> | 
-                    <a onclick="return toggle('22');">Contact</a>
+                    <a href="javascript:toggle('22');">Contact</a> |
+                    <?php echo $this->Html->link('Home', array('controller' => 'welcome', 'action' => 'index')); ?>
                     <p id ="22" style ="display: none">
                         <br />Mission Columbia 
                         <br />2723 Ashland Rd.
