@@ -76,18 +76,20 @@
                                 var currResources = this.resources;
 
                                 var orgsResourcesStr = "";
+                                var resourcePointer;
                                 var count = 0;
                                 //alert(count);
                                 $.each(currResources, function(){
+                                    resourcePointer = this;
                                     //resName = currResources.resource_name;
                                     count++;
 
                                     if(count != currResources.length){
                                         //alert(count);
-                                        orgsResourcesStr = orgsResourcesStr + this.resource_name + ", ";
+                                        orgsResourcesStr = orgsResourcesStr + resourcePointer.resource_name + ", ";
                                     }
                                     else{
-                                        orgsResourcesStr = orgsResourcesStr + this.resource_name;
+                                        orgsResourcesStr = orgsResourcesStr + resourcePointer.resource_name;
                                     }
                                     //console.log(this);
                                 });
@@ -99,7 +101,7 @@
                                         /*
                                         $('#map_canvas').gmap('openInfoWindow', { 'content': 'Organization: ' + orgName + '<br/> Address: ' + address + ' <a href="http://www.w3schools.com">This is a link</a> ' + '<br/>resources: ' + orgsResourcesStr }, this);
                                         */
-                                        $('#map_canvas').gmap('openInfoWindow', { 'content': ' <a href="https://localhost/mission_columbia_baked/organizations/view/' + orgId + '">' + orgName + '</a> ' + '<br/> Address: ' + address + '<br/>resources: ' + orgsResourcesStr }, this);
+                                        $('#map_canvas').gmap('openInfoWindow', { 'content': '<a href="https://localhost/mission_columbia_baked/organizations/view/' + orgId + '">' + orgName + '</a> ' + '<br/> Address: ' + address + '<br/>resources: ' + orgsResourcesStr }, this);
 
                                     });
                                     
@@ -112,9 +114,13 @@
                                 
                                 
                                $.each(currResources, function(){
+                                    resourcePointer = this;
+                                    var resId = resourcePointer.id;
+                                    var resOrgId = resourcePointer.organization_id;
+                                    var resOrgName = resourcePointer.rOrgName;
+                                    var resName = resourcePointer.resource_name;
+                                    var resAddress = resourcePointer.resource_address;
 
-                                    var resName = this.resource_name;
-                                    var resAddress = this.resource_address;
 
                                     geocoder = new google.maps.Geocoder();
                                     
@@ -133,7 +139,9 @@
 
                                         $('#map_canvas').gmap('addMarker', { 'icon': images[2], 'tags':tagNum, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
 
-                                            $('#map_canvas').gmap('openInfoWindow', { 'content': 'Resource: ' + resName + '<br/> Address: ' + resAddress }, this);
+                                            //$('#map_canvas').gmap('openInfoWindow', { 'content': 'Resource: ' + resName + '<br/> Address: ' + resAddress }, this);
+
+                                            $('#map_canvas').gmap('openInfoWindow', { 'content': ' <a href="https://localhost/mission_columbia_baked/resources/view/' + resId + '">' + resName + '</a> ' + '<br/> Address: ' + resAddress + '<br/> Resource managed by: ' +  '<a href="https://localhost/mission_columbia_baked/organizations/view/' + resOrgId + '">' + resOrgName + '</a> '}, this);
                                         });
                                         
                                       } 

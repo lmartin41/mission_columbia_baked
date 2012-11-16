@@ -168,6 +168,8 @@ class OrganizationsController extends AppController {
             for ($j = 0; $j < count($query2); $j++) {
                 $retVal[$i]['resources'][$j] = array(
                     'id' => $query2[$j]['resources']['id'],
+                    'organization_id' => $query2[$j]['resources']['organization_id'],
+                    'rOrgName' => $query[$i]['organizations']['org_name'],
                     'resource_name' => $query2[$j]['resources']['resource_name'],
                     'resource_address' => $query2[$j]['resources']['street_address'] . ", " . $query2[$j]['resources']['city']
                     . ", " . $query2[$j]['resources']['state'] . ", " . $query2[$j]['resources']['zip']
