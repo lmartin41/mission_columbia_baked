@@ -5,6 +5,9 @@
 <!--the below js file aids the filter functionality -->
 <?php echo $this->Html->script('demo.js'); ?>
 
+<?php echo $this->Html->script('global.js'); ?>
+
+
 <?php if ($isAtleastAdmin): ?>
 <div class="resources form">
 <?php else: ?>
@@ -101,7 +104,9 @@
                                     */
 
                                     
-                                    orgsResourcesStr = orgsResourcesStr + '<a href="https://localhost/mission_columbia_baked/resources/view/' + rId + '">' + rName + '</a> '
+                                    // orgsResourcesStr = orgsResourcesStr + '<a href="https://localhost/mission_columbia_baked/resources/view/' + rId + '">' + rName + '</a> ';
+
+                                    orgsResourcesStr = orgsResourcesStr + '<a href="' + global.base_url + '/resources/view/' + rId + '">' + rName + '</a> ';
 
                                     //console.log(this);
                                 });
@@ -113,7 +118,7 @@
                                         /*
                                         $('#map_canvas').gmap('openInfoWindow', { 'content': 'Organization: ' + orgName + '<br/> Address: ' + address + ' <a href="http://www.w3schools.com">This is a link</a> ' + '<br/>resources: ' + orgsResourcesStr }, this);
                                         */
-                                        $('#map_canvas').gmap('openInfoWindow', { 'content': '<a href="https://localhost/mission_columbia_baked/organizations/view/' + orgId + '">' + orgName + '</a> ' + '<br/> Address: ' + address + '<br/>resources: ' + orgsResourcesStr }, this);
+                                        $('#map_canvas').gmap('openInfoWindow', { 'content': '<a href="' + global.base_url + '/organizations/view/' + orgId + '">' + orgName + '</a> ' + '<br/> Address: ' + address + '<br/>resources: ' + orgsResourcesStr }, this);
 
                                     });
                                     
@@ -153,7 +158,7 @@
 
                                             //$('#map_canvas').gmap('openInfoWindow', { 'content': 'Resource: ' + resName + '<br/> Address: ' + resAddress }, this);
 
-                                            $('#map_canvas').gmap('openInfoWindow', { 'content': ' <a href="https://localhost/mission_columbia_baked/resources/view/' + resId + '">' + resName + '</a> ' + '<br/> Address: ' + resAddress + '<br/> Resource managed by: ' +  '<a href="https://localhost/mission_columbia_baked/organizations/view/' + resOrgId + '">' + resOrgName + '</a> '}, this);
+                                            $('#map_canvas').gmap('openInfoWindow', { 'content': ' <a href="https://localhost/mission_columbia_baked/resources/view/' + resId + '">' + resName + '</a> ' + '<br/> Address: ' + resAddress + '<br/> Resource managed by: ' +  '<a href="' + global.base_url + '/organizations/view/' + resOrgId + '">' + resOrgName + '</a> '}, this);
                                         });
                                         
                                       } 
