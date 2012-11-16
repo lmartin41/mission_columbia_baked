@@ -72,14 +72,35 @@
                                 var geocoder = new google.maps.Geocoder();
                                 var orgName = this.org_name;
                                 var address = this.org_address;
-
+                                var orgId = this.id;
                                 var currResources = this.resources;
+
+                                var orgsResourcesStr = "";
+                                var count = 0;
+                                //alert(count);
+                                $.each(currResources, function(){
+                                    //resName = currResources.resource_name;
+                                    count++;
+
+                                    if(count != currResources.length){
+                                        //alert(count);
+                                        orgsResourcesStr = orgsResourcesStr + this.resource_name + ", ";
+                                    }
+                                    else{
+                                        orgsResourcesStr = orgsResourcesStr + this.resource_name;
+                                    }
+                                    //console.log(this);
+                                });
 
                                 geocoder.geocode( { 'address': address}, function(results, status) {
                                   if (status == google.maps.GeocoderStatus.OK) {
                                     $('#map_canvas').gmap('addMarker', { 'icon': images[0], 'tags':[], 'bound':true, 'position': results[0].geometry.location} ).click(function() {
 
-                                        $('#map_canvas').gmap('openInfoWindow', { 'content': 'Organization: ' + orgName + '<br/> Address: ' + address }, this);
+                                        /*
+                                        $('#map_canvas').gmap('openInfoWindow', { 'content': 'Organization: ' + orgName + '<br/> Address: ' + address + ' <a href="http://www.w3schools.com">This is a link</a> ' + '<br/>resources: ' + orgsResourcesStr }, this);
+                                        */
+                                        $('#map_canvas').gmap('openInfoWindow', { 'content': ' <a href="https://localhost/mission_columbia_baked/organizations/view/' + orgId + '">' + orgName + '</a> ' + '<br/> Address: ' + address + '<br/>resources: ' + orgsResourcesStr }, this);
+
                                     });
                                     
                                   } 

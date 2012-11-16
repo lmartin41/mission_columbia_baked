@@ -151,13 +151,14 @@ class OrganizationsController extends AppController {
             $orgID = $query[$i]['organizations']['id'];
             $query2 = $this->Organization->query("
                 
-                Select resource_name, street_address, city, state, zip
+                Select id, organization_id, resource_name, street_address, city, state, zip
                 From resources
                 Where organization_id = '$orgID'
 
                 ;");
 
             $retVal[$i] = array(
+                'id' => $query[$i]['organizations']['id'],
                 'org_name' => $query[$i]['organizations']['org_name'],
                 'org_address' => $query[$i]['organizations']['address_one'] . ", " . $query[$i]['organizations']['city']
                 . ", " . $query[$i]['organizations']['state'] . ", " . $query[$i]['organizations']['zip'],
@@ -166,6 +167,7 @@ class OrganizationsController extends AppController {
   
             for ($j = 0; $j < count($query2); $j++) {
                 $retVal[$i]['resources'][$j] = array(
+                    'id' => $query2[$j]['resources']['id'],
                     'resource_name' => $query2[$j]['resources']['resource_name'],
                     'resource_address' => $query2[$j]['resources']['street_address'] . ", " . $query2[$j]['resources']['city']
                     . ", " . $query2[$j]['resources']['state'] . ", " . $query2[$j]['resources']['zip']
