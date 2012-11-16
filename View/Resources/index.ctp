@@ -78,12 +78,19 @@
                                 var orgsResourcesStr = "";
                                 var resourcePointer;
                                 var count = 0;
+
+                                var rId = 0;
+                                var rName = "";
+
                                 //alert(count);
                                 $.each(currResources, function(){
                                     resourcePointer = this;
+                                    rId = resourcePointer.id;
+                                    rName = resourcePointer.resource_name;
                                     //resName = currResources.resource_name;
                                     count++;
 
+                                    /*
                                     if(count != currResources.length){
                                         //alert(count);
                                         orgsResourcesStr = orgsResourcesStr + resourcePointer.resource_name + ", ";
@@ -91,6 +98,11 @@
                                     else{
                                         orgsResourcesStr = orgsResourcesStr + resourcePointer.resource_name;
                                     }
+                                    */
+
+                                    
+                                    orgsResourcesStr = orgsResourcesStr + '<a href="https://localhost/mission_columbia_baked/resources/view/' + rId + '">' + rName + '</a> '
+
                                     //console.log(this);
                                 });
 
