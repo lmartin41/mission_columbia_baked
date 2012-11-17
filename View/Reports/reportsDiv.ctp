@@ -11,5 +11,4 @@
     </ul>
     <br />
         <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
-
 </div>

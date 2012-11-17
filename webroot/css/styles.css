@@ -1,3 +1,8 @@
+dl
+{
+	width: 90%;
+}
+
 ul#top_links{
 	list-style-type: none;
 }
@@ -87,9 +92,14 @@ div.actionsNoButton
 	float: left;
 }
 
-div.actionsNoButton.users, div.actionsNoButton.client
+div.actionsNoButton.users, div.actionsNoButton.clients
 {
 	width: 15%;
+}
+
+div.actionsNoButton.clients.smaller
+{
+	width: 10%;
 }
 
 div.actionsNoButton a
@@ -105,21 +115,40 @@ div.actionsNoButton a
 	cursor: default;
 }
 
-div.users.index
+div.index, div.form, div.view
 {
 	float: left;
-	width: 70%;
+	width: 67%;
+}
+
+div.clients.view
+{
+	width: 60%;
+}
+
+div.clients.form table tbody
+{
+	width: 95%;
+}
+
+div.clients.view table tbody dl
+{
+	width: 100%;
+}
+
+div.clients.view .ui-accordion-content dt
+{
+	width: 11em;
+}
+
+div.clients.view .ui-accordion-content dd
+{
+	padding-left: 2em;
 }
 
 form
 {
 	width:100%;
-}
-
-div.view
-{
-	float: left;
-	width: 70%;
 }
 
 div.form.no-border, div.index.no-border
@@ -194,9 +223,22 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 
 #tipArea
 {
-	width:20%; 
-	background:#B4CFEC; 
+	width:18%; 
+	background:#B4CFEC;
 	float:right; 
 	display:inline-block;
-	margin: 1px;
+	padding: 5px 5px 2px 5px;
+	margin-top: 3%;
+	text-align: center;
+}
+
+form .submit input[type=submit].disabled, form .submit input[type=submit].disabled:hover
+{
+	color: silver;
+	background-color: gainsboro;
+}
+
+.dialog-duplicate.ui-widget-header
+{
+	background: #0B3E6F;
 }

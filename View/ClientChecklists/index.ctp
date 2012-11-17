@@ -1,6 +1,13 @@
+<div class="actionsNoButton clientChecklists">
+    
+        <?php echo $this->Html->link(__('Create Client Checklist'), array('action' => 'add', $client['Client']['id'])); ?><br />
+        <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> <br />
+        <?php echo $this->Html->link(__('Browse Clients'), array('controller' => 'clients', 'action' => 'browse')); ?><br />
+    
+</div>
 <div class="clientChecklists index">
     <h2><?php echo __('Client Checklists for ' . $client['Client']['first_name']); ?></h2>
-    <table cellpadding="0" cellspacing="0">
+    <table>
         <tr>
             <th><?php echo $this->Paginator->sort('id'); ?></th>
             <th><?php echo $this->Paginator->sort('client'); ?></th>
@@ -44,11 +51,4 @@
         echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
         ?>
     </div>
-</div>
-<div class="actionsNoButton">
-    
-        <?php echo $this->Html->link(__('Create Client Checklist'), array('action' => 'add', $client['Client']['id'])); ?><br />
-        <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> <br />
-        <?php echo $this->Html->link(__('Browse Clients'), array('controller' => 'clients', 'action' => 'browse')); ?><br />
-    
 </div>

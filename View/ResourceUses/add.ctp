@@ -1,4 +1,9 @@
 <?php $this->Html->script('resource_uses_add', FALSE); ?>
+<div class="actionsNoButton resourceuses">
+        <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?><br />
+        <?php echo $this->Html->link(__('Client Listing'), array('controller' => 'clients', 'action' => 'browse')); ?><br />
+        <?php echo $this->Html->link(__('Resource Listing'), array('controller' => 'resources', 'action' => 'index')); ?> 
+</div>
 <div class="resourceuses form">
     <?php echo $this->Form->create('ResourceUs'); ?>
     <fieldset>
@@ -18,9 +23,4 @@
         <?php echo $this->Form->submit('Cancel', array('name' => 'cancel', 'div' => false)); ?>
         <?php echo $this->Form->end(); ?>
     </div>
-</div>
-<div class="actionsNoButton">
-        <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?><br />
-        <?php echo $this->Html->link(__('Client Listing'), array('controller' => 'clients', 'action' => 'browse')); ?><br />
-        <?php echo $this->Html->link(__('Resource Listing'), array('controller' => 'resources', 'action' => 'index')); ?> 
 </div>

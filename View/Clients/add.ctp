@@ -17,6 +17,10 @@
     }
 </style>
 
+<div class="actionsNoButton clients smaller">
+    <?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?><Br />
+    <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add'), array('class' => 'active_link')); ?><br />
+</div>
 <div class="clients form">
     <?php echo $this->Form->create('Client'); ?>
     <div id="accordion">
@@ -202,8 +206,4 @@
         <?php echo $this->Form->submit('Cancel', array('name' => 'cancel', 'div' => false)); ?>
         <?php echo $this->Form->end(); ?>
     </div>
-</div>
-<div class="actionsNoButton" style="">
-    <?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?><Br />
-    <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add'), array('class' => 'active_link')); ?><br />
 </div>
