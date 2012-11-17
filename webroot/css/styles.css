@@ -121,6 +121,10 @@ div.index, div.form, div.view
 	width: 67%;
 }
 
+div.users.index
+{
+	width: 60%;
+}
 div.clients.view
 {
 	width: 60%;
