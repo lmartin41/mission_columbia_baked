@@ -1,3 +1,8 @@
+<div class="actionsNoButton">
+
+        <?php echo $this->Html->link(__('Organization Listing'), array('action' => 'index')); ?><br />
+    
+</div>
 <div class="organizations form">
     <?php echo $this->Form->create('Organization'); ?>
     <fieldset>
@@ -73,9 +78,4 @@
         <?php echo $this->Form->submit('Cancel', array('name' => 'cancel', 'div' => false)); ?>
         <?php echo $this->Form->end(); ?>
     </div>
-</div>
-<div class="actionsNoButton">
-
-        <?php echo $this->Html->link(__('Organization Listing'), array('action' => 'index')); ?><br />
-    
 </div>

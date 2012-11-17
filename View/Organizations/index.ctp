@@ -1,4 +1,10 @@
 <?php if ($isAtleastAdmin): ?>
+    <div class="actionsNoButton" style="">
+        <?php echo $this->Html->link(__('New Organization'), array('action' => 'add')); ?><br />
+    </div>
+<?php endif; ?>
+
+<?php if ($isAtleastAdmin): ?>
 <div class="organizations form">
 <?php else: ?>
 <div class="organizations form no-border">
@@ -41,10 +47,5 @@
     </div>
     
 </div>
-<?php if ($isAtleastAdmin): ?>
-    <div class="actionsNoButton" style="">
-        <?php echo $this->Html->link(__('New Organization'), array('action' => 'add')); ?><br />
-    </div>
-<?php endif; ?>
 
 
