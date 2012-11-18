@@ -45,8 +45,10 @@
                                 )));
                         ?>
                     </td>
-                <td>
-                    <?php echo $this->Form->input('zip'); ?>
+            </tr>
+            <tr>
+            	<td colspan="2">
+                    <?php echo $this->Form->input('zip', array('type' => 'text')); ?>
                 </td>
             </tr>
             <tr>
@@ -64,7 +66,9 @@
                 <td>
                     <?php echo $this->Form->input('phone_cell', array('type' => 'text')); ?>
                 </td>
-                <td>
+            </tr>
+            <tr>
+            	<td colspan="2">
                     <?php echo $this->Form->input('phone_office', array('type' => 'text')); ?>
                 </td>
             </tr>
