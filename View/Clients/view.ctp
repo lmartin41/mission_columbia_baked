@@ -2,7 +2,7 @@
 <?php echo $this->Html->script('ajaxupload-min.js', FALSE); ?>
 <?php echo $this->Html->css('classicTheme/style'); ?>
 
-<div class="actionsNoButton client">
+<div class="actionsNoButton clients">
     <?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?><br />
     <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add')); ?><br />
     <?php echo $this->Html->link(__('Edit This Client'), array('action' => 'edit', $client['Client']['id'])); ?><br />

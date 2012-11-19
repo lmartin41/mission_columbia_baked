@@ -18,7 +18,13 @@
         font-size: 18px;
     }
 </style>
+<div class="actionsNoButton">
 
+
+    <?php echo $this->Html->link(__('Users Listing'), array('controller' => 'users', 'action' => 'index')); ?><br />
+    <?php echo $this->Html->link(__('Search for Clients'), array('controller' => 'clients', 'action' => 'index')); ?>
+
+</div>
 <div class="volunteerInformationForms form">
     <?php echo $this->Form->create('VolunteerInformationForm'); ?>
     <fieldset>
@@ -171,11 +177,4 @@
         <?php echo $this->Form->submit('Cancel', array('name' => 'cancel', 'div' => false)); ?>
         <?php echo $this->Form->end(); ?>
     </div>
-</div>
-<div class="actionsNoButton">
-
-
-    <?php echo $this->Html->link(__('Users Listing'), array('controller' => 'users', 'action' => 'index')); ?><br />
-    <?php echo $this->Html->link(__('Search for Clients'), array('controller' => 'clients', 'action' => 'index')); ?>
-
 </div>

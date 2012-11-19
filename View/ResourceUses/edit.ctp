@@ -1,4 +1,13 @@
 <?php $this->Html->script('resource_uses_add', FALSE); ?>
+<div class="actionsNoButton resourceuses">
+    
+		<?php echo $this->Form->postLink(__('Delete this Resource Use'), 
+                        array('action' => 'delete', $this->Form->value('Resourceus.id')), 
+                        null, __('Are you sure you want to delete %s?', $this->Form->value('Resourceus.id'))); ?><br /><br />
+		<?php echo $this->Html->link(__('Resource Use Listing'), array('action' => 'index')); ?><br /><br />
+		<?php echo $this->Html->link(__('Search for Clients'), array('controller' => 'clients', 'action' => 'index')); ?> 
+	
+</div>
 <div class="resourceuses form">
     <?php echo $this->Form->create('ResourceUs'); ?>
     <fieldset>
@@ -11,13 +20,4 @@
         ?>
     </fieldset>
     <?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actionsNoButton">
-
-    <?php
-    echo $this->Form->postLink(__('Delete this Resource Use'), array('action' => 'delete', $resourceID), null, __('Are you sure you want to delete this Resource Use?'));
-    ?><br />
-    <?php echo $this->Html->link(__('Resource Use Listing'), array('action' => 'index')); ?><br />
-    <?php echo $this->Html->link(__('Search for Clients'), array('controller' => 'clients', 'action' => 'index')); ?> 
-
 </div>

@@ -181,12 +181,6 @@ checkContext();
                 
             
             </div>
-
-            <!-- This has to happen AFTER the tipsBox is rendered -->
-            <script>
-                checkContext();
-            </script>
-
             <div id="footer" style="text-align: center; margin-left:auto; margin-left:auto;">
                 <?php if ($logged_in): ?>
                     We would appreciate your <?php echo $this->Html->link('Feedback', array('controller' => 'feedbacks', 'action' => 'add')); ?> | 

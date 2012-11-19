@@ -1,3 +1,8 @@
+<div class="actionsNoButton">
+
+        <?php echo $this->Html->link(__('Organization Listing'), array('action' => 'index')); ?><br />
+    
+</div>
 <div class="organizations form">
     <?php echo $this->Form->create('Organization'); ?>
     <fieldset>
@@ -40,7 +45,9 @@
                                 )));
                         ?>
                     </td>
-                <td>
+            </tr>
+            <tr>
+            	<td colspan="2">
                     <?php echo $this->Form->input('zip'); ?>
                 </td>
             </tr>
@@ -59,7 +66,9 @@
                 <td>
                     <?php echo $this->Form->input('phone_cell', array('type' => 'text')); ?>
                 </td>
-                <td>
+            </tr>
+            <tr>
+            	<td colspan="2">
                     <?php echo $this->Form->input('phone_office', array('type' => 'text')); ?>
                 </td>
             </tr>
@@ -71,9 +80,4 @@
         <?php echo $this->Form->submit('Cancel', array('name' => 'cancel', 'div' => false)); ?>
         <?php echo $this->Form->end(); ?>
     </div>
-</div>
-<div class="actionsNoButton">
-
-        <?php echo $this->Html->link(__('Organization Listing'), array('action' => 'index')); ?><br />
-    
 </div>

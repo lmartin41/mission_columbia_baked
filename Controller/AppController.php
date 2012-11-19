@@ -49,6 +49,111 @@ class AppController extends Controller {
     	'Security'
     );
     
+    public $pageCatalog = array(
+    	'controllers' => array(
+    		'ClientChecklists', 
+    		'ClientChecklistTasks',
+    		'ClientRelations',
+    		'Clients',
+    		'Customize',
+    		'Feedbacks',
+    		'Global',
+    		'Organizations',
+    		'PrayerRequests',
+    		'Reports',
+    		'Resources',
+    		'ResourceUses',
+    		'Users',
+    		'VolunteerInformationForms',
+    		'Welcome'
+    	),
+    	'views' => array(
+    		'ClientChecklists' => array(
+    			'add',
+    			'edit',
+    			'index',
+    			'view'
+    		),
+    		'ClientChecklistTasks' => array(
+    			'add',
+    			'edit',
+    			'view'
+    		),
+    		'ClientRelations' => array(
+    			'add',
+    			'edit',
+    			'view'		
+    		),
+    		'Clients' => array(
+    			'add',
+    			'browse',
+    			'edit',
+    			'index',
+    			'search_results',
+    			'view'		
+    		),
+    		'Customize' => array(
+    			'index'
+    		),
+    		'Feedbacks' => array(
+    			'add',
+    			'edit',
+    			'index',
+    			'view'
+    		),
+    		'Global' => array(
+    			'login'		
+    		),
+    		'Organizations' => array(
+    			'add',
+    			'edit',
+    			'index',
+    			'view'
+    		),
+    		'PrayerRequests' => array(
+    			'add',
+    			'edit',
+    			'index',
+    			'view'
+    		),
+    		'Reports' => array(
+    			'client_report_search',
+    			'client_report',
+    			'counts_index',
+    			'counts',
+    			'index',
+    			'lists_index',
+    			'lists',
+    			'resource_index',
+    			'resource_report',		
+    		),
+    		'Resources' => array(
+    			'add',
+    			'edit',
+    			'index',
+    			'view'
+    		),
+    		'ResourceUses' => array(
+    			'add',
+    			'edit',
+    			'view'		
+    		),
+    		'Users' => array(
+    			'add',
+    			'edit',
+    			'index',
+    			'view'	
+    		),
+    		'VolunteerInformationForms' => array(
+    			'add',
+    			'edit',
+    			'view'		
+    		),
+    		'Welcome' => array(
+    			'index'	
+    		)
+    	)
+    );
     /**
      * Lee: this function checks to see if a user is authorized
      * 

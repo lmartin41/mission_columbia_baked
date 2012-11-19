@@ -5,6 +5,11 @@
 <!--the below js file aids the filter functionality -->
 <?php echo $this->Html->script('demo.js'); ?>
 
+<?php echo $this->Html->script('global.js'); ?>
+
+<div class="actionsNoButton resources">
+    <?php echo $this->Html->link('Create a Resource', array('action' => 'add', $current_user['organization_id'])); ?>
+</div>
 <?php if ($isAtleastAdmin): ?>
 <div class="resources form">
 <?php else: ?>
@@ -72,14 +77,51 @@
                                 var geocoder = new google.maps.Geocoder();
                                 var orgName = this.org_name;
                                 var address = this.org_address;
-
+                                var orgId = this.id;
                                 var currResources = this.resources;
+
+                                var orgsResourcesStr = "";
+                                var resourcePointer;
+                                var count = 0;
+
+                                var rId = 0;
+                                var rName = "";
+
+                                //alert(count);
+                                $.each(currResources, function(){
+                                    resourcePointer = this;
+                                    rId = resourcePointer.id;
+                                    rName = resourcePointer.resource_name;
+                                    //resName = currResources.resource_name;
+                                    count++;
+
+                                    /*
+                                    if(count != currResources.length){
+                                        //alert(count);
+                                        orgsResourcesStr = orgsResourcesStr + resourcePointer.resource_name + ", ";
+                                    }
+                                    else{
+                                        orgsResourcesStr = orgsResourcesStr + resourcePointer.resource_name;
+                                    }
+                                    */
+
+                                    
+                                    // orgsResourcesStr = orgsResourcesStr + '<a href="https://localhost/mission_columbia_baked/resources/view/' + rId + '">' + rName + '</a> ';
+
+                                    orgsResourcesStr = orgsResourcesStr + '<a href="' + global.base_url + '/resources/view/' + rId + '">' + rName + '</a> ';
+
+                                    //console.log(this);
+                                });
 
                                 geocoder.geocode( { 'address': address}, function(results, status) {
                                   if (status == google.maps.GeocoderStatus.OK) {
                                     $('#map_canvas').gmap('addMarker', { 'icon': images[0], 'tags':[], 'bound':true, 'position': results[0].geometry.location} ).click(function() {
 
-                                        $('#map_canvas').gmap('openInfoWindow', { 'content': 'Organization: ' + orgName + '<br/> Address: ' + address }, this);
+                                        /*
+                                        $('#map_canvas').gmap('openInfoWindow', { 'content': 'Organization: ' + orgName + '<br/> Address: ' + address + ' <a href="http://www.w3schools.com">This is a link</a> ' + '<br/>resources: ' + orgsResourcesStr }, this);
+                                        */
+                                        $('#map_canvas').gmap('openInfoWindow', { 'content': '<a href="' + global.base_url + '/organizations/view/' + orgId + '">' + orgName + '</a> ' + '<br/> Address: ' + address + '<br/>resources: ' + orgsResourcesStr }, this);
+
                                     });
                                     
                                   } 
@@ -91,9 +133,13 @@
                                 
                                 
                                $.each(currResources, function(){
+                                    resourcePointer = this;
+                                    var resId = resourcePointer.id;
+                                    var resOrgId = resourcePointer.organization_id;
+                                    var resOrgName = resourcePointer.rOrgName;
+                                    var resName = resourcePointer.resource_name;
+                                    var resAddress = resourcePointer.resource_address;
 
-                                    var resName = this.resource_name;
-                                    var resAddress = this.resource_address;
 
                                     geocoder = new google.maps.Geocoder();
                                     
@@ -112,7 +158,9 @@
 
                                         $('#map_canvas').gmap('addMarker', { 'icon': images[2], 'tags':tagNum, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
 
-                                            $('#map_canvas').gmap('openInfoWindow', { 'content': 'Resource: ' + resName + '<br/> Address: ' + resAddress }, this);
+                                            //$('#map_canvas').gmap('openInfoWindow', { 'content': 'Resource: ' + resName + '<br/> Address: ' + resAddress }, this);
+
+                                            $('#map_canvas').gmap('openInfoWindow', { 'content': ' <a href="https://localhost/mission_columbia_baked/resources/view/' + resId + '">' + resName + '</a> ' + '<br/> Address: ' + resAddress + '<br/> Resource managed by: ' +  '<a href="' + global.base_url + '/organizations/view/' + resOrgId + '">' + resOrgName + '</a> '}, this);
                                         });
                                         
                                       } 
@@ -195,9 +243,6 @@
 
 </div>
 <?php if ($isAtleastAdmin): ?>
-<div class="actionsNoButton" style="">
-    <?php echo $this->Html->link('Create a Resource', array('action' => 'add', $current_user['organization_id'])); ?>
-</div>
 
 
 
