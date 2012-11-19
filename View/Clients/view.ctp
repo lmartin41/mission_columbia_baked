@@ -253,7 +253,6 @@
             <?php if (!empty($client['ClientRelation'])): ?>
                 <table cellpadding = "0" cellspacing = "0">
                     <tr>
-                        <th><?php echo __('Id'); ?></th>
                         <th><?php echo __('First Name'); ?></th>
                         <th><?php echo __('Last Name'); ?></th>
                         <th><?php echo __('Relationship'); ?></th>
@@ -267,7 +266,6 @@
                         if ($clientRelation['client_id'] == $client['Client']['id']):
                             ?>
                             <tr>
-                                <td><?php echo $clientRelation['id']; ?></td>
                                 <td><?php echo $clientRelation['first_name']; ?></td>
                                 <td><?php echo $clientRelation['last_name']; ?></td>
                                 <td><?php echo $clientRelation['relationship']; ?></td>
@@ -328,16 +326,12 @@
             <?php if (!empty($client['ClientChecklist'])): ?>
                 <table cellpadding = "0" cellspacing = "0">
                     <tr>
-                        <th><?php echo __('Id'); ?></th>
-                        <th><?php echo __('Client Id'); ?></th>
                         <th><?php echo __('Checklist Name'); ?></th>
                         <th><?php echo __('Checklist Description'); ?></th>
                         <th class="actions"><?php echo __(''); ?></th>
                     </tr>
                     <?php foreach ($client['ClientChecklist'] as $checklist): ?>
                         <tr>
-                            <td><?php echo $checklist['id']; ?></td>
-                            <td><?php echo $checklist['client_id']; ?></td>
                             <td><?php echo $checklist['checklist_name']; ?></td>
                             <td><?php echo $checklist['checklist_description']; ?></td>
                             <td class="actions">
@@ -358,16 +352,12 @@
             <?php if (!empty($client['PrayerRequest'])): ?>
                 <table cellpadding = "0" cellspacing = "0">
                     <tr>
-                        <th><?php echo __('Id'); ?></th>
-                        <th><?php echo __('Client Id'); ?></th>
                         <th><?php echo __('Date'); ?></th>
                         <th><?php echo __('Request'); ?></th>
                         <th class="actions"><?php echo __(''); ?></th>
                     </tr>
                     <?php foreach ($client['PrayerRequest'] as $prayerRequest): ?>
                         <tr>
-                            <td><?php echo $prayerRequest['id']; ?></td>
-                            <td><?php echo $prayerRequest['client_id']; ?></td>
                             <td><?php echo $prayerRequest['date']; ?></td>
                             <td><?php echo $prayerRequest['request']; ?></td>
                             <td class="actions">
@@ -389,7 +379,7 @@
                 <script type="text/javascript">
                     $('#image_upload').ajaxupload({
                         url:'/mission_columbia_baked/webroot/upload.php?id="client-<?php echo ($client["Client"]["id"]); ?>',
-                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/uploaded_images',
+                        remotePath:<?php echo $remotePath; ?>,
                         editFilename: true
                     });
                 </script>

@@ -3,7 +3,7 @@
     <?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?><br />
     <?php echo $this->Html->link(__('View User'), array('action' => 'view', $user['User']['id']), array('class' => 'active_link')); ?><br />
     <?php echo $this->Html->link(__('Edit User'), array('action' => 'edit', $user['User']['id'])); ?><br />
-    <?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?><br />
+    <?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete %s?', $user['User']['username'])); ?><br />
 
     <?php if (empty($doesFormExist)): ?>
         <?php echo $this->Html->link('Volunteer Information Form', array('controller' => 'VolunteerInformationForms', 'action' => 'add', $user['User']['id'])); ?>

@@ -9,7 +9,8 @@ App::uses('ClientsController', 'Controller');
  * @property Resource $Resource
  */
 class ResourcesController extends AppController {
-
+    public $uses = array("Resource", "Client");
+    
     /**
      * index method
      *
@@ -38,10 +39,24 @@ class ResourcesController extends AppController {
         if (!$this->Resource->exists()) {
             throw new NotFoundException(__('Invalid resource'));
         }
-        $this->set('resource', $this->Resource->read(null, $id));
         
+        $resource = $this->Resource->read(null, $id);
+        $this->set('resource', $resource);
+        $resourceUseWithClientName = array();
+        $i = 0;
+        foreach ($resource['ResourceUs'] as $resourceUse) {
+            $clientID = $resourceUse['client_id'];
+            $clientName = $this->Client->query("Select first_name, last_name from clients where id = $clientID");
+            $resourceUseWithClientName[$i]['clientName'] = $clientName[$i]['clients']['first_name']." ".$clientName[$i]['clients']['last_name']; 
+            $resourceUseWithClientName[$i]['date'] = $resourceUse['date'];
+            $resourceUseWithClientName[$i]['comments'] = $resourceUse['comments'];
+            $resourceUseWithClientName[$i]['id'] = $resourceUse['id'];
+        }
+        
+        $this->set('resourceUse', $resourceUseWithClientName);
         $path = ClientsController::giveMePath('Resource', $id);
         $this->set('imagePath', $path);
+        $this->set('remotePath', preg_quote("'" . APP . 'webroot' . DS . 'uploaded_images' . "'"));
     }
 
     /**

@@ -4,7 +4,7 @@
 
 <div class="actionsNoButton">
     <?php echo $this->Html->link(__('Edit Resource'), array('action' => 'edit', $resource['Resource']['id'], $resource['Resource']['organization_id'])); ?><br />
-    <?php echo $this->Form->postLink(__('Delete Resource'), array('action' => 'delete', $resource['Resource']['id']), null, __('Are you sure you want to delete # %s?', $resource['Resource']['resource_name'])); ?><br />
+    <?php echo $this->Form->postLink(__('Delete Resource'), array('action' => 'delete', $resource['Resource']['id']), null, __('Are you sure you want to delete %s?', $resource['Resource']['resource_name'])); ?><br />
     <?php echo $this->Html->link(__('Resource Listing'), array('action' => 'index')); ?>
 </div>
 
@@ -69,22 +69,20 @@
         </div>
         <h2><?php echo __('Activity History for this Resource'); ?></h2>
         <div class="white-background black-text">
-            <?php if (!empty($resource['ResourceUs'])): ?>
+            <?php if (!empty($resourceUse)): ?>
                 <table cellpadding = "0" cellspacing = "0">
                     <tr>
-                        <th><?php echo __('Client Id'); ?></th>
-                        <th><?php echo __('Resource Id'); ?></th>
+                        <th><?php echo __('Client Name'); ?></th>
                         <th><?php echo __('Date'); ?></th>
                         <th><?php echo __('Comments'); ?></th>
                         <th class="actions"><?php echo __(''); ?></th>
                     </tr>
                     <?php
                     $i = 0;
-                    foreach ($resource['ResourceUs'] as $resourceUs):
+                    foreach ($resourceUse as $resourceUs):
                         ?>
                         <tr>
-                            <td><?php echo $resourceUs['client_id']; ?></td>
-                            <td><?php echo $resourceUs['resource_id']; ?></td>
+                            <td><?php echo $resourceUs['clientName']; ?></td>
                             <td><?php echo $resourceUs['date']; ?></td>
                             <td><?php echo $resourceUs['comments']; ?></td>
                             <td class="actions">
@@ -107,7 +105,7 @@
 
                     $('#demo1').ajaxupload({
                         url:'/mission_columbia_baked/webroot/upload.php?id="resource-<?php echo h($resource["Resource"]["id"]); ?>',
-                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/uploaded_images',
+                        remotePath:<?php echo $remotePath; ?>,
                         editFilename: true
                     });
                     

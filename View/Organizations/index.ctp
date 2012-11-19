@@ -7,17 +7,13 @@
     <h2><?php echo __('Organization Listing'); ?></h2>
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th><?php echo $this->Paginator->sort('id'); ?></th>
             <th><?php echo $this->Paginator->sort('org_name'); ?></th>
-            <th><?php echo $this->Paginator->sort('org_type'); ?>
             <th><?php echo $this->Paginator->sort('contact'); ?></th>
             <th class="actions"><?php echo __(''); ?></th>
         </tr>
         <?php foreach ($organizations as $organization): ?>
             <tr>
-                <td><?php echo h($organization['Organization']['id']); ?>&nbsp;</td>
                 <td><?php echo h($organization['Organization']['org_name']); ?>&nbsp;</td>
-                <td><?php echo h($organization['Organization']['org_type']); ?>&nbsp;</td>
                 <td><?php echo h($organization['Organization']['contact']); ?>&nbsp;</td>
                 <td class="actions">
                     <?php echo $this->Html->link(__('View/Edit'), array('action' => 'view', $organization['Organization']['id'])); ?>

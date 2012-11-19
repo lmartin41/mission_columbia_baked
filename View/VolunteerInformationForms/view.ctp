@@ -2,7 +2,7 @@
 
 	
 		<?php echo $this->Html->link(__('Edit Volunteer Information Form'), array('action' => 'edit', $volunteerInformationForm['VolunteerInformationForm']['id'])); ?><br />
-		<?php echo $this->Form->postLink(__('Delete Volunteer Information Form'), array('action' => 'delete', $volunteerInformationForm['VolunteerInformationForm']['id']), null, __('Are you sure you want to delete # %s?', $volunteerInformationForm['VolunteerInformationForm']['id'])); ?><br />
+		<?php echo $this->Form->postLink(__('Delete Volunteer Information Form'), array('action' => 'delete', $volunteerInformationForm['VolunteerInformationForm']['id']), null, __('Are you sure you want to delete this information form?')); ?><br />
 		<?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?><br />
 		<?php echo $this->Html->link(__('Search for Clients'), array('controller' => 'clients', 'action' => 'index')); ?>
 	

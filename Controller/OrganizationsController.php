@@ -38,6 +38,7 @@ class OrganizationsController extends AppController {
 
         $path = ClientsController::giveMePath('Organization', $id);
         $this->set('imagePath', $path);
+        $this->set('remotePath', preg_quote("'" . APP . 'webroot' . DS . 'uploaded_images' . "'"));
     }
 
     /**

@@ -32,6 +32,11 @@ class Organization extends AppModel {
                 'rule' => array('custom', '/^[a-z0-9 ]*$/i'),
                 'message' => 'Organization Name Should be Alphanumeric',
             ),
+            'isUnique' => array(
+                'rule' => array('isUnique'),
+                'message' => 'This username has already been taken',
+                'on' => 'create'
+            ),
         ),
         'org_type' => array(
             'notempty' => array(
@@ -130,6 +135,19 @@ class Organization extends AppModel {
         ),
         'User' => array(
             'className' => 'User',
+            'foreignKey' => 'organization_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+        'PrayerRequest' => array(
+            'className' => 'PrayerRequest',
             'foreignKey' => 'organization_id',
             'dependent' => false,
             'conditions' => '',

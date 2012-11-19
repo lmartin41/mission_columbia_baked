@@ -1,10 +1,9 @@
 <div class="actionsNoButton">
     
         <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $clientChecklist['ClientChecklist']['id'], $clientChecklist['Client']['id'])); ?> <br />
-        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $clientChecklist['ClientChecklist']['id'], $clientChecklist['Client']['id']), null, __('Are you sure you want to delete # %s?', $clientChecklist['ClientChecklist']['id'])); ?><br />
+        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $clientChecklist['ClientChecklist']['id'], $clientChecklist['Client']['id']), null, __('Are you sure you want to delete this checklist?')); ?><br />
         <?php echo $this->Html->link(__('Checklists Listing'), array('action' => 'index', $clientChecklist['Client']['id'])); ?> <br />
         <?php echo $this->Html->link(__('New Checklist'), array('action' => 'add', $clientChecklist['ClientChecklist']['id'])); ?><br />
-        <?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'browse')); ?> <br />
         <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?><br />
         <?php echo $this->Html->link(__('New Client Checklist Task'), array('controller' => 'client_checklist_tasks', 'action' => 'add')); ?>
     

@@ -1,10 +1,9 @@
 <div class="actionsNoButton">
     
         <?php echo $this->Html->link(__('Edit Request'), array('action' => 'edit', $prayerRequest['PrayerRequest']['id'], $prayerRequest['Client']['id'])); ?> <br />
-        <?php echo $this->Form->postLink(__('Delete Request'), array('action' => 'delete', $prayerRequest['PrayerRequest']['id'], $prayerRequest['Client']['id']), null, __('Are you sure you want to delete # %s?', $prayerRequest['PrayerRequest']['id'])); ?><br />
+        <?php echo $this->Form->postLink(__('Delete Request'), array('action' => 'delete', $prayerRequest['PrayerRequest']['id'], $prayerRequest['Client']['id']), null, __('Are you sure you want to delete this prayer request?')); ?><br />
         <?php echo $this->Html->link(__('Requests Listing'), array('action' => 'index', $prayerRequest['Client']['id'])); ?> <br />
         <?php echo $this->Html->link(__('New Request'), array('action' => 'add', $prayerRequest['PrayerRequest']['id'])); ?><br />
-        <?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'browse')); ?> <br />
         <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?><br />
     
 </div>

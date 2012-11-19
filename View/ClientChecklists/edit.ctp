@@ -18,7 +18,6 @@
     
 
         <?php echo $this->Html->link(__('Checklists Listing'), array('action' => 'index', $clientID)); ?><br />
-        <?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'browse')); ?><br />
         <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?>
 
     

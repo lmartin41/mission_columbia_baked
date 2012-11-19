@@ -3,7 +3,8 @@
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th><?php echo $this->Paginator->sort('client_id'); ?></th>
-            <th><?php echo $this->Paginator->sort('request'); ?></th>
+            <th><?php echo $this->Paginator->sort('date'); ?></th>
+            <th><?php echo $this->Paginator->sort('organization'); ?></th>
             <th class="actions"><?php echo __(''); ?></th>
         </tr>
         <?php
@@ -14,7 +15,8 @@
                     <td>
                         <?php echo $this->Html->link($prayerRequest['Client']['first_name'] . ' ' . $prayerRequest['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?>
                     </td>
-                    <td><?php echo h($prayerRequest['PrayerRequest']['request']); ?>&nbsp;</td>
+                    <td><?php echo h($prayerRequest['PrayerRequest']['created']); ?>&nbsp;</td>
+                    <td><?php echo h($prayerRequest['Organization']['org_name']); ?>&nbsp;</td>
                     <td class="actions">
                         <?php echo $this->Html->link(__('View/Edit'), array('action' => 'view', $prayerRequest['PrayerRequest']['id'], $client['Client']['id'])); ?>
                     </td>
@@ -41,6 +43,5 @@
 
     <?php echo $this->Html->link(__('New Prayer Request'), array('action' => 'add', $client['Client']['id'])); ?><br />
     <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> <br />
-    <?php echo $this->Html->link(__('Browse Clients'), array('controller' => 'clients', 'action' => 'browse')); ?><br />
 
 </div>

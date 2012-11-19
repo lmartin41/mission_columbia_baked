@@ -50,7 +50,14 @@ class PrayerRequest extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
-        )
+        ),
+        'Organization' => array(
+            'className' => 'Organization',
+            'foreignKey' => 'organization_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
     );
 
 }

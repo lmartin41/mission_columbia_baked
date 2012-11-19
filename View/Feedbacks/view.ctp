@@ -1,7 +1,7 @@
 <div class="actionsNoButton">
 
 		<?php echo $this->Html->link(__('Edit Feedback'), array('action' => 'edit', $feedback['Feedback']['id'])); ?><br />
-		<?php echo $this->Form->postLink(__('Delete Feedback'), array('action' => 'delete', $feedback['Feedback']['id']), null, __('Are you sure you want to delete # %s?', $feedback['Feedback']['id'])); ?><br />
+		<?php echo $this->Form->postLink(__('Delete Feedback'), array('action' => 'delete', $feedback['Feedback']['id']), null, __('Are you sure you want to delete this feedback?')); ?><br />
 		<?php echo $this->Html->link(__('List Feedbacks'), array('action' => 'index')); ?><br />
 		<?php echo $this->Html->link(__('New Feedback'), array('action' => 'add')); ?><br />
 	

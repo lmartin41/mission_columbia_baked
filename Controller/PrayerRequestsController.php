@@ -29,6 +29,7 @@ class PrayerRequestsController extends AppController {
      * @return void
      */
     public function view($id = null, $clientID = null) {
+        $this->check_privileges($this->Auth->user(), $id, $clientID);
         $this->PrayerRequest->id = $id;
         if (!$this->PrayerRequest->exists()) {
             throw new NotFoundException(__('Invalid prayer request'));
@@ -56,8 +57,8 @@ class PrayerRequestsController extends AppController {
                 $this->Session->setFlash(__('The prayer request could not be saved. Please, try again.'));
             }
         }
-        $clients = $this->PrayerRequest->Client->find('list');
-        $this->set(compact('clients'));
+        $organizations = $this->PrayerRequest->Organization->find('list');
+        $this->set(compact('organizations'));
     }
 
     /**
@@ -111,6 +112,19 @@ class PrayerRequestsController extends AppController {
         }
         $this->Session->setFlash(__('Prayer request was not deleted'));
         $this->redirect(array('action' => 'index', $clientID));
+    }
+
+    private function check_privileges($currentUser, $requestID, $clientID) {
+        $valid = true;
+        $prayerRequest = $this->PrayerRequest->read(null, $requestID);
+        $organizationIdOfRequest = $prayerRequest['PrayerRequest']['organization_id'];
+        if ($currentUser['organization_id'] != $organizationIdOfRequest)
+            $valid = false;
+
+        if (!$valid) {
+            $this->Session->setFlash(__('Sorry, prayer requests are private -- users of organizations can only view their own organization\'s prayer requests'));
+            $this->redirect(array('action' => 'index', $clientID));
+        }
     }
 
 }

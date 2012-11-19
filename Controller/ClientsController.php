@@ -180,8 +180,9 @@ class ClientsController extends AppController {
         $this->set('organizationName', $organizationName);
         $this->set('client', $client);
         
-        $path = $this->giveMePath('Client', $id);
+        $path = $this->giveMePath('client', $id);
         $this->set('imagePath', $path);
+        $this->set('remotePath', preg_quote("'" . APP . 'webroot' . DS . 'uploaded_images' . "'"));
     }
     
     /**
@@ -191,15 +192,15 @@ class ClientsController extends AppController {
      * @return string 
      */
     public static function giveMePath($name, $id) {
-        $path1 = APP . 'webroot' . DS . 'img' . DS . $name.$id. '.jpg';
-        $path2 = APP . 'webroot' . DS . 'img' . DS . $name.$id. '.png';
+        $path1 = APP . 'webroot' . DS . 'uploaded_images' . DS . $name . "-"  . $id . '.jpg';
+        $path2 = APP . 'webroot' . DS . 'uploaded_images' . DS . $name . "-"  . $id . '.png';
         $path = "person.png";
         
         if (file_exists($path1)) {
-            $path = $name.$id.'.jpg';
+            $path = "/uploaded_images/".$name."-".$id.".jpg";
         }
         else if (file_exists($path2)) {
-            $path = $name.$id.'.png';
+            $path = "/uploaded_images/".$name."-".$id.".png";;
         }
 
         return $path;

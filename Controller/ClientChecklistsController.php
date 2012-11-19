@@ -9,6 +9,8 @@ App::uses('AppController', 'Controller');
  */
 class ClientChecklistsController extends AppController {
 
+    public $uses = array("ClientChecklist", "ClientChecklistTask");
+
     /**
      * index method
      *
@@ -46,17 +48,22 @@ class ClientChecklistsController extends AppController {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('action' => 'index', $clientID));
             }
+
             $this->request->data['ClientChecklist']['client_id'] = $clientID;
             $this->ClientChecklist->create();
             if ($this->ClientChecklist->save($this->request->data)) {
-                $this->Session->setFlash(__('The client checklist has been saved'));
-                if (isset($this->request->data['addMore'])) {
-                    $this->redirect(array('controller' => 'ClientChecklistTasksController', 'action' => 'add', $this->ClientChecklist->id));
-                } else if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('action' => 'index', $clientID));
+                $this->request->data['ClientChecklistTask']['client_checklist_id'] = $this->ClientChecklist->id;
+                $this->ClientChecklistTask->create();
+                if ($this->ClientChecklistTask->save($this->request->data)) {
+                    $this->Session->setFlash(__('The client checklist and the checklist task has been saved'));
+                    if (isset($this->request->data['addMore'])) {
+                        $this->redirect(array('controller' => 'ClientChecklists', 'action' => 'add', $this->ClientChecklist->id));
+                    } else if (isset($this->request->data['finished'])) {
+                        $this->redirect(array('action' => 'index', $clientID));
+                    }
+                } else {
+                    $this->Session->setFlash(__('The client checklist could not be saved. Please, try again.'));
                 }
-            } else {
-                $this->Session->setFlash(__('The client checklist could not be saved. Please, try again.'));
             }
         }
     }

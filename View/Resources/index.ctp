@@ -152,11 +152,10 @@
                 });
         </script>
     </div>
-
+    <br />
     <h2><?php echo __('Resource Listing'); ?></h2>
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th><?php echo $this->Paginator->sort('id'); ?></th>
             <th><?php echo $this->Paginator->sort('resource_name'); ?></th>
             <th><?php echo $this->Paginator->sort('organization_id'); ?></th>
             <th><?php echo $this->Paginator->sort('description'); ?></th>
@@ -165,7 +164,6 @@
         </tr>
         <?php foreach ($resources as $resource): ?>
             <tr>
-                <td><?php echo h($resource['Resource']['id']); ?>&nbsp;</td>
                 <td><?php echo h($resource['Resource']['resource_name']); ?>&nbsp;</td>
                 <td>
                     <?php echo $this->Html->link($resource['Organization']['org_name'], array('controller' => 'organizations', 'action' => 'view', $resource['Organization']['id'])); ?>

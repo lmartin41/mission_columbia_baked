@@ -2,7 +2,6 @@
     <h2><?php echo __('Client Checklists for ' . $client['Client']['first_name']); ?></h2>
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th><?php echo $this->Paginator->sort('id'); ?></th>
             <th><?php echo $this->Paginator->sort('client'); ?></th>
             <th><?php echo $this->Paginator->sort('isCompleted'); ?></th>
             <th><?php echo $this->Paginator->sort('checklist_name'); ?></th>
@@ -14,7 +13,6 @@
             if ($client['Client']['id'] == $clientChecklist['Client']['id']):
                 ?>
                 <tr>
-                    <td><?php echo h($clientChecklist['ClientChecklist']['id']); ?>&nbsp;</td>
                     <td>
                         <?php echo $this->Html->link($clientChecklist['Client']['first_name']." ".$clientChecklist['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $clientChecklist['Client']['id'])); ?>
                     </td>
@@ -49,6 +47,5 @@
     
         <?php echo $this->Html->link(__('Create Client Checklist'), array('action' => 'add', $client['Client']['id'])); ?><br />
         <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> <br />
-        <?php echo $this->Html->link(__('Browse Clients'), array('controller' => 'clients', 'action' => 'browse')); ?><br />
     
 </div>

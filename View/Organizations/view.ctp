@@ -8,13 +8,13 @@
     <?php if ($isAtleastAdmin): ?>
         <?php echo $this->Html->link(__('New Organization'), array('action' => 'add')); ?><br />
         <?php echo $this->Html->link(__('Edit Organization'), array('action' => 'edit', $organization['Organization']['id'])); ?><br />
-        <?php echo $this->Form->postLink(__('Delete Organization'), array('action' => 'delete', $organization['Organization']['id']), null, __('Are you sure you want to delete # %s?', $organization['Organization']['id'])); ?><br />
+        <?php echo $this->Form->postLink(__('Delete Organization'), array('action' => 'delete', $organization['Organization']['id']), null, __('Are you sure you want to delete %s?', $organization['Organization']['org_name'])); ?><br />
     <?php endif; ?>
         
 </div>
 
 <div class="organizations view">
-    <h2><?php echo __($organization['Resource']['resource_name']); ?></h2>
+    <h2><?php echo __($organization['Organization']['org_name']); ?></h2>
     <br />
     <?php echo $this->Html->image($imagePath, array('alt' => 'Sample Photo', 'height' => '30%', 'width' => '30%')); ?>
 
@@ -22,19 +22,9 @@
         <h2>Organization Information</h2>
         <div class="white-background black-text">
             <dl>
-                <dt><?php echo __('Id'); ?></dt>
-                <dd>
-                    <?php echo h($organization['Organization']['id']); ?>
-                    &nbsp;
-                </dd>
                 <dt><?php echo __('Org Name'); ?></dt>
                 <dd>
                     <?php echo h($organization['Organization']['org_name']); ?>
-                    &nbsp;
-                </dd>
-                <dt><?php echo __('Org Type'); ?></dt>
-                <dd>
-                    <?php echo h($organization['Organization']['org_type']); ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Address One'); ?></dt>
@@ -99,9 +89,7 @@
             <?php if (!empty($organization['Resource'])): ?>
                 <table cellpadding = "0" cellspacing = "0">
                     <tr>
-                        <th><?php echo __('Id'); ?></th>
                         <th><?php echo __('Resource Name'); ?></th>
-                        <th><?php echo __('Organization Id'); ?></th>
                         <th><?php echo __('Resource Status'); ?></th>
                         <th class="actions"><?php echo __(''); ?></th>
                     </tr>
@@ -110,9 +98,7 @@
                     foreach ($organization['Resource'] as $resource):
                         ?>
                         <tr>
-                            <td><?php echo $resource['id']; ?></td>
                             <td><?php echo $resource['resource_name']; ?></td>
-                            <td><?php echo $resource['organization_id']; ?></td>
                             <td><?php echo $resource['resource_status']; ?></td>
                             <td class="actions">
                                 <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'resources', 'action' => 'view', $resource['id'])); ?>
@@ -169,8 +155,8 @@
             <div id="demo1" style="width:500px">
                 <script type="text/javascript">
                     $('#demo1').ajaxupload({
-                        url:'/mission_columbia_baked/webroot/upload.php',
-                        remotePath:'C:/wamp/www/mission_columbia_baked/webroot/img',
+                        url:'/mission_columbia_baked/webroot/upload.php?id="organization-<?php echo h($organization["Organization"]["id"]); ?>',
+                        remotePath:<?php echo $remotePath; ?>,
                         editFilename: true
                     });
                 </script>

@@ -1,9 +1,8 @@
 <div class="actionsNoButton">
 
     <?php echo $this->Html->link(__('Edit Task'), array('action' => 'edit', $clientChecklistTask['ClientChecklistTask']['id'], $clientID)); ?><Br />
-    <?php echo $this->Form->postLink(__('Delete Task'), array('action' => 'delete', $clientChecklistTask['ClientChecklistTask']['id'], $clientID), null, __('Are you sure you want to delete # %s?', $clientChecklistTask['ClientChecklistTask']['id'])); ?><br />
+    <?php echo $this->Form->postLink(__('Delete Task'), array('action' => 'delete', $clientChecklistTask['ClientChecklistTask']['id'], $clientID), null, __('Are you sure you want to delete tihs task?')); ?><br />
     <?php echo $this->Html->link(__('Checklists Listing'), array('controller' => 'ClientChecklists', 'action' => 'index', $clientID)); ?> <br />
-    <?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'browse')); ?><br />
     <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?>
 
 </div>
