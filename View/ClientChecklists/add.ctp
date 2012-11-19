@@ -1,5 +1,5 @@
 
-<div class="actionsNoButton">
+<div class="actionsNoButton clientChecklists">
 
 
     <?php echo $this->Html->link(__('Checklists Listing'), array('action' => 'index', $clientID)); ?><br />
