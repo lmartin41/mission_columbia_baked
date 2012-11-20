@@ -2,7 +2,7 @@
 
 App::uses('OrganizationsController', 'Controller');
 App::uses('AppController', 'Controller');
-
+require_once('../Vendor/Spyc.php');
 class WelcomeController extends AppController {
 
     public $helpers = array('GoogleMap');   //Adding the helper
@@ -40,6 +40,13 @@ class WelcomeController extends AppController {
     {
     	if( isset($_SERVER['REDIRECT_HTTPS']) )
     		$this->redirect(array('action' => 'index'));
+    	
+    	$options = Spyc::YAMLLoad('customize.yml');
+    	
+    	if( $options['options']['georgia_tech_ssl_documentation'] == false )
+    	{
+    		$this->redirect(array('controller' => 'users', 'action' => 'login'));
+    	}
     }
 
 }
