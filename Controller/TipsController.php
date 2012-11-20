@@ -12,7 +12,7 @@ class TipsController extends AppController {
 	
 	public function beforeFilter()
 	{
-		$this->Auth->authorize = 'controller';
+		$this->Auth->authorize = 'Controller';
 		parent::beforeFilter();
 	}
 	
