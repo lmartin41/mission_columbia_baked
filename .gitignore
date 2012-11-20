@@ -4,7 +4,7 @@
 Config/database.php
 Config/core.php
 webroot/index.php
-
+webroot/uploaded_images/*
 #################
 ## Eclipse
 #################

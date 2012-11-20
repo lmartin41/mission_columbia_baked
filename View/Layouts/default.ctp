@@ -168,12 +168,15 @@ checkContext();
 
                     <?php echo $this->fetch('content'); ?>
 					<div id="tipArea">
-                        <div id="tips" class="tipsBox" style="background:#B4CFEC; border-radius: 5px;">
+					<?php if( $tip_render != null ): ?>
+                        <div id="tips" class="tipsBox">
                             <div class="tipsContent">
-                                <p><strong>Tips Default</strong></p>
-                                <p>If you cannot remember your password, please talk to your organizations administrator to change it.</p>
+                                <!-- <p><strong>Tips Default</strong></p>
+                                <p>If you cannot remember your password, please talk to your organizations administrator to change it.</p> -->
+                                <?php echo $tip_render; ?>
                             </div>
                         </div>
+                    <?php endif; ?>
                     </div>
                 </div>
                 <div class="clear"></div>

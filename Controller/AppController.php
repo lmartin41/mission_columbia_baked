@@ -49,6 +49,8 @@ class AppController extends Controller {
     	'Security'
     );
     
+    public $uses = array('Tip');
+    
     public $pageCatalog = array(
     	'controllers' => array(
     		'ClientChecklists', 
@@ -178,5 +180,38 @@ class AppController extends Controller {
     {
     	if( !isset($_SERVER['REDIRECT_HTTPS']) )
     		$this->redirect('https://' . $_SERVER['SERVER_NAME'] . $this->here);
+    }
+    
+    /**
+     * Brett: This code figures out if there is a tip that needs to be render on a given page.
+     */
+    
+    public function beforeRender()
+    {
+    	$tip = null;
+    	
+    	//special case for the log in screen
+    	if( $this->name == 'Users' && $this->action == 'login' )
+    	{
+    		$conditions = array('AND' => array(
+    				'Tip.controller' => 'Global',
+    				'Tip.view' => $this->action,
+    				'Tip.isDeleted' => false
+    		));
+    		
+    		$tip = $this->Tip->find('first', array('conditions' => $conditions));
+    	}
+    	elseif( $this->name != 'CakeError' )
+    	{
+	    	$cur_user = $this->Auth->user();
+	    	$conditions = array('AND' => array(
+	    			'Tip.controller' => $this->name, 
+	    			'Tip.view' => $this->action, 
+	    			'Tip.organization_id' => $cur_user['organization_id'],
+	    			'Tip.isDeleted' => false
+	    			));
+	    	$tip = $this->Tip->find('first', array('conditions' => $conditions));
+    	}
+    	$this->set('tip_render', $tip['Tip']['tip']);
     }
 }

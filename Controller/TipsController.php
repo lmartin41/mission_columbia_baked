@@ -156,7 +156,7 @@ class TipsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$cur_user = $this->Auth->user();
 			if( $cur_user['isAdmin']
-					&& $this->pageCatalog['controllers'][$this->request->data['controller']] != 'Global')
+					&& $this->pageCatalog['controllers'][$this->request->data['controller']] == 'Global')
 			{
 				$this->Session->setFlash(__('You do not have permission to update a global tip.'));
 				$this->redirect(array('action' => 'index'));

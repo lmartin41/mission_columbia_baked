@@ -1,7 +1,7 @@
 <?php
 class CustomizeController extends AppController
 {
-	public $uses = null;
+	//public $uses = null;
 	public $name = 'Customize';
 	
 	public function index()

@@ -1,3 +1,4 @@
+<?php $this->Html->script('tiny_mce/tiny_mce', FALSE); ?>
 <?php $this->Html->script('tips_add', FALSE); ?>
 <div class="actionsNoButton tips">
 	<?php echo $this->Html->link(__('List Tips'), array('action' => 'index')); ?><br/>

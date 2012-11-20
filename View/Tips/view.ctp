@@ -24,7 +24,7 @@
 		</dd>
 		<dt><?php echo __('Tip'); ?></dt>
 		<dd>
-			<?php echo h($tip['Tip']['tip']); ?>
+			<?php echo $tip['Tip']['tip']; ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Is Deleted?'); ?>

@@ -121,7 +121,8 @@ class ClientsController extends AppController {
     				$result['Client']['first_name'], 
     				$result['Client']['last_name'], 
     				date('m/d/Y', strtotime(h($result['Client']['DOB']))),
-    				'DT_RowId' => 'client_' . $result['Client']['id']
+    				'DT_RowId' => 'client_' . $result['Client']['id'],
+    				'DT_RowClass' => 'highlight-dataTables'
     				);
     		$output['aaData'][] = $row;
     	}

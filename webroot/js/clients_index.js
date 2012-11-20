@@ -17,12 +17,4 @@ $(document).ready(function(){
 		var id = $(this).attr('id');
 		location.href = global.base_url + "/clients/view/" + id.substr(id.indexOf('_') + 1);
 	});
-	
-	$('#clientsResults').on('mouseenter', 'tbody tr', function(event){
-		$(this).addClass('highlight-dataTables');
-	});
-	
-	$('#clientsResults').on('mouseleave', 'tbody tr', function(event){
-		$(this).removeClass('highlight-dataTables');
-	});
 });

@@ -212,12 +212,12 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 	border: 1px solid #73787E;	
 }
 
-.highlight-dataTables
+.highlight-dataTables:hover
 {
 	border: 1px solid black;
 }
 
-.highlight-dataTables:last-of-type
+.highlight-dataTables:last-of-type:hover
 {
 	border-top: 1px solid black;
 	border-right: 1px solid black;
@@ -227,13 +227,18 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 
 #tipArea
 {
-	width:18%; 
-	background:#B4CFEC;
+	width:18%;
 	float:right; 
 	display:inline-block;
-	padding: 5px 5px 2px 5px;
 	margin-top: 3%;
 	text-align: center;
+}
+
+.tipsBox
+{
+	background:#B4CFEC; 
+	border-radius: 5px;
+	padding: 5px 5px 5px 5px;
 }
 
 form .submit input[type=submit].disabled, form .submit input[type=submit].disabled:hover
@@ -245,4 +250,19 @@ form .submit input[type=submit].disabled, form .submit input[type=submit].disabl
 .dialog-duplicate.ui-widget-header
 {
 	background: #0B3E6F;
+}
+
+span.bold
+{
+	font-weight: bold;
+}
+
+span.italics
+{
+	font-style: italic;
+}
+
+span.underline
+{
+	text-decoration: underline;
 }
