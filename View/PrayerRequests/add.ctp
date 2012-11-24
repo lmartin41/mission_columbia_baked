@@ -1,3 +1,10 @@
+<div class="actionsNoButton">
+
+    <?php echo $this->Html->link(__('Prayer Requests Listing'), array('action' => 'index', $clientID)); ?><br />
+    <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?>
+
+</div>
+
 <div class="prayerRequests form">
     <?php echo $this->Form->create('PrayerRequest'); ?>
     <fieldset>
@@ -15,9 +22,4 @@
         <?php echo $this->Form->end(); ?>
     </div>
 </div>
-<div class="actionsNoButton">
 
-    <?php echo $this->Html->link(__('Prayer Requests Listing'), array('action' => 'index', $clientID)); ?><br />
-    <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?>
-
-</div>

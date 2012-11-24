@@ -22,6 +22,7 @@
     <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add'), array('class' => 'active_link')); ?><br />
 </div>
 <div class="clients form">
+    
     <?php echo $this->Form->create('Client'); ?>
     <div id="accordion">
         <h2>Personal Information</h2>

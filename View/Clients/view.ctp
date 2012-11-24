@@ -358,7 +358,7 @@
                     </tr>
                     <?php foreach ($client['PrayerRequest'] as $prayerRequest): ?>
                         <tr>
-                            <td><?php echo $prayerRequest['date']; ?></td>
+                            <td><?php echo substr($prayerRequest['created'], 0, 10); ?></td>
                             <td><?php echo $prayerRequest['request']; ?></td>
                             <td class="actions">
                                 <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'prayer_requests', 'action' => 'view', $prayerRequest['id'])); ?>

@@ -2,6 +2,7 @@
 
 App::uses('AppController', 'Controller');
 App::uses('ClientsController', 'Controller');
+App::uses('LoggersController', 'Controller');
 
 /**
  * Organizations Controller
@@ -53,6 +54,11 @@ class OrganizationsController extends AppController {
             }
             $this->Organization->create();
             if ($this->Organization->save($this->request->data)) {
+                
+                //logging the add
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "organizations", "add", "Added organization " . $this->request->data['Organization']['org_name']);
+                
                 $this->Session->setFlash(__('The Organization has been saved'));
                 $this->Session->write('organizationID', $this->Organization->id);
                 if (isset($this->request->data['addMore'])) {
@@ -83,6 +89,11 @@ class OrganizationsController extends AppController {
                 $this->redirect(array('action' => 'index'));
             }
             if ($this->Organization->save($this->request->data)) {
+                
+                //logging the edit
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "organizations", "edit", "Edited organization " . $this->request->data['Organization']['org_name']);
+                
                 $this->Session->setFlash(__('The organization has been saved'));
                 if (isset($this->request->data['finished'])) {
                     $this->redirect(array('action' => 'index'));
@@ -107,11 +118,20 @@ class OrganizationsController extends AppController {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
+        
         $this->Organization->id = $id;
+        $orgName = $this->Organization->read(null, $id);
+        $orgName = $orgName['Organization']['org_name'];
+        
         if (!$this->Organization->exists()) {
             throw new NotFoundException(__('Invalid organization'));
         }
         if ($this->Organization->delete()) {
+            
+            //logging the delete
+            $lControl = new LoggersController();
+            $lControl->add($this->Auth->user(), "organizations", "delete", "Deleted organization " . $orgName);
+            
             $this->Session->setFlash(__('Organization deleted'));
             $this->redirect(array('action' => 'index'));
         }

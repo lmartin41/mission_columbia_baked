@@ -27,16 +27,10 @@
         echo $this->Form->input('comments', array('value' => ""));
         ?>
     </fieldset>
-    <button type="button" onClick="addNewDiv()">Add another Task</button>
-
-    <script type="text/javascript">
-        function addNewDiv() {
-            document.writeln('hey');
-        }
-    </script>
 
     <div>
-
+        <?php echo $this->Form->submit('Add More Tasks', array('name' => 'addMore', 'div' => false)); ?>
+        &nbsp;
         <?php echo $this->Form->submit('Done', array('name' => 'finished', 'div' => false)); ?>
         &nbsp;
         <?php echo $this->Form->submit('Cancel', array('name' => 'cancel', 'div' => false)); ?>

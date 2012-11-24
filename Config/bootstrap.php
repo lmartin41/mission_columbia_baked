@@ -109,3 +109,5 @@ CakeLog::config('error', array(
 	'scopes' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+date_default_timezone_set('EST');

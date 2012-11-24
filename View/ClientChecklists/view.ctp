@@ -31,11 +31,6 @@
             <?php echo h($clientChecklist['ClientChecklist']['isCompleted']); ?>
             &nbsp;
         </dd>
-        <dt><?php echo __('IsDeleted'); ?></dt>
-        <dd>
-            <?php echo h($clientChecklist['ClientChecklist']['isDeleted']); ?>
-            &nbsp;
-        </dd>
         <dt><?php echo __('Created'); ?></dt>
         <dd>
             <?php echo h($clientChecklist['ClientChecklist']['created']); ?>

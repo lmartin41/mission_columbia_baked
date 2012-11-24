@@ -3,10 +3,18 @@
 
 <style type="text/css">
     form label { 
+        width: 7em; 
         float: left;
         padding: 0px;
     }
 </style>
+
+<div class="actionsNoButton">
+
+    <?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'index')); ?><br />
+    <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'search')); ?> 
+
+</div>
 
 <div class="clientRelations form">
     <?php echo $this->Form->create('ClientRelation'); ?>
@@ -61,9 +69,4 @@
             <?php echo $this->Form->end(); ?>
         </div>
 </div>
-<div class="actionsNoButton">
 
-    <?php echo $this->Html->link(__('Clients Listing'), array('controller' => 'clients', 'action' => 'index')); ?><br />
-    <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'search')); ?> 
-
-</div>

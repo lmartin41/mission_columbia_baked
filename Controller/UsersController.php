@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('LoggersController', 'Controller');
 
 /**
  * Users Controller
@@ -79,7 +80,7 @@ class UsersController extends AppController {
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
-        
+
         $this->set('doesFormExist', $this->User->VolunteerInformationForm->find('first', array('conditions' => array('user_id' => "$id"))));
         $this->set('user', $this->User->read(null, $id));
     }
@@ -98,6 +99,12 @@ class UsersController extends AppController {
             }
             $this->User->create();
             if ($this->User->save($this->request->data)) {
+
+                //logging the add
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "users", "add", "Added user " . $this->request->data['User']['username']);
+
+
                 $this->Session->setFlash(__('The user has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
@@ -152,6 +159,11 @@ class UsersController extends AppController {
                     $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
                 }
             } elseif ($this->User->save($this->request->data)) {
+
+                //logging the edit
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "users", "edit", "Edited user " . $this->request->data['User']['username']);
+
                 $this->Session->setFlash(__('The user has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
@@ -189,6 +201,13 @@ class UsersController extends AppController {
         $this->User->set('isDeleted', 1);
         if ($this->User->save(null, array('validate' => false))) {
             $this->Session->setFlash(__('User deleted'));
+
+            //logging the delete
+            $lControl = new LoggersController();
+            $userName = $this->User->read(null, $id);
+            $userName = $userName['User']['username'];
+            $lControl->add($this->Auth->user(), "users", "delete", "Deleted user " . $userName);
+
             $this->redirect(array('action' => 'index'));
         }
         $this->Session->setFlash(__('User was not deleted'));

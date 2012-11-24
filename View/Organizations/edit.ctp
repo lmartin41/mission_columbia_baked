@@ -1,3 +1,11 @@
+<style type="text/css">
+    form label { 
+        width: 7em; 
+        float: left;
+        padding: 0px;
+    }
+</style>
+
 <div class="actionsNoButton">
 
         <?php echo $this->Html->link(__('Organization Listing'), array('action' => 'index')); ?><br />
@@ -11,9 +19,6 @@
             <tr>
                 <td>
                     <?php echo $this->Form->input('org_name'); ?>
-                </td>
-                <td>
-                    <?php echo $this->Form->input('org_type'); ?>
                 </td>
             </tr>
             <tr>

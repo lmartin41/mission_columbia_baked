@@ -6,9 +6,10 @@
     </ul>
     <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br />
     <ul>
- <li><?php echo $this->Html->link('Counts', array('action' => 'countsIndex')); ?></li><br />
-        <li><?php echo $this->Html->link('Lists', array('action' => 'listsIndex')); ?></li>
+        <li><?php echo $this->Html->link('Counts', array('action' => 'countsIndex')); ?></li><br />
+        <li><?php echo $this->Html->link('Lists', array('action' => 'listsIndex')); ?></li><br />
+        <li><?php echo $this->Html->link('Logs', array('controller' => 'loggers', 'action' => 'index')); ?></li>
     </ul>
     <br />
-        <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
+    <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
 </div>

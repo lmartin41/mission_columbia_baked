@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('LoggersController', 'Controller');
 
 /**
  * Resourceuses Controller
@@ -8,7 +9,9 @@ App::uses('AppController', 'Controller');
  * @property Resourceus $Resourceus
  */
 class ResourceUsesController extends AppController {
-	public $uses = array("ResourceUs", "Organization", "Resource");
+
+    public $uses = array("ResourceUs", "Organization", "Resource");
+
     /**
      * index method
      *
@@ -40,15 +43,28 @@ class ResourceUsesController extends AppController {
      * @return void
      */
     public function add($clientID = null) {
-    	
+
         if ($this->request->is('post')) {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('controller' => 'clients', 'action' => 'index'));
             }
+
             $this->request->data['ResourceUs']['client_id'] = $clientID;
             $this->ResourceUs->create();
             $this->ResourceUs->client_id = $clientID;
             if ($this->ResourceUs->save($this->request->data)) {
+
+                $clientName = $this->ResourceUs->Client->read(null, $clientID);
+                $clientName = $clientName['Client']['first_name'] . " " . $clientName['Client']['last_name'];
+                $resourceID = $this->ResourceUs->id;
+                $resourceName = $this->ResourceUs->read(null, $resourceID);
+                $date = $resourceName['ResourceUs']['date'];
+                $resourceName = $resourceName['Resource']['resource_name'];
+
+                //logging the add
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "Resource Uses", "add", "Added Resource Use for Client " . $clientName . " using resource " . $resourceName . " on " . $date);
+
                 $this->Session->setFlash(__('The resource use has been saved'));
                 if (isset($this->request->data['Add_another_resource'])) {
                     $this->redirect(array('action' => 'add', $clientID));
@@ -78,6 +94,16 @@ class ResourceUsesController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->ResourceUs->save($this->request->data)) {
+
+                $resourceUse = $this->ResourceUs->read(null, $id);
+                $clientName = $resourceUse['Client']['first_name'] . " " . $resourceUse['Client']['last_name'];
+                $date = $resourceUse['ResourceUs']['date'];
+                $resourceName = $resourceUse['Resource']['resource_name'];
+
+                //logging the add
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "Resource Uses", "edit", "Edited Resource Use for Client " . $clientName . " using resource " . $resourceName . " on " . $date);
+
                 $this->Session->setFlash(__('The resource use has been saved'));
                 $this->redirect(array('controller' => 'clients', 'action' => 'index'));
             } else {
@@ -89,11 +115,12 @@ class ResourceUsesController extends AppController {
         $clients = $this->ResourceUs->Client->find('list');
         $organizations = $this->Organization->find('list');
         $selected_organization = $this->request->data['Resource']['organization_id'];
-        $resources = $this->Resource->find('list', array( 'conditions' => array('Resource.organization_id' => $selected_organization)));
+        $resources = $this->Resource->find('list', array('conditions' => array('Resource.organization_id' => $selected_organization)));
         $selected_resource = $this->request->data['Resource']['id'];
         $this->set(compact('clients', 'organizations', 'resources'));
         $this->set('selected_organization', $selected_organization);
         $this->set('selected_resource', $selected_resource);
+        $this->set('resourceID', $id);
     }
 
     /**
@@ -112,7 +139,18 @@ class ResourceUsesController extends AppController {
         if (!$this->ResourceUs->exists()) {
             throw new NotFoundException(__('Invalid resourceus'));
         }
+
+        $resourceUse = $this->ResourceUs->read(null, $id);
+        $clientName = $resourceUse['Client']['first_name'] . " " . $resourceUse['Client']['last_name'];
+        $date = $resourceUse['ResourceUs']['date'];
+        $resourceName = $resourceUse['Resource']['resource_name'];
+
         if ($this->ResourceUs->delete()) {
+
+            //logging the delete
+            $lControl = new LoggersController();
+            $lControl->add($this->Auth->user(), "Resource Uses", "delete", "Deleted " . $clientName . "'s Resource Use for resource ".$resourceName." on ".$date);
+
             $this->Session->setFlash(__('Resource use deleted'));
             $this->redirect(array('controller' => 'clients', 'action' => 'index'));
         }
@@ -132,34 +170,13 @@ class ResourceUsesController extends AppController {
         return $query[0][0]['period'];
     }
 
-    public function mostPopular() {
-        $query = $this->ResourceUse->query(
-                "Select max(counts) as mostPopular from (
-                    select resource_name as counts from resource_uses 
-                    join resources on resource_id 
-                    group by resource_id) as derived;
-                 ");
-        return $query[0][0]['mostPopular'];
-    }
-
     public function countParticular($resourceID, $startDate, $endDate) {
-       $query = $this->ResourceUse->query("
+        $query = $this->ResourceUse->query("
                 Select count(resource_id) as count
                 From resource_uses
                 Where resource_id = '$resourceID' AND date between '$startDate' and '$endDate';
             ");
         return $query[0][0]['count'];
-    }
-    
-    public function mostPopularClient($resourceID, $startDate, $endDate) {
-        $query = $this->ResourceUse->query("
-               Select max(counts) as mostPopular from (
-                    select first_name as counts from clients
-                    join resource_uses on client_id 
-                    where resource_uses.resource_id = '$resourceID' AND date between '$startDate' and '$endDate'
-                    group by clients.id) as derived;
-               ");
-        return $query[0][0]['mostPopular'];
     }
 
 }

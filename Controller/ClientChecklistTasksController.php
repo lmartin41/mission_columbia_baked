@@ -52,7 +52,7 @@ class ClientChecklistTasksController extends AppController {
             if ($this->ClientChecklistTask->save($this->request->data)) {
                 $this->Session->setFlash(__('The client checklist task has been saved'));
                 if (isset($this->request->data['ClientChecklist']['Add_another_task'])) {
-                    $this->redirect(array('controller' => 'ClientChecklists', 'action' => 'index', $clientChecklist['ClientChecklist']['client_id']));
+                    $this->redirect(array('controller' => 'ClientChecklistTasks', 'action' => 'add', $clientChecklistID));
                 } else if (isset($this->request->data['ClientChecklist']['finished'])) {
                     $this->redirect(array('controller' => 'ClientChecklists', 'action' => 'index', $clientChecklist['ClientChecklist']['client_id']));
                 }

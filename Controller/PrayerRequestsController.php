@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('LoggersController', 'Controller');
 
 /**
  * PrayerRequests Controller
@@ -51,6 +52,11 @@ class PrayerRequestsController extends AppController {
             $this->request->data['PrayerRequest']['client_id'] = $clientID;
             $this->PrayerRequest->create();
             if ($this->PrayerRequest->save($this->request->data)) {
+                
+                //logging the add
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "Prayer Requests", "add", "Added Prayer Request");
+                
                 $this->Session->setFlash(__('The prayer request has been saved'));
                 $this->redirect(array('action' => 'index', $clientID));
             } else {
@@ -78,6 +84,11 @@ class PrayerRequestsController extends AppController {
                 $this->redirect(array('action' => 'index', $clientID));
             }
             if ($this->PrayerRequest->save($this->request->data)) {
+                
+                //logging the save
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "Prayer Requests", "edit", "Edited Prayer Request");
+                
                 $this->Session->setFlash(__('The prayer request has been saved'));
                 $this->redirect(array('action' => 'index', $clientID));
             } else {
@@ -88,6 +99,7 @@ class PrayerRequestsController extends AppController {
         }
         $clients = $this->PrayerRequest->Client->find('list');
         $this->set(compact('clients'));
+        $this->set('clientID', $clientID);
     }
 
     /**
@@ -107,6 +119,11 @@ class PrayerRequestsController extends AppController {
             throw new NotFoundException(__('Invalid prayer request'));
         }
         if ($this->PrayerRequest->delete()) {
+            
+            //logging the add
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "Prayer Requests", "delete", "Deleted Prayer Request");
+            
             $this->Session->setFlash(__('Prayer request deleted'));
             $this->redirect(array('action' => 'index', $clientID));
         }

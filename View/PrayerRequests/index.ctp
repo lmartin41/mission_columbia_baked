@@ -1,3 +1,10 @@
+<div class="actionsNoButton">
+
+    <?php echo $this->Html->link(__('New Prayer Request'), array('action' => 'add', $client['Client']['id'])); ?><br />
+    <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> <br />
+
+</div>
+
 <div class="prayerRequests index">
     <h2><?php echo __('Prayer Requests for ' . $client['Client']['first_name']); ?></h2>
     <table cellpadding="0" cellspacing="0">
@@ -39,9 +46,4 @@
         ?>
     </div>
 </div>
-<div class="actionsNoButton">
 
-    <?php echo $this->Html->link(__('New Prayer Request'), array('action' => 'add', $client['Client']['id'])); ?><br />
-    <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?> <br />
-
-</div>

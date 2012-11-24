@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('LoggersController', 'Controller');
 
 /**
  * ClientRelations Controller
@@ -8,7 +9,7 @@ App::uses('AppController', 'Controller');
  * @property ClientRelation $ClientRelation
  */
 class ClientRelationsController extends AppController {
-    
+
     /**
      * index method
      *
@@ -32,7 +33,7 @@ class ClientRelationsController extends AppController {
         if (!$this->ClientRelation->exists()) {
             throw new NotFoundException(__('Invalid client Relative'));
         }
-        
+
         $this->set('clientRelation', $this->ClientRelation->read(null, $id));
     }
 
@@ -49,6 +50,12 @@ class ClientRelationsController extends AppController {
             $this->request->data['ClientRelation']['client_id'] = $clientID;
             $this->ClientRelation->create();
             if ($this->ClientRelation->save($this->request->data)) {
+
+                //logging the add
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "Client Relatives", "add", "Added Relative " .
+                        $this->request->data['ClientRelation']['first_name'] . " " . $this->request->data['ClientRelation']['last_name']);
+
                 $this->Session->setFlash(__('The client relative has been saved'));
                 if (isset($this->request->data['Add_another_relative'])) {
                     $this->redirect(array('action' => 'add', $clientID));
@@ -72,7 +79,7 @@ class ClientRelationsController extends AppController {
      */
     public function edit($id = null, $clientID = null) {
         $this->ClientRelation->id = $id;
-        
+
         $this->set('clientID', $clientID);
         if (!$this->ClientRelation->exists()) {
             throw new NotFoundException(__('Invalid client relation'));
@@ -83,6 +90,12 @@ class ClientRelationsController extends AppController {
             }
             $this->request->data['ClientRelation']['client_id'] = $clientID;
             if ($this->ClientRelation->save($this->request->data)) {
+
+                //logging the edit
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "Client Relatives", "edit", "Edited Relative " .
+                        $this->request->data['ClientRelation']['first_name'] . " " . $this->request->data['ClientRelation']['last_name']);
+
                 $this->Session->setFlash(__('The client relative has been saved'));
                 if (isset($this->request->data['finished'])) {
                     $this->redirect(array('controller' => 'clients', 'action' => 'index'));
@@ -110,10 +123,20 @@ class ClientRelationsController extends AppController {
             throw new MethodNotAllowedException();
         }
         $this->ClientRelation->id = $id;
+        
+        $relativeName = $this->ClientRelation->read(null, $id);
+        $relativeName = $relativeName['ClientRelation']['first_name']." ".$relativeName['ClientRelation']['last_name'];
+        
         if (!$this->ClientRelation->exists()) {
             throw new NotFoundException(__('Invalid client relative'));
         }
         if ($this->ClientRelation->delete()) {
+
+            //logging the edit
+            $lControl = new LoggersController();
+            $lControl->add($this->Auth->user(), "Client Relatives", "delete", "Deleted Relative ".$relativeName);
+
+
             $this->Session->setFlash(__('Client relative deleted'));
             $this->redirect(array('controller' => 'clients', 'action' => 'index'));
         }

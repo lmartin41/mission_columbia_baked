@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('LoggersController', 'Controller');
 
 /**
  * Feedbacks Controller
@@ -47,6 +48,11 @@ class FeedbacksController extends AppController {
             $this->request->data['Feedback']['user_id'] = $auth_user['id'];
             $this->Feedback->create();
             if ($this->Feedback->save($this->request->data)) {
+                
+                //logging the add
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "feedacks", "add", "Left feedback");
+                
                 $this->Session->setFlash(__('The feedback has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
@@ -71,6 +77,11 @@ class FeedbacksController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Feedback->save($this->request->data)) {
+                
+                //logging the edit
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "feedacks", "edit", "Edited feedback");
+                
                 $this->Session->setFlash(__('The feedback has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
@@ -99,7 +110,12 @@ class FeedbacksController extends AppController {
         if (!$this->Feedback->exists()) {
             throw new NotFoundException(__('Invalid feedback'));
         }
-        if ($this->Feedback->delete()) {
+        if ($this->Feedback->delete()) {//logging the edit
+            
+                $lControl = new LoggersController();
+                $lControl->add($this->Auth->user(), "feedacks", "delete", "Deleted feedback");
+            
+            
             $this->Session->setFlash(__('Feedback deleted'));
             $this->redirect(array('action' => 'index'));
         }
