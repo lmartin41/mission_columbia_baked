@@ -1,4 +1,5 @@
 <?php echo $this->Html->image('mission_logo.png', array('alt' => 'Sample Photo')); ?>
+
 <h2><?php echo __($client['Client']['first_name'] . "'s Summary"); ?></h2>
 <dl>
     <h3>Personal Information</h3>

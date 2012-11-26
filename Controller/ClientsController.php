@@ -325,5 +325,23 @@ class ClientsController extends AppController {
         $this->set('client', $this->Client->read(null, $id));
         $this->set('bodyAttr', 'onload="window.print();"');
     }
+    
+    /**
+     * This method prints off the little hope project cards that Mission 
+     * Columbia requested we print off
+     * 
+     * @param type $id
+     * @throws NotFoundException 
+     */
+    public function printCards($id = null) {
+        $this->layout = 'print';
+        $this->Client->recursive = -1;
+        $this->Client->id = $id;
+        if (!$this->Client->exists()) {
+            throw new NotFoundException(__('Invalid client'));
+        }
+        $this->set('client', $this->Client->read(null, $id));
+        $this->set('bodyAttr', 'onload="window.print();"');
+    }
 
 }

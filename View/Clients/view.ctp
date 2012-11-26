@@ -9,6 +9,7 @@
     <?php echo $this->Html->link(__('Add Resource Use'), array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?><br />
     <?php echo $this->Html->link(__('Client Checklist'), array('controller' => 'client_checklists', 'action' => 'index', $client['Client']['id'])); ?><br />
     <?php echo $this->Html->link(__('Prayer Requests'), array('controller' => 'prayer_requests', 'action' => 'index', $client['Client']['id'])); ?><br />
+    <?php echo $this->Html->link(__('Print Client Cards'), array('action' => 'printCards', $client['Client']['id'])); ?><br />
     <?php echo $this->Html->link(__('Print Client Summary'), array('action' => 'printClient', $client['Client']['id'])); ?><br />
     <?php echo $this->Form->postLink(__('Delete This Client'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to delete %s?', $client['Client']['first_name'])); ?>
 </div>
