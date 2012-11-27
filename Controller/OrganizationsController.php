@@ -86,7 +86,7 @@ class OrganizationsController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('action' => 'view', $id));
             }
             if ($this->Organization->save($this->request->data)) {
                 
@@ -96,7 +96,7 @@ class OrganizationsController extends AppController {
                 
                 $this->Session->setFlash(__('The organization has been saved'));
                 if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('action' => 'index'));
+                    $this->redirect(array('action' => 'view', $id));
                 } else {
                     $this->Session->setFlash(__('The organization could not be saved. Please, try again.'));
                 }

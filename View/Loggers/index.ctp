@@ -13,8 +13,7 @@
         <li><?php echo $this->Html->link('Lists', array('controller' => 'reports', 'action' => 'listsIndex')); ?></li><br />
         <li><?php echo $this->Html->link('Logs', array('controller' => 'loggers', 'action' => 'index')); ?></li>
     </ul>
-    <br />
-    <?php echo $this->Html->link('Client Listing', array('controller' => 'clients', 'action' => 'browse')); ?>
+
 </div>
 
 <div class="loggers index">
@@ -51,7 +50,7 @@
             <th><?php echo $this->Paginator->sort('Category'); ?></th>
             <th><?php echo $this->Paginator->sort('action'); ?></th>
             <th><?php echo $this->Paginator->sort('Description'); ?></th>
-            <th><?php echo $this->Paginator->sort('Time'); ?></th>
+            <th><?php echo $this->Paginator->sort('Date'); ?></th>
             <?php if ($isAtleastAdmin): ?><th class="actions"><?php echo __('Actions'); ?></th><?php endif; ?>
         </tr>
         <?php foreach ($loggers as $logger): ?>

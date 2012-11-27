@@ -46,7 +46,7 @@ class ResourceUsesController extends AppController {
 
         if ($this->request->is('post')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+                $this->redirect(array('controller' => 'clients', 'action' => 'view', $clientID));
             }
 
             $this->request->data['ResourceUs']['client_id'] = $clientID;
@@ -93,6 +93,11 @@ class ResourceUsesController extends AppController {
             throw new NotFoundException(__('Invalid resource use'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
+            
+             if (isset($this->request->data['cancel'])) {
+                $this->redirect(array('action' => 'view', $id));
+            }
+            
             if ($this->ResourceUs->save($this->request->data)) {
 
                 $resourceUse = $this->ResourceUs->read(null, $id);
@@ -152,7 +157,7 @@ class ResourceUsesController extends AppController {
             $lControl->add($this->Auth->user(), "Resource Uses", "delete", "Deleted " . $clientName . "'s Resource Use for resource ".$resourceName." on ".$date);
 
             $this->Session->setFlash(__('Resource use deleted'));
-            $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+            $this->redirect(array('controller' => 'clients', 'action' => 'view', $resourceUse['Client']['id']));
         }
         $this->Session->setFlash(__('Resource use was not deleted'));
         $this->redirect(array('controller' => 'clients', 'action' => 'index'));
@@ -161,11 +166,11 @@ class ResourceUsesController extends AppController {
     /**
      * Lee: Report functions 
      */
-    public function countPeriod($startDate, $endDate, $sex) {
+    public function countPeriod($startDate, $endDate) {
         $query = $this->ResourceUse->query("
                 Select count(DISTINCT resource_uses.id) as period
                 From resource_uses join clients
-                Where $sex AND date between '$startDate' AND '$endDate';
+                Where date between '$startDate' AND '$endDate';
             ");
         return $query[0][0]['period'];
     }

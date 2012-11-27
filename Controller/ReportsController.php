@@ -11,9 +11,12 @@ App::uses('GoogleChart', 'GoogleChart.Lib');
 
 class ReportsController extends AppController {
 
-    public $uses = array("ResourceUse", "Organization", "PrayerRequest", "ClientChecklist", "Resource", "Client");
+    public $uses = array("ResourceUs", "Organization", "PrayerRequest", "ClientChecklist", "Resource", "Client");
     public $helpers = array('Js', 'GoogleChart.GoogleChart');
     public $name = 'Reports';
+    public $paginate = array(
+        'limit' => 10
+    );
 
     public function index() {
         $clientsController = new ClientsController();
@@ -128,16 +131,18 @@ class ReportsController extends AppController {
         $this->set('endDate', $endDate);
         $this->set('startCompare', strtotime($this->Session->read('startDate')));
         $this->set('endCompare', strtotime($this->Session->read('endDate')));
+        $resourceUseController = new ResourceUsesController();
+        $this->set('totalNumber', $resourceUseController->countPeriod($startDate, $endDate));
 
         if ($range == 'monthly') {
-            $dates = $this->ResourceUse->query("
+            $dates = $this->ResourceUs->query("
            Select count(date) as counts, date 
            from resource_uses 
            where date between '$startDate' AND '$endDate'
            group by month(date);
             ");
         } else {
-            $dates = $this->ResourceUse->query("
+            $dates = $this->ResourceUs->query("
            Select count(date) as counts, date 
            from resource_uses 
            where date between '$startDate' AND '$endDate'
@@ -146,13 +151,15 @@ class ReportsController extends AppController {
         }
         if (!empty($dates)) {
             $chart = new GoogleChart();
-            $chart->type("LineChart");
+            $chart->type("ColumnChart");
             $chart->options(array(
-                'title' => 'Total Number of Resource Uses', 
-                'width' => '500', 
+                'title' => '',
+                'width' => '750',
                 'vAxis' => array(
                     'viewWindow' => array(
-                        'min' => 0))));
+                        'min' => 0,
+                        'max' => 100)),
+            ));
             $chart->columns(array(
                 'date' => array(
                     'type' => 'string',
@@ -169,6 +176,9 @@ class ReportsController extends AppController {
             }
             $this->set(compact('chart'));
         }
+
+        $this->ResourceUs->recursive = 0;
+       $this->set('resourceuses', $this->paginate('ResourceUs', "date between '$startDate' AND '$endDate'"));
     }
 
     public function lists() {
@@ -202,7 +212,7 @@ class ReportsController extends AppController {
         $this->set('startCompare', $startCompare);
         $this->set('endCompare', $endCompare);
 
-        $dates = $this->ResourceUse->query("
+        $dates = $this->ResourceUs->query("
            Select count(date) as counts, date 
            from resource_uses 
            where client_id = '$clientID' AND date between '$startDate' AND '$endDate'
@@ -211,8 +221,15 @@ class ReportsController extends AppController {
 
         if (!empty($dates)) {
             $chart = new GoogleChart();
-            $chart->type("LineChart");
-            $chart->options(array('title' => 'Number of Resources Used', 'width' => '500'));
+            $chart->type("ColumnChart");
+            $chart->options(array(
+                'title' => '',
+                'width' => '750',
+                'vAxis' => array(
+                    'viewWindow' => array(
+                        'min' => 0,
+                        'max' => 15)),
+            ));
             $chart->columns(array(
                 'date' => array(
                     'type' => 'string',
@@ -224,6 +241,7 @@ class ReportsController extends AppController {
                 )
             ));
 
+
             foreach ($dates as $date) {
                 $chart->addRow(array('date' => $date['resource_uses']['date'], 'counts' => intVal($date[0]['counts']), 10));
             }
@@ -232,28 +250,15 @@ class ReportsController extends AppController {
         }
 
         $clientsController = new ClientsController();
-        $this->set('numberResourceUses', $clientsController->numberResourceUses($clientID, $this->Session->read('startDate'), $this->Session->read('endDate')));
+        $this->set('numberResourceUses', $clientsController->numberResourceUses($clientID, $startDate, $endDate));
 
         $client = $this->Client->read(null, $clientID);
         $resourceUses = array();
         $resourceName = array();
         $organizationName = array();
 
-        $i = 0;
-        foreach ($client['ResourceUs'] as $resourceUse) {
-            if ($resourceUse['client_id'] == $client['Client']['id']) {
-                $resourceUses[$i] = $resourceUse;
-                $num = $resourceUse['resource_id'];
-                $resource = $this->Resource->find('first', array('conditions' => array('Resource.id' => $num)));
-                $resourceName[$i] = $resource['Resource']['resource_name'];
-                $organizationName[$i] = $resource['Organization']['org_name'];
-                $i++;
-            }
-        }
-
-        $this->set('resourceUses', $resourceUses);
-        $this->set('resourceName', $resourceName);
-        $this->set('organizationName', $organizationName);
+        $this->ResourceUs->recursive = 0;
+        $this->set('resourceuses', $this->paginate('ResourceUs', "client_id = $clientID AND date between '$startDate' AND '$endDate'"));
         $this->set('client', $client);
     }
 
@@ -267,7 +272,7 @@ class ReportsController extends AppController {
         $this->set('startCompare', $startCompare);
         $this->set('endCompare', $endCompare);
 
-        $dates = $this->ResourceUse->query("
+        $dates = $this->ResourceUs->query("
            Select count(date) as counts, date 
            from resource_uses 
            where resource_id = '$resourceID' AND date between '$startDate' AND '$endDate'
@@ -276,8 +281,16 @@ class ReportsController extends AppController {
 
         if (!empty($dates)) {
             $chart = new GoogleChart();
-            $chart->type("LineChart");
-            $chart->options(array('title' => 'Number of Times this Resource Has Been Used', 'width' => '500'));
+            $chart->type("ColumnChart");
+            $chart->options(array(
+                'title' => '',
+                'width' => '750',
+                'vAxis' => array(
+                    'viewWindow' => array(
+                        'min' => 0,
+                        'max' => 120)),
+            ));
+
             $chart->columns(array(
                 'date' => array(
                     'type' => 'string',
@@ -297,10 +310,12 @@ class ReportsController extends AppController {
         }
 
 
-        $resourceUsesController = new ResourceUsesController();
-        $this->set('numberResourceUses', $resourceUsesController->countParticular($resourceID, $startDate, $endDate));
-
+        $this->ResourceUs->recursive = 0;
+        $this->set('resourceuses', $this->paginate('ResourceUs', "resource_id = $resourceID AND date between '$startDate' AND '$endDate'"));
         $this->set('resource', $this->Resource->read(null, $resourceID));
+        $rCont = new ResourceUsesController();
+        $numberResourceUses = $rCont->countParticular($resourceID, $startDate, $endDate);
+        $this->set('numberResourceUses', $numberResourceUses);
     }
 
 }

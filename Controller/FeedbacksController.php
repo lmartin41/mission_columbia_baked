@@ -45,6 +45,11 @@ class FeedbacksController extends AppController {
         $this->set('selected_id', $auth_user['id']);
         
         if ($this->request->is('post')) {
+            
+            if (isset($this->request->data['cancel'])) {
+                $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+            }
+            
             $this->request->data['Feedback']['user_id'] = $auth_user['id'];
             $this->Feedback->create();
             if ($this->Feedback->save($this->request->data)) {
@@ -54,7 +59,7 @@ class FeedbacksController extends AppController {
                 $lControl->add($this->Auth->user(), "feedacks", "add", "Left feedback");
                 
                 $this->Session->setFlash(__('The feedback has been saved'));
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('controller' => 'clients', 'action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The feedback could not be saved. Please, try again.'));
             }
@@ -76,6 +81,11 @@ class FeedbacksController extends AppController {
             throw new NotFoundException(__('Invalid feedback'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
+            
+            if (isset($this->request->data['cancel'])) {
+                $this->redirect(array('action' => 'index'));
+            }
+            
             if ($this->Feedback->save($this->request->data)) {
                 
                 //logging the edit

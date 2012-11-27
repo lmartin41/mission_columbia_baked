@@ -81,7 +81,7 @@ class PrayerRequestsController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('action' => 'index', $clientID));
+                $this->redirect(array('action' => 'view', $id, $clientID));
             }
             if ($this->PrayerRequest->save($this->request->data)) {
                 
@@ -90,7 +90,7 @@ class PrayerRequestsController extends AppController {
                 $lControl->add($this->Auth->user(), "Prayer Requests", "edit", "Edited Prayer Request");
                 
                 $this->Session->setFlash(__('The prayer request has been saved'));
-                $this->redirect(array('action' => 'index', $clientID));
+                $this->redirect(array('action' => 'view', $id, $clientID));
             } else {
                 $this->Session->setFlash(__('The prayer request could not be saved. Please, try again.'));
             }

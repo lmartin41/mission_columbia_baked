@@ -1,40 +1,50 @@
 <?php include("reportsDiv.ctp"); ?>
 <div class="reports form">
-
-    <div id="chart_div"><?php $this->GoogleChart->createJsChart($chart); ?></div>
+    <h2>Number of Resources Used</h2>
+    
+    
+    <div id="chart_div">
+        <?php $this->GoogleChart->createJsChart($chart); ?>
+    </div>
 
     Number of Resources Used During this Period: <?php echo $numberResourceUses; ?><br /><br />
 
-    <h3><?php echo h($client['Client']['first_name']) . " 's Resource Usage Listing"; ?></h3>
-    <?php if (!empty($client['ResourceUs'])): ?>
-        <table cellpadding = "0" cellspacing = "0">
+    <h2><?php echo __('Resource Usage Listing'); ?></h2>
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <th><?php echo $this->Paginator->sort('client_id'); ?></th>
+            <th><?php echo $this->Paginator->sort('resource_id'); ?></th>
+            <th><?php echo $this->Paginator->sort('date'); ?></th>
+            <th><?php echo $this->Paginator->sort('comments'); ?></th>
+        </tr>
+        <?php foreach ($resourceuses as $resourceus): ?>
             <tr>
-                <th><?php echo __('Organization'); ?></th>
-                <th><?php echo __('Resource Name'); ?></th>
-                <th><?php echo __('Date'); ?></th>
-                <th><?php echo __('Comments'); ?></th>
-                <th class="actions"><?php echo __(''); ?></th>
+                <td>
+                    <?php echo $this->Html->link($resourceus['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $resourceus['Client']['id'])); ?>
+                </td>
+                <td>
+                    <?php echo $this->Html->link($resourceus['Resource']['resource_name'], array('controller' => 'resources', 'action' => 'view', $resourceus['Resource']['id'])); ?>
+                </td>
+                <td><?php echo h($resourceus['ResourceUs']['date']); ?>&nbsp;</td>
+                <td><?php echo h($resourceus['ResourceUs']['comments']); ?>&nbsp;</td>
             </tr>
-            <?php
-            $j = 0;
-            foreach ($resourceUses as $resourceUs):
-                ?>
-                <tr>
-                    <td><?php echo $organizationName[$j]; ?></td>
-                    <td><?php echo $resourceName[$j]; ?></td>
-                    <td><?php echo $resourceUs['date']; ?></td>
-                    <td><?php echo $resourceUs['comments']; ?></td>
-                    <td class="actions">
-                        <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'ResourceUses', 'action' => 'view', $resourceUs['id'])); ?>
-                    </td>
-                </tr>
-                <?php $j++; ?>
-            <?php endforeach; ?>
-        </table>
-    <?php else: echo "none"; ?>
-    <?php endif; ?>
+        <?php endforeach; ?>
+    </table>
+    <p>
+        <?php
+        echo $this->Paginator->counter(array(
+            'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
+        ));
+        ?>	</p>
 
-    <br /><br />
+    <div class="paging">
+        <?php
+        echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+        echo $this->Paginator->numbers(array('separator' => ''));
+        echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+        ?>
+    </div>
+
 </div>
 
 

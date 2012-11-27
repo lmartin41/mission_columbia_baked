@@ -107,7 +107,7 @@ class ResourcesController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('action' => 'view', $id));
             }
             if ($this->Resource->save($this->request->data)) {
 
@@ -117,7 +117,7 @@ class ResourcesController extends AppController {
 
                 $this->Session->setFlash(__('The resource has been saved'));
                 if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('action' => 'index'));
+                    $this->redirect(array('action' => 'view', $id));
                 }
             } else {
                 $this->Session->setFlash(__('The resource could not be saved. Please, try again.'));

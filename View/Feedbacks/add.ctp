@@ -18,5 +18,10 @@
 		echo $this->Form->input('feedback');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+    <div>
+        <?php echo $this->Form->submit('Done', array('name' => 'finished', 'div' => false)); ?>
+        &nbsp;
+        <?php echo $this->Form->submit('Cancel', array('name' => 'cancel', 'div' => false)); ?>
+        <?php echo $this->Form->end(); ?>
+    </div>
 </div>
