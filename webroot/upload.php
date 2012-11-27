@@ -65,6 +65,7 @@ if(!file_exists($thumbPath) && !empty($thumbPath))
 }
 
 
+
 //with gd library
 
 function createThumbGD($filepath, $thumbPath, $postfix, $maxwidth, $maxheight, $format='jpg', $quality=75)
@@ -202,6 +203,8 @@ function checkFilename($fileName, $size, $newName = '')
 	}
     
 	$fullPath = $uploadPath.$fileName.$id;
+
+	/*
     $c=0;
 	while(file_exists($fullPath))
 	{
@@ -209,7 +212,20 @@ function checkFilename($fileName, $size, $newName = '')
 		$fileName	= $fileBase."($c).".$fileExt;
 		$fullPath 	= $uploadPath.$fileName;
 	}
+
+	*/
+
+
+	if(file_exists($fullPath))
+	  {
+	  	unlink($fullPath);
+	  }
+
 	return $fullPath;
+	
+
+
+
 }
 
 if(isset($_FILES['ax-files'])) 
