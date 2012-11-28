@@ -93,6 +93,5 @@
             </table>
         <?php endif; ?>
 
-<?php echo $this->Html->link(__('New Feedback'), array('controller' => 'feedbacks', 'action' => 'add')); ?>
     </div>
 </div>

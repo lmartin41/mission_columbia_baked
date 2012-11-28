@@ -6,7 +6,6 @@
 
     <?php echo $this->Html->link(__('Organization Listing'), array('action' => 'index')); ?><br />
     <?php if ($isAtleastAdmin): ?>
-        <?php echo $this->Html->link(__('New Organization'), array('action' => 'add')); ?><br />
         <?php echo $this->Html->link(__('Edit Organization'), array('action' => 'edit', $organization['Organization']['id'])); ?><br />
         <?php echo $this->Form->postLink(__('Delete Organization'), array('action' => 'delete', $organization['Organization']['id']), null, __('Are you sure you want to delete %s?', $organization['Organization']['org_name'])); ?><br />
     <?php endif; ?>

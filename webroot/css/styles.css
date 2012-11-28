@@ -212,19 +212,6 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 	border: 1px solid #73787E;	
 }
 
-.highlight-dataTables:hover
-{
-	border: 1px solid black;
-}
-
-.highlight-dataTables:last-of-type:hover
-{
-	border-top: 1px solid black;
-	border-right: 1px solid black;
-	border-left: 1px solid black;
-	border-bottom: 1px none;
-}
-
 #tipArea
 {
 	width:18%;

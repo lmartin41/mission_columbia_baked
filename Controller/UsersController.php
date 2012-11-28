@@ -136,7 +136,7 @@ class UsersController extends AppController {
 
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+                $this->redirect(array('action' => 'view', $id));
                 return;
             }
             if ($this->request->data['User']['password'] == '' && $this->request->data['User']['password_confirmation'] == '') {
