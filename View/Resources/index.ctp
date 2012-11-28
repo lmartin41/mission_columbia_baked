@@ -130,7 +130,7 @@
                                     
                                   } 
                                   else {
-                                    alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for an organization");
+                                    alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for the organization " + orgName);
                                   }
                                   
                                 });
