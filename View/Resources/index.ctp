@@ -119,7 +119,7 @@
 
                                 geocoder.geocode( { 'address': address}, function(results, status) {
                                   if (status == google.maps.GeocoderStatus.OK) {
-                                    $('#map_canvas').gmap('addMarker', { 'icon': images[0], 'tags':['Organizations'], 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+                                    $('#map_canvas').gmap('addMarker', { 'icon': images[1], 'tags':['Organizations'], 'bound':true, 'position': results[0].geometry.location} ).click(function() {
 
                                         /*
                                         $('#map_canvas').gmap('openInfoWindow', { 'content': 'Organization: ' + orgName + '<br/> Address: ' + address + ' <a href="http://www.w3schools.com">This is a link</a> ' + '<br/>resources: ' + orgsResourcesStr }, this);
@@ -160,7 +160,7 @@
                                       if (status == google.maps.GeocoderStatus.OK) {
                                         //map.setCenter(results[0].geometry.location);
 
-                                        $('#map_canvas').gmap('addMarker', { 'icon': images[2], 'tags':tagNum, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+                                        $('#map_canvas').gmap('addMarker', { 'icon': images[7], 'tags':tagNum, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
 
                                             //$('#map_canvas').gmap('openInfoWindow', { 'content': 'Resource: ' + resName + '<br/> Address: ' + resAddress }, this);
 
@@ -169,7 +169,7 @@
                                         
                                       } 
                                       else {
-                                        alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for a resource");
+                                        alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for the resource " + resName);
                                       }
                                       
                                     });
