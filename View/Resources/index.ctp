@@ -46,11 +46,13 @@
 
 
                             var tags = [];
+                            
 
                             $.each(jsonObj, function() { 
 
                                 var tempAll = this.resources;
                                 var allSet = [];
+                                
                                 $.each(tempAll, function(){
                                     var tempName = this.resource_name;
 
@@ -67,6 +69,8 @@
                                     
                                 });
                             }); 
+
+                            tags.push("Organizations");
 
                             $.each(tags, function(i, tag) {
                                 $('#radios').append(('<label style="margin-right:5px;display:block;"><input type="checkbox" style="margin-right:3px" value="{0}"/>{1}</label>').format(tag, tag));
@@ -115,7 +119,7 @@
 
                                 geocoder.geocode( { 'address': address}, function(results, status) {
                                   if (status == google.maps.GeocoderStatus.OK) {
-                                    $('#map_canvas').gmap('addMarker', { 'icon': images[0], 'tags':[], 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+                                    $('#map_canvas').gmap('addMarker', { 'icon': images[0], 'tags':['Organizations'], 'bound':true, 'position': results[0].geometry.location} ).click(function() {
 
                                         /*
                                         $('#map_canvas').gmap('openInfoWindow', { 'content': 'Organization: ' + orgName + '<br/> Address: ' + address + ' <a href="http://www.w3schools.com">This is a link</a> ' + '<br/>resources: ' + orgsResourcesStr }, this);
@@ -191,7 +195,7 @@
                                 } else {
                                     $.each($('#map_canvas').gmap('get', 'markers'), function(i, marker) {
                                         $('#map_canvas').gmap('addBounds', marker.position);
-                                        marker.setVisible(true); 
+                                        marker.setVisible(true);
                                     });
                                 }
                             });
