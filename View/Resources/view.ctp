@@ -128,7 +128,7 @@
                 <script type="text/javascript">
 
                     $('#demo1').ajaxupload({
-                        url:'/mission_columbia_baked/webroot/upload.php?id="resource-<?php echo h($resource["Resource"]["id"]); ?>',
+                        url: global.base_url + '/webroot/upload.php?id=resource-<?php echo h($resource["Resource"]["id"]); ?>',
                         remotePath:<?php echo $remotePath; ?>,
                         editFilename: true
                     });

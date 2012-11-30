@@ -154,7 +154,7 @@
             <div id="demo1" style="width:500px">
                 <script type="text/javascript">
                     $('#demo1').ajaxupload({
-                        url:'/mission_columbia_baked/webroot/upload.php?id="organization-<?php echo h($organization["Organization"]["id"]); ?>',
+                        url: global.base_url + '/webroot/upload.php?id=organization-<?php echo h($organization["Organization"]["id"]); ?>',
                         remotePath:<?php echo $remotePath; ?>,
                         editFilename: true
                     });
