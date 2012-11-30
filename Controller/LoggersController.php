@@ -15,15 +15,20 @@ class LoggersController extends AppController {
      * @return void
      */
     public function index() {
-        if ($this->request->is('post')) {
-            $this->set('startDate', $this->request->data['startDate']);
-            $this->set('endDate', $this->request->data['endDate']);
-            $this->set('showDiv', true);
-            $this->Logger->recursive = 0;
-            $this->set('loggers', $this->paginate());
-        }
 
-        else $this->set('showDiv', false);
+        if ($this->request->is('post')) {
+            $this->Session->write('startDate', $this->request->data['startDate']);
+            $this->Session->write('endDate', $this->request->data['endDate']);
+            $this->redirect(array('action' => 'logs'));
+        }
+    }
+
+    public function logs() {
+        $this->set('startDate', $this->Session->read('startDate'));
+        $this->set('endDate', $this->Session->read('endDate'));
+        $this->set('showDiv', true);
+        $this->Logger->recursive = 0;
+        $this->set('loggers', $this->paginate());
     }
 
     /**

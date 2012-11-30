@@ -28,7 +28,7 @@
             <input type="radio" name="weekMonthChooser" value="monthly" style="vertical-align: middle" />Monthly<br /><br />
         </fieldset>
 
-        <input type="submit" value="Retrieve Aggregate Client Report"/>
+        <input type="submit" value="Retrieve Report"/>
     </form>
 
 </div>

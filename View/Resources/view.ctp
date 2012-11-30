@@ -17,10 +17,16 @@
         <h2>Resource Information</h2>
         <div class="white-background black-text">
             <dl>
-                <dt><?php echo __('Resource Name'); ?></dt>
+                <dt><?php echo $customLabels['Resource Name']; ?></dt>
                 <dd>
                     
                     <?php echo h($resource['Resource']['resource_name']); ?>
+                    &nbsp;
+                </dd>
+                 <dt><?php echo $customLabels['Resource Type']; ?></dt>
+                <dd>
+                    
+                    <?php echo h($resource['ResourceType']['name']); ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Organization'); ?></dt>
@@ -28,37 +34,37 @@
                     <?php echo $this->Html->link($resource['Organization']['org_name'], array('controller' => 'organizations', 'action' => 'view', $resource['Organization']['id'])); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Status'); ?></dt>
+                <dt><?php echo $customLabels['Resource Status']; ?></dt>
                 <dd>
                     <?php echo h($resource['Resource']['resource_status']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Description'); ?></dt>
+                <dt><?php echo $customLabels['Description']; ?></dt>
                 <dd>
                     <?php echo h($resource['Resource']['description']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Inventory'); ?></dt>
+                <dt><?php echo $customLabels['Inventory']; ?></dt>
                 <dd>
                     <?php echo h($resource['Resource']['inventory']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Street Address'); ?></dt>
+                <dt><?php echo $customLabels['Street Address']; ?></dt>
                 <dd>
                     <?php echo h($resource['Resource']['street_address']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('City'); ?></dt>
+                <dt><?php echo $customLabels['City']; ?></dt>
                 <dd>
                     <?php echo h($resource['Resource']['city']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('State'); ?></dt>
+                <dt><?php echo $customLabels['State']; ?></dt>
                 <dd>
                     <?php echo h($resource['Resource']['state']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Zip'); ?></dt>
+                <dt><?php echo $customLabels['Zip']; ?></dt>
                 <dd>
                     <?php echo h($resource['Resource']['zip']); ?>
                     &nbsp;
@@ -98,6 +104,24 @@
                 </div>
             <?php endif; ?>
         </div>
+        
+        <?php /*         * **************** CONFIGURATION ****************************** */ ?>
+        <h2><?php echo $current_user['Organization']['org_name'] . "'s Fields"; ?></h2>
+        <div class="white-background black-text">
+            <dl>
+                <?php foreach ($customFields as $customField): ?>
+
+                    <dt><?php echo __($customField['Fields']['field_name']); ?></dt>
+                    <dd>
+                        &nbsp;&nbsp;
+                        <?php echo h($customField['FieldInstance']['field_value']); ?>
+                        &nbsp;
+                    </dd>
+
+                <?php endforeach; ?>
+            </dl>
+        </div>
+        
         <h2>Upload Photo</h2>
         <div class="white-background black-text">
             <div id="demo1" style="width:500px">

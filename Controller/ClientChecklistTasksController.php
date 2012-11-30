@@ -44,22 +44,31 @@ class ClientChecklistTasksController extends AppController {
         $this->set('clientChecklistID', $clientChecklistID);
         $clientChecklist = $this->ClientChecklistTask->ClientChecklist->read(null, $clientChecklistID);
         if ($this->request->is('post')) {
-            if (isset($this->request->data['ClientChecklist']['cancel'])) {
-                $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+            if (isset($this->request->data['cancel'])) {
+                $this->redirect(array('controller' => 'clientChecklists', 'action' => 'index', $clientChecklist['ClientChecklist']['client_id']));
             }
             $this->request->data['ClientChecklistTask']['client_checklist_id'] = $clientChecklistID;
             $this->ClientChecklistTask->create();
             if ($this->ClientChecklistTask->save($this->request->data)) {
                 $this->Session->setFlash(__('The client checklist task has been saved'));
-                if (isset($this->request->data['ClientChecklist']['Add_another_task'])) {
+                if (isset($this->request->data['Add_another_task'])) {
                     $this->redirect(array('controller' => 'ClientChecklistTasks', 'action' => 'add', $clientChecklistID));
-                } else if (isset($this->request->data['ClientChecklist']['finished'])) {
+                } else if (isset($this->request->data['finished'])) {
+                    
                     $this->redirect(array('controller' => 'ClientChecklists', 'action' => 'index', $clientChecklist['ClientChecklist']['client_id']));
                 }
             } else {
                 $this->Session->setFlash(__('The client checklist task could not be saved. Please, try again.'));
             }
         }
+
+        //finding current checklist tasks
+        $clientChecklistTasks = $this->ClientChecklistTask->find('all', array(
+            'conditions' => array(
+                'client_checklist_id' => $clientChecklistID,
+            )
+        ));
+        $this->set('clientChecklistTasks', $clientChecklistTasks);
     }
 
     /**

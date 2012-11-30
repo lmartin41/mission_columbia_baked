@@ -84,7 +84,7 @@ class ClientChecklistsController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('action' => 'index', $clientID));
+                $this->redirect(array('action' => 'view', $id));
             }
             if ($this->ClientChecklist->save($this->request->data)) {
                 $this->Session->setFlash(__('The client checklist has been saved'));
