@@ -24,25 +24,25 @@
                 <h3><?php echo $client['Client']['first_name'] . " " . $client['Client']['last_name'] . "'s Personal Information" ?></h3>
                 <dl>
 
-                    <dt><?php echo __('First Name'); ?></dt>
+                    <dt><?php echo $customLabels['First Name']; ?></dt>
                     <dd>
                         &nbsp;&nbsp;
                         <?php echo h($client['Client']['first_name']); ?>
                         &nbsp;
                     </dd>
-                    <dt><?php echo __('Last Name'); ?></dt>
+                    <dt><?php echo $customLabels['Last Name']; ?></dt>
                     <dd>
                         &nbsp;&nbsp;
                         <?php echo h($client['Client']['last_name']); ?>
                         &nbsp;
                     </dd>
-                    <dt><?php echo __('DOB'); ?></dt>
+                    <dt><?php echo $customLabels['DOB']; ?></dt>
                     <dd>
                         &nbsp;&nbsp;
                         <?php echo h($client['Client']['DOB']); ?>
                         &nbsp;
                     </dd>
-                    <dt><?php echo __('Sex'); ?></dt>
+                    <dt><?php echo $customLabels['Sex']; ?></dt>
                     <dd>
                         &nbsp;&nbsp;
                         <?php echo h($client['Client']['sex']); ?>
@@ -59,37 +59,37 @@
         <h2>Contact Information</h2>
         <div class="white-background black-text">
             <dl>
-                <dt><?php echo __('Address:'); ?></dt>
+                <dt><?php echo $customLabels['Address']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['address_one']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Apartment Number:'); ?></dt>
+                <dt><?php echo $customLabels['Apt #']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['apartment_number']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('City:'); ?></dt>
+                <dt><?php echo $customLabels['City']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['city']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('State:'); ?></dt>
+                <dt><?php echo $customLabels['State']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['state']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Zip:'); ?></dt>
+                <dt><?php echo $customLabels['Zip']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['zip']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Phone:'); ?></dt>
+                <dt><?php echo $customLabels['Phone']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['phone']); ?>
@@ -100,61 +100,61 @@
         <h2>Source of Income</h2>
         <div class="white-background black-text">
             <dl>
-                <dt><?php echo __('Regular Job'); ?></dt>
+                <dt><?php echo $customLabels['Regular Job']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['regular_job']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Food Stamps'); ?></dt>
+                <dt><?php echo $customLabels['Food Stamps']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['food_stamps']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Veterans Pension'); ?></dt>
+                <dt><?php echo $customLabels['Veterans Pension']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['veterans_pension']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Part Time Job'); ?></dt>
+                <dt><?php echo $customLabels['Part Time Job']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['part_time_job']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Social Security'); ?></dt>
+                <dt><?php echo $customLabels['Social Security']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['social_security']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Annuity Check'); ?></dt>
+                <dt><?php echo $customLabels['Annuity Check']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['annuity_check']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Child Support'); ?></dt>
+                <dt><?php echo $customLabels['Child Support']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['child_support']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Ssi Or Disability'); ?></dt>
+                <dt><?php echo $customLabels['SSI Or Disability']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['ssi_or_disability']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Unemployment'); ?></dt>
+                <dt><?php echo $customLabels['Unemployment']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['unemployment']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('When Next Check'); ?></dt>
+                <dt><?php echo $customLabels['When Next Check']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['when_next_check']); ?>
@@ -165,79 +165,79 @@
         <h2>Other Information</h2>
         <div class="white-background black-text">
             <dl>
-                <dt><?php echo __('Pregnant'); ?></dt>
+                <dt><?php echo $customLabels['Pregnant']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo ($client['Client']['pregnant'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Disabled'); ?></dt>
+                <dt><?php echo $customLabels['Disabled']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo ($client['Client']['disabled'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Handicapped'); ?></dt>
+                <dt><?php echo $customLabels['Handicapped']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo ($client['Client']['handicapped'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Stove'); ?></dt>
+                <dt><?php echo $customLabels['Stove']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo ($client['Client']['stove'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Refrigerator'); ?></dt>
+                <dt><?php echo $customLabels['Refrigerator']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo ($client['Client']['refrigerator'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Cell'); ?></dt>
+                <dt><?php echo $customLabels['Cell']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo ($client['Client']['cell'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Cable'); ?></dt>
+                <dt><?php echo $customLabels['Cable']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo ($client['Client']['cable'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Internet'); ?></dt>
+                <dt><?php echo $customLabels['Internet']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo ($client['Client']['internet'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Accepted Christ?'); ?></dt>
+                <dt><?php echo $customLabels['Accepted Christ']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo ($client['Client']['acceptedChrist'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Dedicated Life to Christ?'); ?></dt>
+                <dt><?php echo $customLabels['Dedicated Christ']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo ($client['Client']['dedicatedChrist'] == 1) ? 'yes' : 'no'; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('Model of Car'); ?></dt>
+                <dt><?php echo $customLabels['Model of Car']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo $client['Client']['model']; ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('How Did You Hear'); ?></dt>
+                <dt><?php echo $customLabels['How Did You Hear About Us?']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['how_did_you_hear']); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo __('How Long Do You Need'); ?></dt>
+                <dt><?php echo $customLabels['How Long Do You Need?']; ?></dt>
                 <dd>
                     &nbsp;&nbsp;
                     <?php echo h($client['Client']['how_long_do_you_need']); ?>
@@ -245,6 +245,23 @@
                 </dd>
             </dl>
         </div>
+
+            <?php /*             * **************** CONFIGURATION ****************************** */ ?>
+            <h2><?php echo $current_user['Organization']['org_name'] . "'s Fields"; ?></h2>
+            <div class="white-background black-text">
+                <dl>
+                    <?php foreach ($customFields as $customField): ?>
+
+                        <dt><?php echo __($customField['Fields']['field_name']); ?></dt>
+                        <dd>
+                            &nbsp;&nbsp;
+                            <?php echo h($customField['FieldInstance']['field_value']); ?>
+                            &nbsp;
+                        </dd>
+
+                    <?php endforeach; ?>
+                </dl>
+            </div>
 
         <?php /*         * *************** Relatives ***************************************** */ ?>
 
@@ -296,24 +313,22 @@
                         <th><?php echo __('Organization'); ?></th>
                         <th><?php echo __('Resource Name'); ?></th>
                         <th><?php echo __('Date'); ?></th>
-                        <th><?php echo __('Comments'); ?></th>
                         <th class="actions"><?php echo __(''); ?></th>
                     </tr>
                     <?php
                     $j = 0;
                     foreach ($resourceUses as $resourceUs):
-                    ?>
+                        ?>
                         <tr>
                             <td><?php echo $organizationName[$j]; ?></td>
                             <td><?php echo $resourceName[$j]; ?></td>
                             <td><?php echo $resourceUs['date']; ?></td>
-                            <td><?php echo $resourceUs['comments']; ?></td>
                             <td class="actions">
                                 <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'ResourceUses', 'action' => 'view', $resourceUs['id'])); ?>
                             </td>
                         </tr>
                         <?php $j++; ?>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </table>
             <?php else: echo "none"; ?>
             <?php endif; ?>
@@ -347,7 +362,7 @@
             <br /><br />
             <?php echo $this->Html->link('Add new Checklist for this Client', array('controller' => 'client_checklists', 'action' => 'add', $client['Client']['id'])); ?>
         </div>
-        
+
         <h2><?php echo h($client['Client']['first_name']) . " 's Prayer Requests"; ?></h2>
         <div class="white-background black-text">
             <?php if (!empty($client['PrayerRequest'])): ?>
@@ -376,7 +391,7 @@
 
         <h2>Upload Photo</h2>
         <div class="white-background black-text">
-        	<div id="image_upload" style="width:500px">
+            <div id="image_upload" style="width:500px">
                 <script type="text/javascript">
                     $('#image_upload').ajaxupload({
                         url:'/mission_columbia_baked/webroot/upload.php?id="client-<?php echo ($client["Client"]["id"]); ?>',

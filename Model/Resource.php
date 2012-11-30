@@ -42,7 +42,14 @@ class Resource extends AppModel {
                 'rule' => array('custom', '/^[a-z0-9 ]*$/i'),
                 'message' => 'Resource Status Should be Alphanumeric',
             )
+        ),
+        'resource_type_id' => array(
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message' => 'Please enter a Resource Type'
+            )
         )
+        
     );
 
     //The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -59,7 +66,14 @@ class Resource extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
-        )
+        ),
+        'ResourceType' => array(
+            'className' => 'ResourceType',
+            'foreignKey' => 'resource_type_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+            )
     );
 
     /**

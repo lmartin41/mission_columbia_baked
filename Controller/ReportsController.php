@@ -97,30 +97,27 @@ class ReportsController extends AppController {
         }
     }
 
-    public function listsIndex() {
+    public function prayerIndex() {
         if ($this->request->is('post')) {
-
             $startDate = $this->request->data['startDate'];
-            $range = 'monthly';
-            if ($this->request->data('weekMonthChooser') == 'weekly') {
-                $range = 'weekly';
-            }
-            $dates = $this->figureOutStartEnd($startDate, $range);
-
-            $this->Session->write('startDate', $dates[0]);
-            $this->Session->write('endDate', $dates[1]);
-
-            $sex = 'both';
-            if ($this->request->data('sexChooser') == 'male') {
-                $sex = 'male';
-            }
-            if ($this->request->data('sexChooser') == 'female') {
-                $sex = 'female';
-            }
-            $this->Session->write('sex', $sex);
-
-            $this->redirect(array('action' => 'lists'));
+            $endDate = $this->request->data['endDate'];
+            $this->Session->write('startDate', $startDate);
+            $this->Session->write('endDate', $endDate);
+            $this->redirect(array('action' => 'prayerJournal'));
         }
+    }
+    
+    public function printPrayers() {
+        $this->layout = 'print';
+        $this->set('prayerRequests', $this->PrayerRequest->find('all'));
+        $this->set('bodyAttr', 'onload="window.print();"');
+    }
+
+    public function prayerJournal() {
+        $startDate = $this->Session->read('startDate');
+        $endDate = $this->Session->read('endDate');
+        $this->PrayerRequest->recursive = 0;
+        $this->set('prayerRequests', $this->paginate('PrayerRequest', "PrayerRequest.created between '$startDate' AND '$endDate'"));
     }
 
     public function counts() {
@@ -178,18 +175,7 @@ class ReportsController extends AppController {
         }
 
         $this->ResourceUs->recursive = 0;
-       $this->set('resourceuses', $this->paginate('ResourceUs', "date between '$startDate' AND '$endDate'"));
-    }
-
-    public function lists() {
-        $this->set('startDate', $this->Session->read('startDate'));
-        $this->set('endDate', $this->Session->read('endDate'));
-        $this->set('startCompare', strtotime($this->Session->read('startDate')));
-        $this->set('endCompare', strtotime($this->Session->read('endDate')));
-        $this->set('sex', $this->Session->read('sex'));
-        $this->set('resourceUses', $this->ResourceUse->find('all'));
-        $this->set('prayerRequests', $this->PrayerRequest->find('all'));
-        $this->set('clientChecklists', $this->ClientChecklist->find('all'));
+        $this->set('resourceuses', $this->paginate('ResourceUs', "date between '$startDate' AND '$endDate'"));
     }
 
     public function clientSearch($firstName, $lastName) {

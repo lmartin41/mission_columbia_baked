@@ -7,8 +7,8 @@
     <?php echo $this->Html->link(__('Aggregate Reports'), array()); ?><br />
     <ul>
         <li><?php echo $this->Html->link('Counts', array('action' => 'countsIndex')); ?></li><br />
-        <li><?php echo $this->Html->link('Lists', array('action' => 'listsIndex')); ?></li><br />
         <li><?php echo $this->Html->link('Logs', array('controller' => 'loggers', 'action' => 'index')); ?></li>
     </ul>
     <br />
+    <?php if ($isAtleastAdmin) echo $this->Html->link('Prayer Journal', array('action' => 'prayerIndex')); ?>
 </div>

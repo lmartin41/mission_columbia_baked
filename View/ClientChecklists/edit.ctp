@@ -1,3 +1,8 @@
+<div class="actionsNoButton">
+        <?php echo $this->Html->link(__('Checklists Listing'), array('action' => 'index', $clientID)); ?><br />
+        <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?>   
+</div>
+
 <div class="clientChecklists form">
     <?php echo $this->Form->create('ClientChecklist'); ?>
     <fieldset>
@@ -5,6 +10,7 @@
         <?php
         echo $this->Form->input('checklist_name');
         echo $this->Form->input('checklist_description');
+        echo $this->Form->input('isCompleted');
         ?>
     </fieldset>
     <div>
@@ -13,12 +19,4 @@
         <?php echo $this->Form->submit('Cancel', array('name' => 'cancel', 'div' => false)); ?>
         <?php echo $this->Form->end(); ?>
     </div>
-</div>
-<div class="actionsNoButton">
-    
-
-        <?php echo $this->Html->link(__('Checklists Listing'), array('action' => 'index', $clientID)); ?><br />
-        <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'clients', 'action' => 'index')); ?>
-
-    
 </div>

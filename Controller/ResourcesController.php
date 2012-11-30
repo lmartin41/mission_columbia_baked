@@ -5,6 +5,18 @@ App::uses('AppController', 'Controller');
 App::uses('ClientsController', 'Controller');
 App::uses('LoggersController', 'Controller');
 
+$GLOBALS['resource_labels'] = array(
+    'Resource Name' => 'Resource Name',
+    'Resource Type' => 'Resource Type',
+    'Description' => 'Description',
+    'Inventory' => 'Inventory',
+    'Resource Status' => 'Resource Status',
+    'Street Address' => 'Street Address',
+    'City' => 'City',
+    'State' => 'State',
+    'Zip' => 'Zip'
+);
+
 /**
  * Resources Controller
  *
@@ -12,7 +24,7 @@ App::uses('LoggersController', 'Controller');
  */
 class ResourcesController extends AppController {
 
-    public $uses = array("Resource", "Client");
+    public $uses = array("Resource", "Client", "ResourceType", "Field", "FieldInstance", "Lookup");
 
     /**
      * index method
@@ -45,6 +57,32 @@ class ResourcesController extends AppController {
 
         $resource = $this->Resource->read(null, $id);
         $this->set('resource', $resource);
+
+        //viewing custom fields
+        $customFields = $this->FieldInstance->find('all', array(
+            'conditions' => array(
+                'resource_id' => $this->Resource->id
+            )
+                ));
+        $this->set('customFields', $customFields);
+        
+        //retrieving and setting custom labels
+        $current_user = $this->Auth->user();
+        $rawLabels = $this->Lookup->find('all', array(
+            'conditions' => array(
+                'table_reference' => 'resources',
+                'organization_id' => $current_user['organization_id']
+            )
+                ));
+
+        //making it easier to match labels with respective fields
+        $customLabels = $GLOBALS['resource_labels'];
+        foreach ($rawLabels as $label) {
+            $key = $label['Lookup']['field_name'];
+            $customLabels[$key] = $label['Lookup']['custom_name'];
+        }
+        $this->set('customLabels', $customLabels);
+
         $resourceUseWithClientName = array();
         $i = 0;
         foreach ($resource['ResourceUs'] as $resourceUse) {
@@ -68,6 +106,34 @@ class ResourcesController extends AppController {
      * @return void
      */
     public function add($organizationID = null) {
+
+        //retrieving and setting custom fields
+        $current_user = $this->Auth->user();
+        $customFields = $this->Field->find('all', array(
+            'conditions' => array(
+                'table_ref' => 'resources',
+                'organization_id' => $current_user['organization_id']
+            )
+                ));
+        $this->set('customFields', $customFields);
+        
+        //retrieving and setting custom labels
+        $current_user = $this->Auth->user();
+        $rawLabels = $this->Lookup->find('all', array(
+            'conditions' => array(
+                'table_reference' => 'resources',
+                'organization_id' => $current_user['organization_id']
+            )
+                ));
+
+        //making it easier to match labels with respective fields
+        $customLabels = $GLOBALS['resource_labels'];
+        foreach ($rawLabels as $label) {
+            $key = $label['Lookup']['field_name'];
+            $customLabels[$key] = $label['Lookup']['custom_name'];
+        }
+        $this->set('customLabels', $customLabels);
+
         if ($this->request->is('post')) {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('action' => 'index'));
@@ -75,6 +141,20 @@ class ResourcesController extends AppController {
             $this->request->data['Resource']['organization_id'] = $organizationID;
             $this->Resource->create();
             if ($this->Resource->save($this->request->data)) {
+
+                //saving all the custom field data
+                $data = array('FieldInstance' => array());
+                $i = 0;
+                foreach ($customFields as $customField) {
+                    $data['FieldInstance'][$i] = array(
+                        'fields_id' => $customField['Field']['id'],
+                        'resource_id' => $this->Resource->id,
+                        'field_value' => $this->request->data['Resource'][$customField['Field']['field_name']]
+                    );
+
+                    $i++;
+                }
+                $this->FieldInstance->saveAll($data['FieldInstance']);
 
                 //logging the adding of a resource
                 $lControl = new LoggersController();
@@ -90,6 +170,8 @@ class ResourcesController extends AppController {
                 $this->Session->setFlash(__('The resource could not be saved. Please, try again.'));
             }
         }
+        $resourceTypes = $this->ResourceType->find('list');
+        $this->set(compact('resourceTypes'));
     }
 
     /**
@@ -105,11 +187,54 @@ class ResourcesController extends AppController {
         if (!$this->Resource->exists()) {
             throw new NotFoundException(__('Invalid resource'));
         }
+
+        //retrieving and setting custom fields
+        $current_user = $this->Auth->user();
+        $customFields = $this->Field->find('all', array(
+            'conditions' => array(
+                'table_ref' => 'resources',
+                'organization_id' => $current_user['organization_id']
+            )
+                ));
+        $this->set('customFields', $customFields);
+        
+        //retrieving and setting custom labels
+        $current_user = $this->Auth->user();
+        $rawLabels = $this->Lookup->find('all', array(
+            'conditions' => array(
+                'table_reference' => 'resources',
+                'organization_id' => $current_user['organization_id']
+            )
+                ));
+
+        //making it easier to match labels with respective fields
+        $customLabels = $GLOBALS['resource_labels'];
+        foreach ($rawLabels as $label) {
+            $key = $label['Lookup']['field_name'];
+            $customLabels[$key] = $label['Lookup']['custom_name'];
+        }
+        $this->set('customLabels', $customLabels);
+
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('action' => 'view', $id));
             }
             if ($this->Resource->save($this->request->data)) {
+
+                //saving all the custom field data
+                $data = array('FieldInstance' => array());
+                $i = 0;
+                foreach ($customFields as $customField) {
+                    $data['FieldInstance'][$i] = array(
+                        'id' => $customField['FieldInstance'][0]['id'],
+                        'fields_id' => $customField['Field']['id'],
+                        'resource_id' => $this->Resource->id,
+                        'field_value' => $this->request->data['Resource'][$customField['Field']['field_name']]
+                    );
+
+                    $i++;
+                }
+                $this->FieldInstance->saveAll($data['FieldInstance']);
 
                 //logging the editing of a resource
                 $lControl = new LoggersController();
@@ -125,8 +250,8 @@ class ResourcesController extends AppController {
         } else {
             $this->request->data = $this->Resource->read(null, $id);
         }
-        $resources = $this->Resource->Organization->find('list');
-        $this->set(compact('resources'));
+        $resourceTypes = $this->ResourceType->find('list');
+        $this->set(compact('resourceTypes'));
     }
 
     /**

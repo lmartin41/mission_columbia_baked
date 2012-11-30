@@ -4,6 +4,47 @@ App::uses('AppController', 'Controller');
 App::uses('ResourcesController', 'Controller');
 App::uses('LoggersController', 'Controller');
 
+/* for custom labels -- defining these as an array because I am not 
+ * anticipating on them changing/any being added (other than the custom fields)
+ * - Lee 
+ */
+$GLOBALS['client_labels'] = array(
+    'First Name' => 'First Name',
+    'Last Name' => 'Last Name',
+    'Sex' => 'Sex',
+    'DOB' => 'DOB',
+    'Age' => 'Age',
+    'Address' => 'Address',
+    'Apt #' => 'Apt #',
+    'City' => 'City',
+    'State' => 'State',
+    'Zip' => 'Zip',
+    'Phone' => 'Phone',
+    'Regular Job' => 'Regular Job',
+    'Food Stamps' => 'Food Stamps',
+    'Veterans Pension' => 'Veterans Pension',
+    'Part Time Job' => 'Part Time Job',
+    'Social Security' => 'Social Security',
+    'Annuity Check' => 'Annuity Check',
+    'Child Support' => 'Child Support',
+    'SSI Or Disability' => 'SSI Or Disability',
+    'Unemployment' => 'Unemployment',
+    'When Next Check' => 'When Next Check',
+    'Pregnant' => 'Pregnant',
+    'Disabled' => 'Disabled',
+    'Handicapped' => 'Handicapped',
+    'Stove' => 'Stove',
+    'Refrigerator' => 'Refrigerator',
+    'Cell' => 'Cell',
+    'Cable' => 'Cable',
+    'Internet' => 'Internet',
+    'Accepted Christ' => 'Accepted Christ',
+    'Dedicated Christ' => 'Dedicated Christ',
+    'Model of Car' => 'Model Of Car',
+    'How Did You Hear About Us?' => 'How Did You Hear About Us?',
+    'How Long Do You Need?' => 'How Long Do You Need?'
+);
+
 /**
  * Clients Controller
  *
@@ -11,7 +52,7 @@ App::uses('LoggersController', 'Controller');
  */
 class ClientsController extends AppController {
 
-    public $uses = array('Client', 'Resource');
+    public $uses = array('Client', 'Resource', 'Field', 'FieldInstance', 'Lookup');
     public $components = array('Session', 'RequestHandler');
     public $helpers = array('Js');
     public $paginate = array(
@@ -144,6 +185,32 @@ class ClientsController extends AppController {
         }
 
         $client = $this->Client->read(null, $id);
+
+        //viewing custom fields
+        $customFields = $this->FieldInstance->find('all', array(
+            'conditions' => array(
+                'client_id' => $this->Client->id
+            )
+                ));
+        $this->set('customFields', $customFields);
+        
+         //retrieving and setting custom labels
+        $current_user = $this->Auth->user();
+        $rawLabels = $this->Lookup->find('all', array(
+            'conditions' => array(
+                'table_reference' => 'clients',
+                'organization_id' => $current_user['organization_id']
+            )
+                ));
+
+        //making it easier to match labels with respective fields
+        $customLabels = $GLOBALS['client_labels'];
+        foreach ($rawLabels as $label) {
+            $key = $label['Lookup']['field_name'];
+            $customLabels[$key] = $label['Lookup']['custom_name'];
+        }
+        $this->set('customLabels', $customLabels);
+
         $resourceUses = array();
         $resourceName = array();
         $organizationName = array();
@@ -204,13 +271,53 @@ class ClientsController extends AppController {
      * @return void
      */
     public function add() {
+        //retrieving and setting custom fields
+        $current_user = $this->Auth->user();
+        $customFields = $this->Field->find('all', array(
+            'conditions' => array(
+                'table_ref' => 'clients',
+                'organization_id' => $current_user['organization_id']
+            )
+                ));
+        $this->set('customFields', $customFields);
+
+        //retrieving and setting custom labels
+        $rawLabels = $this->Lookup->find('all', array(
+            'conditions' => array(
+                'table_reference' => 'clients',
+                'organization_id' => $current_user['organization_id']
+            )
+                ));
+
+        //making it easier to match labels with respective fields
+        $customLabels = $GLOBALS['client_labels'];
+        foreach ($rawLabels as $label) {
+            $key = $label['Lookup']['field_name'];
+            $customLabels[$key] = $label['Lookup']['custom_name'];
+        }
+        $this->set('customLabels', $customLabels);
+
         if ($this->request->is('post')) {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('action' => 'index'));
             }
             $this->Client->create();
             if ($this->Client->save($this->request->data)) {
-                
+
+                //saving all the custom field data
+                $data = array('FieldInstance' => array());
+                $i = 0;
+                foreach ($customFields as $customField) {
+                    $data['FieldInstance'][$i] = array(
+                        'fields_id' => $customField['Field']['id'],
+                        'client_id' => $this->Client->id,
+                        'field_value' => $this->request->data['Client'][$customField['Field']['field_name']]
+                    );
+
+                    $i++;
+                }
+                $this->FieldInstance->saveAll($data['FieldInstance']);
+
                 //logging the add
                 $lControl = new LoggersController();
                 $lControl->add($this->Auth->user(), "clients", "add", "Added client " . $this->request->data['Client']['first_name'] . " " . $this->request->data['Client']['last_name']);
@@ -219,7 +326,7 @@ class ClientsController extends AppController {
                 if (isset($this->request->data['addMore'])) {
                     $this->redirect(array('controller' => 'client_relations', 'action' => 'add', $this->Client->id));
                 } else if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('action' => 'index'));
+                    $this->redirect(array('action' => 'view', $this->Client->id));
                 }
             } else {
                 $this->Session->setFlash(__('The client could not be saved. Please, try again.'));
@@ -242,12 +349,54 @@ class ClientsController extends AppController {
             $this->Session->setFlash('This client does not exist.  Please create him now');
             $this->redirect(array('action' => 'add'));
         }
+
+        //retrieving and setting custom fields
+        $current_user = $this->Auth->user();
+        $customFields = $this->Field->find('all', array(
+            'conditions' => array(
+                'table_ref' => 'clients',
+                'organization_id' => $current_user['organization_id']
+            )
+                ));
+        $this->set('customFields', $customFields);
+        
+        //retrieving and setting custom labels
+        $rawLabels = $this->Lookup->find('all', array(
+            'conditions' => array(
+                'table_reference' => 'clients',
+                'organization_id' => $current_user['organization_id']
+            )
+                ));
+
+        //making it easier to match labels with respective fields
+        $customLabels = $GLOBALS['client_labels'];
+        foreach ($rawLabels as $label) {
+            $key = $label['Lookup']['field_name'];
+            $customLabels[$key] = $label['Lookup']['custom_name'];
+        }
+        $this->set('customLabels', $customLabels);
+
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('action' => 'view', $id));
             }
             if ($this->Client->save($this->request->data)) {
-                
+
+                //saving all the custom field data
+                $data = array('FieldInstance' => array());
+                $i = 0;
+                foreach ($customFields as $customField) {
+                    $data['FieldInstance'][$i] = array(
+                        'id' => $customField['FieldInstance'][0]['id'],
+                        'fields_id' => $customField['Field']['id'],
+                        'client_id' => $this->Client->id,
+                        'field_value' => $this->request->data['Client'][$customField['Field']['field_name']]
+                    );
+
+                    $i++;
+                }
+                $this->FieldInstance->saveAll($data['FieldInstance']);
+
                 //logging the edit
                 $lControl = new LoggersController();
                 $lControl->add($this->Auth->user(), "clients", "edit", "Edited client " . $this->request->data['Client']['first_name'] . " " . $this->request->data['Client']['last_name']);
@@ -284,7 +433,7 @@ class ClientsController extends AppController {
             throw new NotFoundException(__('Invalid client'));
         }
         if ($this->Client->delete()) {
-            
+
             //logging the delete
             $lControl = new LoggersController();
             $lControl->add($this->Auth->user(), "clients", "delete", "Deleted client " . $clientName);
@@ -325,7 +474,7 @@ class ClientsController extends AppController {
         $this->set('client', $this->Client->read(null, $id));
         $this->set('bodyAttr', 'onload="window.print();"');
     }
-    
+
     /**
      * This method prints off the little hope project cards that Mission 
      * Columbia requested we print off

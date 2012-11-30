@@ -31,16 +31,16 @@
             <table>
                 <tr>
                     <td>
-                        <?php echo $this->Form->input('first_name'); ?>
+                        <?php echo $this->Form->input('first_name', array('label' => $customLabels['First Name'])); ?>
                     </td>
                     <td>
-                        <?php echo $this->Form->input('last_name'); ?>
+                        <?php echo $this->Form->input('last_name', array('label' => $customLabels['Last Name'])); ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <fieldset>
-                            <legend class="sex">Sex<span class="asteriks">*</span></legend>
+                            <legend class="sex"><?php echo $customLabels['Sex']; ?><span class="asteriks">*</span></legend>
                             <?php
                             $options = array('M' => 'Male', 'F' => 'Female');
                             $attributes = array('legend' => false);
@@ -51,31 +51,37 @@
                 </tr>
                 <tr>
                     <td>
-
-                        <?php echo $this->Form->input('DOB', array('type' => 'date', 'onChange' => "updateAge('Client')", 'minYear' => date('Y') - 120, 'maxYear' => date('Y'), 'empty' => true, 'div' => false, 'separator' => false)); ?>
-
+                        <?php echo $this->Form->input('DOB', array(
+                            'type' => 'date',
+                            'onChange' => "updateAge('Client')",
+                            'minYear' => date('Y') - 120,
+                            'maxYear' => date('Y'),
+                            'empty' => true,
+                            'div' => false,
+                            'separator' => false,
+                            'label' => $customLabels['DOB']
+                            )); ?>
                         &nbsp; &nbsp;<b>OR</b>
-
                     </td>
                     <td>
-                        <?php echo $this->Form->input('age', array('onChange' => "updateDOB('Client')")); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo $this->Form->input('address_one', array('label' => 'Address')); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('apartment_number', array('label' => 'Apt #', 'type' => 'text')); ?>
+                        <?php echo $this->Form->input('age', array('label' => $customLabels['Age'], 'onChange' => "updateDOB('Client')")); ?>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <?php echo $this->Form->input('city'); ?>
+                        <?php echo $this->Form->input('address_one', array('label' => $customLabels['Address'])); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('apartment_number', array('label' => $customLabels['Apt #'], 'type' => 'text')); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $this->Form->input('city', array('label' => $customLabels['City'])); ?>
                     </td>
                     <td>
                         <?php
-                        echo $this->Form->input('state', array('type' => 'select', 'empty' => true, 'options' => array(
+                        echo $this->Form->input('state', array('label' => $customLabels['State'], 'type' => 'select', 'empty' => true, 'options' => array(
                                 'Alabama' => 'Alabama', 'Alaska' => 'Alaska', 'Arizona' => 'Arizona', 'Arkansas' => 'Arkansas', 'California' => 'California',
                                 'Colorado' => 'Colorado', 'Connecticut' => 'Connecticut', 'Delaware' => 'Delaware', 'Washington DC' => 'Washington DC', 'Florida' => 'Florida',
                                 'Georgia' => 'Georgia', 'Hawaii' => 'Hawaii', 'Idaho' => 'Idaho', 'Illinois' => 'Illinois', 'Indiana' => 'Indiana',
@@ -93,12 +99,12 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <?php echo $this->Form->input('zip', array('type' => 'text')); ?>
+                        <?php echo $this->Form->input('zip', array('label' => $customLabels['Zip'], 'type' => 'text')); ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <?php echo $this->Form->input('phone', array('type' => 'text')); ?>
+                        <?php echo $this->Form->input('phone', array('label' => $customLabels['Phone'], 'type' => 'text')); ?>
                     </td>
                 </tr>
             </table>
@@ -109,44 +115,51 @@
             <table>
                 <tr>
                     <td>
-                        <?php echo $this->Form->input('regular_job'); ?>
+                        <?php echo $this->Form->input('regular_job', array('label' => $customLabels['Regular Job'], 'value' => '$0.00')); ?>
                     </td>
                     <td>
-                        <?php echo $this->Form->input('food_stamps'); ?>
+                        <?php echo $this->Form->input('food_stamps', array('label' => $customLabels['Food Stamps'], 'value' => '$0.00')); ?>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <?php echo $this->Form->input('veterans_pension'); ?>
+                        <?php echo $this->Form->input('veterans_pension', array('label' => $customLabels['Veterans Pension'], 'value' => '$0.00')); ?>
                     </td>
                     <td>
-                        <?php echo $this->Form->input('part_time_job'); ?>
+                        <?php echo $this->Form->input('part_time_job', array('label' => $customLabels['Part Time Job'], 'value' => '$0.00')); ?>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <?php echo $this->Form->input('social_security'); ?>
+                        <?php echo $this->Form->input('social_security', array('label' => $customLabels['Social Security'], 'value' => '$0.00')); ?>
                     </td>
                     <td>
-                        <?php echo $this->Form->input('annuity_check'); ?>
+                        <?php echo $this->Form->input('annuity_check', array('label' => $customLabels['Annuity Check'], 'value' => '$0.00')); ?>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <?php echo $this->Form->input('child_support'); ?>
+                        <?php echo $this->Form->input('child_support', array('label' => $customLabels['Child Support'], 'value' => '$0.00')); ?>
                     </td>
                     <td>
-                        <?php echo $this->Form->input('ssi_or_disability', array('label' => 'SSI or Disability')); ?> 
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <?php echo $this->Form->input('unemployment'); ?>
+                        <?php echo $this->Form->input('ssi_or_disability', array('label' => $customLabels['SSI Or Disability'], 'value' => '$0.00')); ?> 
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <?php echo $this->Form->input('when_next_check', array('type' => 'date', 'empty' => true, 'separator' => false)); ?>    
+                        <?php echo $this->Form->input('unemployment', array('label' => $customLabels['Unemployment'], 'value' => '$0.00')); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <?php echo $this->Form->input('when_next_check', array(
+                            'type' => 'date',
+                            'empty' => true,
+                            'separator' => false,
+                            'minYear' => date('Y'),
+                            'maxYear' => date('Y') + 5,
+                            'label' => $customLabels['When Next Check'], 
+                            )); ?>    
                     </td>
                 </tr>
             </table>
@@ -158,38 +171,38 @@
             <table>
                 <tr>
                     <td>
-                        <?php echo $this->Form->input('pregnant'); ?> 
+                        <?php echo $this->Form->input('pregnant', array('label' => $customLabels['Pregnant'])); ?> 
                     </td>
                     <td>
-                        <?php echo $this->Form->input('disabled'); ?>  
+                        <?php echo $this->Form->input('disabled', array('label' => $customLabels['Disabled'])); ?>  
                     </td>
                     <td>
-                        <?php echo $this->Form->input('handicapped'); ?> 
+                        <?php echo $this->Form->input('handicapped', array('label' => $customLabels['Handicapped'])); ?> 
                     </td>
                     <td>
-                        <?php echo $this->Form->input('stove'); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo $this->Form->input('refrigerator'); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('cell'); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('cable'); ?>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('internet'); ?>
+                        <?php echo $this->Form->input('stove', array('label' => $customLabels['Stove'])); ?>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <?php echo $this->Form->input("acceptedChrist"); ?>
+                        <?php echo $this->Form->input('refrigerator', array('label' => $customLabels['Refrigerator'])); ?>
                     </td>
                     <td>
-                        <?php echo $this->Form->input("dedicatedChrist"); ?>
+                        <?php echo $this->Form->input('cell', array('label' => $customLabels['Cell'])); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('cable', array('label' => $customLabels['Cable'])); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input('internet', array('label' => $customLabels['Internet'])); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $this->Form->input("acceptedChrist", array('label' => $customLabels['Accepted Christ'])); ?>
+                    </td>
+                    <td>
+                        <?php echo $this->Form->input("dedicatedChrist", array('label' => $customLabels['Dedicated Christ'])); ?>
                     </td>
                 </tr>
             </table>
@@ -199,6 +212,13 @@
             echo $this->Form->input('how_did_you_hear', array('label' => 'How did you hear about us?'));
             echo $this->Form->input('how_long_do_you_need', array('label' => 'How long do you need?'));
             ?>
+        </div>
+        
+        <h2><?php echo $current_user['Organization']['org_name']."'s Fields"; ?></h2>
+        <div class="white-background black-text">
+            <?php foreach ($customFields as $customField): ?>
+                <?php echo $this->Form->input($customField['Field']['field_name'], array('type' => $customField['Field']['field_type'])); ?>
+            <?php endforeach; ?>
         </div>
     </div>
     <br /><br />

@@ -8,7 +8,7 @@
 <?php echo $this->Html->script('global.js'); ?>
 
 <div class="actionsNoButton resources">
-    <?php echo $this->Html->link('Create a Resource', array('action' => 'add', $current_user['organization_id'])); ?>
+    <?php echo $this->Html->link('Add Resource', array('action' => 'add', $current_user['organization_id'])); ?>
 </div>
 <?php if ($isAtleastAdmin): ?>
 <div class="resources form">

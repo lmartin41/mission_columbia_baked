@@ -34,7 +34,7 @@ class Organization extends AppModel {
             ),
             'isUnique' => array(
                 'rule' => array('isUnique'),
-                'message' => 'This username has already been taken',
+                'message' => 'This name has already been taken',
                 'on' => 'create'
             ),
         ),

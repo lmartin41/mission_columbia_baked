@@ -22,11 +22,10 @@
                     <td>
                         <?php echo $this->Html->link($clientChecklist['Client']['first_name']." ".$clientChecklist['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $clientChecklist['Client']['id'])); ?>
                     </td>
-                    <td><?php echo h($clientChecklist['ClientChecklist']['isCompleted']); ?>&nbsp;</td>
+                    <td><?php echo ($clientChecklist['ClientChecklist']['isCompleted'] == 1) ? 'Yes' : 'No'; ?>&nbsp;</td>
                     <td><?php echo h($clientChecklist['ClientChecklist']['checklist_name']); ?>&nbsp;</td>
                     <td><?php echo h($clientChecklist['ClientChecklist']['checklist_description']); ?>&nbsp;</td>
                     <td class="actions">
-                        <?php echo $this->Html->link(__('Add Task'), array('controller' => 'ClientChecklistTasks', 'action' => 'add', $clientChecklist['ClientChecklist']['id'])); ?>
                         <?php echo $this->Html->link(__('View/Edit'), array('action' => 'view', $clientChecklist['ClientChecklist']['id'])); ?>
 
                     </td>
