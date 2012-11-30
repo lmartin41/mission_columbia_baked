@@ -2,12 +2,6 @@
 <?php echo $this->Html->script("ageDobAuto.js", FALSE); ?>
 
 <style type="text/css">
-    form label { 
-        width: 9em; 
-        float: left;
-        padding: 0px;
-    }
-
     select {
         margin-left: 20px;
     }
@@ -38,14 +32,12 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <fieldset>
-                            <legend class="sex"><?php echo $customLabels['Sex']; ?><span class="asteriks">*</span></legend>
-                            <?php
+                    	<span class="sex"><?php echo $customLabels['Sex']; ?><span class="asteriks">*</span></span>
+                        <?php
                             $options = array('M' => 'Male', 'F' => 'Female');
                             $attributes = array('legend' => false);
                             echo $this->Form->radio('sex', $options, $attributes);
-                            ?>
-                        </fieldset>
+                        ?>
                     </td>
                 </tr>
                 <tr>

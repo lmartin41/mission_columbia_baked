@@ -394,7 +394,7 @@
             <div id="image_upload" style="width:500px">
                 <script type="text/javascript">
                     $('#image_upload').ajaxupload({
-                        url:'/mission_columbia_baked/webroot/upload.php?id="client-<?php echo ($client["Client"]["id"]); ?>',
+                        url:'/mission_columbia_baked/webroot/upload.php?id=client-<?php echo ($client["Client"]["id"]); ?>',
                         remotePath:<?php echo $remotePath; ?>,
                         editFilename: true
                     });
