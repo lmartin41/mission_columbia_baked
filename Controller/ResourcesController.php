@@ -65,7 +65,7 @@ class ResourcesController extends AppController {
             )
                 ));
         $this->set('customFields', $customFields);
-        
+
         //retrieving and setting custom labels
         $current_user = $this->Auth->user();
         $rawLabels = $this->Lookup->find('all', array(
@@ -116,7 +116,7 @@ class ResourcesController extends AppController {
             )
                 ));
         $this->set('customFields', $customFields);
-        
+
         //retrieving and setting custom labels
         $current_user = $this->Auth->user();
         $rawLabels = $this->Lookup->find('all', array(
@@ -145,16 +145,18 @@ class ResourcesController extends AppController {
                 //saving all the custom field data
                 $data = array('FieldInstance' => array());
                 $i = 0;
-                foreach ($customFields as $customField) {
-                    $data['FieldInstance'][$i] = array(
-                        'fields_id' => $customField['Field']['id'],
-                        'resource_id' => $this->Resource->id,
-                        'field_value' => $this->request->data['Resource'][$customField['Field']['field_name']]
-                    );
+                if (!empty($customFields)) {
+                    foreach ($customFields as $customField) {
+                        $data['FieldInstance'][$i] = array(
+                            'fields_id' => $customField['Field']['id'],
+                            'resource_id' => $this->Resource->id,
+                            'field_value' => $this->request->data['Resource'][$customField['Field']['field_name']]
+                        );
 
-                    $i++;
+                        $i++;
+                    }
+                    $this->FieldInstance->saveAll($data['FieldInstance']);
                 }
-                $this->FieldInstance->saveAll($data['FieldInstance']);
 
                 //logging the adding of a resource
                 $lControl = new LoggersController();
@@ -197,7 +199,7 @@ class ResourcesController extends AppController {
             )
                 ));
         $this->set('customFields', $customFields);
-        
+
         //retrieving and setting custom labels
         $current_user = $this->Auth->user();
         $rawLabels = $this->Lookup->find('all', array(
@@ -222,19 +224,21 @@ class ResourcesController extends AppController {
             if ($this->Resource->save($this->request->data)) {
 
                 //saving all the custom field data
-                $data = array('FieldInstance' => array());
-                $i = 0;
-                foreach ($customFields as $customField) {
-                    $data['FieldInstance'][$i] = array(
-                        'id' => $customField['FieldInstance'][0]['id'],
-                        'fields_id' => $customField['Field']['id'],
-                        'resource_id' => $this->Resource->id,
-                        'field_value' => $this->request->data['Resource'][$customField['Field']['field_name']]
-                    );
+                if (!empty($customFields)) {
+                    $data = array('FieldInstance' => array());
+                    $i = 0;
+                    foreach ($customFields as $customField) {
+                        $data['FieldInstance'][$i] = array(
+                            'id' => $customField['FieldInstance'][0]['id'],
+                            'fields_id' => $customField['Field']['id'],
+                            'resource_id' => $this->Resource->id,
+                            'field_value' => $this->request->data['Resource'][$customField['Field']['field_name']]
+                        );
 
-                    $i++;
+                        $i++;
+                    }
+                    $this->FieldInstance->saveAll($data['FieldInstance']);
                 }
-                $this->FieldInstance->saveAll($data['FieldInstance']);
 
                 //logging the editing of a resource
                 $lControl = new LoggersController();

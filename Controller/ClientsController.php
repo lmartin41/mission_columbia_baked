@@ -193,8 +193,8 @@ class ClientsController extends AppController {
             )
                 ));
         $this->set('customFields', $customFields);
-        
-         //retrieving and setting custom labels
+
+        //retrieving and setting custom labels
         $current_user = $this->Auth->user();
         $rawLabels = $this->Lookup->find('all', array(
             'conditions' => array(
@@ -305,19 +305,20 @@ class ClientsController extends AppController {
             if ($this->Client->save($this->request->data)) {
 
                 //saving all the custom field data
-                $data = array('FieldInstance' => array());
-                $i = 0;
-                foreach ($customFields as $customField) {
-                    $data['FieldInstance'][$i] = array(
-                        'fields_id' => $customField['Field']['id'],
-                        'client_id' => $this->Client->id,
-                        'field_value' => $this->request->data['Client'][$customField['Field']['field_name']]
-                    );
+                if (!empty($customFields)) {
+                    $data = array('FieldInstance' => array());
+                    $i = 0;
+                    foreach ($customFields as $customField) {
+                        $data['FieldInstance'][$i] = array(
+                            'fields_id' => $customField['Field']['id'],
+                            'client_id' => $this->Client->id,
+                            'field_value' => $this->request->data['Client'][$customField['Field']['field_name']]
+                        );
 
-                    $i++;
+                        $i++;
+                    }
+                    $this->FieldInstance->saveAll($data['FieldInstance']);
                 }
-                $this->FieldInstance->saveAll($data['FieldInstance']);
-
                 //logging the add
                 $lControl = new LoggersController();
                 $lControl->add($this->Auth->user(), "clients", "add", "Added client " . $this->request->data['Client']['first_name'] . " " . $this->request->data['Client']['last_name']);
@@ -359,7 +360,7 @@ class ClientsController extends AppController {
             )
                 ));
         $this->set('customFields', $customFields);
-        
+
         //retrieving and setting custom labels
         $rawLabels = $this->Lookup->find('all', array(
             'conditions' => array(
@@ -383,19 +384,21 @@ class ClientsController extends AppController {
             if ($this->Client->save($this->request->data)) {
 
                 //saving all the custom field data
-                $data = array('FieldInstance' => array());
-                $i = 0;
-                foreach ($customFields as $customField) {
-                    $data['FieldInstance'][$i] = array(
-                        'id' => $customField['FieldInstance'][0]['id'],
-                        'fields_id' => $customField['Field']['id'],
-                        'client_id' => $this->Client->id,
-                        'field_value' => $this->request->data['Client'][$customField['Field']['field_name']]
-                    );
+                if (!empty($customFields)) {
+                    $data = array('FieldInstance' => array());
+                    $i = 0;
+                    foreach ($customFields as $customField) {
+                        $data['FieldInstance'][$i] = array(
+                            'id' => $customField['FieldInstance'][0]['id'],
+                            'fields_id' => $customField['Field']['id'],
+                            'client_id' => $this->Client->id,
+                            'field_value' => $this->request->data['Client'][$customField['Field']['field_name']]
+                        );
 
-                    $i++;
+                        $i++;
+                    }
+                    $this->FieldInstance->saveAll($data['FieldInstance']);
                 }
-                $this->FieldInstance->saveAll($data['FieldInstance']);
 
                 //logging the edit
                 $lControl = new LoggersController();
