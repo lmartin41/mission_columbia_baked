@@ -416,7 +416,8 @@ form .submit input[type=submit] {
 	background-image: -webkit-linear-gradient(top, #76BF6B, #3B8230);
 	background-image: -moz-linear-gradient(top, #76BF6B, #3B8230);  */
 	border-color:  silver;
-        color: #333333;
+        color: #
+        ;
 	text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 0px;
 	padding: 8px 10px;
 }
@@ -462,7 +463,7 @@ form .error-message {
 	padding: 5px;
 }
 
-.success,
+/*
 .message,
 .cake-error,
 .cake-debug,
@@ -490,14 +491,12 @@ p.error,
 	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
-.success,
-.message,
-.cake-error,
-p.error,
-.error-message {
+*/
+.message {
+	/*
 	clear: both;
 	color: #fff;
-	background: #c43c35;
+	background: #000000;
 	border: 1px solid rgba(0, 0, 0, 0.5);
 	background-repeat: repeat-x;
 	background-image: -moz-linear-gradient(top, #ee5f5b, #c43c35);
@@ -507,8 +506,29 @@ p.error,
 	background-image: -o-linear-gradient(top, #ee5f5b, #c43c35);
 	background-image: linear-gradient(top, #ee5f5b, #c43c35);
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+	*/
+	clear: both;
+	color: #fff;
+	background: #c43c35;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	background-repeat: repeat-x;
+	background-image: -moz-linear-gradient(top, #000000, #000000);
+	background-image: -ms-linear-gradient(top, #000000, #000000);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#000000));
+	background-image: -webkit-linear-gradient(top, #000000, #000000);
+	background-image: -o-linear-gradient(top, #000000, #000000);
+	background-image: linear-gradient(top, #000000, #000000);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+	
 }
-.success {
+
+
+
+.success,
+.cake-error,
+p.error,
+.error-message {
+	/*
 	clear: both;
 	color: #fff;
 	border: 1px solid rgba(0, 0, 0, 0.5);
@@ -520,6 +540,20 @@ p.error,
 	background-image: -ms-linear-gradient(top, #76BF6B, #3B8230);
 	background-image: -o-linear-gradient(top, #76BF6B, #3B8230);
 	background-image: linear-gradient(top, #76BF6B, #3B8230);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+	*/
+
+	clear: both;
+	color: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	background: #000000;
+	background-repeat: repeat-x;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#000000));
+	background-image: -webkit-linear-gradient(top, #000000, #000000);
+	background-image: -moz-linear-gradient(top, #000000, #000000);
+	background-image: -ms-linear-gradient(top, #000000, #000000);
+	background-image: -o-linear-gradient(top, #000000, #000000);
+	background-image: linear-gradient(top, #000000, #000000);
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 p.error {
@@ -540,7 +574,7 @@ p.error em {
 	margin: 1em 0;
 }
 .success {
-	color: #fff;
+	color: #000;
 }
 
 /**  Actions  **/

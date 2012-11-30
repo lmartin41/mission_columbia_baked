@@ -14,6 +14,20 @@
         {
         	echo $this->Form->input($input);
         }
+
+        /*
+        $options = array(
+		    'standard' => 'Standard',
+		    'pro' => 'Pro'
+		);
+
+		$attributes = array(
+		    'legend' => false,
+		    'value' => $foo
+		);
+
+		echo $this->Form->radio('type', $options, $attributes);
+		*/
 		echo $this->Form->input('organization_id', array($org_disabled, 'selected' => $selected_id));
 		echo $this->Form->input('email');
 	?>

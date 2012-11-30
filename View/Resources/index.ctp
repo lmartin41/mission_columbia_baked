@@ -46,11 +46,13 @@
 
 
                             var tags = [];
+                            
 
                             $.each(jsonObj, function() { 
 
                                 var tempAll = this.resources;
                                 var allSet = [];
+                                
                                 $.each(tempAll, function(){
                                     var tempName = this.resource_name;
 
@@ -67,6 +69,8 @@
                                     
                                 });
                             }); 
+
+                            tags.push("Organizations");
 
                             $.each(tags, function(i, tag) {
                                 $('#radios').append(('<label style="margin-right:5px;display:block;"><input type="checkbox" style="margin-right:3px" value="{0}"/>{1}</label>').format(tag, tag));
@@ -115,7 +119,7 @@
 
                                 geocoder.geocode( { 'address': address}, function(results, status) {
                                   if (status == google.maps.GeocoderStatus.OK) {
-                                    $('#map_canvas').gmap('addMarker', { 'icon': images[0], 'tags':[], 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+                                    $('#map_canvas').gmap('addMarker', { 'icon': images[1], 'tags':['Organizations'], 'bound':true, 'position': results[0].geometry.location} ).click(function() {
 
                                         /*
                                         $('#map_canvas').gmap('openInfoWindow', { 'content': 'Organization: ' + orgName + '<br/> Address: ' + address + ' <a href="http://www.w3schools.com">This is a link</a> ' + '<br/>resources: ' + orgsResourcesStr }, this);
@@ -126,7 +130,7 @@
                                     
                                   } 
                                   else {
-                                    alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for an organization");
+                                    alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for the organization " + orgName);
                                   }
                                   
                                 });
@@ -156,7 +160,7 @@
                                       if (status == google.maps.GeocoderStatus.OK) {
                                         //map.setCenter(results[0].geometry.location);
 
-                                        $('#map_canvas').gmap('addMarker', { 'icon': images[2], 'tags':tagNum, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+                                        $('#map_canvas').gmap('addMarker', { 'icon': images[7], 'tags':tagNum, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
 
                                             //$('#map_canvas').gmap('openInfoWindow', { 'content': 'Resource: ' + resName + '<br/> Address: ' + resAddress }, this);
 
@@ -165,7 +169,7 @@
                                         
                                       } 
                                       else {
-                                        alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for a resource");
+                                        alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for the resource " + resName);
                                       }
                                       
                                     });
@@ -191,7 +195,7 @@
                                 } else {
                                     $.each($('#map_canvas').gmap('get', 'markers'), function(i, marker) {
                                         $('#map_canvas').gmap('addBounds', marker.position);
-                                        marker.setVisible(true); 
+                                        marker.setVisible(true);
                                     });
                                 }
                             });
