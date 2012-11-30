@@ -156,7 +156,7 @@ checkContext();
                     <li><input type="radio" id="radio5" name="radio" /><label for="radio5">Reports</label></li>
                     <?php if ($isAtleastAdmin): ?>
                         <li><input type="radio" id="radioUsers" name="radioUsers" /><label for="radioUsers">Users</label></li>
-                        <li><input type="radio" id="radioCustomize" name="radioCustomize" /><label for="radioCustomize">Customize</label></li>
+                        <li><input type="radio" id="radioCustomize" name="radioCustomize" /><label for="radioCustomize">Configure</label></li>
                     <?php endif; ?>
                 </ul>
 
@@ -171,8 +171,8 @@ checkContext();
 					<?php if( $tip_render != null ): ?>
                         <div id="tips" class="tipsBox">
                             <div class="tipsContent">
-                                <!-- <p><strong>Tips Default</strong></p>
-                                <p>If you cannot remember your password, please talk to your organizations administrator to change it.</p> -->
+                                <p id="tip_header">Tips</p>
+                                <!--<p>If you cannot remember your password, please talk to your organizations administrator to change it.</p> -->
                                 <?php echo $tip_render; ?>
                             </div>
                         </div>

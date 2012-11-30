@@ -18,8 +18,9 @@ class TipsController extends AppController {
 	
 	public function isAuthorized($user)
 	{
-		if( !($user['isSuperAdmin'] || $user['isAdmin']) )
+		if( !$user['isSuperAdmin'] )
 		{
+			$this->Session->setFlash(__('You do not have permission to view that page'));
 			return false;
 		}
 		

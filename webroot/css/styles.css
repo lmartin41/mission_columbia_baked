@@ -253,3 +253,10 @@ span.underline
 {
 	text-decoration: underline;
 }
+
+#tip_header
+{
+	text-decoration: underline;
+	font-weight: bold;
+	font-size: 14px;
+}
