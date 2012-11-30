@@ -171,8 +171,8 @@ checkContext();
 					<?php if( $tip_render != null ): ?>
                         <div id="tips" class="tipsBox">
                             <div class="tipsContent">
-                                <!-- <p><strong>Tips Default</strong></p>
-                                <p>If you cannot remember your password, please talk to your organizations administrator to change it.</p> -->
+                                <p id="tip_header">Tips</p>
+                                <!--<p>If you cannot remember your password, please talk to your organizations administrator to change it.</p> -->
                                 <?php echo $tip_render; ?>
                             </div>
                         </div>
