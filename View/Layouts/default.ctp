@@ -156,7 +156,7 @@ checkContext();
                     <li><input type="radio" id="radio5" name="radio" /><label for="radio5">Reports</label></li>
                     <?php if ($isAtleastAdmin): ?>
                         <li><input type="radio" id="radioUsers" name="radioUsers" /><label for="radioUsers">Users</label></li>
-                        <li><input type="radio" id="radioCustomize" name="radioCustomize" /><label for="radioCustomize">Customize</label></li>
+                        <li><input type="radio" id="radioCustomize" name="radioCustomize" /><label for="radioCustomize">Configure</label></li>
                     <?php endif; ?>
                 </ul>
 
