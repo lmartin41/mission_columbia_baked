@@ -104,14 +104,10 @@ class User extends AppModel {
             if ($user['isSuperAdmin']) {
                 $retArray[] = 'isSuperAdmin';
                 $retArray[] = 'isAdmin';
-            } elseif ($user['isAdmin']) {
-                $retArray[] = 'isAdmin';
             }
         } else {
             if ($user['isSuperAdmin'] && !$this->data['User']['isSuperAdmin']) {
                 $retArray[] = 'isSuperAdmin';
-                $retArray[] = 'isAdmin';
-            } elseif ($user['isAdmin'] && !$this->data['User']['isSuperAdmin'] && !$this->data['User']['isAdmin']) {
                 $retArray[] = 'isAdmin';
             }
 
