@@ -143,6 +143,7 @@ class AppController extends Controller {
     		'Users' => array(
     			'add',
     			'edit',
+    			'edit_password',
     			'index',
     			'view'	
     		),

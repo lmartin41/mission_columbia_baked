@@ -21,6 +21,54 @@ class UsersController extends AppController {
         $this->Security->requireSecure(array('login'));
     }
 
+    public function isAuthorized($user)
+    {	
+    	$valid = true;
+    	
+    	//only admins and superAdmins can get to index, view, add, and delete.
+    	if( in_array($this->action, array('index', 'view', 'add', 'delete')) )
+    	{
+    		if( !($user['isAdmin'] || $user['isSuperAdmin']) )
+    		{
+    			$valid = false;
+    		}
+    	}
+    	
+    	if( in_array($this->action, array('edit', 'editPassword')) )
+    	{
+    		$userId = $this->params['pass'][0];
+	
+    		$this->User->read(null, $userId);
+    		//admins and superAdmins can only edit profiles below their level
+    		//regular users can only edit their own profile
+    		if( !$this->User->hasLessPrivilege($user) )
+    		{
+    			if( $userId != $user['id'] )
+    			{
+    				$valid = false;
+    			}
+    		}
+    		
+    		//admins can only edit users in their organization
+    		elseif( $user['isAdmin'] )
+    		{
+    			if( !$this->User->sameOrganization($user['organization_id']) )
+    			{
+    				$valid = false;
+    			}
+    		}
+    	}
+    	
+    	if (!$valid) {
+    		$this->Session->setFlash(__('You do not have sufficient privileges to perform that action.'));
+    		if ($user['isAdmin'] || $user['isSuperAdmin'])
+    			$this->redirect(array('controller' => 'users', 'action' => 'index'));
+    		else
+    			$this->redirect(array('controller' => 'pages', 'action' => 'index'));
+    	}
+    	
+    	return parent::isAuthorized($user);
+    }
     /**
      * Lee: Standard login method 
      * Redirects to users page right now (see AppController.php)
@@ -54,7 +102,6 @@ class UsersController extends AppController {
      * @return void
      */
     public function index() {
-        $this->check_privileges($this->Auth->user(), 'index');
         $conditions = array('cur_user' => $this->Auth->user());
         if (isset($this->params['url']['showAll'])) {
             $this->paginate = array('showDeletedToo', 'conditions' => $conditions);
@@ -75,7 +122,6 @@ class UsersController extends AppController {
      * @return void
      */
     public function view($id = null) {
-        $this->check_privileges($this->Session->read('Auth.User'), 'view');
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -91,13 +137,14 @@ class UsersController extends AppController {
      * @return void
      */
     public function add() {
-        $this->check_privileges($this->Session->read('Auth.User'), 'add');
         if ($this->request->is('post')) {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('action' => 'index'));
                 return;
             }
             $this->User->create();
+            //this will allow the password to be hashed
+            $this->request->data['User']['pwd'] = $this->request->data['User']['password'];
             if ($this->User->save($this->request->data)) {
 
                 //logging the add
@@ -127,8 +174,6 @@ class UsersController extends AppController {
      * @return void
      */
     public function edit($id = null) {
-        $this->check_privileges($this->Auth->user(), 'edit', $id);
-
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -136,42 +181,42 @@ class UsersController extends AppController {
 
         if ($this->request->is('post') || $this->request->is('put')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('action' => 'view', $id));
+             	$cur_user = $this->Auth->user();
+                if( $cur_user['isAdmin'] || $cur_user['isSuperAdmin'] )
+                {
+                	$this->redirect(array('action' => 'view', $id));
+                }
+                else
+                {
+                	$this->redirect(array('controller' => 'clients', 'action' => 'index'));
+                }
                 return;
             }
-            if ($this->request->data['User']['password'] == '' && $this->request->data['User']['password_confirmation'] == '') {
-                $this->User->set('username', $this->request->data['User']['username']);
-                $this->User->set('email', $this->request->data['User']['email']);
-                if (isset($this->request->data['User']['organization_id']))
-                    $this->User->set('organization_id', $this->request->data['User']['organization_id']);
-                if (isset($this->request->data['User']['isSuperAdmin']))
-                    $this->User->set('isSuperAdmin', $this->request->data['User']['isSuperAdmin']);
-                if (isset($this->request->data['User']['isAdmin']))
-                    $this->User->set('isAdmin', $this->request->data['User']['isAdmin']);
-                if (isset($this->request->data['User']['isDeleted']))
-                    $this->User->set('isDeleted', $this->request->data['User']['isDeleted']);
-
-                if ($this->User->validates(array('fieldList' => array('email')))) {
-                    $this->User->save(null, array('validate' => false));
-                    $this->Session->setFlash(__('The user has been saved'));
-                    $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-                }
-            } elseif ($this->User->save($this->request->data)) {
+            
+            //this is just so the password match will be successfull but no new password will actually be saved
+            $this->request->data['User']['password_confirmation'] = $this->User->data['User']['password'];
+            if ($this->User->save($this->request->data)) {
 
                 //logging the edit
                 $lControl = new LoggersController();
                 $lControl->add($this->Auth->user(), "users", "edit", "Edited user " . $this->request->data['User']['username']);
 
-                $this->Session->setFlash(__('The user has been saved'));
-                $this->redirect(array('action' => 'index'));
+                $cur_user = $this->Auth->user();
+                if( $cur_user['isAdmin'] || $cur_user['isSuperAdmin'] )
+                {
+                	$this->Session->setFlash(__('The user has been saved'));
+                	$this->redirect(array('action' => 'view', $id));
+                }
+                else
+                {
+                	$this->Session->setFlash(__('Your profile has been saved'));
+                	$this->redirect(array('controller' => 'clients', 'action' => 'index'));
+                }
             } else {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->User->read(null, $id);
-            $this->request->data['User']['password'] = '';
         }
         $organizations = $this->User->Organization->find('list');
         $this->set(compact('organizations'));
@@ -180,6 +225,58 @@ class UsersController extends AppController {
         $this->set('org_disabled', $this->User->organizationDisabled($cur_user));
     }
 
+    
+    public function editPassword($id = null )
+    {
+    	$this->User->id = $id;
+    	if (!$this->User->exists()) {
+    		throw new NotFoundException(__('Invalid user'));
+    	}
+    	
+    	if ($this->request->is('post') || $this->request->is('put')) {
+    		if (isset($this->request->data['cancel'])) {
+    			$cur_user = $this->Auth->user();
+                if( $cur_user['isAdmin'] || $cur_user['isSuperAdmin'] )
+                {
+                	$this->redirect(array('action' => 'view', $id));
+                }
+                else
+                {
+                	$this->redirect(array('action' => 'edit', $cur_user['id']));
+                }
+                return;
+    		}
+    	
+    		//this will allow the password to be hashed
+    		$this->request->data['User']['pwd'] = $this->request->data['User']['password'];
+    		if ($this->User->save($this->request->data)) {
+    	
+    			//logging the edit
+    			$lControl = new LoggersController();
+    			$lControl->add($this->Auth->user(), "users", "editPassword", "Edited password for " . $this->request->data['User']['username']);
+    	
+    			$cur_user = $this->Auth->user();
+                if( $cur_user['isAdmin'] || $cur_user['isSuperAdmin'] )
+                {
+                	$this->Session->setFlash(__('The user\'s password has been saved'));
+                	$this->redirect(array('action' => 'view', $id));
+                }
+                else
+                {
+                	$this->Session->setFlash(__('Your password has been saved'));
+                	$this->redirect(array('action' => 'edit', $cur_user['id']));
+                }
+    		} else {
+    			$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+    		}
+    	} else {
+    		$this->request->data = $this->User->read(null, $id);
+    		
+    		unset($this->request->data['User']['password']);
+    		unset($this->request->data['User']['password_confirmation']);
+    	}
+    }
+    
     /**
      * delete method
      *
@@ -189,7 +286,6 @@ class UsersController extends AppController {
      * @return void
      */
     public function delete($id = null) {
-        $this->check_privileges($this->Auth->user(), 'delete', $id);
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
@@ -212,46 +308,6 @@ class UsersController extends AppController {
         }
         $this->Session->setFlash(__('User was not deleted'));
         $this->redirect(array('action' => 'index'));
-    }
-
-    private function check_privileges($user, $action, $id = null) {
-        $model_user = null;
-        if ($id != null) {
-            $model_user = $this->User->read(null, $id);
-        }
-
-        $valid = true;
-        if (!$user['isAdmin'] && !$user['isSuperAdmin']) {
-            if ($action == 'edit') {
-                if ($user['id'] == $model_user['User']['id']) {
-                    return true;
-                }
-            } else {
-                $valid = false;
-            }
-        }
-
-        if ($action == 'edit' || $action == 'delete') {
-            //A user cannot edit or delete a user unless they have higher privileges than that user. 
-            if ($user['isAdmin']) {
-                if ($model_user['User']['isSuperAdmin']) {
-                    $valid = false;
-                } elseif ($model_user['User']['isAdmin']) {
-                    if ($action == 'edit' && $model_user['User']['id'] != $user['id']) //A user can edit themself
-                        $valid = false;
-                    elseif ($action == 'delete') //A user cannot delete themself.
-                        $valid = false;
-                }
-            }
-        }
-
-        if (!$valid) {
-            $this->Session->setFlash(__('You do not have sufficient privileges to perform that action.'));
-            if ($user['isAdmin'] || $user['isSuperAdmin'])
-                $this->redirect(array('controller' => 'users', 'action' => 'index'));
-            else
-                $this->redirect(array('controller' => 'pages', 'action' => 'index'));
-        }
     }
 
 }

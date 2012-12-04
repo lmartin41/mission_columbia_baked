@@ -2,21 +2,15 @@
 <?php echo $this->Html->script("ageDobAuto.js", FALSE); ?>
 
 <style type="text/css">
-    form label { 
-        width: 9em; 
-        float: left;
-        padding: 0px;
-    }
-
     select {
-        margin-left: 20px;
+        margin-left: 5px;
+        vertical-align: baseline;
     }
 
     h1 {
         font-size: 18px;
     }
 </style>
-
 <div class="actionsNoButton clients smaller">
     <?php echo $this->Html->link(__('Search Clients'), array('action' => 'index')); ?><Br />
     <?php echo $this->Html->link(__('Add a Client'), array('action' => 'add'), array('class' => 'active_link')); ?><br />
@@ -37,33 +31,48 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <fieldset>
-                            <legend class="sex"><?php echo $customLabels['Sex']; ?><span class="asteriks">*</span></legend>
-                            <?php
-                            $options = array('M' => 'Male', 'F' => 'Female');
-                            $attributes = array('legend' => false);
-                            echo $this->Form->radio('sex', $options, $attributes);
-                            ?>
-                        </fieldset>
+                    <td colspan="2" id="sex">
+                    	<?php if( isset($this->validationErrors['Client']['sex']) ): ?>
+                    		<div class="input radio error">
+                    	<?php else: ?>
+                    		<div class="input radio">
+                    	<?php endif; ?>
+                    		<span class="sex"><?php echo $customLabels['Sex']; ?><span class="asteriks">*</span></span>
+                        	<?php
+                            	$options = array('M' => 'Male', 'F' => 'Female');
+                            	$attributes = array('legend' => false);
+                            	echo $this->Form->radio('sex', $options, $attributes);
+                        	?>
+                        	<?php if( isset($this->validationErrors['Client']['sex']) ): ?>
+                        		<div class="error-message"><?php echo $this->validationErrors['Client']['sex'][0]; ?></div>
+                        	<?php endif; ?>
+                        </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <?php echo $this->Form->input('DOB', array(
-                            'type' => 'date',
-                            'onChange' => "updateAge('Client')",
-                            'minYear' => date('Y') - 120,
-                            'maxYear' => date('Y'),
-                            'empty' => true,
-                            'div' => false,
-                            'separator' => false,
-                            'label' => $customLabels['DOB']
-                            )); ?>
-                        &nbsp; &nbsp;<b>OR</b>
-                    </td>
-                    <td>
-                        <?php echo $this->Form->input('age', array('label' => $customLabels['Age'], 'onChange' => "updateDOB('Client')")); ?>
+                    <td colspan="2">
+                    	<?php if( isset($this->validationErrors['Client']['DOB']) ): ?>
+                    		<div class="input required error">
+                    	<?php else: ?>
+                    		<div class="input required">
+                    	<?php endif; ?>
+	                        <?php echo $this->Form->input('DOB', array(
+	                            'type' => 'date',
+	                            'onChange' => "updateAge('Client')",
+	                            'minYear' => date('Y') - 120,
+	                            'maxYear' => date('Y'),
+	                            'empty' => true,
+	                            'div' => false,
+	                        	'error' => false,
+	                            'separator' => false,
+	                            'label' => $customLabels['DOB']
+	                            )); ?>
+	                        &nbsp; &nbsp;<strong>OR</strong> &nbsp; &nbsp;
+                        	<?php echo $this->Form->input('age', array('label' => $customLabels['Age'], 'div' => false,'onChange' => "updateDOB('Client')")); ?>
+                        	<?php if( isset($this->validationErrors['Client']['DOB']) ): ?>
+                        		<div class="error-message"><?php echo $this->validationErrors['Client']['DOB'][0]; ?></div>
+                        	<?php endif; ?>
+                        </div>
                     </td>
                 </tr>
                 <tr>

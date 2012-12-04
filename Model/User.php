@@ -51,7 +51,7 @@ class User extends AppModel {
             'matchPasswords' => array(
                 'rule' => 'matchPasswords',
                 'message' => 'Your passwords do not match',
-            //'on' => 'create'
+            	//'on' => 'create'
             )
         ),
         'password_confirmation' => array(
@@ -90,9 +90,11 @@ class User extends AppModel {
      * Lee: callback function for encrypting passwords 
      */
     public function beforeSave($options = array()) {
-        if (isset($this->data['User']['password'])) {
-            $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+        if (isset($this->data['User']['pwd'])) {
+            $this->data['User']['password'] = AuthComponent::password($this->data['User']['pwd']);
+            unset($this->data['User']['pwd']); //no longer needed
         }
+        
         return true;
     }
 
@@ -102,14 +104,10 @@ class User extends AppModel {
             if ($user['isSuperAdmin']) {
                 $retArray[] = 'isSuperAdmin';
                 $retArray[] = 'isAdmin';
-            } elseif ($user['isAdmin']) {
-                $retArray[] = 'isAdmin';
             }
         } else {
             if ($user['isSuperAdmin'] && !$this->data['User']['isSuperAdmin']) {
                 $retArray[] = 'isSuperAdmin';
-                $retArray[] = 'isAdmin';
-            } elseif ($user['isAdmin'] && !$this->data['User']['isSuperAdmin'] && !$this->data['User']['isAdmin']) {
                 $retArray[] = 'isAdmin';
             }
 
@@ -127,6 +125,36 @@ class User extends AppModel {
             return NULL;
     }
 
+    public function hasLessPrivilege($user)
+    {
+    	if( !($user['isSuperAdmin'] || $user['isAdmin']) )
+    	{
+    		return false;
+    	}
+    	
+    	if( $user['isSuperAdmin'] && $this->data['User']['isSuperAdmin'] )
+    	{
+    		return false;
+    	}
+    	
+    	if( $user['isAdmin'] && ($this->data['User']['isSuperAdmin'] || $this->data['User']['isAdmin']) )
+    	{
+    		return false;
+    	}
+    	
+    	return true;
+    }
+    
+    public function sameOrganization($orgId)
+    {
+    	if( $this->data['Organization']['id'] == $orgId )
+    	{
+    		return true;
+    	}
+    	
+    	return false;
+    }
+    
     protected function _findActive($state, $query, $results = array()) {
         if ($state == 'before') {
             $cur_user = $query['conditions']['cur_user'];

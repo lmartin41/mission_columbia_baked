@@ -260,3 +260,19 @@ span.underline
 	font-weight: bold;
 	font-size: 14px;
 }
+
+#sex input[type=radio]
+{
+	float: none;
+	margin-left: 10px;
+}
+
+#sex label
+{
+	margin-left: 5px;
+}
+
+span.sex
+{
+	font-weight: bold;
+}
