@@ -17,10 +17,11 @@ class OrganizationsController extends AppController {
      * @return void
      */
     public $components = array('RequestHandler');
+    public $uses = array("Organization", "Resource");
 
     public function index() {
         $this->Organization->recursive = 0;
-        $this->set('organizations', $this->paginate());
+        $this->set('organizations', $this->paginate('Organization', 'Organization.isDeleted = 0'));
     }
 
     /**
@@ -54,11 +55,11 @@ class OrganizationsController extends AppController {
             }
             $this->Organization->create();
             if ($this->Organization->save($this->request->data)) {
-                
+
                 //logging the add
                 $lControl = new LoggersController();
                 $lControl->add($this->Auth->user(), "organizations", "add", "Added organization " . $this->request->data['Organization']['org_name']);
-                
+
                 $this->Session->setFlash(__('The Organization has been saved'));
                 $this->Session->write('organizationID', $this->Organization->id);
                 if (isset($this->request->data['addMore'])) {
@@ -89,11 +90,11 @@ class OrganizationsController extends AppController {
                 $this->redirect(array('action' => 'view', $id));
             }
             if ($this->Organization->save($this->request->data)) {
-                
+
                 //logging the edit
                 $lControl = new LoggersController();
                 $lControl->add($this->Auth->user(), "organizations", "edit", "Edited organization " . $this->request->data['Organization']['org_name']);
-                
+
                 $this->Session->setFlash(__('The organization has been saved'));
                 if (isset($this->request->data['finished'])) {
                     $this->redirect(array('action' => 'view', $id));
@@ -118,20 +119,35 @@ class OrganizationsController extends AppController {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
-        
+
         $this->Organization->id = $id;
         $orgName = $this->Organization->read(null, $id);
         $orgName = $orgName['Organization']['org_name'];
-        
+
         if (!$this->Organization->exists()) {
             throw new NotFoundException(__('Invalid organization'));
         }
-        if ($this->Organization->delete()) {
-            
+        $this->Organization->set('isDeleted', 1);
+        if ($this->Organization->save()) {
+
+            //need to also delete all the organization's resources
+            $resources = $this->Resource->find('all', array(
+                'conditions' => array(
+                    'organization_id' => $id)
+                    ));
+            $i = 0;
+            foreach ($resources as $resource) {
+                $resourceID = $resource['Resource']['id'];
+                $this->Resource->query("
+                UPDATE resources
+                SET `isDeleted` =  '1' 
+                WHERE id = '$resourceID'");
+            }
+
             //logging the delete
             $lControl = new LoggersController();
             $lControl->add($this->Auth->user(), "organizations", "delete", "Deleted organization " . $orgName);
-            
+
             $this->Session->setFlash(__('Organization deleted'));
             $this->redirect(array('action' => 'index'));
         }
@@ -172,8 +188,8 @@ class OrganizationsController extends AppController {
             $orgID = $query[$i]['organizations']['id'];
             $query2 = $this->Organization->query("
                 
-                Select id, organization_id, resource_name, street_address, city, state, zip
-                From resources
+                Select resources.id, resources.organization_id, resources.resource_name, resources.street_address, resources.city, resources.state, resources.zip, resource_types.name
+                From resources join resource_types on resources.resource_type_id = resource_types.id
                 Where organization_id = '$orgID'
 
                 ;");
@@ -185,13 +201,14 @@ class OrganizationsController extends AppController {
                 . ", " . $query[$i]['organizations']['state'] . ", " . $query[$i]['organizations']['zip'],
                 'resources' => array()
             );
-  
+
             for ($j = 0; $j < count($query2); $j++) {
                 $retVal[$i]['resources'][$j] = array(
                     'id' => $query2[$j]['resources']['id'],
                     'organization_id' => $query2[$j]['resources']['organization_id'],
                     'rOrgName' => $query[$i]['organizations']['org_name'],
                     'resource_name' => $query2[$j]['resources']['resource_name'],
+                    'resource_type' => $query2[$j]['resource_types']['name'],
                     'resource_address' => $query2[$j]['resources']['street_address'] . ", " . $query2[$j]['resources']['city']
                     . ", " . $query2[$j]['resources']['state'] . ", " . $query2[$j]['resources']['zip']
                 );
@@ -200,7 +217,7 @@ class OrganizationsController extends AppController {
         return $retVal;
     }
 
-    public function giveMeUniqueResources(){
+    public function giveMeUniqueResources() {
         return $this->Organization->Resource->query("
             Select distinct resource_name
             From resources

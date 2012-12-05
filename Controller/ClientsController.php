@@ -52,7 +52,7 @@ $GLOBALS['client_labels'] = array(
  */
 class ClientsController extends AppController {
 
-    public $uses = array('Client', 'Resource', 'Field', 'FieldInstance', 'Lookup');
+    public $uses = array('Client', 'Resource', 'Field', 'FieldInstance', 'Lookup', 'PrayerRequest', 'ClientChecklistTask', 'ClientRelation', 'ClientChecklist', 'ResourceUs');
     public $components = array('Session', 'RequestHandler');
     public $helpers = array('Js');
     public $paginate = array(
@@ -67,6 +67,9 @@ class ClientsController extends AppController {
      * @return void
      */
     public function index() {
+        echo "<pre>";
+        print_r($this->Session->read('associations'));
+        echo "</pre>";
         $this->Client->recursive = 0;
         $this->set('clients', $this->paginate());
     }
@@ -125,9 +128,7 @@ class ClientsController extends AppController {
         }
 
         $raw_data = $this->Client->find('all', $params);
-
         $total = $this->Client->find('count');
-
         if (isset($params['conditions'])) {
             $filteredTotal = $this->Client->find('count', array('conditions' => $params['conditions']));
         } else {
@@ -435,7 +436,65 @@ class ClientsController extends AppController {
         if (!$this->Client->exists()) {
             throw new NotFoundException(__('Invalid client'));
         }
-        if ($this->Client->delete()) {
+
+        $this->Client->set('isDeleted', 1);
+        
+        //need to delete everything associated with this client
+        $associations = $this->Client->find('all', array(
+            'conditions' => array(
+                'id' => $id)
+                ));
+        $this->Session->write('associations', $associations);
+        //clientchecklists and tasks
+        foreach ($associations['ClientChecklist'] as $assocList) {
+            $tasks = $this->ClientChecklistTask->find('all', array(
+                'conditions' => array(
+                    'client_checklist_id' => $assocList['id'])
+                    ));
+
+            foreach ($tasks as $task) {
+                $taskID = $task['ClientChecklistTask']['id'];
+                $this->ClientChecklistTask->query("
+                UPDATE client_checklist_tasks
+                SET `isDeleted` =  '1' 
+                WHERE id = '$taskID'");
+            }
+
+            $checklistID = $assocList['id'];
+            $this->ClientChecklist->query("
+                UPDATE client_checklists
+                SET `isDeleted` =  '1' 
+                WHERE id = '$checklistID'");
+        }
+        
+        //client relatives
+        foreach ($associations['ClientRelation'] as $assocRelative) {
+            $relativeID = $assocRelative['id'];
+            $this->ClientRelation->query("
+                UPDATE client_relations
+                SET `isDeleted` =  '1' 
+                WHERE id = '$relativeID'");
+        }
+        
+        //resource uses
+        foreach ($associations['ResourceUs'] as $assocUsage) {
+            $usageID = $assocUsage['id'];
+            $this->ResourceUs->query("
+                UPDATE resource_uses
+                SET `isDeleted` =  '1' 
+                WHERE id = '$usageID'");
+        }
+        
+        //prayer requests
+        foreach ($associations['PrayerRequest'] as $assocRequest) {
+            $prayerID = $assocRequest['id'];
+            $this->ResourceUs->query("
+                UPDATE prayer_requests
+                SET `isDeleted` =  '1' 
+                WHERE id = '$prayerID'");
+        }
+        
+        if ($this->Client->save()) {
 
             //logging the delete
             $lControl = new LoggersController();

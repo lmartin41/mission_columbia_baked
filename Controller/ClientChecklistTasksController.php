@@ -114,7 +114,8 @@ class ClientChecklistTasksController extends AppController {
         if (!$this->ClientChecklistTask->exists()) {
             throw new NotFoundException(__('Invalid client checklist task'));
         }
-        if ($this->ClientChecklistTask->delete()) {
+        $this->ClientChecklistTask->set('isDeleted', 1);
+        if ($this->ClientChecklistTask->save()) {
             $this->Session->setFlash(__('Client checklist task deleted'));
             $this->redirect(array('controller' => 'ClientChecklists', 'action' => 'index', $clientID));
         }

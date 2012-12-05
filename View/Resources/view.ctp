@@ -109,6 +109,8 @@
         <h2><?php echo $current_user['Organization']['org_name'] . "'s Fields"; ?></h2>
         <div class="white-background black-text">
             <dl>
+                <?php if (empty($customFields)): echo "None"; ?>
+                <?php endif; ?>
                 <?php foreach ($customFields as $customField): ?>
 
                     <dt><?php echo __($customField['Fields']['field_name']); ?></dt>

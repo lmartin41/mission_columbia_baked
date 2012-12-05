@@ -32,14 +32,13 @@ class ResourcesController extends AppController {
      * @return void
      */
     public function index() {
-
         $orgCont = new OrganizationsController();
         $result = $orgCont->giveMeAddresses();
 
         $this->set('theResult', $result);
 
         $this->Resource->recursive = 0;
-        $this->set('resources', $this->paginate());
+        $this->set('resources', $this->paginate('Resource', 'Resource.isDeleted = 0'));
     }
 
     /**
@@ -138,7 +137,10 @@ class ResourcesController extends AppController {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('action' => 'index'));
             }
-            $this->request->data['Resource']['organization_id'] = $organizationID;
+            
+            if (!$current_user['isSuperAdmin']) {
+                $this->request->data['Resource']['organization_id'] = $organizationID;
+            }
             $this->Resource->create();
             if ($this->Resource->save($this->request->data)) {
 
@@ -174,6 +176,10 @@ class ResourcesController extends AppController {
         }
         $resourceTypes = $this->ResourceType->find('list');
         $this->set(compact('resourceTypes'));
+        if ($current_user['isSuperAdmin']) {
+            $organizations = $this->Resource->Organization->find('list');
+            $this->set(compact('organizations'));
+        }
     }
 
     /**
@@ -256,6 +262,10 @@ class ResourcesController extends AppController {
         }
         $resourceTypes = $this->ResourceType->find('list');
         $this->set(compact('resourceTypes'));
+        if ($current_user['isSuperAdmin']) {
+            $organizations = $this->Resource->Organization->find('list');
+            $this->set(compact('organizations'));
+        }
     }
 
     /**
@@ -278,7 +288,8 @@ class ResourcesController extends AppController {
         if (!$this->Resource->exists()) {
             throw new NotFoundException(__('Invalid resource'));
         }
-        if ($this->Resource->delete()) {
+        $this->Resource->set('isDeleted', 1);
+        if ($this->Resource->save()) {
 
             //logging the deleting of a resource
             $lControl = new LoggersController();

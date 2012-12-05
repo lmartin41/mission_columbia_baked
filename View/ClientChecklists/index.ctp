@@ -16,8 +16,7 @@
         </tr>
         <?php
         foreach ($clientChecklists as $clientChecklist):
-            if ($client['Client']['id'] == $clientChecklist['Client']['id']):
-                ?>
+            if ($client['Client']['id'] == $clientChecklist['Client']['id'] && $clientChecklist['ClientChecklist']['isDeleted'] == 0): ?>
                 <tr>
                     <td>
                         <?php echo $this->Html->link($clientChecklist['Client']['first_name']." ".$clientChecklist['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $clientChecklist['Client']['id'])); ?>

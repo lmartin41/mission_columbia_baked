@@ -120,8 +120,10 @@ class FeedbacksController extends AppController {
         if (!$this->Feedback->exists()) {
             throw new NotFoundException(__('Invalid feedback'));
         }
-        if ($this->Feedback->delete()) {//logging the edit
-            
+        
+        //feedbacks will be permanently deleted -- no reason to hang onto them
+        if ($this->Feedback->delete()) {
+                //logging the delete
                 $lControl = new LoggersController();
                 $lControl->add($this->Auth->user(), "feedacks", "delete", "Deleted feedback");
             

@@ -84,6 +84,8 @@ class LookupsController extends AppController {
         if (!$this->Lookup->exists()) {
             throw new NotFoundException(__('Invalid lookup'));
         }
+        
+        //lookups will be permanently deleted
         if ($this->Lookup->delete()) {
             $this->Session->setFlash(__('Lookup deleted'));
             $this->redirect(array('action' => 'index'));

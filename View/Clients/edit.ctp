@@ -225,6 +225,8 @@
         
         <h2><?php echo $current_user['Organization']['org_name']."'s Fields"; ?></h2>
         <div class="white-background black-text">
+            <?php if (empty($customFields)): echo "None"; ?>
+                <?php endif; ?>
             <?php foreach ($customFields as $customField): ?>
                 <?php echo $this->Form->input($customField['Field']['field_name'], array('type' => $customField['Field']['field_type'])); ?>
             <?php endforeach; ?>

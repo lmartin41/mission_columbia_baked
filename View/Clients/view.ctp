@@ -246,22 +246,24 @@
             </dl>
         </div>
 
-            <?php /*             * **************** CONFIGURATION ****************************** */ ?>
-            <h2><?php echo $current_user['Organization']['org_name'] . "'s Fields"; ?></h2>
-            <div class="white-background black-text">
-                <dl>
-                    <?php foreach ($customFields as $customField): ?>
+        <?php /*         * **************** CONFIGURATION ****************************** */ ?>
+        <h2><?php echo $current_user['Organization']['org_name'] . "'s Fields"; ?></h2>
+        <div class="white-background black-text">
+            <dl>
+                <?php if (empty($customFields)): echo "None"; ?>
+                <?php endif; ?>
+                <?php foreach ($customFields as $customField): ?>
 
-                        <dt><?php echo __($customField['Fields']['field_name']); ?></dt>
-                        <dd>
-                            &nbsp;&nbsp;
-                            <?php echo h($customField['FieldInstance']['field_value']); ?>
-                            &nbsp;
-                        </dd>
+                    <dt><?php echo __($customField['Fields']['field_name']); ?></dt>
+                    <dd>
+                        &nbsp;&nbsp;
+                        <?php echo h($customField['FieldInstance']['field_value']); ?>
+                        &nbsp;
+                    </dd>
 
-                    <?php endforeach; ?>
-                </dl>
-            </div>
+                <?php endforeach; ?>
+            </dl>
+        </div>
 
         <?php /*         * *************** Relatives ***************************************** */ ?>
 
@@ -282,18 +284,20 @@
                     $i = 0;
                     foreach ($client['ClientRelation'] as $clientRelation):
                         if ($clientRelation['client_id'] == $client['Client']['id']):
-                            ?>
-                            <tr>
-                                <td><?php echo $clientRelation['first_name']; ?></td>
-                                <td><?php echo $clientRelation['last_name']; ?></td>
-                                <td><?php echo $clientRelation['relationship']; ?></td>
-                                <td><?php echo $clientRelation['DOB']; ?></td>
-                                <td><?php echo $clientRelation['sex']; ?></td>
-                                <td class="actions">
-                                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_relations', 'action' => 'view', $clientRelation['id'])); ?>
+                            if ($clientRelation['isDeleted'] == 0):
+                                ?>
+                                <tr>
+                                    <td><?php echo $clientRelation['first_name']; ?></td>
+                                    <td><?php echo $clientRelation['last_name']; ?></td>
+                                    <td><?php echo $clientRelation['relationship']; ?></td>
+                                    <td><?php echo $clientRelation['DOB']; ?></td>
+                                    <td><?php echo $clientRelation['sex']; ?></td>
+                                    <td class="actions">
+                                        <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_relations', 'action' => 'view', $clientRelation['id'])); ?>
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </table>
@@ -318,16 +322,18 @@
                     <?php
                     $j = 0;
                     foreach ($resourceUses as $resourceUs):
-                        ?>
-                        <tr>
-                            <td><?php echo $organizationName[$j]; ?></td>
-                            <td><?php echo $resourceName[$j]; ?></td>
-                            <td><?php echo $resourceUs['date']; ?></td>
-                            <td class="actions">
-                                <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'ResourceUses', 'action' => 'view', $resourceUs['id'])); ?>
-                            </td>
-                        </tr>
-                        <?php $j++; ?>
+                        if ($resourceUs['isDeleted'] == 0):
+                            ?>
+                            <tr>
+                                <td><?php echo $organizationName[$j]; ?></td>
+                                <td><?php echo $resourceName[$j]; ?></td>
+                                <td><?php echo $resourceUs['date']; ?></td>
+                                <td class="actions">
+                                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'ResourceUses', 'action' => 'view', $resourceUs['id'])); ?>
+                                </td>
+                            </tr>
+                            <?php $j++; ?>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </table>
             <?php else: echo "none"; ?>
@@ -373,13 +379,19 @@
                         <th class="actions"><?php echo __(''); ?></th>
                     </tr>
                     <?php foreach ($client['PrayerRequest'] as $prayerRequest): ?>
-                        <tr>
-                            <td><?php echo substr($prayerRequest['created'], 0, 10); ?></td>
-                            <td><?php echo $prayerRequest['request']; ?></td>
-                            <td class="actions">
-                                <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'prayer_requests', 'action' => 'view', $prayerRequest['id'])); ?>
-                            </td>
-                        </tr>
+                        <?php if ($prayerRequest['isDeleted'] == 0): ?>
+                            <tr>
+                                <td><?php echo substr($prayerRequest['created'], 0, 10); ?></td>
+                                <?php if ($prayerRequest['organization_id'] == $current_user['organization_id']): ?>
+                                    <td><?php echo $prayerRequest['request']; ?></td>
+                                <?php else: ?>
+                                    <td><?php echo "Prayer Requests Are Private"; ?></td>
+                                <?php endif; ?>
+                                <td class="actions">
+                                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'prayer_requests', 'action' => 'view', $prayerRequest['id'], $client['Client']['id'])); ?>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </table>
             <?php else: echo "none"; ?>

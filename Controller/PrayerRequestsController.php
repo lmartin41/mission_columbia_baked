@@ -19,7 +19,7 @@ class PrayerRequestsController extends AppController {
 
         $this->PrayerRequest->recursive = 0;
         $this->set('client', $this->PrayerRequest->Client->read(null, $clientID));
-        $this->set('prayerRequests', $this->paginate());
+        $this->set('prayerRequests', $this->paginate('PrayerRequest', 'PrayerRequest.isDeleted = 0'));
     }
 
     /**
@@ -118,9 +118,9 @@ class PrayerRequestsController extends AppController {
         if (!$this->PrayerRequest->exists()) {
             throw new NotFoundException(__('Invalid prayer request'));
         }
-        if ($this->PrayerRequest->delete()) {
-            
-            //logging the add
+        $this->PrayerRequest->set('isDeleted', 1);
+        if ($this->PrayerRequest->save()) {
+            //logging the delete
                 $lControl = new LoggersController();
                 $lControl->add($this->Auth->user(), "Prayer Requests", "delete", "Deleted Prayer Request");
             
