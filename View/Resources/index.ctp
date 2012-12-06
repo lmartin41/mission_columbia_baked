@@ -48,13 +48,18 @@
                             var tags = [];
                             
 
+
                             $.each(jsonObj, function() { 
+
+                                //console.log(this.resource_type);
 
                                 var tempAll = this.resources;
                                 var allSet = [];
                                 
                                 $.each(tempAll, function(){
-                                    var tempName = this.resource_name;
+                                    console.log(this.resource_type);
+                                    //var tempName = this.resource_name;
+                                    var tempName = this.resource_type;
 
                                     var hasDup = 0;
                                     for(var k = 0; k<tempAll.length; k++){
@@ -95,7 +100,8 @@
                                 $.each(currResources, function(){
                                     resourcePointer = this;
                                     rId = resourcePointer.id;
-                                    rName = resourcePointer.resource_name;
+                                    //rName = resourcePointer.resource_name;
+                                    rName = resourcePointer.resource_type;
                                     //resName = currResources.resource_name;
                                     count++;
 
@@ -141,7 +147,8 @@
                                     var resId = resourcePointer.id;
                                     var resOrgId = resourcePointer.organization_id;
                                     var resOrgName = resourcePointer.rOrgName;
-                                    var resName = resourcePointer.resource_name;
+                                    //var resName = resourcePointer.resource_name;
+                                    var resName = resourcePointer.resource_type;
                                     var resAddress = resourcePointer.resource_address;
 
 
