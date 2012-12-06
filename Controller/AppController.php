@@ -204,14 +204,12 @@ class AppController extends Controller {
     	}
     	elseif( $this->name != 'CakeError' )
     	{
-	    	$cur_user = $this->Auth->user();
 	    	$conditions = array('AND' => array(
 	    			'Tip.controller' => $this->name, 
 	    			'Tip.view' => $this->action, 
-	    			'Tip.organization_id' => $cur_user['organization_id'],
 	    			'Tip.isDeleted' => false
 	    			));
-	    	$tip = $this->Tip->find('first', array('conditions' => $conditions));
+	    	$tip = $this->Tip->find('first', array('conditions' => $conditions, 'recursive' => -1, 'fields' => array('Tip.tip')));
     	}
     	$this->set('tip_render', $tip['Tip']['tip']);
     }

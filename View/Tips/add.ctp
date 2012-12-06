@@ -9,7 +9,11 @@
 	<fieldset>
 		<legend><?php echo __('Add Tip'); ?></legend>
 	<?php
-		echo $this->Form->input('organization_id', $options['organization_id']);
+		/**
+		 * Uncomment for admin control
+		 * 
+		 * echo $this->Form->input('organization_id', $options['organization_id']);
+		 */
 		echo $this->Form->input('controller', $options['controller']);
 		echo $this->Form->input('view', $options['view']);
 		echo $this->Form->input('tip', array('label' => 'Tip:'));
