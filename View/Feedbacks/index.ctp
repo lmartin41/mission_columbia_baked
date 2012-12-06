@@ -22,7 +22,7 @@
 		<td><?php echo h($feedback['Feedback']['feedback']); ?>&nbsp;</td>
 		<td><?php echo h($feedback['Feedback']['created']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View/Edit'), array('action' => 'view', $feedback['Feedback']['id'])); ?>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $feedback['Feedback']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
