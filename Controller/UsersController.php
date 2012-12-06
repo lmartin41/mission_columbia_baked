@@ -145,6 +145,13 @@ class UsersController extends AppController {
             $this->User->create();
             //this will allow the password to be hashed
             $this->request->data['User']['pwd'] = $this->request->data['User']['password'];
+            
+            $cur_user = $this->Auth->user();
+            if( !$cur_user['isSuperAdmin'] )
+            {
+            	$this->request->data['User']['organization_id'] = $cur_user['organization_id'];
+            }
+            
             if ($this->User->save($this->request->data)) {
 
                 //logging the add

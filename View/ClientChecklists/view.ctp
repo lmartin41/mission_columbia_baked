@@ -45,6 +45,7 @@
             <?php
             $i = 0;
             foreach ($clientChecklist['ClientChecklistTask'] as $clientChecklistTask):
+                if ($clientChecklistTask['isDeleted'] == 0):
                 ?>
                 <tr>
                     <td><?php echo $clientChecklistTask['task_name']; ?></td>
@@ -55,6 +56,7 @@
                         <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_checklist_tasks', 'action' => 'view', $clientChecklistTask['id'], $clientChecklist['Client']['id'])); ?>
                     </td>
                 </tr>
+                <?php endif; ?>
             <?php endforeach; ?>
         </table>
 

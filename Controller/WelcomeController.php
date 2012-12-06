@@ -23,8 +23,6 @@ class WelcomeController extends AppController {
 
         $uResources = $orgCont->giveMeUniqueResources();
 
-        //var_dump($uResources);
-
         $this->set('theUResources', $uResources);
 
         /*

@@ -85,6 +85,8 @@ class FieldsController extends AppController {
         if (!$this->Field->exists()) {
             throw new NotFoundException(__('Invalid field'));
         }
+        
+        //fields will be permanently deleted
         if ($this->Field->delete()) {
             $this->Session->setFlash(__('Field deleted'));
             $this->redirect(array('action' => 'index'));

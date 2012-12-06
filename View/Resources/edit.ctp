@@ -20,6 +20,7 @@
     <fieldset>
         <legend><?php echo __('Edit Resource'); ?></legend>
         <?php
+        if ($current_user['isSuperAdmin']) echo $this->Form->input('organization_id');
         echo $this->Form->input('resource_name', array('label' => $customLabels['Resource Name']));
         echo $this->Form->input('resource_type_id', array('label' => $customLabels['Resource Type']));
         echo $this->Form->input('description', array('label' => $customLabels['Description']));
@@ -56,6 +57,8 @@
         </table>
         <br /><br />
             <h3><?php echo $current_user['Organization']['org_name'] . "'s Fields"; ?></h3>
+            <?php if (empty($customFields)): echo "None"; ?>
+                <?php endif; ?>
             <?php foreach ($customFields as $customField): ?>
                 <?php echo $this->Form->input($customField['Field']['field_name'], array('type' => $customField['Field']['field_type'], 'value' => $customField['FieldInstance'][0]['field_value'])); ?>
             <?php endforeach; ?>

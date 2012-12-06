@@ -14,8 +14,8 @@
 
 </div>
 <div class="loggers index">
-<h3>Logs</h3>
-<br />
+    <h3>Logs</h3>
+    <br />
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th><?php echo $this->Paginator->sort('user_id'); ?></th>
@@ -23,24 +23,18 @@
             <th><?php echo $this->Paginator->sort('action'); ?></th>
             <th><?php echo $this->Paginator->sort('Description'); ?></th>
             <th><?php echo $this->Paginator->sort('Date'); ?></th>
-            <?php if ($isAtleastAdmin): ?><th class="actions"><?php echo __('Actions'); ?></th><?php endif; ?>
         </tr>
         <?php foreach ($loggers as $logger): ?>
-            <?php if ($logger['User']['organization_id'] === $current_user['organization_id']): ?>
-                <?php if (strtotime($logger['Logger']['created']) >= strtotime($startDate) && strtotime($logger['Logger']['created']) <= strtotime($endDate)): ?>
-                    <tr>
-                        <td>
-                            <?php echo $this->Html->link($logger['User']['username'], array('controller' => 'users', 'action' => 'view', $logger['User']['id'])); ?>
-                        </td>
-                        <td><?php echo h($logger['Logger']['controller']); ?>&nbsp;</td>
-                        <td><?php echo h($logger['Logger']['action']); ?>&nbsp;</td>
-                        <td><?php echo h($logger['Logger']['description']); ?>&nbsp;</td>
-                        <td><?php echo h($logger['Logger']['created']); ?>&nbsp;</td>
-                        <td class="actions">
-                            <?php if ($isAtleastAdmin): ?><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $logger['Logger']['id']), null, __('Are you sure you want to delete # %s?', $logger['Logger']['id'])); ?><?php endif; ?>   
-                        </td>
-                    </tr>
-                <?php endif; ?>
+            <?php if (strtotime($logger['Logger']['created']) >= strtotime($startDate) && strtotime($logger['Logger']['created']) <= strtotime($endDate)): ?>
+                <tr>
+                    <td>
+                        <?php echo $this->Html->link($logger['User']['username'], array('controller' => 'users', 'action' => 'view', $logger['User']['id'])); ?>
+                    </td>
+                    <td><?php echo h($logger['Logger']['controller']); ?>&nbsp;</td>
+                    <td><?php echo h($logger['Logger']['action']); ?>&nbsp;</td>
+                    <td><?php echo h($logger['Logger']['description']); ?>&nbsp;</td>
+                    <td><?php echo h($logger['Logger']['created']); ?>&nbsp;</td>
+                </tr>
             <?php endif; ?>
         <?php endforeach; ?>
     </table>

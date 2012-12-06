@@ -117,7 +117,9 @@ class ReportsController extends AppController {
         $startDate = $this->Session->read('startDate');
         $endDate = $this->Session->read('endDate');
         $this->PrayerRequest->recursive = 0;
-        $this->set('prayerRequests', $this->paginate('PrayerRequest', "PrayerRequest.created between '$startDate' AND '$endDate'"));
+        $current_user = $this->Auth->user();
+        $current_user_orgID = $current_user['organization_id'];
+        $this->set('prayerRequests', $this->paginate('PrayerRequest', "PrayerRequest.organization_id = $current_user_orgID AND PrayerRequest.created between '$startDate' AND '$endDate' "));
     }
 
     public function counts() {

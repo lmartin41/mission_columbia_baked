@@ -45,7 +45,7 @@ class ClientRelationsController extends AppController {
     public function add($clientID = null) {
         if ($this->request->is('post')) {
             if (isset($this->request->data['cancel'])) {
-                $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+                $this->redirect(array('controller' => 'clients', 'action' => 'view', $clientID));
             }
             $this->request->data['ClientRelation']['client_id'] = $clientID;
             $this->ClientRelation->create();
@@ -60,7 +60,7 @@ class ClientRelationsController extends AppController {
                 if (isset($this->request->data['Add_another_relative'])) {
                     $this->redirect(array('action' => 'add', $clientID));
                 } else if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+                    $this->redirect(array('controller' => 'clients', 'action' => 'view', $clientID));
                 }
             } else {
                 $this->Session->setFlash(__('The client relative could not be saved. Please, try again.'));
@@ -124,13 +124,14 @@ class ClientRelationsController extends AppController {
         }
         $this->ClientRelation->id = $id;
         
-        $relativeName = $this->ClientRelation->read(null, $id);
-        $relativeName = $relativeName['ClientRelation']['first_name']." ".$relativeName['ClientRelation']['last_name'];
+        $relative = $this->ClientRelation->read(null, $id);
+        $relativeName = $relative['ClientRelation']['first_name']." ".$relative['ClientRelation']['last_name'];
         
         if (!$this->ClientRelation->exists()) {
             throw new NotFoundException(__('Invalid client relative'));
         }
-        if ($this->ClientRelation->delete()) {
+        $this->ClientRelation->set('isDeleted', 1);
+        if ($this->ClientRelation->save()) {
 
             //logging the edit
             $lControl = new LoggersController();
@@ -138,7 +139,7 @@ class ClientRelationsController extends AppController {
 
 
             $this->Session->setFlash(__('Client relative deleted'));
-            $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+            $this->redirect(array('controller' => 'clients', 'action' => 'view', $relative['ClientRelation']['client_id']));
         }
         $this->Session->setFlash(__('Client relative was not deleted'));
         $this->redirect(array('controller' => 'clients', 'action' => 'index'));

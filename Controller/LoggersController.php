@@ -8,14 +8,15 @@ App::uses('AppController', 'Controller');
  * @property Logger $Logger
  */
 class LoggersController extends AppController {
-
+    
+    public $users = array('Logger', 'User');
+    
     /**
      * index method
      *
      * @return void
      */
     public function index() {
-
         if ($this->request->is('post')) {
             $this->Session->write('startDate', $this->request->data['startDate']);
             $this->Session->write('endDate', $this->request->data['endDate']);
@@ -26,9 +27,24 @@ class LoggersController extends AppController {
     public function logs() {
         $this->set('startDate', $this->Session->read('startDate'));
         $this->set('endDate', $this->Session->read('endDate'));
-        $this->set('showDiv', true);
         $this->Logger->recursive = 0;
-        $this->set('loggers', $this->paginate());
+        $current_user = $this->Auth->user();
+        
+        $this->paginate = array(
+            'conditions' => array('organizations.id' => $current_user['organization_id']),
+            'joins' => array(
+                array(
+                    'table' => 'users',
+                    'conditions' => 'Logger.user_id = users.id'
+                ),
+                array(
+                    'table' => 'organizations',
+                    'type' => 'LEFT',
+                    'conditions' => 'users.organization_id = organizations.id'
+                ),
+            ),
+        );
+        $this->set('loggers', $this->paginate($this->Logger));
     }
 
     /**

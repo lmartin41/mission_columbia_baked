@@ -13,16 +13,6 @@ class ResourceUsesController extends AppController {
     public $uses = array("ResourceUs", "Organization", "Resource");
 
     /**
-     * index method
-     *
-     * @return void
-     */
-    public function index() {
-        $this->ResourceUs->recursive = 0;
-        $this->set('resourceuses', $this->paginate());
-    }
-
-    /**
      * view method
      *
      * @throws NotFoundException
@@ -110,7 +100,7 @@ class ResourceUsesController extends AppController {
                 $lControl->add($this->Auth->user(), "Resource Uses", "edit", "Edited Resource Use for Client " . $clientName . " using resource " . $resourceName . " on " . $date);
 
                 $this->Session->setFlash(__('The resource use has been saved'));
-                $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+                $this->redirect(array('action' => 'view', $id));
             } else {
                 $this->Session->setFlash(__('The resource use could not be saved. Please, try again.'));
             }
@@ -150,7 +140,8 @@ class ResourceUsesController extends AppController {
         $date = $resourceUse['ResourceUs']['date'];
         $resourceName = $resourceUse['Resource']['resource_name'];
 
-        if ($this->ResourceUs->delete()) {
+        $this->ResourceUs->set('isDeleted', 1);
+        if ($this->ResourceUs->save()) {
 
             //logging the delete
             $lControl = new LoggersController();
