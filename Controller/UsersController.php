@@ -11,7 +11,7 @@ App::uses('LoggersController', 'Controller');
 class UsersController extends AppController {
 
     public $name = 'Users';
-    public $components = array('Security');
+    public $components = array('Security', 'RequestHandler');
 
     /**
      *
@@ -102,16 +102,11 @@ class UsersController extends AppController {
      * @return void
      */
     public function index() {
-        $conditions = array('cur_user' => $this->Auth->user());
         if (isset($this->params['url']['showAll'])) {
-            $this->paginate = array('showDeletedToo', 'conditions' => $conditions);
             $this->set('hideDeleted', true);
         } else {
-            $this->paginate = array('active', 'conditions' => $conditions);
             $this->set('hideDeleted', false);
         }
-        $users = $this->paginate();
-        $this->set(compact('users'));
     }
 
     /**
@@ -315,6 +310,93 @@ class UsersController extends AppController {
         }
         $this->Session->setFlash(__('User was not deleted'));
         $this->redirect(array('action' => 'index'));
+    }
+    
+    public function dataTables() {
+    	$aColumns = array('User.username', 'Organization.org_name', 'User.email', 'User.isDeleted');
+    	$params = array();
+    
+    	//Paging
+    	if (isset($this->params['url']['iDisplayStart']) && $this->params['url']['iDisplayLength'] != '-1') {
+    		$params['limit'] = $this->params['url']['iDisplayLength'];
+    		$params['offset'] = $this->params['url']['iDisplayStart'];
+    	}
+    
+    	//Sorting
+    	if (isset($this->params['url']['iSortCol_0'])) {
+    		$order = array();
+    		for ($i = 0; $i < intval($this->params['url']['iSortingCols']); $i++) {
+    			if ($this->params['url']['bSortable_' . intval($this->params['url']['iSortCol_' . $i])] == "true") {
+    				$order[] = $aColumns[intval($this->params['url']['iSortCol_' . $i])] . ' ' . $this->params['url']['sSortDir_' . $i];
+    			}
+    		}
+    
+    		$params['order'] = $order;
+    	}
+    
+    	//Filtering
+    	if (isset($this->params['url']['sSearch']) && $this->params['url']['sSearch'] != "") {
+    		$conditions = array('OR' => array());
+    		for ($i = 0; $i < count($aColumns); $i++) {
+    			if (isset($this->params['url']['bSearchable_' . $i]) &&
+    				$this->params['url']['bSearchable_' . $i] == "true") {
+    				$conditions['OR'][$aColumns[$i] . ' LIKE '] = $this->params['url']['sSearch'] . '%';
+    			}
+    		}
+    		$params['conditions'] = $conditions;
+    	}
+    	
+    	//Custom parameters
+    	$total_count_params = array();
+    	if (isset($this->params['url']['org_id']) && $this->params['url']['org_id'] != -1)
+    	{
+    		$params['conditions']['Organization.id'] = $this->params['url']['org_id'];
+    		$total_count_params['Organization.id'] = $this->params['url']['org_id'];
+    	}
+    	
+    	if( isset($this->params['url']['show_all']) && $this->params['url']['show_all'] == "false" )
+    	{
+    		$params['conditions']['User.isDeleted'] = 0;
+    		$total_count_params['User.isDeleted'] = 0;
+    	}
+    	
+    	$params['fields'] = array('User.id', 'User.username', 'Organization.org_name', 'User.email', 'User.isDeleted');
+    	$params['recursive'] = 0;
+    
+    	$raw_data = $this->User->find('all', $params);
+    	
+    	$total = $this->User->find('count', array('conditions' => $total_count_params));
+    	
+    	if (isset($params['conditions'])) {
+    		$filteredTotal = $this->User->find('count', array('conditions' => $params['conditions']));
+    	} else {
+    		$filteredTotal = $total;
+    	}
+    
+    	$output = array(
+    			'sEcho' => intval($this->params['url']['sEcho']),
+    			'iTotalRecords' => $total,
+    			'iTotalDisplayRecords' => $filteredTotal,
+    			'aaData' => array()
+    	);
+    
+    	foreach ($raw_data as $result) {
+    		$row = array(
+    				$result['User']['username'],
+    				$result['Organization']['org_name'],
+    				$result['User']['email'],
+    				$result['User']['isDeleted'],
+    				'DT_RowId' => 'user_' . $result['User']['id'],
+    		);
+    		
+    		if( $result['User']['isDeleted'] == 1 )
+    		{
+    			$row['DT_RowClass'] = 'deleted';
+    		}
+    		
+    		$output['aaData'][] = $row;
+    	}
+    	$this->set('output', $output);
     }
 
 }

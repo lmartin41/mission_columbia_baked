@@ -1,47 +1,33 @@
+<?php $this->Html->script('jquery.dataTables.min', FALSE); ?>
+<?php $this->Html->script('dataTables.fnSetFilteringDelay', FALSE)?>
+<?php $this->Html->script('users_index', FALSE); ?>
+<?php $this->Html->css('jquery.dataTables_themeroller', 'stylesheet', array('inline' => FALSE)); ?>
+
 <div class="actionsNoButton users">
 		<?php echo $this->Html->link(__('List Users'), array('action' => 'index'), array('class' => 'active_link'));?><br />
 		<?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?><br />
 		<?php if($hideDeleted): ?>
 			<?php echo $this->Html->link(__('Hide Deleted Users'), array('action' => 'index')); ?>
+			<div id="show_all" class="do_not_show">true</div>
 		<?php else: ?>
 			<?php echo $this->Html->link(__('Show Deleted Users'), array('action' => 'index', '?' => array('showAll' => true))); ?>
+			<div id="show_all" class="do_not_show">false</div>
 		<?php endif;?>
 </div>
 <div class="users index">
 	<h2><?php echo __('Users'); ?></h2>
-	<table>
-	<tr>
-			<th><?php echo $this->Paginator->sort('username'); ?></th>
-			<th><?php echo $this->Paginator->sort('organization_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('email'); ?></th>
-			<th class="actions"><?php echo __(''); ?></th>
-	</tr>
-	<?php
-	foreach ($users as $user): ?>
-	<tr>
-		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($user['Organization']['org_name'], array('controller' => 'organizations', 'action' => 'view', $user['Organization']['id'])); ?>
-		</td>
-		<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View/Edit'), array('action' => 'view', $user['User']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
+	<table id="usersResults">
+   		<thead>
+           	<tr>
+               	<th>Username</th>
+               	<th>Organization</th>
+               	<th>Email</th>
+           	</tr>
+        </thead>
 	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
+	<?php if( $current_user['isSuperAdmin'] ): ?>
+		<div id="org_id" class="do_not_show">-1</div>
+	<?php else: ?>
+		<div id="org_id" class="do_not_show"><?php echo $current_user['Organization']['id']; ?></div>
+	<?php endif; ?>
 </div>
