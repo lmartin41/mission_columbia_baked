@@ -51,25 +51,28 @@
 
                             $.each(jsonObj, function() { 
 
-                                //console.log(this.resource_type);
+                                //console.log(this);
 
                                 var tempAll = this.resources;
+
                                 var allSet = [];
                                 
                                 $.each(tempAll, function(){
-                                    console.log(this.resource_type);
+                                    //console.log(this.resource_type);
                                     //var tempName = this.resource_name;
                                     var tempName = this.resource_type;
 
                                     var hasDup = 0;
-                                    for(var k = 0; k<tempAll.length; k++){
+                                    for(var k = 0; k<tags.length; k++){
 
                                         if(tempName===tags[k]){
                                             hasDup = 1;
                                         }
+                                        //console.log("isInCheck " + k);
                                     }
                                     if(hasDup == 0){
                                         tags.push(tempName);
+                                        //console.log("added");
                                     }
                                     
                                 });
