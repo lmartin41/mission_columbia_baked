@@ -130,7 +130,7 @@ div.clients.view
 	width: 60%;
 }
 
-div.clients.form table tbody
+div.clients.form table tbody, div.users.index table tbody
 {
 	width: 95%;
 }
@@ -186,23 +186,23 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 	margin-left: 13em;
 }
 
-#clientsResults thead, #clientsResults tbody
+#clientsResults thead, #clientsResults tbody, #usersResults thead, #usersResults tbody
 {
 	display: table-row-group;
 	cursor: pointer;
 }
 
-#clientsResults
+#clientsResults, #usersResults
 {
 	display: table;
 }
 
-#clientsResults tr td
+#clientsResults tr td, #usersResults tr td
 {
 	border-bottom: 1px none;
 }
 
-#clientsResults_filter
+#clientsResults_filter, #usersResults_filter
 {
 	width: 40%;
 }
