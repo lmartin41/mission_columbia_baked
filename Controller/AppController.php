@@ -166,10 +166,9 @@ class AppController extends Controller {
         return true;
     }
     
-    /**
-     * Lee: non logged in users can access view and index pages 
-     */
+    public $start_time;
     public function beforeFilter() {
+    	$this->start_time = microtime(true);
     	$this->Security->blackHoleCallback = 'forceSSL';
         $this->set('logged_in', $this->Auth->loggedIn());
         $this->set('current_user', $this->Auth->user());
@@ -212,5 +211,14 @@ class AppController extends Controller {
 	    	$tip = $this->Tip->find('first', array('conditions' => $conditions, 'recursive' => -1, 'fields' => array('Tip.tip')));
     	}
     	$this->set('tip_render', $tip['Tip']['tip']);
+    }
+    
+    public function afterFilter()
+    {
+    	//Uncomment to log response times
+    	/*$final_time = microtime(true) - $this->start_time;
+    	$fh = fopen('time_log.dat', 'a');
+    	fwrite($fh, "It took " . $final_time ."s to execute " . $this->name . "->" . $this->action . "\n");
+    	fclose($fh);*/
     }
 }

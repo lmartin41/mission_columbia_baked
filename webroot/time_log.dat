@@ -1,0 +1,129 @@
+It took 1.2212390899658s to execute Clients->index
+It took 1.2159998416901s to execute Clients->dataTables
+It took 1.2321400642395s to execute Clients->index
+It took 1.2185781002045s to execute Clients->dataTables
+--After removing query from index--
+It took 1.1324129104614s to execute Clients->index
+It took 1.2565310001373s to execute Clients->dataTables
+It took 1.1564979553223s to execute Clients->index
+It took 1.2565538883209s to execute Clients->dataTables
+It took 1.3003489971161s to execute Clients->dataTables
+It took 1.2906160354614s to execute Clients->dataTables
+It took 1.3005499839783s to execute Clients->dataTables
+It took 1.1172480583191s to execute Clients->dataTables
+It took 1.1258699893951s to execute Clients->index
+It took 1.2475898265839s to execute Clients->dataTables
+It took 1.1155700683594s to execute Clients->dataTables
+It took 1.2840778827667s to execute Clients->dataTables
+
+--Normal Resources 5 total--
+It took 1.6920509338379s to execute Resources->index
+It took 1.5252110958099s to execute Resources->index
+It took 1.163391828537s to execute Resources->index
+It took 1.3521251678467s to execute Resources->index
+It took 1.1380770206451s to execute Resources->index
+
+--Stressed Resources 5000 total--
+It took 2.6610541343689s to execute Resources->index
+It took 2.544233083725s to execute Resources->index
+It took 2.551637172699s to execute Resources->index
+It took 2.7672460079193s to execute Resources->index
+It took 2.6949999332428s to execute Resources->index
+
+--Normal Orgs 7 per page 7 total--
+It took 1.2877380847931s to execute Organizations->index
+It took 1.1176309585571s to execute Organizations->index
+It took 1.1633789539337s to execute Organizations->index
+It took 1.1129238605499s to execute Organizations->index
+It took 1.1635820865631s to execute Organizations->index
+
+--Stressed Orgs 20 per page 1000 total--
+It took 1.2430710792542s to execute Organizations->index
+It took 1.196918964386s to execute Organizations->index
+It took 1.1959881782532s to execute Organizations->index
+It took 1.176304101944s to execute Organizations->index
+It took 1.1356811523438s to execute Organizations->index
+It took 1.1881070137024s to execute Organizations->index
+
+--Stressed Paginate Orgs 20 per page 1000 total--
+It took 1.2989280223846s to execute Organizations->index
+It took 1.1684191226959s to execute Organizations->index
+It took 1.1314251422882s to execute Organizations->index
+It took 1.1574840545654s to execute Organizations->index
+
+--Normal Clients Index 10 per page 17 total--
+It took 1.1437139511108s to execute Clients->index
+It took 1.3048639297485s to execute Clients->dataTables
+It took 1.1006212234497s to execute Clients->index
+It took 1.1043388843536s to execute Clients->dataTables
+It took 1.1134510040283s to execute Clients->index
+It took 1.0938091278076s to execute Clients->dataTables
+It took 1.1097528934479s to execute Clients->index
+It took 1.3694870471954s to execute Clients->dataTables
+It took 1.1769151687622s to execute Clients->index
+It took 1.3309571743011s to execute Clients->dataTables
+
+--Normal Clients Paginating Index 10 per page 17 total--
+It took 1.2966668605804s to execute Clients->dataTables
+It took 1.1227369308472s to execute Clients->dataTables
+It took 1.106419801712s to execute Clients->dataTables
+It took 1.1132328510284s to execute Clients->dataTables
+It took 1.1130299568176s to execute Clients->dataTables
+
+--Normal Clients Searching Index 17 total--
+It took 1.3238110542297s to execute Clients->dataTables 2 per page/2 total
+It took 1.1353480815887s to execute Clients->dataTables 1 per page/1 total
+It took 1.1256399154663s to execute Clients->dataTables 1 per page/1 total
+It took 1.3119280338287s to execute Clients->dataTables 3 per page/3 total
+It took 1.1057500839233s to execute Clients->dataTables 0 per page/0 total
+
+--Stressed Clients Index 10 per page 5000 total--
+It took 1.1875457763672s to execute Clients->index
+It took 1.2829418182373s to execute Clients->dataTables
+It took 1.2091429233551s to execute Clients->index
+It took 1.2616949081421s to execute Clients->dataTables
+It took 1.11501121521s to execute Clients->index
+It took 1.3022520542145s to execute Clients->dataTables
+It took 1.0951540470123s to execute Clients->index
+It took 1.1299738883972s to execute Clients->dataTables
+It took 1.1077971458435s to execute Clients->index
+It took 1.1837208271027s to execute Clients->dataTables
+It took 1.1174101829529s to execute Clients->index
+It took 1.2667310237885s to execute Clients->dataTables
+
+--Stressed Paginating Index 10 per page 5000 total--
+It took 1.3148419857025s to execute Clients->dataTables
+It took 1.1181349754333s to execute Clients->dataTables
+It took 1.1236469745636s to execute Clients->dataTables
+It took 1.1378049850464s to execute Clients->dataTables
+It took 1.1281611919403s to execute Clients->dataTables
+
+--Stressed Paginating Index 100 per page 5000 total--
+It took 1.4120829105377s to execute Clients->dataTables
+It took 1.1350297927856s to execute Clients->dataTables
+It took 1.2813160419464s to execute Clients->dataTables
+It took 1.117317199707s to execute Clients->dataTables
+It took 1.1406190395355s to execute Clients->dataTables
+It took 1.1246449947357s to execute Clients->dataTables
+
+--Stressed Searching Index 10 per page--
+It took 1.3160898685455s to execute Clients->dataTables 406 total
+It took 1.1760091781616s to execute Clients->dataTables 397 total
+It took 1.3547430038452s to execute Clients->dataTables 369 total
+It took 1.118213891983s to execute Clients->dataTables  381 total
+It took 1.3233578205109s to execute Clients->dataTables 357 total
+
+--Normal Clients View 3 Resource Uses--
+It took 1.7797520160675s to execute Clients->view
+It took 1.7311680316925s to execute Clients->view
+It took 1.3251008987427s to execute Clients->view
+It took 1.3211748600006s to execute Clients->view
+It took 1.9183099269867s to execute Clients->view
+It took 1.3535079956055s to execute Clients->view
+
+--Stressed Clients View 100 Resource Uses--
+It took 2.5169370174408s to execute Clients->view
+It took 2.2292468547821s to execute Clients->view
+It took 2.3607912063599s to execute Clients->view
+It took 2.3773059844971s to execute Clients->view
+It took 2.5150818824768s to execute Clients->view

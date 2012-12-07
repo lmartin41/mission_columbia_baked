@@ -276,3 +276,15 @@ span.sex
 {
 	font-weight: bold;
 }
+
+/*For the resource map */
+#radios input, #radios input[type="checkbox"]
+{
+	display: block;
+	margin: 0;
+}
+
+#radios
+{
+	width: 20%\9;
+}

@@ -7,7 +7,7 @@ $(document).ready(function(){
 		"sAjaxSource": global.base_url + "/clients/dataTables.json",
 		"aoColumns": [
 		              	{"bSortable": true, "bSearchable": true},
-		              	{"bSortable": true, "bSearchable": true, },
+		              	{"bSortable": true, "bSearchable": true},
 		              	{"bSortable": false, "bSearchable": false}
 		             ],
 		"aaSorting": [[1, 'asc']]

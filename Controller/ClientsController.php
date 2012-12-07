@@ -67,8 +67,8 @@ class ClientsController extends AppController {
      * @return void
      */
     public function index() {
-        $this->Client->recursive = 0;
-        $this->set('clients', $this->paginate());
+        //$this->Client->recursive = 0;
+        //$this->set('clients', $this->paginate());
     }
 
     public function dataTables() {
@@ -124,6 +124,9 @@ class ClientsController extends AppController {
             $params['conditions'] = $conditions;
         }
 
+        $params['fields'] = array('Client.id', 'Client.first_name', 'Client.last_name', 'Client.DOB');
+        $params['recursive'] = -1; //no need for joins
+        
         $raw_data = $this->Client->find('all', $params);
         $total = $this->Client->find('count');
         if (isset($params['conditions'])) {
@@ -145,7 +148,6 @@ class ClientsController extends AppController {
                 $result['Client']['last_name'],
                 date('m/d/Y', strtotime(h($result['Client']['DOB']))),
                 'DT_RowId' => 'client_' . $result['Client']['id'],
-                'DT_RowClass' => 'highlight-dataTables'
             );
             $output['aaData'][] = $row;
         }
