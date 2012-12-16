@@ -67,9 +67,6 @@ class ClientsController extends AppController {
      * @return void
      */
     public function index() {
-        echo "<pre>";
-        print_r($this->Session->read('associations'));
-        echo "</pre>";
         $this->Client->recursive = 0;
         $this->set('clients', $this->paginate());
     }
