@@ -29,7 +29,7 @@ class Organization extends AppModel {
                 'message' => 'Organization Name Should Not Be Empty',
             ),
             'alphanumeric' => array(
-                'rule' => array('custom', '/^[a-z0-9 ]*$/i'),
+                'rule' => array('custom', '/^[a-z0-9 \.]*$/i'),
                 'message' => 'Organization Name Should be Alphanumeric',
             ),
             'isUnique' => array(
@@ -54,7 +54,7 @@ class Organization extends AppModel {
                 'message' => 'Address Field Should not be Empty',
             ),
             'alphanumeric' => array(
-                'rule' => array('custom', '/^[a-z0-9 ]*$/i'),
+                'rule' => array('custom', '/^[a-z0-9 \.]*$/i'),
                 'message' => 'Address Field Should be Alphanumeric',
             ),
         ),

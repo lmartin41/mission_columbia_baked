@@ -10,6 +10,23 @@ App::uses('LoggersController', 'Controller');
  */
 class FeedbacksController extends AppController {
 
+	
+	public function beforeFilter()
+	{
+		parent::beforeFilter();
+	}
+	
+	public function isAuthorized($user)
+	{
+		if( !$user['isSuperAdmin']  && $this->action != "add" )
+		{
+			$this->Session->setFlash(__('You do not have permission to view that page'));
+			return false;
+		}
+		
+		return parent::isAuthorized($user);
+	}
+	
     /**
      * index method
      *

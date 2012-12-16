@@ -16,14 +16,14 @@ class WelcomeController extends AppController {
 	
     public function index() {
 
-        $orgCont = new OrganizationsController();
+        /*$orgCont = new OrganizationsController();
         $result = $orgCont->giveMeAddresses();
 
         $this->set('theResult', $result);
 
         $uResources = $orgCont->giveMeUniqueResources();
 
-        $this->set('theUResources', $uResources);
+        $this->set('theUResources', $uResources);*/
 
         /*
           echo '<pre>';

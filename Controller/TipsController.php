@@ -3,6 +3,13 @@ App::uses('AppController', 'Controller');
 /**
  * Tips Controller
  *
+ * Right now there is a lot of logic here that is no longer used because a decision was made to have
+ * just one set of tips for the entire system instead of different tips that can be created by admins
+ * at each organization. Some things have been commented out here, in the view, and in the javascript to make 
+ * the user experience better with the aformentioned decision.  Should this decision ever be changed just
+ * uncomment the lines marked as "Uncomment for admin control".  Also the AppController beforeRender function 
+ * needs to be updated to query for tips from the current users organization should the decision be reversed.
+ * 
  * @property Tip $Tip
  */
 class TipsController extends AppController {
@@ -76,6 +83,9 @@ class TipsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Tip->create();
 			
+			//Remove this line of code for admin control
+			$data['Tip']['organization_id'] = 1;
+			
 			//need to massage the request data a bit
 			$data = $this->request->data;
 			
@@ -93,11 +103,13 @@ class TipsController extends AppController {
 				$viewIsGood = true;
 			}
 			
-			if( ! isset($data['Tip']['organization_id']) )
+			/*
+			 * Uncomment for admin control
+			 * if( ! isset($data['Tip']['organization_id']) )
 			{
-				$cur_user = $this->Auth->user();
+				a$cur_user = $this->Auth->user();
 				$data['Tip']['organization_id'] = $cur_user['organization_id'];
-			}
+			}*/
 
 			if ($this->Tip->save($data)) {
 				$this->Session->setFlash(__('The tip has been saved'));

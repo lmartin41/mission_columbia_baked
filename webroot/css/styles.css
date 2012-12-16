@@ -130,7 +130,7 @@ div.clients.view
 	width: 60%;
 }
 
-div.clients.form table tbody
+div.clients.form table tbody, div.users.index table tbody
 {
 	width: 95%;
 }
@@ -186,23 +186,35 @@ div.feedbacks.index, div.customize.index, div.welcome.index
 	margin-left: 13em;
 }
 
-#clientsResults thead, #clientsResults tbody
+#clientsResults thead, #clientsResults tbody, #usersResults thead, #usersResults tbody
 {
 	display: table-row-group;
 	cursor: pointer;
 }
 
-#clientsResults
+#clientsResults, #usersResults
 {
 	display: table;
 }
 
-#clientsResults tr td
+#clientsResults tr td, #usersResults tr td
 {
 	border-bottom: 1px none;
 }
 
-#clientsResults_filter
+#usersResults tr.deleted.odd, #usersResults tr.deleted.odd td.sorting_1
+{
+	background-color: black;
+	color: white;
+}
+
+#usersResults tr.deleted.even, #usersResults tr.deleted.even td.sorting_1
+{
+	background-color: #222222;
+	color: white;
+}
+
+#clientsResults_filter, #usersResults_filter
 {
 	width: 40%;
 }
@@ -275,4 +287,16 @@ span.underline
 span.sex
 {
 	font-weight: bold;
+}
+
+/*For the resource map */
+#radios input, #radios input[type="checkbox"]
+{
+	display: block;
+	margin: 0;
+}
+
+#radios
+{
+	width: 20%\9;
 }

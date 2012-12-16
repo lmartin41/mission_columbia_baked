@@ -48,23 +48,31 @@
                             var tags = [];
                             
 
+
                             $.each(jsonObj, function() { 
 
+                                //console.log(this);
+
                                 var tempAll = this.resources;
+
                                 var allSet = [];
                                 
                                 $.each(tempAll, function(){
-                                    var tempName = this.resource_name;
+                                    //console.log(this.resource_type);
+                                    //var tempName = this.resource_name;
+                                    var tempName = this.resource_type;
 
                                     var hasDup = 0;
-                                    for(var k = 0; k<tempAll.length; k++){
+                                    for(var k = 0; k<tags.length; k++){
 
                                         if(tempName===tags[k]){
                                             hasDup = 1;
                                         }
+                                        //console.log("isInCheck " + k);
                                     }
                                     if(hasDup == 0){
                                         tags.push(tempName);
+                                        //console.log("added");
                                     }
                                     
                                 });
@@ -95,7 +103,8 @@
                                 $.each(currResources, function(){
                                     resourcePointer = this;
                                     rId = resourcePointer.id;
-                                    rName = resourcePointer.resource_name;
+                                    //rName = resourcePointer.resource_name;
+                                    rName = resourcePointer.resource_type;
                                     //resName = currResources.resource_name;
                                     count++;
 
@@ -130,7 +139,7 @@
                                     
                                   } 
                                   else {
-                                    alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for the organization " + orgName);
+                                    //alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for the organization " + orgName);
                                   }
                                   
                                 });
@@ -141,7 +150,8 @@
                                     var resId = resourcePointer.id;
                                     var resOrgId = resourcePointer.organization_id;
                                     var resOrgName = resourcePointer.rOrgName;
-                                    var resName = resourcePointer.resource_name;
+                                    //var resName = resourcePointer.resource_name;
+                                    var resName = resourcePointer.resource_type;
                                     var resAddress = resourcePointer.resource_address;
 
 

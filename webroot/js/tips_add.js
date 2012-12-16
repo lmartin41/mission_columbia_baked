@@ -27,7 +27,10 @@ $(document).ready( function(){
 		}
 		
 		//use ajax to see if this tip already exists
-		org_id = $('#TipOrganizationId').val();
+		
+		// Uncomment for admin control
+		//org_id = $('#TipOrganizationId').val();
+		org_id = 1; //remove for admin control
 		controller = $('#controller').val();
 		view = $('#view').val();
 		$.ajax({
