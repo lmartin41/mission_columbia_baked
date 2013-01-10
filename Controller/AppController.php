@@ -210,7 +210,11 @@ class AppController extends Controller {
 	    			));
 	    	$tip = $this->Tip->find('first', array('conditions' => $conditions, 'recursive' => -1, 'fields' => array('Tip.tip')));
     	}
-    	$this->set('tip_render', $tip['Tip']['tip']);
+
+        if( $tip != null )
+        {
+    	   $this->set('tip_render', $tip['Tip']['tip']);
+        }
     }
     
     public function afterFilter()

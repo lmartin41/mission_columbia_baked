@@ -168,7 +168,7 @@ checkContext();
 
                     <?php echo $this->fetch('content'); ?>
 					<div id="tipArea">
-					<?php if( $tip_render != null ): ?>
+					<?php if( isset( $tip_render ) && $tip_render != null ): ?>
                         <div id="tips" class="tipsBox">
                             <div class="tipsContent">
                                 <p id="tip_header">Tips</p>

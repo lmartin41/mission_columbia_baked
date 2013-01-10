@@ -20,6 +20,4 @@ if needed, just add it between js and sensor; example: ...js?key=MYAPIKEY&sensor
 	<p>Mission Columbia allows users to create, read, update, delete and track <br />clients, resource streams, and 
 	the organizations responsible for those resource streams.</p>
 
-	<?php?>
-
 </div>
