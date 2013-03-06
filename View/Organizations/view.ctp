@@ -89,7 +89,7 @@
                 <table cellpadding = "0" cellspacing = "0">
                     <tr>
                         <th><?php echo __('Resource Name'); ?></th>
-                        <th><?php echo __('Resource Status'); ?></th>
+                        <th><?php echo __('Resource Description'); ?></th>
                         <th class="actions"><?php echo __(''); ?></th>
                     </tr>
                     <?php
@@ -98,7 +98,7 @@
                         ?>
                         <tr>
                             <td><?php echo $resource['resource_name']; ?></td>
-                            <td><?php echo $resource['resource_status']; ?></td>
+                            <td><?php echo $resource['description']; ?></td>
                             <td class="actions">
                                 <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'resources', 'action' => 'view', $resource['id'])); ?>
                             </td>

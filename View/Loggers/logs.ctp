@@ -10,9 +10,10 @@
         <li><?php echo $this->Html->link('Logs', array('controller' => 'loggers', 'action' => 'index')); ?></li>
     </ul>
     <br />
-    <?php if ($isAtleastAdmin) echo $this->Html->link('Prayer Journal', array('controller' => 'reports', 'action' => 'prayerIndex')); ?>
+    <?php echo $this->Html->link('Prayer Journal', array('controller' => 'reports', 'action' => 'prayerIndex')); ?>
 
 </div>
+
 <div class="loggers index">
     <h3>Logs</h3>
     <br />
@@ -25,7 +26,6 @@
             <th><?php echo $this->Paginator->sort('Date'); ?></th>
         </tr>
         <?php foreach ($loggers as $logger): ?>
-            <?php if (strtotime($logger['Logger']['created']) >= strtotime($startDate) && strtotime($logger['Logger']['created']) <= strtotime($endDate)): ?>
                 <tr>
                     <td>
                         <?php echo $this->Html->link($logger['User']['username'], array('controller' => 'users', 'action' => 'view', $logger['User']['id'])); ?>
@@ -35,7 +35,6 @@
                     <td><?php echo h($logger['Logger']['description']); ?>&nbsp;</td>
                     <td><?php echo h($logger['Logger']['created']); ?>&nbsp;</td>
                 </tr>
-            <?php endif; ?>
         <?php endforeach; ?>
     </table>
     <p>

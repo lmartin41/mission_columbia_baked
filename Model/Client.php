@@ -9,6 +9,7 @@ App::uses('AppModel', 'Model');
  * @property ResourceUs $ResourceUs
  */
 class Client extends AppModel {
+
     var $name = 'Client';
 
     /**
@@ -30,8 +31,8 @@ class Client extends AppModel {
                 'message' => "Please enter a first name",
             ),
             'alphaNumeric' => array(
-                'rule' => array('alphanumeric'),
-                'message' => 'The first name should be alphanumeric',
+                'rule' => array('custom', '/^[A-Za-z\.\'-]*$/i'),
+                'message' => 'Letters, apostrophes, dashes and periods are the only characters allowed for first names',
             ),
         ),
         'last_name' => array(
@@ -39,10 +40,10 @@ class Client extends AppModel {
                 'rule' => array('notempty'),
                 'message' => 'Please enter a last name',
             ),
-            'alphanumeric' => array(
-                'rule' => array('alphanumeric'),
-                'message' => 'The last name should be alphanumeric',
-            ),
+          'alphanumeric' => array(
+              'rule' => array('custom', '/^[A-Za-z\.\'-]*$/i'),
+                'message' => 'Letters, apostrophes, dashes and periods are the only characters allowed for last names',
+           ),
         ),
         'DOB' => array(
             'notempty' => array(
@@ -71,12 +72,13 @@ class Client extends AppModel {
             )
         )
     );
-    
+
     public function futureDate($data) {
         if (strtotime($data['when_next_check']) < strtotime(date('Y-m-d'))) {
             $this->invalidate();
         }
-        else return true;
+        else
+            return true;
     }
 
     /**

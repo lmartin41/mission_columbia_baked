@@ -10,5 +10,5 @@
         <li><?php echo $this->Html->link('Logs', array('controller' => 'loggers', 'action' => 'index')); ?></li>
     </ul>
     <br />
-    <?php if ($isAtleastAdmin) echo $this->Html->link('Prayer Journal', array('action' => 'prayerIndex')); ?>
+    <?php echo $this->Html->link('Prayer Journal', array('action' => 'prayerIndex')); ?>
 </div>

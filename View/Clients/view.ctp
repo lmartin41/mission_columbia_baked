@@ -343,6 +343,7 @@
             <?php echo $this->Html->link('Add new Resource Use for this Client', array('controller' => 'resource_uses', 'action' => 'add', $client['Client']['id'])); ?>
         </div>
 
+        <?php ///////////////////////////////// CHECKLISTS ////////////////////////// ?>
         <h2><?php echo h($client['Client']['first_name']) . " 's Checklists"; ?></h2>
         <div class="white-background black-text">
             <?php if (!empty($client['ClientChecklist'])): ?>
@@ -353,13 +354,15 @@
                         <th class="actions"><?php echo __(''); ?></th>
                     </tr>
                     <?php foreach ($client['ClientChecklist'] as $checklist): ?>
-                        <tr>
-                            <td><?php echo $checklist['checklist_name']; ?></td>
-                            <td><?php echo $checklist['checklist_description']; ?></td>
-                            <td class="actions">
-                                <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_checklists', 'action' => 'view', $checklist['id'])); ?>
-                            </td>
-                        </tr>
+                        <?php if (!$checklist['isDeleted']): ?>
+                            <tr>
+                                <td><?php echo $checklist['checklist_name']; ?></td>
+                                <td><?php echo $checklist['checklist_description']; ?></td>
+                                <td class="actions">
+                                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'client_checklists', 'action' => 'view', $checklist['id'])); ?>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </table>
             <?php else: echo "none"; ?>

@@ -553,5 +553,6 @@ class ClientsController extends AppController {
         $this->set('client', $this->Client->read(null, $id));
         $this->set('bodyAttr', 'onload="window.print();"');
     }
+    
 
 }

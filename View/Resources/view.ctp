@@ -34,11 +34,6 @@
                     <?php echo $this->Html->link($resource['Organization']['org_name'], array('controller' => 'organizations', 'action' => 'view', $resource['Organization']['id'])); ?>
                     &nbsp;
                 </dd>
-                <dt><?php echo $customLabels['Resource Status']; ?></dt>
-                <dd>
-                    <?php echo h($resource['Resource']['resource_status']); ?>
-                    &nbsp;
-                </dd>
                 <dt><?php echo $customLabels['Description']; ?></dt>
                 <dd>
                     <?php echo h($resource['Resource']['description']); ?>

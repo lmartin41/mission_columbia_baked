@@ -1,12 +1,12 @@
 <div class="actionsNoButton">
-    
-        <?php echo $this->Html->link(__('Browse Client Checklists'), array('controller' => 'client_checklists', 'action' => 'index', $clientChecklistID)); ?><br />
-        <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'client', 'action' => 'index')); ?><br />
-    
+
+    <?php echo $this->Html->link(__('Browse Client Checklists'), array('controller' => 'client_checklists', 'action' => 'index', $clientChecklistID)); ?><br />
+    <?php echo $this->Html->link(__('Search for a Client'), array('controller' => 'client', 'action' => 'index')); ?><br />
+
 </div>
 
 <div class="clientChecklistTasks form">
-    
+
     <h3><?php echo __('Current Client Checklist Tasks'); ?></h3>
     <table>
         <tr>
@@ -15,12 +15,15 @@
             <th>Comments</th>
         </tr>
         <?php
-        foreach ($clientChecklistTasks as $clientChecklistTask): ?>
+        foreach ($clientChecklistTasks as $clientChecklistTask):
+            if (!$clientChecklistTask['ClientChecklistTask']['isDeleted']):
+                ?>
                 <tr>
                     <td><?php echo $clientChecklistTask['ClientChecklistTask']['task_name']; ?></td>
                     <td><?php echo $clientChecklistTask['ClientChecklistTask']['task_description']; ?>&nbsp;</td>
                     <td><?php echo $clientChecklistTask['ClientChecklistTask']['comments']; ?>&nbsp;</td>
                 </tr>
+            <?php endif; ?>
         <?php endforeach; ?>
     </table>
     <br /><br /><br />

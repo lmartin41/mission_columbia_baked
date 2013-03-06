@@ -25,7 +25,6 @@
         echo $this->Form->input('resource_type_id', array('label' => $customLabels['Resource Type']));
         echo $this->Form->input('description', array('label' => $customLabels['Description']));
         echo $this->Form->input('inventory', array('label' => $customLabels['Inventory']));
-        echo $this->Form->input('resource_status', array('label' => $customLabels['Resource Status']));
         echo $this->Form->input('street_address', array('label' => $customLabels['Street Address']));
         ?>
         <table>

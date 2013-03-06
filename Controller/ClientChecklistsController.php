@@ -56,7 +56,7 @@ class ClientChecklistsController extends AppController {
                 $this->ClientChecklistTask->create();
                 if ($this->ClientChecklistTask->save($this->request->data)) {
                     $this->Session->setFlash(__('The client checklist and the checklist task has been saved'));
-                    
+
                     if (isset($this->request->data['addMore'])) {
                         $this->redirect(array('controller' => 'ClientChecklistTasks', 'action' => 'add', $this->ClientChecklist->id));
                     } else if (isset($this->request->data['finished'])) {
@@ -113,22 +113,23 @@ class ClientChecklistsController extends AppController {
         if (!$this->ClientChecklist->exists()) {
             throw new NotFoundException(__('Invalid client checklist'));
         }
-        
+
         $this->ClientChecklist->set('isDeleted', 1);
         //need to also delete all the checklist's tasks
         $tasks = $this->ClientChecklistTask->find('all', array(
             'conditions' => array(
                 'client_checklist_id' => $id)
-        ));
+                )
+        );
 
         foreach ($tasks as $task) {
-            $taskID = $task['ClientChecklistTask']['id'];
-            $this->ClientChecklistTask->query("
-                UPDATE client_checklist_tasks
-                SET `isDeleted` =  '1' 
-                WHERE id = '$taskID'");
+              $taskID = $task['ClientChecklistTask']['id'];
+               $this->ClientChecklistTask->query("
+                  UPDATE client_checklist_tasks
+                  SET `isDeleted` =  '1' 
+                   WHERE id = '$taskID'");
         }
-               
+
         if ($this->ClientChecklist->save()) {
             $this->Session->setFlash(__('Client checklist deleted'));
             $this->redirect(array('action' => 'index', $clientID));

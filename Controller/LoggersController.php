@@ -8,9 +8,9 @@ App::uses('AppController', 'Controller');
  * @property Logger $Logger
  */
 class LoggersController extends AppController {
-    
+
     public $users = array('Logger', 'User');
-    
+
     /**
      * index method
      *
@@ -18,20 +18,28 @@ class LoggersController extends AppController {
      */
     public function index() {
         if ($this->request->is('post')) {
-            $this->Session->write('startDate', $this->request->data['startDate']);
-            $this->Session->write('endDate', $this->request->data['endDate']);
-            $this->redirect(array('action' => 'logs'));
+            $this->redirect(array('action' => 'logs',
+                $this->request->data['startDate'], $this->request->data['endDate']));
         }
     }
 
-    public function logs() {
-        $this->set('startDate', $this->Session->read('startDate'));
-        $this->set('endDate', $this->Session->read('endDate'));
+    public function logs($startDate = null, $endDate = null) {
         $this->Logger->recursive = 0;
         $current_user = $this->Auth->user();
         
+        $conditions = array(
+            'organizations.id' => $current_user['organization_id'],
+            "Logger.created BETWEEN '$startDate' AND '$endDate'"
+        );
+
+        if ($current_user['isSuperAdmin']) {
+            $conditions = array(
+                "Logger.created BETWEEN '$startDate' AND '$endDate'"
+            );
+        }
+
         $this->paginate = array(
-            'conditions' => array('organizations.id' => $current_user['organization_id']),
+            'conditions' => $conditions,
             'joins' => array(
                 array(
                     'table' => 'users',
@@ -44,6 +52,7 @@ class LoggersController extends AppController {
                 ),
             ),
         );
+
         $this->set('loggers', $this->paginate($this->Logger));
     }
 

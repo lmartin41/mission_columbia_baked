@@ -108,8 +108,14 @@ class ReportsController extends AppController {
     }
     
     public function printPrayers() {
+        $startDate = $this->Session->read('startDate');
+        $endDate = $this->Session->read('endDate');
         $this->layout = 'print';
-        $this->set('prayerRequests', $this->PrayerRequest->find('all'));
+        $this->PrayerRequest->recursive = 0;
+        $current_user = $this->Auth->user();
+        $current_user_orgID = $current_user['organization_id'];
+        $this->set('prayerRequests', $this->paginate('PrayerRequest', 
+                "PrayerRequest.organization_id = $current_user_orgID AND PrayerRequest.created between '$startDate' AND '$endDate'"));
         $this->set('bodyAttr', 'onload="window.print();"');
     }
 
@@ -119,7 +125,8 @@ class ReportsController extends AppController {
         $this->PrayerRequest->recursive = 0;
         $current_user = $this->Auth->user();
         $current_user_orgID = $current_user['organization_id'];
-        $this->set('prayerRequests', $this->paginate('PrayerRequest', "PrayerRequest.organization_id = $current_user_orgID AND PrayerRequest.created between '$startDate' AND '$endDate' "));
+        $this->set('prayerRequests', $this->paginate('PrayerRequest', 
+                "PrayerRequest.organization_id = $current_user_orgID AND PrayerRequest.created between '$startDate' AND '$endDate'"));
     }
 
     public function counts() {
@@ -304,6 +311,17 @@ class ReportsController extends AppController {
         $rCont = new ResourceUsesController();
         $numberResourceUses = $rCont->countParticular($resourceID, $startDate, $endDate);
         $this->set('numberResourceUses', $numberResourceUses);
+    }
+    
+        public function printResourceUsage($id = null) {
+        $this->layout = 'print';
+        $this->Resource->recursive = -1;
+        $this->Resource->id = $id;
+        if (!$this->Resource->exists()) {
+            throw new NotFoundException(__('Invalid client'));
+        }
+        $this->set('resource', $this->Resource->read(null, $id));
+        $this->set('bodyAttr', 'onload="window.print();"');
     }
 
 }

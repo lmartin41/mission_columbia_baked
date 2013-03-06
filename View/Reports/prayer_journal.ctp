@@ -12,17 +12,15 @@
             <th class="actions"><?php echo __(''); ?></th>
         </tr>
         <?php foreach ($prayerRequests as $prayerRequest): ?>
-            <?php if ($current_user['organization_id'] == $prayerRequest['PrayerRequest']['organization_id']): ?>
-                <tr>
-                    <td><?php echo $this->Html->link($prayerRequest['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?></td>
-                    <td><?php echo $prayerRequest['PrayerRequest']['request']; ?></td>
-                    <td><?php echo $prayerRequest['PrayerRequest']['comments']; ?></td>
-                    <td><?php echo $prayerRequest['PrayerRequest']['created']; ?></td>
-                    <td class="actions">
-                        <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'prayer_requests', 'action' => 'view', $prayerRequest['PrayerRequest']['id'])); ?>
-                    </td>
-                </tr>
-            <?php endif; ?>
+            <tr>
+                <td><?php echo $this->Html->link($prayerRequest['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?></td>
+                <td><?php echo $prayerRequest['PrayerRequest']['request']; ?></td>
+                <td><?php echo $prayerRequest['PrayerRequest']['comments']; ?></td>
+                <td><?php echo $prayerRequest['PrayerRequest']['created']; ?></td>
+                <td class="actions">
+                    <?php echo $this->Html->link(__('View/Edit'), array('controller' => 'prayer_requests', 'action' => 'view', $prayerRequest['PrayerRequest']['id'])); ?>
+                </td>
+            </tr>
         <?php endforeach; ?>
     </table>
     <p>
