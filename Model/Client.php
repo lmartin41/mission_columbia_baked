@@ -41,7 +41,7 @@ class Client extends AppModel {
                 'message' => 'Please enter a last name',
             ),
           'alphanumeric' => array(
-              'rule' => array('custom', '/^[A-Za-z\.\'-]*$/i'),
+              'rule' => array('custom', '/^[A-Za-z \.\'-]*$/i'),
                 'message' => 'Letters, apostrophes, dashes and periods are the only characters allowed for last names',
            ),
         ),

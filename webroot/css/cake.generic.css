@@ -233,6 +233,11 @@ table td.actions a {
 	color:#fff;
 }
 
+.cake-sql-log tbody {
+	display: table-row-group;
+	background-color: white;
+}
+
 /** Paging **/
 .paging {
 	background:#fff;
