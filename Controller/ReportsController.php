@@ -58,6 +58,7 @@ class ReportsController extends AppController {
     }
     
     /***************************** PRAYER JOURNAL ******************************/
+
     public function prayerIndex() {
         if ($this->request->is('post')) {
             $startDate = $this->request->data['startDate'];
@@ -94,13 +95,13 @@ class ReportsController extends AppController {
      public function countsIndex() {
         if ($this->request->is('post')) {
 
+
             $startDate = $this->request->data['startDate'];
             $endDate = $this->request->data['endDate'];
             $range = 'monthly';
             if ($this->request->data('weekMonthChooser') == 'weekly') {
                 $range = 'weekly';
             }
-
             $this->Session->write('startDate', $startDate);
             $this->Session->write('endDate', $endDate);
             $this->Session->write('range', $range);
@@ -311,6 +312,7 @@ class ReportsController extends AppController {
         
         //FAMILY UNITS
         $datesFamily = $this->ResourceUs->query("
+
            Select distinct count(clients.id) as counts, resource_uses.date as date
            from resource_uses
                 join clients on clients.id = resource_uses.client_id

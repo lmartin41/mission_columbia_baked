@@ -8,7 +8,6 @@
     
     Total Number of Resource Usages (Total): <?php echo $countParticularTotal; ?><br />
     Total Number of Resource Usages (Family Units): <?php echo $countParticularFamily; ?><br />
-
     <br /><br />
 
 <h2><?php echo __('Resource Usage Listing'); ?></h2>
