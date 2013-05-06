@@ -31,7 +31,7 @@ class Client extends AppModel {
                 'message' => "Please enter a first name",
             ),
             'alphaNumeric' => array(
-                'rule' => array('custom', '/^[A-Za-z\.\'-]*$/i'),
+                'rule' => array('custom', '/^[A-Za-z \.\'-]*$/i'),
                 'message' => 'Letters, apostrophes, dashes and periods are the only characters allowed for first names',
             ),
         ),
@@ -40,7 +40,7 @@ class Client extends AppModel {
                 'rule' => array('notempty'),
                 'message' => 'Please enter a last name',
             ),
-          'alphanumeric' => array(
+          'alphaNumeric' => array(
               'rule' => array('custom', '/^[A-Za-z \.\'-]*$/i'),
                 'message' => 'Letters, apostrophes, dashes and periods are the only characters allowed for last names',
            ),

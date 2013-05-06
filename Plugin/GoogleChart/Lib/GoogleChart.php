@@ -71,6 +71,15 @@ class GoogleChart extends Object
      */
     private $div = "chart_div";
     
+    public function setDiv($divToSet) {
+        $this->div = $divToSet;
+    }
+    
+    public function getDiv() {
+        return $this->div;
+    }
+    
+    
     /*
      * Constructor
      * 

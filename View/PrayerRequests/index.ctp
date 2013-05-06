@@ -16,19 +16,17 @@
         </tr>
         <?php
         foreach ($prayerRequests as $prayerRequest):
-            if ($client['Client']['id'] == $prayerRequest['PrayerRequest']['client_id']):
-                ?>
-                <tr>
-                    <td>
-                        <?php echo $this->Html->link($prayerRequest['Client']['first_name'] . ' ' . $prayerRequest['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?>
-                    </td>
-                    <td><?php echo h($prayerRequest['PrayerRequest']['created']); ?>&nbsp;</td>
-                    <td><?php echo h($prayerRequest['Organization']['org_name']); ?>&nbsp;</td>
-                    <td class="actions">
-                        <?php echo $this->Html->link(__('View/Edit'), array('action' => 'view', $prayerRequest['PrayerRequest']['id'], $client['Client']['id'])); ?>
-                    </td>
-                </tr>
-            <?php endif; ?>
+            ?>
+            <tr>
+                <td>
+                    <?php echo $this->Html->link($prayerRequest['Client']['first_name'] . ' ' . $prayerRequest['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?>
+                </td>
+                <td><?php echo h($prayerRequest['PrayerRequest']['created']); ?>&nbsp;</td>
+                <td><?php echo h($prayerRequest['Organization']['org_name']); ?>&nbsp;</td>
+                <td class="actions">
+                    <?php echo $this->Html->link(__('View/Edit'), array('action' => 'view', $prayerRequest['PrayerRequest']['id'], $client['Client']['id'])); ?>
+                </td>
+            </tr>
         <?php endforeach; ?>
     </table>
     <p>

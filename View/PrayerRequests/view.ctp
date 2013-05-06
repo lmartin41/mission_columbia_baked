@@ -26,6 +26,11 @@
 			<?php echo h($prayerRequest['PrayerRequest']['comments']); ?>
 			&nbsp;
 		</dd>
+                <dt><?php echo __('Date of Service'); ?></dt>
+		<dd>
+			<?php echo h($prayerRequest['PrayerRequest']['date']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($prayerRequest['PrayerRequest']['created']); ?>

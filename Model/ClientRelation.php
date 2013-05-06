@@ -27,9 +27,9 @@ class ClientRelation extends AppModel {
                 'rule' => array('notempty'),
                 'message' => 'Please enter a first name',
             ),
-            'alphanumeric' => array(
-                'rule' => array('alphanumeric'),
-                'message' => 'The first name should be alphanumeric',
+            'alphaNumeric' => array(
+                'rule' => array('custom', '/^[A-Za-z\.\'-]*$/i'),
+                'message' => 'Letters, apostrophes, dashes and periods are the only characters allowed for first names',
             ),
         ),
         'last_name' => array(
@@ -37,10 +37,10 @@ class ClientRelation extends AppModel {
                 'rule' => array('notempty'),
                 'message' => 'Plese enter a last name',
             ),
-            'alphanumeric' => array(
-                'rule' => array('alphanumeric'),
-                'message' => 'The last name should be alphanumeric',
-            ),
+            'alphaNumeric' => array(
+              'rule' => array('custom', '/^[A-Za-z \.\'-]*$/i'),
+                'message' => 'Letters, apostrophes, dashes and periods are the only characters allowed for last names',
+           ),
         ),
         'relationship' => array(
             'notempty' => array(

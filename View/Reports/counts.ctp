@@ -4,7 +4,8 @@
     <h2>Total Number of Resource Uses</h2>
     <div id="chart_div"><?php $this->GoogleChart->createJsChart($chart); ?></div><br /><br />
 
-    Total Number of Resource Usages: <?php echo $totalNumber; ?>
+    Total Number of Resource Usages (Singles): <?php echo $countSingles; ?><br />
+    Total Number of Resource Usages (Family Units): <?php echo $countFamilyUnits; ?><br />
     <br /><br />
 
     <h2><?php echo __('Resource Usage Listing'); ?></h2>

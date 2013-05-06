@@ -13,7 +13,7 @@
         </tr>
         <?php foreach ($prayerRequests as $prayerRequest): ?>
             <tr>
-                <td><?php echo $this->Html->link($prayerRequest['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?></td>
+                <td><?php echo $this->Html->link($prayerRequest['Client']['first_name'] . ' ' . $prayerRequest['Client']['last_name'], array('controller' => 'clients', 'action' => 'view', $prayerRequest['Client']['id'])); ?></td>
                 <td><?php echo $prayerRequest['PrayerRequest']['request']; ?></td>
                 <td><?php echo $prayerRequest['PrayerRequest']['comments']; ?></td>
                 <td><?php echo $prayerRequest['PrayerRequest']['created']; ?></td>

@@ -22,12 +22,6 @@ class PrayerRequest extends AppModel {
      * @var array
      */
     public $validate = array(
-        'date' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
-                'message' => 'Please enter a date',
-            ),
-        ),
         'request' => array(
             'notempty' => array(
                 'rule' => array('notempty'),

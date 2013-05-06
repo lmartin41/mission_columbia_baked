@@ -56,47 +56,8 @@ class ReportsController extends AppController {
             }
         }
     }
-
-    public function resourceIndex() {
-        if ($this->request->is('post')) {
-            $startDate = $this->request->data['startDate'];
-            $endDate = $this->request->data['endDate'];
-
-            if ($startDate > $endDate) {
-                $this->Session->setFlash('Invalid date range');
-                $this->redirect(array('action' => 'resourceIndex'));
-            }
-
-            $resourceID = $this->request->data['ResourceUs']['resource_id'];
-            $correctResuorce = $this->Resource->read(null, $resourceID);
-
-            $this->Session->write('resourceResults', $correctResults);
-            $this->Session->write('startDate', $startDate);
-            $this->Session->write('endDate', $endDate);
-            $this->redirect(array('action' => 'resourceReport', $this->request->data['ResourceUs']['resource_id']));
-        }
-
-        $organizations = $this->Organization->find('list');
-        $this->set(compact('organizations'));
-    }
-
-    public function countsIndex() {
-        if ($this->request->is('post')) {
-
-            $startDate = $this->request->data['startDate'];
-            $endDate = $this->request->data['endDate'];
-            $range = 'monthly';
-            if ($this->request->data('weekMonthChooser') == 'weekly') {
-                $range = 'weekly';
-            }
-
-            $this->Session->write('startDate', $startDate);
-            $this->Session->write('endDate', $endDate);
-            $this->Session->write('range', $range);
-            $this->redirect(array('action' => 'counts'));
-        }
-    }
-
+    
+    /***************************** PRAYER JOURNAL ******************************/
     public function prayerIndex() {
         if ($this->request->is('post')) {
             $startDate = $this->request->data['startDate'];
@@ -126,9 +87,27 @@ class ReportsController extends AppController {
         $current_user = $this->Auth->user();
         $current_user_orgID = $current_user['organization_id'];
         $this->set('prayerRequests', $this->paginate('PrayerRequest', 
-                "PrayerRequest.organization_id = $current_user_orgID AND PrayerRequest.created between '$startDate' AND '$endDate'"));
+                "PrayerRequest.organization_id = $current_user_orgID AND PrayerRequest.created >= '$startDate' AND PrayerRequest.created < DATE(DATE_ADD('$endDate', INTERVAL +1 DAY))"));
     }
+    
+    /****************************** COUNTS ************************************/
+     public function countsIndex() {
+        if ($this->request->is('post')) {
 
+            $startDate = $this->request->data['startDate'];
+            $endDate = $this->request->data['endDate'];
+            $range = 'monthly';
+            if ($this->request->data('weekMonthChooser') == 'weekly') {
+                $range = 'weekly';
+            }
+
+            $this->Session->write('startDate', $startDate);
+            $this->Session->write('endDate', $endDate);
+            $this->Session->write('range', $range);
+            $this->redirect(array('action' => 'counts'));
+        }
+    }
+    
     public function counts() {
         $startDate = $this->Session->read('startDate');
         $endDate = $this->Session->read('endDate');
@@ -137,8 +116,8 @@ class ReportsController extends AppController {
         $this->set('endDate', $endDate);
         $this->set('startCompare', strtotime($this->Session->read('startDate')));
         $this->set('endCompare', strtotime($this->Session->read('endDate')));
-        $resourceUseController = new ResourceUsesController();
-        $this->set('totalNumber', $resourceUseController->countPeriod($startDate, $endDate));
+        $this->set('countSingles', $this->countSingles($startDate, $endDate));
+        $this->set('countFamilyUnits', $this->countFamilyUnits($startDate, $endDate));
 
         if ($range == 'monthly') {
             $dates = $this->ResourceUs->query("
@@ -256,28 +235,54 @@ class ReportsController extends AppController {
         $this->set('resourceuses', $this->paginate('ResourceUs', "client_id = $clientID AND date between '$startDate' AND '$endDate'"));
         $this->set('client', $client);
     }
+    
+    /**************************** RESOURCE REPORT ********************************/
+    public function resourceIndex() {
+        if ($this->request->is('post')) {
+            $startDate = $this->request->data['startDate'];
+            $endDate = $this->request->data['endDate'];
 
-    public function resourceReport($resourceID = null) {
-        $startDate = $this->Session->read('startDate');
-        $endDate = $this->Session->read('endDate');
+            if ($startDate > $endDate) {
+                $this->Session->setFlash('Invalid date range');
+                $this->redirect(array('action' => 'resourceIndex'));
+            }
+            
+            $range = 'year';
+            if ($this->request->data('weekMonthChooser') == 'weekly') {
+                $range = 'week';
+            }
+            else if ($this->request->data('weekMonthChooser') == 'monthly') {
+                $range = 'month';
+            }
+
+            $this->redirect(array('action' => 'resourceReport', $this->request->data['ResourceUs']['resource_id'], $startDate, $endDate, $range));
+        }
+
+        $organizations = $this->Organization->find('list');
+        $this->set(compact('organizations'));
+    }
+    
+    public function resourceReport($resourceID = null, $startDate = null, $endDate = null, $range = null) {
         $startCompare = strtotime($startDate);
         $endCompare = strtotime($endDate);
         $this->set('startDate', $startDate);
         $this->set('endDate', $endDate);
         $this->set('startCompare', $startCompare);
         $this->set('endCompare', $endCompare);
-
-        $dates = $this->ResourceUs->query("
+        
+        //TOTALS
+        $datesTotal = $this->ResourceUs->query("
            Select count(date) as counts, date 
            from resource_uses 
            where resource_id = '$resourceID' AND date between '$startDate' AND '$endDate'
-           group by date;
+           group by " . $range . "(date);
             ");
 
-        if (!empty($dates)) {
-            $chart = new GoogleChart();
-            $chart->type("ColumnChart");
-            $chart->options(array(
+        if (!empty($datesTotal)) {
+            $chartTotal = new GoogleChart();
+            $chartTotal->setDiv('chartTotal_div');
+            $chartTotal->type("ColumnChart");
+            $chartTotal->options(array(
                 'title' => '',
                 'width' => '750',
                 'vAxis' => array(
@@ -286,7 +291,7 @@ class ReportsController extends AppController {
                         'max' => 120)),
             ));
 
-            $chart->columns(array(
+            $chartTotal->columns(array(
                 'date' => array(
                     'type' => 'string',
                     'label' => 'date'
@@ -297,20 +302,59 @@ class ReportsController extends AppController {
                 )
             ));
 
-            foreach ($dates as $date) {
-                $chart->addRow(array('date' => $date['resource_uses']['date'], 'counts' => intVal($date[0]['counts']), 10));
+            foreach ($datesTotal as $date) {
+                $chartTotal->addRow(array('date' => $date['resource_uses']['date'], 'counts' => intVal($date[0]['counts']), 10));
             }
 
-            $this->set(compact('chart'));
+            $this->set('chartTotal', $chartTotal);  
+        }
+        
+        //FAMILY UNITS
+        $datesFamily = $this->ResourceUs->query("
+           Select distinct count(clients.id) as counts, resource_uses.date as date
+           from resource_uses
+                join clients on clients.id = resource_uses.client_id
+           where resource_id = '$resourceID' AND date between '$startDate' AND '$endDate'
+           group by " . $range . "(date);
+            ");
+
+        if (!empty($datesFamily)) {
+            $chartFamily = new GoogleChart();
+            $chartFamily->setDiv('chartFamily_div');
+            $chartFamily->type("ColumnChart");
+            $chartFamily->options(array(
+                'title' => '',
+                'width' => '750',
+                'vAxis' => array(
+                    'viewWindow' => array(
+                        'min' => 0,
+                        'max' => 120)),
+            ));
+
+            $chartFamily->columns(array(
+                'date' => array(
+                    'type' => 'string',
+                    'label' => 'date'
+                ),
+                'counts' => array(
+                    'type' => 'number',
+                    'label' => 'Resource Usage'
+                )
+            ));
+
+            foreach ($datesFamily as $date) {
+                $chartFamily->addRow(array('date' => $date['resource_uses']['date'], 'counts' => intVal($date[0]['counts']), 10));
+            }
+
+            $this->set('chartFamily', $chartFamily); 
         }
 
 
         $this->ResourceUs->recursive = 0;
         $this->set('resourceuses', $this->paginate('ResourceUs', "resource_id = $resourceID AND date between '$startDate' AND '$endDate'"));
         $this->set('resource', $this->Resource->read(null, $resourceID));
-        $rCont = new ResourceUsesController();
-        $numberResourceUses = $rCont->countParticular($resourceID, $startDate, $endDate);
-        $this->set('numberResourceUses', $numberResourceUses);
+        $this->set("countParticularTotal", $this->countParticularTotal($resourceID, $startDate, $endDate));
+        $this->set("countParticularFamily", $numberResourceUses = $this->countParticularFamily($resourceID, $startDate, $endDate));
     }
     
         public function printResourceUsage($id = null) {
@@ -322,6 +366,49 @@ class ReportsController extends AppController {
         }
         $this->set('resource', $this->Resource->read(null, $id));
         $this->set('bodyAttr', 'onload="window.print();"');
+    }
+    
+    
+     /**
+     * Lee: Report functions 
+     */
+    public function countSingles($startDate, $endDate) {
+        $query = $this->ResourceUs->query("
+                Select count(DISTINCT resource_uses.id) as period
+                From resource_uses join clients
+                Where date between '$startDate' AND '$endDate';
+            ");
+        return $query[0][0]['period'] - $this->countFamilyUnits($startDate, $endDate);
+    }
+    
+     public function countFamilyUnits($startDate, $endDate) {
+        $query = $this->ResourceUs->query("
+                Select count(DISTINCT client_relations.client_id) as period
+                From resource_uses 
+                    join clients on clients.id = resource_uses.client_id
+                    join client_relations on client_relations.client_id = clients.id 
+                Where date between '$startDate' AND '$endDate';
+            ");
+        return $query[0][0]['period'];
+    }
+    
+    public function countParticularTotal($resourceID, $startDate, $endDate) {
+        $query = $this->ResourceUs->query("
+                Select count(resource_id) as period
+                From resource_uses
+                Where resource_id = '$resourceID' AND date between '$startDate' and '$endDate';
+            ");
+        return $query[0][0]['period'];
+    }
+    
+    public function countParticularFamily($resourceID, $startDate, $endDate) {
+        $query = $this->ResourceUs->query("
+                Select DISTINCT count(resource_uses.client_id) as period
+                From resource_uses 
+                    join clients on clients.id = resource_uses.client_id
+                Where resource_uses.resource_id = '$resourceID' AND date between '$startDate' AND '$endDate';
+            ");
+        return $query[0][0]['period'];
     }
 
 }

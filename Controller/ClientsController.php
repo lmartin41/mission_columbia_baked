@@ -42,7 +42,8 @@ $GLOBALS['client_labels'] = array(
     'Dedicated Christ' => 'Dedicated Christ',
     'Model of Car' => 'Model Of Car',
     'How Did You Hear About Us?' => 'How Did You Hear About Us?',
-    'How Long Do You Need?' => 'How Long Do You Need?'
+    'How Long Do You Need?' => 'How Long Do You Need?',
+    'Comments' => 'Comments'
 );
 
 /**

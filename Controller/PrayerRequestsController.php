@@ -16,10 +16,17 @@ class PrayerRequestsController extends AppController {
      * @return void
      */
     public function index($clientID = null) {
-
         $this->PrayerRequest->recursive = 0;
         $this->set('client', $this->PrayerRequest->Client->read(null, $clientID));
-        $this->set('prayerRequests', $this->paginate('PrayerRequest', 'PrayerRequest.isDeleted = 0'));
+        $current_user = $this->Auth->user();
+        $this->paginate = array(
+            'conditions' => array(
+                'PrayerRequest.isDeleted' => false,
+                'PrayerRequest.organization_id' => $current_user['organization_id'],
+                'PrayerRequest.client_id' => $clientID
+            )
+        );
+        $this->set('prayerRequests', $this->paginate($this->PrayerRequest));
     }
 
     /**
