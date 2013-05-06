@@ -98,7 +98,7 @@ class ClientRelationsController extends AppController {
 
                 $this->Session->setFlash(__('The client relative has been saved'));
                 if (isset($this->request->data['finished'])) {
-                    $this->redirect(array('controller' => 'clients', 'action' => 'index'));
+                    $this->redirect(array('controller' => 'clients', 'action' => 'view', $clientID));
                 }
             } else {
                 $this->Session->setFlash(__('The client relative could not be saved. Please, try again.'));

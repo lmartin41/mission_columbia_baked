@@ -13,6 +13,7 @@
         echo $this->Form->input('organization_id', array('label' => 'Viewable to Organization:  '));
         echo $this->Form->input('request');
         echo $this->Form->input('comments');
+        echo $this->Form->input('date', array('label' => 'Date of Service:', 'empty' => true));
         ?>
     </fieldset>
     <div>

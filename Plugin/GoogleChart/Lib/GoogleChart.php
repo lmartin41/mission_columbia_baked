@@ -71,6 +71,7 @@ class GoogleChart extends Object
      */
     private $div = "chart_div";
     
+    
     /*
      * Constructor
      * 

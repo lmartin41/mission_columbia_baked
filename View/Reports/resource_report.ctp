@@ -1,9 +1,16 @@
 <?php include("reportsDiv.ctp"); ?>
-<div class="reports form">
-    <h2>Number of Times this Resource has Been Used</h2>
-    <div id="chart_div"><?php $this->GoogleChart->createJsChart($chart); ?></div>
 
-    Number of Times this Resource has Been Used During this Period: <?php echo $numberResourceUses; ?><br /><br />
+<div class="reports form">
+    <h2>Number of Times this Resource has Been Used (Total)</h2>>
+    <div id="chart_div"><?php $this->GoogleChart->createJsChart($chartTotal); ?></div>
+    <h2>Number of Times this Resource has Been Used (Family Units)</h2>
+    <div id="chartFamily_div"><?php $this->GoogleChart->createJsChart($chartFamily); ?></div>
+    
+    Total Number of Resource Usages (Family Units): <?php echo $countParticularFamilyUnits; ?><br />
+    Total Number of Resource Usages (Singles): <?php echo $countParticularSingles; ?><br />
+    Total Number of Clients Served: <?php echo $countParticularSingles + $countParticularFamilyUnits; ?><br />
+    
+    <br /><br />
 
 <h2><?php echo __('Resource Usage Listing'); ?></h2>
     <table cellpadding="0" cellspacing="0">

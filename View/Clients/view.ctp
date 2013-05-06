@@ -372,6 +372,7 @@
             <?php echo $this->Html->link('Add new Checklist for this Client', array('controller' => 'client_checklists', 'action' => 'add', $client['Client']['id'])); ?>
         </div>
 
+        <?php /////////////////////////////////// PRAYER REQUESTS ////////////////////////// ?>
         <h2><?php echo h($client['Client']['first_name']) . " 's Prayer Requests"; ?></h2>
         <div class="white-background black-text">
             <?php if (!empty($client['PrayerRequest'])): ?>
@@ -404,6 +405,23 @@
             <?php echo $this->Html->link('Add new Prayer Request for this Client', array('controller' => 'prayer_requests', 'action' => 'add', $client['Client']['id'])); ?>
         </div>
 
+        <?php ////////////////////////////////////// COMMENTS ////////////////////////// ?>
+        <h2>Comments</h2>
+        <div class="white-background black-text">
+            <?php if (!empty($client['Client']['comments'])): ?>
+                <dl>
+                    <dt><?php echo $customLabels['Comments']; ?></dt>
+                    <dd>
+                        &nbsp;&nbsp;
+                        <?php echo $client['Client']['comments']; ?>
+                        &nbsp;
+                    </dd>
+                </dl>
+            <?php else: echo $this->Html->link("Add Comment (Edit Client)", array('controller' => 'Clients', 'action' => 'edit', $client['Client']['id'])); ?>
+            <?php endif; ?>
+        </div>
+
+        <?php ////////////////////////////////////// UPLOAD PHOTO /////////////////////// ?>
         <h2>Upload Photo</h2>
         <div class="white-background black-text">
             <div id="image_upload" style="width:500px">
@@ -416,6 +434,8 @@
                 </script>
             </div>
         </div>
+
+
     </div>
 </div>
 

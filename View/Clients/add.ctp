@@ -221,6 +221,11 @@
             echo $this->Form->input('how_long_do_you_need', array('label' => $customLabels['How Long Do You Need?']));
             ?>
         </div>
+        
+         <h2>Comments</h2>
+        <div class="white-background black-text">
+            <?php echo $this->Form->input("comments", array('label' => $customLabels['Comments'], 'type' => 'textarea')); ?>
+        </div>
             
             <?php /***************** CUSTOM FIELDS **************************/ ?>
             <h2><?php echo $current_user['Organization']['org_name'] . "'s Fields"; ?></h2>
@@ -231,6 +236,9 @@
                     <?php echo $this->Form->input($customField['Field']['field_name'], array('type' => $customField['Field']['field_type'])); ?>
                 <?php endforeach; ?>
             </div>
+            
+       
+        
     </div>
     <br /><br />
 

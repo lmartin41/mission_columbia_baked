@@ -24,7 +24,15 @@
         new datepickr('datepickResource3', { dateFormat: 'Y-m-d' });
         new datepickr('datepickResource4', { dateFormat: 'Y-m-d' });
     </script>
-    <br /><br />
+    
+    <br /><br /><br />
+    Search Weekly, Monthly or Annually:<br />
+        <fieldset>
+            <input type="radio" name="weekMonthChooser" value="weekly" style="vertical-align: middle" />Weekly<br /><br />
+            <input type="radio" name="weekMonthChooser" value="monthly" style="vertical-align: middle" />Monthly<br /><br />
+            <input type="radio" name="weekMonthChooser" value="annually" style="vertical-align: middle" />Annually<br /><br />
+        </fieldset>
+    
     <?php
     echo $this->Form->end("Retrieve Resource Report", array('name' => 'resource'));
     ?> 

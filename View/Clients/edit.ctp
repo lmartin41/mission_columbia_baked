@@ -223,6 +223,11 @@
             ?>
         </div>
         
+        <h2>Comments</h2>
+        <div class="white-background black-text">
+            <?php echo $this->Form->input("comments", array('label' => $customLabels['Comments'], 'type' => 'textarea')); ?>
+        </div>
+        
         <h2><?php echo $current_user['Organization']['org_name']."'s Fields"; ?></h2>
         <div class="white-background black-text">
             <?php if (empty($customFields)): echo "None"; ?>
@@ -231,6 +236,8 @@
                 <?php echo $this->Form->input($customField['Field']['field_name'], array('type' => $customField['Field']['field_type'])); ?>
             <?php endforeach; ?>
         </div>
+        
+        
     </div>
     <br /><br />
 
