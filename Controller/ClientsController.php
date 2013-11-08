@@ -128,8 +128,11 @@ class ClientsController extends AppController {
         $params['fields'] = array('Client.id', 'Client.first_name', 'Client.last_name', 'Client.DOB');
         $params['recursive'] = -1; //no need for joins
         
+        $params['conditions']['Client.isDeleted'] = false;
         $raw_data = $this->Client->find('all', $params);
-        $total = $this->Client->find('count');
+        
+        $total = $this->Client->find('count', array('conditions' => array('Client.isDeleted' => false)));
+
         if (isset($params['conditions'])) {
             $filteredTotal = $this->Client->find('count', array('conditions' => $params['conditions']));
         } else {
@@ -155,22 +158,6 @@ class ClientsController extends AppController {
         $this->set('output', $output);
     }
 
-    //No longer needed - Brett Koenig
-    public function clientSearch($firstName, $lastName) {
-        if (empty($lastName)) {
-            $conditions = array('OR' => array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $firstName . '%'));
-        } else {
-            $conditions = array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $lastName . '%');
-        }
-
-        return $this->Client->find('all', array('conditions' => $conditions));
-    }
-
-    //No longer needed - Brett Koenig
-    public function browse() {
-        $this->Client->recursive = 0;
-        $this->set('clients', $this->paginate());
-    }
 
     /**
      * view method
@@ -186,6 +173,11 @@ class ClientsController extends AppController {
         }
 
         $client = $this->Client->read(null, $id);
+
+        if ($client['Client']['isDeleted'])
+        {
+            throw new NotFoundException(__('Invalid client'));
+        }
 
         //viewing custom fields
         $customFields = $this->FieldInstance->find('all', array(
