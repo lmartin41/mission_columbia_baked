@@ -8,6 +8,7 @@ $(document).ready(function(){
 		"aoColumns": [
 		              	{"bSortable": true, "bSearchable": true},
 		              	{"bSortable": true, "bSearchable": true},
+		              	{"bSortable": false, "bSearchable": false},
 		              	{"bSortable": false, "bSearchable": false}
 		             ],
 		"aaSorting": [[1, 'asc']]

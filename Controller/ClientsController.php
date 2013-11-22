@@ -73,7 +73,7 @@ class ClientsController extends AppController {
     }
 
     public function dataTables() {
-        $aColumns = array('Client.first_name', 'Client.last_name', 'Client.DOB');
+        $aColumns = array('Client.first_name', 'Client.last_name', 'Client.DOB', 'Client.comments');
         $params = array();
 
         //Paging
@@ -125,7 +125,7 @@ class ClientsController extends AppController {
             $params['conditions'] = $conditions;
         }
 
-        $params['fields'] = array('Client.id', 'Client.first_name', 'Client.last_name', 'Client.DOB');
+        $params['fields'] = array('Client.id', 'Client.first_name', 'Client.last_name', 'Client.DOB', 'Client.comments');
         $params['recursive'] = -1; //no need for joins
         
         $params['conditions']['Client.isDeleted'] = false;
@@ -151,6 +151,7 @@ class ClientsController extends AppController {
                 $result['Client']['first_name'],
                 $result['Client']['last_name'],
                 date('m/d/Y', strtotime(h($result['Client']['DOB']))),
+                $this->truncate($result['Client']['comments'], 27),
                 'DT_RowId' => 'client_' . $result['Client']['id'],
             );
             $output['aaData'][] = $row;
@@ -158,6 +159,15 @@ class ClientsController extends AppController {
         $this->set('output', $output);
     }
 
+    private function truncate($string, $max)
+    {
+        if( strlen($string) > $max )
+        {
+            return trim(substr($string, 0, $max - 3)) . "...";
+        }
+
+        return $string;
+    }
 
     /**
      * view method
