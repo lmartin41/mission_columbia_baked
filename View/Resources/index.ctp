@@ -75,7 +75,6 @@
                                 var rName = "";
 
                                 $.each(currResources, function(){
-                                    console.log(this);
                                     var resource_id = this.id;
                                     var resource_name = this.resource_name;
                                     var address = this.street_address + ", "
