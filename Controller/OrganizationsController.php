@@ -89,6 +89,7 @@ class OrganizationsController extends AppController {
             if (isset($this->request->data['cancel'])) {
                 $this->redirect(array('action' => 'view', $id));
             }
+
             if ($this->Organization->save($this->request->data)) {
 
                 //logging the edit
@@ -169,52 +170,6 @@ class OrganizationsController extends AppController {
      */
     public function count() {
         return $this->Organization->find('count');
-    }
-
-    /**
-     * 2d array
-     * need an array of all addresses separated by address_one, City, and state
-     */
-    public function giveMeAddresses() {
-        $retVal = array();
-        $query = $this->Organization->query("
-            
-            Select id, org_name, address_one, city, state, zip
-            From organizations
-            
-            ");
-
-        for ($i = 0; $i < count($query); $i++) {
-            $orgID = $query[$i]['organizations']['id'];
-            $query2 = $this->Organization->query("
-                
-                Select resources.id, resources.organization_id, resources.resource_name, resources.street_address, resources.city, resources.state, resources.zip, resource_types.name
-                From resources join resource_types on resources.resource_type_id = resource_types.id
-                Where organization_id = '$orgID'
-
-                ;");
-
-            $retVal[$i] = array(
-                'id' => $query[$i]['organizations']['id'],
-                'org_name' => $query[$i]['organizations']['org_name'],
-                'org_address' => $query[$i]['organizations']['address_one'] . ", " . $query[$i]['organizations']['city']
-                . ", " . $query[$i]['organizations']['state'] . ", " . $query[$i]['organizations']['zip'],
-                'resources' => array()
-            );
-
-            for ($j = 0; $j < count($query2); $j++) {
-                $retVal[$i]['resources'][$j] = array(
-                    'id' => $query2[$j]['resources']['id'],
-                    'organization_id' => $query2[$j]['resources']['organization_id'],
-                    'rOrgName' => $query[$i]['organizations']['org_name'],
-                    'resource_name' => $query2[$j]['resources']['resource_name'],
-                    'resource_type' => $query2[$j]['resource_types']['name'],
-                    'resource_address' => $query2[$j]['resources']['street_address'] . ", " . $query2[$j]['resources']['city']
-                    . ", " . $query2[$j]['resources']['state'] . ", " . $query2[$j]['resources']['zip']
-                );
-            }
-        }
-        return $retVal;
     }
 
     public function giveMeUniqueResources() {

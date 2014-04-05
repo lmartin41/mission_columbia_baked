@@ -1,0 +1,5 @@
+ALTER TABLE  `organizations` ADD  `lat` FLOAT NULL DEFAULT NULL AFTER  `phone_office` ,
+ADD  `lng` FLOAT NULL DEFAULT NULL AFTER  `lat` ;
+
+ALTER TABLE  `resources` ADD  `lat` FLOAT NULL DEFAULT NULL AFTER  `zip` ,
+ADD  `lng` FLOAT NULL DEFAULT NULL AFTER  `lat` ;

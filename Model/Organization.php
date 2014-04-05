@@ -93,7 +93,7 @@ class Organization extends AppModel {
         'phone' => array(
             'phone' => array(
                 'rule' => array('phone'),
-                'message' => 'Please enter phone numberi in Phone format',
+                'message' => 'Please enter phone number in Phone format',
             ),
         ),
         'phone_cell' => array(

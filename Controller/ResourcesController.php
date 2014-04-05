@@ -24,7 +24,7 @@ $GLOBALS['resource_labels'] = array(
  */
 class ResourcesController extends AppController {
 
-    public $uses = array("Resource", "Client", "ResourceType", "Field", "FieldInstance", "Lookup");
+    public $uses = array("Resource", "Client", "ResourceType", "Field", "FieldInstance", "Lookup", "Organization");
 
     /**
      * index method
@@ -32,13 +32,32 @@ class ResourcesController extends AppController {
      * @return void
      */
     public function index() {
-        $orgCont = new OrganizationsController();
-        $result = $orgCont->giveMeAddresses();
-
-        $this->set('theResult', $result);
+        $this->ResourceType->recursive = 0;
+        $this->set('resource_types', $this->ResourceType->find('all', 'ResourceType.isDeleted = 0'));
 
         $this->Resource->recursive = 0;
         $this->set('resources', $this->paginate('Resource', 'Resource.isDeleted = 0'));
+
+        $this->Organization->recursive = 1;
+        $organizations = $this->Organization->find('all', 'Organization.isDeleted = 0');
+
+        $organizations_for_json = array();
+
+        foreach($organizations as &$organization)
+        {
+            foreach($organization['Resource'] as &$resource)
+            {
+                $resource['description'] = str_replace("'", "&apos;", $resource['description']);
+            }
+            unset($resource);
+
+            //This is a terrible way to do this but I am in a hurry.
+            unset($organization['User']);
+            unset($organization['PrayerRequest']);
+            $organizations_for_json[] = $organization;
+        }
+
+        $this->set('organizations', $organizations_for_json);
     }
 
     /**

@@ -41,56 +41,31 @@
                             var latSpan = northEast.lat() - southWest.lat();
                             var images = ['http://google-maps-icons.googlecode.com/files/friends.png', 'http://google-maps-icons.googlecode.com/files/home.png', 'http://google-maps-icons.googlecode.com/files/girlfriend.png', 'http://google-maps-icons.googlecode.com/files/dates.png', 'http://google-maps-icons.googlecode.com/files/realestate.png', 'http://google-maps-icons.googlecode.com/files/apartment.png', 'http://google-maps-icons.googlecode.com/files/family.png'];
 
-                            var jsonResults = '<?php echo json_encode($theResult); ?>';
-                            var jsonObj = $.parseJSON(jsonResults);
-
+                            var organizations = '<?php echo json_encode($organizations); ?>';
+                            var resourceTypes = '<?php echo json_encode($resource_types); ?>';
+                            var jsonOrganizations = $.parseJSON(organizations);
+                            var jsonResourceTypes = $.parseJSON(resourceTypes);
 
                             var tags = [];
-                            
 
-
-                            $.each(jsonObj, function() { 
-
-                                //console.log(this);
-
-                                var tempAll = this.resources;
-
-                                var allSet = [];
-                                
-                                $.each(tempAll, function(){
-                                    //console.log(this.resource_type);
-                                    //var tempName = this.resource_name;
-                                    var tempName = this.resource_type;
-
-                                    var hasDup = 0;
-                                    for(var k = 0; k<tags.length; k++){
-
-                                        if(tempName===tags[k]){
-                                            hasDup = 1;
-                                        }
-                                        //console.log("isInCheck " + k);
-                                    }
-                                    if(hasDup == 0){
-                                        tags.push(tempName);
-                                        //console.log("added");
-                                    }
-                                    
-                                });
+                            $.each(jsonResourceTypes, function() {
+                                tags.push(this.ResourceType.name);
                             }); 
 
                             tags.push("Organizations");
 
                             $.each(tags, function(i, tag) {
-                                $('#radios').append(('<label style="margin-right:5px;display:block;"><input type="checkbox" style="margin-right:3px" value="{0}"/>{1}</label>').format(tag, tag));
+                                $('#radios').append(('<label style="margin-right:5px;display:block;"><input type="checkbox" style="margin-right:3px" value="{0}" checked="true"/>{1}</label>').format(tag, tag));
                             });
                             
-                            $.each(jsonObj, function() { 
-
-                                var geocoder = new google.maps.Geocoder();
-                                var orgName = this.org_name;
-                                var address = this.org_address;
-                                var orgId = this.id;
-                                var currResources = this.resources;
+                            $.each(jsonOrganizations, function() {
+                                var orgName = this.Organization.org_name;
+                                var address = this.Organization.address_one + "\n" 
+                                                + this.Organization.address_two + ", \n" 
+                                                + this.Organization.city + ", " + this.Organization.state + "\n"
+                                                + this.Organization.zip;
+                                var orgId = this.Organization.id;
+                                var currResources = this.Resource;
 
                                 var orgsResourcesStr = "";
                                 var resourcePointer;
@@ -99,92 +74,43 @@
                                 var rId = 0;
                                 var rName = "";
 
-                                //alert(count);
                                 $.each(currResources, function(){
-                                    resourcePointer = this;
-                                    rId = resourcePointer.id;
-                                    //rName = resourcePointer.resource_name;
-                                    rName = resourcePointer.resource_type;
-                                    //resName = currResources.resource_name;
-                                    count++;
-
-                                    /*
-                                    if(count != currResources.length){
-                                        //alert(count);
-                                        orgsResourcesStr = orgsResourcesStr + resourcePointer.resource_name + ", ";
-                                    }
-                                    else{
-                                        orgsResourcesStr = orgsResourcesStr + resourcePointer.resource_name;
-                                    }
-                                    */
-
+                                    console.log(this);
+                                    var resource_id = this.id;
+                                    var resource_name = this.resource_name;
+                                    var address = this.street_address + ", "
+                                                    + this.city + ", " + this.state + " "
+                                                    + this.zip;
+                                    orgsResourcesStr = orgsResourcesStr + '<a href="' + global.base_url + '/resources/view/' + this.id + '">' + this.resource_name + '</a> ';
                                     
-                                    // orgsResourcesStr = orgsResourcesStr + '<a href="https://localhost/mission_columbia_baked/resources/view/' + rId + '">' + rName + '</a> ';
+                                    if( this.lat != null && this.lat != '' && this.lng != null && this.lng != '' )
+                                    {
+                                        var tagNum = [];
 
-                                    orgsResourcesStr = orgsResourcesStr + '<a href="' + global.base_url + '/resources/view/' + rId + '">' + rName + '</a> ';
+                                        for(var q = 0; q<tags.length; q++){
 
-                                    //console.log(this);
+                                            if(this.resource_name === tags[q]){
+                                                tagNum.push(this.resource_name);
+                                            }
+                                        }
+
+                                        var latlng = new google.maps.LatLng(this.lat, this.lng);
+                                        $('#map_canvas').gmap('addMarker', { 'icon': images[7], 'tags':tagNum, 'bound':true, 'position': latlng} ).click(function() {
+
+                                            $('#map_canvas').gmap('openInfoWindow', { 'content': ' <a href="https://localhost/mission_columbia_baked/resources/view/' + resource_id + '">' + resource_name + '</a> ' + '<br/> Address: ' + address + '<br/> Resource managed by: ' +  '<a href="' + global.base_url + '/organizations/view/' + orgId + '">' + orgName + '</a> '}, this);
+                                        });
+                                    }
                                 });
 
-                                geocoder.geocode( { 'address': address}, function(results, status) {
-                                  if (status == google.maps.GeocoderStatus.OK) {
-                                    $('#map_canvas').gmap('addMarker', { 'icon': images[1], 'tags':['Organizations'], 'bound':true, 'position': results[0].geometry.location} ).click(function() {
+                                if( this.Organization.lat != null && this.Organization.lat != '' && this.Organization.lng != null && this.Organization.lng != '' )
+                                {
+                                    var latlng = new google.maps.LatLng(this.Organization.lat, this.Organization.lng);
+                                    $('#map_canvas').gmap('addMarker', { 'icon': images[1], 'tags':['Organizations'], 'bound':true, 'position': latlng} ).click(function() {
 
-                                        /*
-                                        $('#map_canvas').gmap('openInfoWindow', { 'content': 'Organization: ' + orgName + '<br/> Address: ' + address + ' <a href="http://www.w3schools.com">This is a link</a> ' + '<br/>resources: ' + orgsResourcesStr }, this);
-                                        */
                                         $('#map_canvas').gmap('openInfoWindow', { 'content': '<a href="' + global.base_url + '/organizations/view/' + orgId + '">' + orgName + '</a> ' + '<br/> Address: ' + address + '<br/>resources: ' + orgsResourcesStr }, this);
 
                                     });
-                                    
-                                  } 
-                                  else {
-                                    //alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for the organization " + orgName);
-                                  }
-                                  
-                                });
-                                
-                                
-                               $.each(currResources, function(){
-                                    resourcePointer = this;
-                                    var resId = resourcePointer.id;
-                                    var resOrgId = resourcePointer.organization_id;
-                                    var resOrgName = resourcePointer.rOrgName;
-                                    //var resName = resourcePointer.resource_name;
-                                    var resName = resourcePointer.resource_type;
-                                    var resAddress = resourcePointer.resource_address;
-
-
-                                    geocoder = new google.maps.Geocoder();
-                                    
-                                    var tagNum = [];
-
-                                    for(var q = 0; q<tags.length; q++){
-
-                                        if(resName===tags[q]){
-                                            tagNum.push(resName);
-                                        }
-                                    }
-
-                                    geocoder.geocode( { 'address': resAddress}, function(results, status) {
-                                      if (status == google.maps.GeocoderStatus.OK) {
-                                        //map.setCenter(results[0].geometry.location);
-
-                                        $('#map_canvas').gmap('addMarker', { 'icon': images[7], 'tags':tagNum, 'bound':true, 'position': results[0].geometry.location} ).click(function() {
-
-                                            //$('#map_canvas').gmap('openInfoWindow', { 'content': 'Resource: ' + resName + '<br/> Address: ' + resAddress }, this);
-
-                                            $('#map_canvas').gmap('openInfoWindow', { 'content': ' <a href="https://localhost/mission_columbia_baked/resources/view/' + resId + '">' + resName + '</a> ' + '<br/> Address: ' + resAddress + '<br/> Resource managed by: ' +  '<a href="' + global.base_url + '/organizations/view/' + resOrgId + '">' + resOrgName + '</a> '}, this);
-                                        });
-                                        
-                                      } 
-                                      else {
-                                        alert("Geocode was not successful for the following reason: " + status + " this means that there is an invalid address input for the resource " + resName);
-                                      }
-                                      
-                                    });
-
-                               });
+                                }
                                
                             }); 
 

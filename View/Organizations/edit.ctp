@@ -1,3 +1,7 @@
+<?php echo $this->Html->script('https://maps-api-ssl.google.com/maps/api/js?key=AIzaSyC22n51FklMDzv3wwoc7kH4nxKO0fo2wTI&sensor=true', false); ?>
+<?php echo $this->Html->script('geocode.js', false); ?>
+<?php echo $this->Html->script('Organizations/geocode_address.js', false); ?>
+
 <style type="text/css">
     form label { 
         width: 7em; 
@@ -78,6 +82,8 @@
                 </td>
             </tr>
         </table>
+        <?php echo $this->Form->input('lat', array('type' => 'hidden')); ?>
+        <?php echo $this->Form->input('lng', array('type' => 'hidden')); ?>
     </fieldset>
     <div>
         <?php echo $this->Form->submit('Done', array('name' => 'finished', 'div' => false)); ?>
