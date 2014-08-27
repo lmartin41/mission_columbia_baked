@@ -17,10 +17,8 @@
 <?php endif; ?>
 
     <div>
-        <body>
             <div id="map_canvas" style="width: 700px; height: 400px"></div>
             <div id="radios" class="item gradient rounded shadow" style="margin:5px;padding:5px 5px 5px 10px; background:white;"></div>
-        </body>
         <script>
 
         //position hardcoded to south carolina for now

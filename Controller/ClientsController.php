@@ -262,6 +262,19 @@ class ClientsController extends AppController {
     }
 
     /**
+     * Brett: This is needed for the reports page.
+     */
+    public function clientSearch($firstName, $lastName) {
+        if (empty($lastName)) {
+            $conditions = array('OR' => array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $firstName . '%'));
+        } else {
+            $conditions = array('first_name LIKE ' => $firstName . '%', 'last_name LIKE ' => $lastName . '%');
+        }
+
+        return $this->Client->find('all', array('conditions' => $conditions));
+    }
+
+    /**
      * Lee: This method displays the results of the above search 
      */
     public function searchResults() {

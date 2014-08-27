@@ -56,7 +56,6 @@ class ResourcesController extends AppController {
             unset($organization['PrayerRequest']);
             $organizations_for_json[] = $organization;
         }
-
         $this->set('organizations', $organizations_for_json);
     }
 
